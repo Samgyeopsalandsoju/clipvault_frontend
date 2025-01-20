@@ -31,5 +31,7 @@ const RememberCheckbox = styled(FormControlLabel)`
 
   .MuiFormControlLabel-label {
     font-size: 12px;
+    -webkit-user-select: none;
+    user-select: none;
   }
 `;

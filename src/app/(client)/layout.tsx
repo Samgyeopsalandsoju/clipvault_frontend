@@ -1,4 +1,4 @@
-import LoginModal from '@/features/auth/ui/LoginModal';
+import AuthModal from '@/features/auth/ui/AuthModal';
 import Header from '@/widgets/header/Header';
 
 export default function RootLayout({
@@ -9,7 +9,7 @@ export default function RootLayout({
   return (
     <>
       <Header />
-      <LoginModal />
+      <AuthModal />
       {children}
     </>
   );

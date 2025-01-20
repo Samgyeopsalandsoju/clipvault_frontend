@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { STORAGE_KEYS } from '../constants';
 import { useAtom } from 'jotai';
-import { RememberMeAtom } from '@/features/auth/auth.atom';
+import { RememberMeAtom } from '@/features/auth/atom';
 
 export const useRememberMe = () => {
   // const [rememberMe, setRememberMe] = useState<boolean>(false);

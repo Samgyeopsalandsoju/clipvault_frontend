@@ -1,8 +1,8 @@
-import { LoginModalIsOpenAtom } from '@/features/auth/auth.atom';
+import { ChangeFormAtom, ModalIsOpenAtom } from '@/features/auth/atom';
+import { FormType } from '@/features/auth/types';
 import { Box } from '@mui/material';
 import { Stack } from '@mui/material';
 import { useSetAtom } from 'jotai';
-import Link from 'next/link';
 import styled from 'styled-components';
 
 interface NavBarProps {
@@ -11,10 +11,13 @@ interface NavBarProps {
 }
 
 const Navigation = ({ isOpen, onClose }: NavBarProps) => {
-  const setIsLoginModalOpen = useSetAtom(LoginModalIsOpenAtom);
-  const handleOpenLoginModal = () => {
+  const setPage = useSetAtom(ChangeFormAtom);
+  const setIsLoginModalOpen = useSetAtom(ModalIsOpenAtom);
+
+  const handleOpenModal = (type: FormType) => {
     onClose();
     setIsLoginModalOpen(true);
+    setPage(type);
   };
 
   return (
@@ -22,10 +25,8 @@ const Navigation = ({ isOpen, onClose }: NavBarProps) => {
       <Overlay $isOpen={isOpen} onClick={onClose} />
       <Container $isOpen={isOpen}>
         <LinkWrapper>
-          <LinkItem>
-            <Link href={'/'}>Sign up</Link>
-          </LinkItem>
-          <LinkItem onClick={handleOpenLoginModal}>Login</LinkItem>
+          <LinkItem onClick={() => handleOpenModal('register')}>Sign up</LinkItem>
+          <LinkItem onClick={() => handleOpenModal('login')}>Login</LinkItem>
         </LinkWrapper>
       </Container>
     </>
