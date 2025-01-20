@@ -2,10 +2,6 @@ import { DefaultTheme } from 'styled-components/dist/types';
 
 // styles/theme.ts
 export const lightTheme: DefaultTheme = {
-  fixed: {
-    main: '#fff',
-    sub: '#c7c6c4',
-  },
   background: {
     primary: '#fff', // 순수 흰색 - 메인 배경
     secondary: '#F3F4F6', // 연한 회색 - 카드 배경
@@ -24,10 +20,6 @@ export const lightTheme: DefaultTheme = {
 };
 
 export const darkTheme: DefaultTheme = {
-  fixed: {
-    main: '#fff',
-    sub: '#c7c6c4',
-  },
   background: {
     primary: '#111827', // 진한 차콜색 - 메인 배경
     secondary: '#1F2937', // 진한 곤색 - 카드 배경

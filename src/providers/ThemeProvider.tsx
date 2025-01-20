@@ -7,13 +7,14 @@ import { darkTheme, lightTheme } from '@/styles/theme';
 import GlobalStyles from '@/styles/GlobalStyles';
 
 function ThemeComponent({ children }: { children: React.ReactNode }) {
-  const { theme } = useTheme();
-  console.log(theme);
-  const currentTheme = theme === 'dark' ? darkTheme : lightTheme;
+  const { theme, systemTheme } = useTheme();
+
+  // console.log('Current theme:', theme);
+  // console.log('System theme:', systemTheme);
+  const currentTheme = systemTheme === 'dark' ? darkTheme : lightTheme;
   return <StyledThemeProvider theme={currentTheme}>{children}</StyledThemeProvider>;
 }
 
-// 메인 ThemeProvider 컴포넌트
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [mounted, setMounted] = useState(false);
 
@@ -26,7 +27,17 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <NextThemesProvider attribute="class" defaultTheme="dark" enableSystem>
+    <NextThemesProvider
+      attribute="class" // HTML에 적용될 속성
+      defaultTheme="system" // 기본 테마 설정
+      enableSystem={true} // 시스템 테마 감지 활성화
+      value={{
+        // 사용 가능한 테마 정의
+        light: 'light',
+        dark: 'dark',
+        system: 'system',
+      }}
+    >
       <ThemeComponent>
         <GlobalStyles />
         {children}
