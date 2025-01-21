@@ -1,13 +1,13 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { STORAGE_KEYS } from '../auth.constants';
 import { useAtom } from 'jotai';
-import { RememberMeAtom } from '@/features/auth/model/auth.atom';
+import { rememberMeAtom } from '../auth.atom';
 
 export const useRememberMe = () => {
   // const [rememberMe, setRememberMe] = useState<boolean>(false);
-  const [rememberMe, setRememberMe] = useAtom(RememberMeAtom);
+  const [rememberMe, setRememberMe] = useAtom(rememberMeAtom);
 
   useEffect(() => {
     const remembered = !!localStorage.getItem(STORAGE_KEYS.REMEMBER_ME);

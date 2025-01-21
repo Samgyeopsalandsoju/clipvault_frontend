@@ -1,4 +1,4 @@
-import { ChangeFormAtom, ModalIsOpenAtom } from '@/features/auth/model/auth.atom';
+import { authModalAtom, authModeAtom } from '@/features/auth/model/auth.atom';
 import { FormType } from '@/features/auth/model/auth.types';
 import { Box } from '@mui/material';
 import { Stack } from '@mui/material';
@@ -11,13 +11,13 @@ interface NavBarProps {
 }
 
 const Navigation = ({ isOpen, onClose }: NavBarProps) => {
-  const setPage = useSetAtom(ChangeFormAtom);
-  const setIsLoginModalOpen = useSetAtom(ModalIsOpenAtom);
+  const setMode = useSetAtom(authModeAtom);
+  const setIsAuthModalOpen = useSetAtom(authModalAtom);
 
   const handleOpenModal = (type: FormType) => {
     onClose();
-    setIsLoginModalOpen(true);
-    setPage(type);
+    setIsAuthModalOpen(true);
+    setMode(type);
   };
 
   return (

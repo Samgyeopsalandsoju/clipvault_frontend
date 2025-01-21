@@ -1,8 +1,8 @@
-import { useRememberMe } from '@/features/shared/hooks/userRememberMe';
 import { FormControlLabel } from '@mui/material';
 import { Checkbox } from '@mui/material';
 import { Box } from '@mui/material';
 import styled from 'styled-components';
+import { useRememberMe } from '../../model/hooks/userRememberMe';
 
 const RememberMe = () => {
   const { rememberMe, setRememberMe } = useRememberMe();
