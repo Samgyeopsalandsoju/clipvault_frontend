@@ -11,8 +11,9 @@ export const OutlineCustomButton = styled(Button)<{ $bgColor?: string }>`
   box-shadow: none;
   border-radius: 5px;
   border: 1px solid #2a2a2a;
+  color: ${(props) => (props.$bgColor ? '#000' : props.theme.text.primary)};
   border: ${(props) => (props.$bgColor ? 'none' : '1px solid #2a2a2a')};
-  background-color: ${(props) => (props.$bgColor ? props.$bgColor : props.theme.text.primary)};
+  background-color: ${(props) => (props.$bgColor ? props.$bgColor : props.theme.background.primary)};
   &:hover {
     background-color: ${(props) => (props.$bgColor ? props.$bgColor : 'rgba(42, 42, 42, 0.05)')};
   }

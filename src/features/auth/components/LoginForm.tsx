@@ -64,7 +64,7 @@ const LoginForm = () => {
             <TextField fullWidth placeholder="Password" size="small" type="password" {...register('password')} />
             <RememberMe />
           </TextFieldWrapper>
-          <SolidSmallCustomButton type="submit">Login</SolidSmallCustomButton>
+          <OutlineCustomButton type="submit">Login</OutlineCustomButton>
         </Form>
       </Content>
       <Stack gap={'16px'} marginTop={'16px'}>
