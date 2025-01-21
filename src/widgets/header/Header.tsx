@@ -23,12 +23,13 @@ const Header = () => {
   return (
     <Container>
       <LogoContainer>
-        <FaPaperclip />
+        <Link href={'/clip'}>
+          <FaPaperclip />
+        </Link>
       </LogoContainer>
       <Link href={'/'}>
         <Title>clipVault</Title>
       </Link>
-
       <IconButton size="large" edge="end" aria-label="menu" onClick={toggleDrawer} sx={{ color: '#000' }}>
         <IoMenu />
       </IconButton>
@@ -42,18 +43,18 @@ const Container = styled.header`
   position: sticky;
   height: 60px;
   padding: 0 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
   justify-content: space-between;
   z-index: 1000;
 `;
 
-// 로고 컨테이너
 const LogoContainer = styled(Stack)`
   font-size: 1.5rem;
   font-weight: bold;
   color: ${(props) => props.theme.text.primary};
+  cursor: pointer;
 `;
 
 const Title = styled(Typography)`
