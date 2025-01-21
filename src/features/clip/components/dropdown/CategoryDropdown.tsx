@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { Category } from '../../types';
 import { IoClose } from 'react-icons/io5';
 import { generateSoftColor } from '../../utils';
+import { Container, DropdownItem, DropdownList, Input, InputWrapper } from './dropdown.style';
 const CATEGORY = [
   {
     id: '1',
@@ -148,30 +149,6 @@ const Dropdown = ({ onSelect }: DropdownProps) => {
 
 export default Dropdown;
 
-const Container = styled(Stack)`
-  position: relative;
-  width: 100%;
-  max-width: 300px;
-`;
-
-const InputWrapper = styled(Stack)`
-  position: relative;
-`;
-
-const Input = styled.input<{ $color: string }>`
-  width: 100%;
-  border: 2px solid #ddd;
-  background-color: ${(props) => props.$color};
-  padding: 8px 12px;
-  border-radius: 4px;
-  font-size: 14px;
-  outline: none;
-
-  &:focus {
-    border-color: #007aff;
-  }
-`;
-
 const CloseButton = styled.button`
   position: absolute;
   right: 8px;
@@ -193,31 +170,6 @@ const CloseButton = styled.button`
     width: 16px;
     height: 16px;
   }
-`;
-
-const DropdownList = styled(Stack)`
-  width: 100%;
-  position: absolute;
-  top: 100%;
-  background: white;
-  max-height: 200px;
-  overflow: auto;
-  z-index: 1000;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin-top: 2px;
-`;
-
-const DropdownItem = styled(Stack)<{ $color: string }>`
-  padding: 4px 8px;
-  cursor: pointer;
-  border: 2px solid ${(props) => props.$color};
-  background-color: ${(props) => props.$color};
-  margin: 2px 0;
-  border-radius: 4px;
-  transition: all 0.2s ease;
-  font-size: 13px;
-  font-weight: 600;
 `;
 
 const CreateCategory = styled(Stack)`

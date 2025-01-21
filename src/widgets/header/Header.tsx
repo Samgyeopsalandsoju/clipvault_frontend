@@ -30,20 +30,26 @@ const Header = () => {
       <Link href={'/'}>
         <Title>clipVault</Title>
       </Link>
-      <IconButton size="large" edge="end" aria-label="menu" onClick={toggleDrawer} sx={{ color: '#000' }}>
+      <IconSection size="large" edge="end" aria-label="menu" onClick={toggleDrawer}>
         <IoMenu />
-      </IconButton>
+      </IconSection>
       <Navigation isOpen={drawerOpen} onClose={handleClose} />
     </Container>
   );
 };
 export default Header;
 
+const IconSection = styled(IconButton)`
+  color: ${(props) => props.theme.text.primary};
+`;
+
 const Container = styled.header`
+  background-color: ${(props) => props.theme.background.primary};
   position: sticky;
   height: 60px;
   padding: 0 20px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  /* border-bottom: 1px solid rgba(0, 0, 0, 0.1); */
+  border-bottom: 1px solid ${(props) => props.theme.border.divider};
   display: flex;
   align-items: center;
   justify-content: space-between;

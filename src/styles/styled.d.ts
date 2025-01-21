@@ -8,6 +8,7 @@ declare module 'styled-components' {
       primary: string;
       secondary: string;
       tertiary: string;
+      textfield: string;
     };
 
     text: {
@@ -20,6 +21,11 @@ declare module 'styled-components' {
       primary: string;
       secondary: string;
       divider: string;
+    };
+
+    boxShadow: {
+      primary: string;
+      secondary: string;
     };
   }
 }

@@ -2,11 +2,12 @@ import { Box, Stack, Typography } from '@mui/material';
 import styled from 'styled-components';
 import { ClipType } from '../../types';
 import { FaCodeFork } from 'react-icons/fa6';
+import { useRouter } from 'next/navigation';
 
 const Clip = ({ title, category, fork, link }: ClipType) => {
   return (
     <Card>
-      <Category>{category}</Category>
+      <Category $color={category.color}>{category.name}</Category>
       <Title>{title}</Title>
       <ForkSection>
         <FaCodeFork fontSize={20} />
@@ -26,6 +27,7 @@ const Card = styled(Stack)`
   border-radius: 12px;
   background-color: beige;
   align-items: center;
+  cursor: pointer;
 `;
 
 const Title = styled(Typography)`
@@ -33,9 +35,11 @@ const Title = styled(Typography)`
   width: 200px;
 `;
 
-const Category = styled(Stack)`
-  background-color: lightcoral;
-  width: 200px;
+const Category = styled(Stack)<{ $color: string }>`
+  background-color: ${(props) => props.$color};
+  padding: 3px 8px;
+  color: #fff;
+  border-radius: 8px;
 `;
 
 const ForkSection = styled(Stack)`

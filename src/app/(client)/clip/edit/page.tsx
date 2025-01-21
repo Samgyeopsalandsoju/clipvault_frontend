@@ -1,11 +1,11 @@
 'use client';
 
-import NewClipPage from '@/features/clip/ui/NewClipPage';
+import ClipEditPage from '@/features/clip/ui/ClipEditPage';
 
-export default function CreateClipPage() {
+export default function EditClipPage() {
   return (
     <>
-      <NewClipPage />
+      <ClipEditPage />
     </>
   );
 }

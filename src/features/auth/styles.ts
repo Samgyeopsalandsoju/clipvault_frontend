@@ -1,4 +1,4 @@
-import { Stack } from '@mui/material';
+import { Divider, Stack } from '@mui/material';
 import { Dialog } from '@mui/material';
 import styled from 'styled-components';
 
@@ -9,7 +9,7 @@ export const StyledDialog = styled(Dialog)`
     margin: 16px;
     border-radius: 16px;
     position: relative;
-    background-color: ${(props) => props.theme.background.primary};
+    background-color: #f5f4ef;
     padding: 20px;
   }
 `;
@@ -25,7 +25,7 @@ export const Title = styled.h2`
   font-weight: 600;
   text-align: center;
   margin-bottom: 16px;
-  color: ${(props) => props.theme.text.primary};
+  color: #1f1e1d;
 `;
 
 export const Form = styled.form`

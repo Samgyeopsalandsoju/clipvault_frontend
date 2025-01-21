@@ -1,6 +1,6 @@
 import { TextField } from '@mui/material';
 import { Content, Form, Logo, TextFieldWrapper, Title } from '../styles';
-import { OutlineCustomButton, SolidCustomButton } from '@/shared/components/button';
+import { OutlineCustomButton, SolidCustomButton, SolidSmallCustomButton } from '@/shared/components/button';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { LoginFormValue } from '../types';
 import { useRememberMe } from '@/shared/hooks/userRememberMe';
@@ -64,11 +64,11 @@ const LoginForm = () => {
             <TextField fullWidth placeholder="Password" size="small" type="password" {...register('password')} />
             <RememberMe />
           </TextFieldWrapper>
-          <SolidCustomButton type="submit">Login</SolidCustomButton>
+          <SolidSmallCustomButton type="submit">Login</SolidSmallCustomButton>
         </Form>
       </Content>
       <Stack gap={'16px'} marginTop={'16px'}>
-        <Divider>or</Divider>
+        <Divider color={'#fff'}>or</Divider>
         <OutlineCustomButton onClick={handleClick}>
           <Logo src={SOCIAL_LOGIN_OPTIONS.EMAIL.logo} />
           {SOCIAL_LOGIN_OPTIONS.EMAIL.text}

@@ -12,15 +12,15 @@ export const OutlineCustomButton = styled(Button)<{ $bgColor?: string }>`
   border-radius: 5px;
   border: 1px solid #2a2a2a;
   border: ${(props) => (props.$bgColor ? 'none' : '1px solid #2a2a2a')};
-  background-color: ${(props) => (props.$bgColor ? props.$bgColor : props.theme.background.primary)};
+  background-color: ${(props) => (props.$bgColor ? props.$bgColor : props.theme.text.primary)};
   &:hover {
-    background-color: ${(props) => (props.$bgColor ? props.$bgColor : ' rgba(42, 42, 42, 0.05)')};
+    background-color: ${(props) => (props.$bgColor ? props.$bgColor : 'rgba(42, 42, 42, 0.05)')};
   }
 `;
 
 // 솔리드 커스텀 버튼
-export const SolidCustomButton = styled(Button)`
-  background-color: ${(props) => props.theme.text.primary};
+export const SolidCustomButton = styled(Button)<{ $color?: string }>`
+  background-color: ${(props) => (props.$color ? props.$color : props.theme.text.primary)};
   font-size: 15px;
   font-family: 'Wanted Sans', sans-serif;
   color: ${(props) => props.theme.background.primary};
@@ -28,12 +28,21 @@ export const SolidCustomButton = styled(Button)`
   box-shadow: none;
   font-weight: 400;
 
-  &:disabled {
-    background-color: #cccccc !important;
-    cursor: not-allowed !important;
+  &:hover {
+    background-color: ${(props) => props.theme.text.primary};
   }
+`;
+
+export const SolidSmallCustomButton = styled(Button)`
+  background-color: ${(props) => props.theme.background.primary};
+  font-size: 15px;
+  font-family: 'Wanted Sans', sans-serif;
+  color: ${(props) => props.theme.text.primary};
+  text-transform: none;
+  box-shadow: none;
+  font-weight: 400;
 
   &:hover {
-    background-color: #444 !important;
+    background-color: ${(props) => props.theme.background.primary};
   }
 `;

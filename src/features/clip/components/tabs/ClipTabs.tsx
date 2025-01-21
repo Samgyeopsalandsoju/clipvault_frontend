@@ -28,8 +28,8 @@ const Container = styled(Stack)`
 const Tabs = styled(Stack)`
   flex-direction: row;
   padding: 16px;
-  background-color: ${(props) => props.theme.background.primary};
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: ${(props) => props.theme.background.tertiary};
+  border: 1px solid ${(props) => props.theme.border.divider};
 `;
 
 const TabButton = styled(Button)<{ $isActive: boolean }>`
@@ -38,7 +38,7 @@ const TabButton = styled(Button)<{ $isActive: boolean }>`
   border: none;
   padding: 0 32px 0 0;
   margin: 0;
-  color: ${({ $isActive }) => ($isActive ? '#000' : '#8e8e8e')};
+  color: ${({ $isActive, theme }) => ($isActive ? theme.text.primary : '#9d9d9d')};
   cursor: pointer;
   font-size: 20px;
   font-weight: ${({ $isActive }) => ($isActive ? 700 : 400)};

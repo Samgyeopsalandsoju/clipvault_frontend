@@ -65,8 +65,9 @@ const LinkWrapper = styled(Stack)`
 `;
 
 const LinkItem = styled(Box)`
+  color: ${(props) => props.theme.text.primary};
   padding: 25px 16px;
-  border-bottom: 1px solid #565656;
+  border-bottom: 1px solid ${(props) => props.theme.border.divider};
   font-size: 24px;
   font-weight: 600;
   cursor: pointer;

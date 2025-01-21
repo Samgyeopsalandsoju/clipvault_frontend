@@ -6,6 +6,7 @@ export interface CurrentTabProps {
 }
 
 export interface ClipType {
+  id: string;
   title: string;
   category: Category;
   link: string;

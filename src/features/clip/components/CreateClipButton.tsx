@@ -19,14 +19,17 @@ const CreateClipButton = () => {
 export default CreateClipButton;
 
 const ButtonContainer = styled(Stack)`
+  border-radius: 18px;
+  border: 1px solid ${(props) => props.theme.border.divider};
   position: absolute;
   bottom: 50px;
   padding-bottom: 16px;
   width: 100%;
-  background: white;
+  background: ${(props) => props.theme.background.primary};
 `;
 
 const CreateButton = styled(Button)`
+  color: ${(props) => props.theme.text.primary};
   position: sticky;
   text-transform: capitalize;
   display: block;

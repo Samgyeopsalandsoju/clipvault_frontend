@@ -165,6 +165,7 @@ const GlobalStyles = createGlobalStyle`
 
   /* body 기본 설정 */
   body {
+    background-color: ${(props) => props.theme.background.primary};
     height: 100%;
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;

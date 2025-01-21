@@ -1,12 +1,13 @@
 import { Stack } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { VisibilityType } from '../../types';
 import { MdArrowDropDown } from 'react-icons/md';
+import { Container, DropdownItem, DropdownList, Input, InputWrapper } from './dropdown.style';
 
 const visibilities = [
-  { name: '공개', code: 'public' },
-  { name: '비공개', code: 'private' },
+  { name: '공개', code: 'public', color: '' },
+  { name: '비공개', code: 'private', color: '' },
 ];
 
 interface DropdownProps {
@@ -16,11 +17,26 @@ interface DropdownProps {
 const VisibilityDropdown = ({ onSelect }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [value, setValue] = useState<string>('');
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // 외부 클릭 감지를 위한 useEffect
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   return (
-    <Container>
+    <Container ref={dropdownRef}>
       <InputWrapper>
         <Input
+          type="text"
           onFocus={() => setIsOpen(true)}
           onChange={(e) => {
             setValue(e.currentTarget.value);
@@ -56,30 +72,6 @@ const VisibilityDropdown = ({ onSelect }: DropdownProps) => {
 
 export default VisibilityDropdown;
 
-const Container = styled(Stack)`
-  position: relative;
-  width: 100%;
-  max-width: 300px;
-`;
-
-const InputWrapper = styled(Stack)`
-  position: relative;
-`;
-
-const Input = styled.input`
-  width: 100%;
-  border: 2px solid #ddd;
-  background-color: #ddd;
-  padding: 8px 12px;
-  border-radius: 4px;
-  font-size: 13px;
-  font-weight: 600;
-  outline: none;
-  &:focus {
-    border-color: #007aff;
-  }
-`;
-
 const IconSection = styled.button`
   position: absolute;
   right: 8px;
@@ -98,29 +90,4 @@ const IconSection = styled.button`
     width: 16px;
     height: 16px;
   }
-`;
-
-const DropdownList = styled(Stack)`
-  width: 100%;
-  position: absolute;
-  top: 100%;
-  background: white;
-  max-height: 200px;
-  overflow: auto;
-  z-index: 1000;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin-top: 2px;
-`;
-
-const DropdownItem = styled(Stack)`
-  padding: 4px 8px;
-  cursor: pointer;
-  margin: 2px 0;
-  border-radius: 4px;
-  transition: all 0.2s ease;
-  border: 2px solid #aa9f84;
-  background-color: #d7c9a7;
-  font-size: 13px;
-  font-weight: 600;
 `;

@@ -19,8 +19,8 @@ export default function ClipLayout({ children }: { children: React.ReactNode }) 
     setMounted(true);
   }, []);
 
-  const isNewPage = pathname === '/clip/new';
-
+  const modalPaths = ['/clip/new', '/clip/edit', '/clip/detail'];
+  const shouldShowModal = modalPaths.includes(pathname);
   return (
     <LayoutContainer>
       <BaseLayer>
@@ -28,7 +28,7 @@ export default function ClipLayout({ children }: { children: React.ReactNode }) 
         <CreateClipButton />
       </BaseLayer>
 
-      {isNewPage && (
+      {shouldShowModal && (
         <OverlayContainer>
           <Backdrop $isOpen={isOpen} onClick={handleClose} />
           <Slide direction="up" in={isOpen && mounted}>
@@ -78,10 +78,10 @@ const ModalLayer = styled(Stack)`
   bottom: 0;
   left: 0;
   right: 0;
-  height: 50vh;
-  background-color: white;
+  height: 60vh;
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
-  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
   pointer-events: auto;
+  background-color: ${(props) => props.theme.background.primary};
+  border: 1px solid ${(props) => props.theme.border.primary};
 `;

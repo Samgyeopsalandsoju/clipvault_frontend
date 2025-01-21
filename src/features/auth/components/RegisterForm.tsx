@@ -1,6 +1,6 @@
 import { Stack, TextField } from '@mui/material';
 import { Content, Form, TextFieldWrapper, Title } from '../styles';
-import { SolidCustomButton } from '@/shared/components/button';
+import { SolidSmallCustomButton } from '@/shared/components/button';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { RegisterFormValue } from '../types';
 import { useRegisterValidation } from '../hooks/useRegisterValidation';
@@ -43,7 +43,7 @@ const RegisterForm = () => {
               error={!!errors.verifyCode}
               helperText={errors.verifyCode?.message || ' '}
             />
-            <SolidCustomButton sx={{ height: '50%' }}>인증</SolidCustomButton>
+            <SolidSmallCustomButton sx={{ height: '50%' }}>인증</SolidSmallCustomButton>
           </Stack>
           <TextField
             fullWidth
@@ -64,7 +64,7 @@ const RegisterForm = () => {
             helperText={errors.confirmPassword?.message || ' '}
           />
         </TextFieldWrapper>
-        <SolidCustomButton type="submit">Login</SolidCustomButton>
+        <SolidSmallCustomButton type="submit">Login</SolidSmallCustomButton>
       </Form>
     </Content>
   );
