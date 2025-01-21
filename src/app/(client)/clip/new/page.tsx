@@ -1,11 +1,7 @@
 'use client';
 
-import ClipNewPage from '@/features/clip/ui/ClipNewPage';
+import NewClipContainer from '@/features/clip/pages/new/NewClipContainer';
 
-export default function CreateClipPage() {
-  return (
-    <>
-      <ClipNewPage />
-    </>
-  );
+export default function Page() {
+  return <NewClipContainer />;
 }

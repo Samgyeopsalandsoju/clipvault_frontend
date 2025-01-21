@@ -1,7 +1,7 @@
-import AuthModal from '@/features/auth/ui/AuthModal';
-import Header from '@/widgets/header/Header';
+import AuthModal from '@/features/auth/ui/modal/AuthModal';
+import Header from '@/features/shared/ui/Header';
 
-export default function RootLayout({
+export default function Layout({
   children,
 }: Readonly<{
   children: React.ReactNode;

@@ -1,11 +1,7 @@
 'use client';
 
-import ClipDetailPage from '@/features/clip/ui/ClipDetailPage';
+import DetailClipContainer from '@/features/clip/pages/detail/DetailClipContainer';
 
-export default function DetailClipPage() {
-  return (
-    <>
-      <ClipDetailPage />
-    </>
-  );
+export default function Page() {
+  return <DetailClipContainer />;
 }

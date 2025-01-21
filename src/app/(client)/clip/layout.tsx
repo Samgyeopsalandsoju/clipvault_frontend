@@ -4,16 +4,16 @@ import { Slide, Stack } from '@mui/material';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useAtomValue } from 'jotai';
-import { NewClipPageOpenAtom } from '@/features/clip/atom';
+import { ClipPageOpenAtom } from '@/features/clip/model/clip.atom';
 import ClipPage from './page';
 import styled from 'styled-components';
-import { useClipPageTransition } from '@/features/clip/hooks/useClipPageTransition';
-import CreateClipButton from '@/features/clip/components/CreateClipButton';
+import { useClipPageTransition } from '@/features/clip/model/hooks/useClipPageTransition';
+import CreateClipButton from '@/features/clip/ui/forms/CreateClipButton';
 
 export default function ClipLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const [mounted, setMounted] = useState(false);
-  const isOpen = useAtomValue(NewClipPageOpenAtom);
+  const isOpen = useAtomValue(ClipPageOpenAtom);
   const { handleClose } = useClipPageTransition();
   useEffect(() => {
     setMounted(true);

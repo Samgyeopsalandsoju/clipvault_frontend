@@ -1,10 +1,11 @@
-import ClipListPage from '@/features/clip/ui/ClipPage';
+'use client';
 
-const ClipPage = () => {
+import ClipContainer from '@/features/clip/pages/ClipContainer';
+const Page = () => {
   return (
     <>
-      <ClipListPage />
+      <ClipContainer />
     </>
   );
 };
-export default ClipPage;
+export default Page;

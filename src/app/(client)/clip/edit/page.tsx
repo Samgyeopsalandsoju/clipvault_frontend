@@ -1,11 +1,6 @@
 'use client';
+import EditClipContainer from '@/features/clip/pages/edit/EditClipContainer';
 
-import ClipEditPage from '@/features/clip/ui/ClipEditPage';
-
-export default function EditClipPage() {
-  return (
-    <>
-      <ClipEditPage />
-    </>
-  );
+export default function Page() {
+  return <EditClipContainer />;
 }
