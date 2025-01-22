@@ -1,9 +1,7 @@
+import HomeContainer from '@/features/clip/pages/home/HomeContainer';
+
 const HomePage = () => {
-  return (
-    <>
-      <div>home page~!</div>
-    </>
-  );
+  return <HomeContainer />;
 };
 
 export default HomePage;

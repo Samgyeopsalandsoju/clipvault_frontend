@@ -14,7 +14,7 @@ export function useClipPageTransition() {
 
     // 애니메이션이 완료된 후 라우팅
     setTimeout(() => {
-      router.back();
+      router.push('/clip');
     }, 300);
   };
 

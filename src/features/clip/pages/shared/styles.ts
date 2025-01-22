@@ -1,8 +1,10 @@
-import { Button, Stack, TextField, Typography } from '@mui/material';
+'use client';
+
+import { Button, Stack, Typography } from '@mui/material';
 import styled from 'styled-components';
 
 export const ScrollContainer = styled(Stack)`
-  overflow: auto;
+  overflow: scroll;
   /** hide scroll */
   -ms-overflow-style: none;
   scrollbar-width: none;

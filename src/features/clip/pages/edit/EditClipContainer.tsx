@@ -1,3 +1,4 @@
+'use client';
 import EditClipForm from '../../ui/forms/EditClipForm';
 import { useEditClipForm } from '../../model/hooks/useEditClipForm';
 

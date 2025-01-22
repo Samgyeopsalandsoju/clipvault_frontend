@@ -1,4 +1,5 @@
-import { Stack } from '@mui/material';
+'use client';
+
 import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { MdArrowDropDown } from 'react-icons/md';

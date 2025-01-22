@@ -5,13 +5,17 @@ import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 import { useEffect, useState } from 'react';
 import { darkTheme, lightTheme } from '@/styles/theme';
 import GlobalStyles from '@/styles/GlobalStyles';
+import { useAtomValue } from 'jotai';
+import { themeModeAtom } from '@/features/shared/atoms';
 
 function ThemeComponent({ children }: { children: React.ReactNode }) {
   const { theme, systemTheme } = useTheme();
+  const isDark = useAtomValue(themeModeAtom);
 
   // console.log('Current theme:', theme);
   // console.log('System theme:', systemTheme);
-  const currentTheme = systemTheme === 'dark' ? darkTheme : lightTheme;
+  // const currentTheme = systemTheme === 'dark' ? darkTheme : lightTheme;
+  const currentTheme = isDark ? darkTheme : lightTheme;
   return <StyledThemeProvider theme={currentTheme}>{children}</StyledThemeProvider>;
 }
 

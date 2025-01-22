@@ -1,3 +1,5 @@
+'use client';
+
 import { authModalAtom, authModeAtom } from '@/features/auth/model/auth.atom';
 import { FormType } from '@/features/auth/model/auth.types';
 import { Box } from '@mui/material';

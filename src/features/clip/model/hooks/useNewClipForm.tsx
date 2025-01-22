@@ -1,10 +1,12 @@
+'use client';
+
 import { useSetAtom } from 'jotai';
 import { ClipPageOpenAtom } from '../clip.atom';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Category, ClipType, VisibilityType } from '../clip.type';
 import { useEffect } from 'react';
 
-const useNewClipForm = () => {
+export const useNewClipForm = () => {
   const setIsOpen = useSetAtom(ClipPageOpenAtom);
   const {
     register,
@@ -46,5 +48,3 @@ const useNewClipForm = () => {
     errors,
   };
 };
-
-export default useNewClipForm;

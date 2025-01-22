@@ -5,7 +5,6 @@ import { SolidCustomButton } from '@/features/shared/ui/button';
 import { FieldErrors, UseFormRegister, UseFormTrigger } from 'react-hook-form';
 import { Category, ClipType, VisibilityType } from '@/features/clip/model/clip.type';
 import { FormEventHandler } from 'react';
-
 interface ClipFormProps {
   register: UseFormRegister<ClipType>;
   errors: FieldErrors<ClipType>;

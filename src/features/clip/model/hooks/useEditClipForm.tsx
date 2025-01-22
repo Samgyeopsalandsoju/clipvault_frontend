@@ -1,3 +1,5 @@
+'use client';
+
 import { useSetAtom } from 'jotai';
 import { ClipPageOpenAtom } from '../clip.atom';
 import { useRouter } from 'next/navigation';

@@ -4,8 +4,8 @@ import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { IoClose } from 'react-icons/io5';
 import { Category } from '@/features/clip/model/clip.type';
-import { generateSoftColor } from '@/features/shared/utils';
 import { Container, DropdownItem, DropdownList, Input, InputWrapper } from '../shared/dropdown.styles';
+import { generateSoftColor } from '@/features/shared/utils';
 const CATEGORY = [
   {
     id: '1',
@@ -179,6 +179,7 @@ const CreateCategory = styled(Stack)`
   margin: 2px 0;
   border-radius: 4px;
   transition: all 0.2s ease;
+  background-color: ${(props) => props.theme.background.primary};
 `;
 
 const ChangeColorButton = styled(Stack)`

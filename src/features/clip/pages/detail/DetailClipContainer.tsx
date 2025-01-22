@@ -1,3 +1,5 @@
+'use client';
+
 import DetailClipForm from '../../ui/forms/DetailClipForm';
 import { useDetailClipForm } from '../../model/hooks/useDetailClipForm';
 
