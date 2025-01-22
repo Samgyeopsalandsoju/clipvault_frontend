@@ -85,6 +85,7 @@ const IconSection = styled.button`
   justify-content: center;
   color: #666;
   cursor: pointer;
+  pointer-events: none;
   transform: translateY(-50%);
 
   svg {

@@ -1,6 +1,6 @@
 'use client';
 import { Stack } from '@mui/material';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { IoClose } from 'react-icons/io5';
 import { Category } from '@/features/clip/model/clip.type';
@@ -42,17 +42,17 @@ const CategoryDropdown = ({ onSelect }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [categories, setCategories] = useState<Category[]>(CATEGORY);
-  const [filteredCategories, setFilteredCategories] = useState<Category[]>(categories);
+  // const [filteredCategories, setFilteredCategories] = useState<Category[]>(categories);
   const [color, setColor] = useState<string>('#ddd');
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   // 외부 클릭 감지를 위한 useEffect
+  const handleClickOutside = useCallback((event: MouseEvent) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      setIsOpen(false);
+    }
+  }, []);
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setIsOpen(false);
-      }
-    };
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
@@ -67,7 +67,7 @@ const CategoryDropdown = ({ onSelect }: DropdownProps) => {
   };
 
   // 카테고리 생성 함수
-  const handleCreateCategory = () => {
+  const handleCreateCategory = useCallback(() => {
     const randomColor = generateSoftColor();
     const category: Category = {
       color: randomColor,
@@ -76,10 +76,10 @@ const CategoryDropdown = ({ onSelect }: DropdownProps) => {
     setIsOpen(false);
     setColor(randomColor);
     onSelect(category);
-  };
+  }, [searchTerm, onSelect]);
 
   // 색 변경
-  const handleChangeColor = () => {
+  const handleChangeColor = useCallback(() => {
     const newColor = generateSoftColor();
     setColor(newColor);
     const category: Category = {
@@ -87,15 +87,11 @@ const CategoryDropdown = ({ onSelect }: DropdownProps) => {
       name: searchTerm,
     };
     onSelect(category);
-  };
+  }, [searchTerm, onSelect]);
 
-  useEffect(() => {
-    if (!searchTerm.trim()) {
-      setFilteredCategories(categories);
-      return;
-    }
-    const filtered = categories.filter((category) => category.name.toLowerCase().includes(searchTerm.toLowerCase()));
-    setFilteredCategories(filtered);
+  const filteredCategories = useMemo(() => {
+    if (!searchTerm.trim()) return categories;
+    return categories.filter((category) => category.name.toLowerCase().includes(searchTerm.toLowerCase()));
   }, [searchTerm, categories]);
 
   // searchTerm 이 비어있지 않고 filterCategories가 비어잇는 경우
@@ -138,9 +134,7 @@ const CategoryDropdown = ({ onSelect }: DropdownProps) => {
               </DropdownItem>
             );
           })}
-          {isOpen && showCreateCategory && (
-            <CreateCategory onClick={handleCreateCategory}>add category +</CreateCategory>
-          )}
+          {isOpen && showCreateCategory && <CreateCategory onClick={handleCreateCategory}>+ category </CreateCategory>}
         </DropdownList>
       )}
     </Container>
@@ -179,7 +173,8 @@ const CreateCategory = styled(Stack)`
   margin: 2px 0;
   border-radius: 4px;
   transition: all 0.2s ease;
-  background-color: ${(props) => props.theme.background.primary};
+  background-color: ${(props) => props.theme.border.divider};
+  text-align: center;
 `;
 
 const ChangeColorButton = styled(Stack)`

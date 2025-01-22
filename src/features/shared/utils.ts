@@ -55,3 +55,37 @@ export const getHSLNeonStyles = (baseHSL: string) => {
     }
   `;
 };
+
+// 메탈릭 스타일을 위한 믹스인 정의
+export const metallicStyles = {
+  gold: css`
+    background: linear-gradient(to right, #b8860b, #ffd700, #b8860b);
+    border: 2px solid rgba(184, 134, 11, 0.3);
+    box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.5), inset 0 -2px 4px rgba(0, 0, 0, 0.2);
+
+    &:hover {
+      background: linear-gradient(to right, #daa520, #ffd700, #daa520);
+      box-shadow: inset 0 2px 8px rgba(255, 255, 255, 0.5), inset 0 -2px 8px rgba(0, 0, 0, 0.2);
+    }
+  `,
+  silver: css`
+    background: linear-gradient(to right, #a9a9a9, #e0e0e0, #a9a9a9);
+    border: 2px solid rgba(169, 169, 169, 0.3);
+    box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.5), inset 0 -2px 4px rgba(0, 0, 0, 0.1);
+
+    &:hover {
+      background: linear-gradient(to right, #c0c0c0, #e0e0e0, #c0c0c0);
+      box-shadow: inset 0 2px 8px rgba(255, 255, 255, 0.5), inset 0 -2px 8px rgba(0, 0, 0, 0.1);
+    }
+  `,
+  bronze: css`
+    background: linear-gradient(to right, #8b4513, #cd853f, #8b4513);
+    border: 2px solid rgba(139, 69, 19, 0.3);
+    box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.3), inset 0 -2px 4px rgba(0, 0, 0, 0.2);
+
+    &:hover {
+      background: linear-gradient(to right, #a0522d, #cd853f, #a0522d);
+      box-shadow: inset 0 2px 8px rgba(255, 255, 255, 0.3), inset 0 -2px 8px rgba(0, 0, 0, 0.2);
+    }
+  `,
+};

@@ -145,7 +145,7 @@ const GlobalStyles = createGlobalStyle`
     src: url('/fonts/WantedSansVariable.woff2') format('woff2-variations');
     font-weight: 100 900;  // Variable 폰트의 weight 범위 설정
     font-style: normal;
-    font-display: swap;    // 폰트 로딩 중 텍스트가 보이지 않는 현상 방지
+    font-display: optional;   
   }
   /* 모든 요소에 대한 기본 박스 모델 설정 */
   *, *::before, *::after {

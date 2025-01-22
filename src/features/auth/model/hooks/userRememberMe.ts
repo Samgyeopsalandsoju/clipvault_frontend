@@ -6,13 +6,12 @@ import { useAtom } from 'jotai';
 import { rememberMeAtom } from '../auth.atom';
 
 export const useRememberMe = () => {
-  // const [rememberMe, setRememberMe] = useState<boolean>(false);
   const [rememberMe, setRememberMe] = useAtom(rememberMeAtom);
 
   useEffect(() => {
     const remembered = !!localStorage.getItem(STORAGE_KEYS.REMEMBER_ME);
     setRememberMe(remembered);
-  }, []);
+  }, [setRememberMe]);
 
   const saveUsername = (username: string) => {
     if (rememberMe) {

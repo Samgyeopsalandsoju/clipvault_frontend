@@ -21,6 +21,7 @@ export const Input = styled.input<{ $color?: string }>`
   font-size: 13px;
   font-weight: 600;
   outline: none;
+  cursor: pointer;
 
   &:focus {
     border-color: #007aff;
@@ -35,11 +36,10 @@ export const DropdownList = styled(Stack)`
   max-height: 200px;
   overflow: auto;
   z-index: 1000;
-  border-radius: 4px;
+  border-radius: 6px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-top: 2px;
   background-color: ${(props) => props.theme.background.primary};
-  border: 2px solid ${(props) => props.theme.border.divider};
 `;
 
 export const DropdownItem = styled(Stack)<{ $color?: string }>`

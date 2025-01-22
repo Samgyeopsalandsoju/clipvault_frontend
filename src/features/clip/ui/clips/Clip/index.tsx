@@ -1,18 +1,14 @@
 import { Box, Stack, Typography } from '@mui/material';
-import styled from 'styled-components';
-import { FaCodeFork } from 'react-icons/fa6';
+import styled, { RuleSet } from 'styled-components';
 import { ClipType } from '@/features/clip/model/clip.type';
+import { metallicStyles } from '@/features/shared/utils';
 
 const Clip = ({ title, category, fork, link }: ClipType) => {
   return (
     <Card>
       <Category $color={category.color}>{category.name}</Category>
       <Title>{title}</Title>
-      <ForkSection>
-        <FaCodeFork fontSize={20} />
-        <ForkText>Fork</ForkText>
-        <ForkCount>{fork}</ForkCount>
-      </ForkSection>
+      <Link> {link}</Link>
     </Card>
   );
 };
@@ -25,13 +21,20 @@ const Card = styled(Stack)`
   padding: 10px;
   border-radius: 12px;
   background-color: beige;
+  transition: all 0.3s ease;
   align-items: center;
   cursor: pointer;
 `;
 
+const Link = styled(Typography)`
+  width: 150px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+
 const Title = styled(Typography)`
   font-size: 18px;
-  width: 200px;
 `;
 
 const Category = styled(Stack)<{ $color: string }>`
@@ -39,25 +42,4 @@ const Category = styled(Stack)<{ $color: string }>`
   padding: 3px 8px;
   color: #fff;
   border-radius: 8px;
-`;
-
-const ForkSection = styled(Stack)`
-  flex-direction: row;
-  gap: 5px;
-`;
-
-const ForkText = styled(Typography)`
-  font-size: 15px;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-`;
-const ForkCount = styled(Box)`
-  border-radius: 100%;
-  background-color: lightgray;
-  width: 25px;
-  height: 25px;
-  justify-content: center;
-  display: flex;
-  align-items: center;
 `;

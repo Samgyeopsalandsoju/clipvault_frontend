@@ -6,6 +6,7 @@ import { Box } from '@mui/material';
 import { Stack } from '@mui/material';
 import { useSetAtom } from 'jotai';
 import styled from 'styled-components';
+import Footer from '../Footer';
 
 interface NavBarProps {
   isOpen: boolean;
@@ -15,6 +16,7 @@ interface NavBarProps {
 const Navigation = ({ isOpen, onClose }: NavBarProps) => {
   const setMode = useSetAtom(authModeAtom);
   const setIsAuthModalOpen = useSetAtom(authModalAtom);
+  const isToken = true;
 
   const handleOpenModal = (type: FormType) => {
     onClose();
@@ -26,10 +28,20 @@ const Navigation = ({ isOpen, onClose }: NavBarProps) => {
     <>
       <Overlay $isOpen={isOpen} onClick={onClose} />
       <Container $isOpen={isOpen}>
-        <LinkWrapper>
-          <LinkItem onClick={() => handleOpenModal('register')}>Sign up</LinkItem>
-          <LinkItem onClick={() => handleOpenModal('login')}>Login</LinkItem>
-        </LinkWrapper>
+        {!isToken && (
+          <LinkWrapper>
+            <LinkItem onClick={() => handleOpenModal('register')}>Sign up</LinkItem>
+            <LinkItem onClick={() => handleOpenModal('login')}>Login</LinkItem>
+          </LinkWrapper>
+        )}
+        {isToken && (
+          <LinkWrapper>
+            <LinkItem>My page</LinkItem>
+            <LinkItem $color={'#f44336'}>Logout</LinkItem>
+          </LinkWrapper>
+        )}
+
+        <Footer />
       </Container>
     </>
   );
@@ -51,6 +63,10 @@ const Overlay = styled(Stack)<{ $isOpen: boolean }>`
   height: 100vh;
 `;
 const Container = styled.nav<{ $isOpen: boolean }>`
+  justify-content: space-between;
+  flex-direction: column;
+  display: flex;
+  padding: 25px;
   position: absolute;
   top: 60px;
   right: ${(props) => (props.$isOpen ? '0' : '-100%')};
@@ -66,8 +82,8 @@ const LinkWrapper = styled(Stack)`
   padding: 25px;
 `;
 
-const LinkItem = styled(Box)`
-  color: ${(props) => props.theme.text.primary};
+const LinkItem = styled(Box)<{ $color?: string }>`
+  color: ${(props) => props.$color || props.theme.text.primary};
   padding: 25px 16px;
   border-bottom: 1px solid ${(props) => props.theme.border.divider};
   font-size: 24px;
