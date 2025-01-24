@@ -22,10 +22,5 @@ declare module 'styled-components' {
       secondary: string;
       divider: string;
     };
-
-    boxShadow: {
-      primary: string;
-      secondary: string;
-    };
   }
 }

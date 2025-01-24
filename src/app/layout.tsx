@@ -1,8 +1,9 @@
-import MUIRegistry from '@/configs/MUI/registry';
-import StyledComponentsRegistry from '@/configs/styled-components/registry';
+import MUIRegistry from '@/libs/MUI/registry';
+import StyledComponentsRegistry from '@/libs/styled-components/registry';
 import { ThemeProvider } from '@/providers/ThemeProvider';
 import { MainContainer } from '@/styles/MainContainer';
 import type { Metadata } from 'next';
+// app/layout.tsx 또는 최상위 컴포넌트
 
 export const metadata: Metadata = {
   title: 'clipVault',

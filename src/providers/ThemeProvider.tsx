@@ -6,8 +6,8 @@ import { useEffect, useState } from 'react';
 import { darkTheme, lightTheme } from '@/styles/theme';
 import GlobalStyles from '@/styles/GlobalStyles';
 import { useAtomValue } from 'jotai';
-import { themeModeAtom } from '@/features/shared/atoms';
-
+import { themeModeAtom } from '@/atoms/theme.atom';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 function ThemeComponent({ children }: { children: React.ReactNode }) {
   const { theme, systemTheme } = useTheme();
   const isDark = useAtomValue(themeModeAtom);
@@ -19,6 +19,11 @@ function ThemeComponent({ children }: { children: React.ReactNode }) {
   return <StyledThemeProvider theme={currentTheme}>{children}</StyledThemeProvider>;
 }
 
+function ReactQueryProviders({ children }: { children: React.ReactNode }) {
+  const queryClient = new QueryClient(); // 컴포넌트 내부에서 생성
+
+  return <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>;
+}
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [mounted, setMounted] = useState(false);
 
@@ -42,10 +47,12 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
         system: 'system',
       }}
     >
-      <ThemeComponent>
-        <GlobalStyles />
-        {children}
-      </ThemeComponent>
+      <ReactQueryProviders>
+        <ThemeComponent>
+          <GlobalStyles />
+          {children}
+        </ThemeComponent>
+      </ReactQueryProviders>
     </NextThemesProvider>
   );
 }

@@ -1,0 +1,52 @@
+{
+  "clips": [
+    {
+      "id": "6071",
+      "title": "1",
+      "category": {
+        "id": "1737722585887-mg2lquu2q",
+        "color": "hsl(293, 39%, 67%)",
+        "name": "새 카테고리"
+      },
+      "link": "1",
+      "visible": "public",
+      "createdBy": "Fri Jan 24 2025 21:43:09 GMT+0900 (한국 표준시)"
+    },
+    {
+      "id": "34a5",
+      "title": "2",
+      "category": {
+        "id": "1737723121189-o2tzm2p16",
+        "color": "hsl(148, 29%, 73%)",
+        "name": "새 카테고리 2"
+      },
+      "link": "2",
+      "visible": "public",
+      "createdBy": "Fri Jan 24 2025 21:52:04 GMT+0900 (한국 표준시)"
+    },
+    {
+      "id": "d57f",
+      "title": "3",
+      "category": {
+        "id": "1737722585887-mg2lquu2q",
+        "color": "hsl(293, 39%, 67%)",
+        "name": "새 카테고리"
+      },
+      "link": "3",
+      "visible": "public",
+      "createdBy": "Fri Jan 24 2025 21:52:18 GMT+0900 (한국 표준시)"
+    },
+    {
+      "id": "7efe",
+      "title": "1",
+      "category": {
+        "id": "1737736559497-ucd4dbp9n",
+        "color": "hsl(194, 30%, 74%)",
+        "name": "새새 카테고리"
+      },
+      "link": "1",
+      "visible": "public",
+      "createdBy": "Sat Jan 25 2025 01:36:01 GMT+0900 (한국 표준시)"
+    }
+  ]
+}

@@ -1,5 +1,5 @@
-import AuthModal from '@/features/auth/ui/modal/AuthModal';
-import Header from '@/features/shared/ui/Header';
+import AuthModal from '@/components/modal/AuthModal';
+import Header from '@/components/Header';
 
 export default function Layout({
   children,
@@ -9,8 +9,8 @@ export default function Layout({
   return (
     <>
       <Header />
-      <AuthModal />
       {children}
+      <AuthModal />
     </>
   );
 }
