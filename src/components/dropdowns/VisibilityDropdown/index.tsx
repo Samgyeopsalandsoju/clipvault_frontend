@@ -52,6 +52,7 @@ const VisibilityDropdown = ({ onSelect, visible }: DropdownProps) => {
           }}
           placeholder="공개 범위 설정"
           value={value}
+          readOnly
         />
         <IconSection>
           <MdArrowDropDown />

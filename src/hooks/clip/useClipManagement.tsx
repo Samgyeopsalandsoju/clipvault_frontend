@@ -1,7 +1,6 @@
 import { ICategoryResponse } from '@/types/clip';
 import { useMemo, useState } from 'react';
 import { useClip } from './clip/useClip';
-import { useRouter } from 'next/navigation';
 
 export const useClipManagement = () => {
   const {
@@ -29,7 +28,8 @@ export const useClipManagement = () => {
   };
 
   const filteredClipList = useMemo(() => {
-    return selectedCategoryId ? data.filter((clip) => clip.category.id === selectedCategoryId) : data;
+    const filteredList = selectedCategoryId ? data.filter((clip) => clip.category.id === selectedCategoryId) : data;
+    return filteredList.length > 0 ? filteredList : data;
   }, [data, selectedCategoryId]);
 
   return { categories, handleCategorySelect, filteredClipList };

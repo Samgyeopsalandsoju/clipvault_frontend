@@ -30,7 +30,6 @@ export const useNewClipForm = () => {
 
   // 새 카테고리 생성
   const handleCreateCreate = (category: ICategoryResponse) => {
-    console.log('new category register');
     const categoryWithId = {
       ...category,
       id: generateUniqueId(),
@@ -40,7 +39,6 @@ export const useNewClipForm = () => {
 
   // 카테고리 선택
   const handleCategorySelect = (category: ICategoryResponse) => {
-    console.log('prev category select');
     setValue('category', category);
   };
 
@@ -51,7 +49,6 @@ export const useNewClipForm = () => {
 
   // 링크 생성
   const onSubmit: SubmitHandler<ICreateClip> = (data) => {
-    console.log('저장할 데이터 : ', data);
     create(data);
   };
 

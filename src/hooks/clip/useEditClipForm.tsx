@@ -4,11 +4,15 @@ import { useSetAtom } from 'jotai';
 import { ClipPageOpenAtom, clipPopupTypeAtom } from '../../atoms/clip.atom';
 import { useEffect, useRef } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { ICategoryResponse, ICreateClip, VisibilityType } from '@/types/clip';
+import { ICategoryResponse, ICreateClip, IModifyClip, VisibilityType } from '@/types/clip';
+import { useClip } from './clip/useClip';
 
 export const useEditClipForm = () => {
   const setIsOpen = useSetAtom(ClipPageOpenAtom);
   const setClipPopupType = useSetAtom(clipPopupTypeAtom);
+  const {
+    clip: { modify, delete: removeClip },
+  } = useClip();
   const hiddenButtonRef = useRef<HTMLButtonElement>(null);
   const {
     register,
@@ -16,7 +20,7 @@ export const useEditClipForm = () => {
     handleSubmit,
     setValue,
     formState: { errors },
-  } = useForm<ICreateClip>({
+  } = useForm<IModifyClip>({
     mode: 'onChange',
   });
 
@@ -27,12 +31,10 @@ export const useEditClipForm = () => {
 
   // 카테고리 선택
   const handleCategorySelect = (category: ICategoryResponse) => {
-    console.log('Selected category:', category);
     setValue('category', category);
   };
   // 공개 범위 선택
   const handleVisibilitySelect = (visibility: VisibilityType) => {
-    console.log('Selected Visibility:', visibility);
     setValue('visible', visibility);
   };
 
@@ -43,8 +45,12 @@ export const useEditClipForm = () => {
     }
   };
 
-  const onSubmit: SubmitHandler<ICreateClip> = (data) => {
-    console.log('전체 데이터', data);
+  const onSubmit: SubmitHandler<IModifyClip> = (data) => {
+    modify(data);
+  };
+
+  const onDelete = (id: string) => {
+    removeClip(id);
   };
 
   const handleBack = () => {
@@ -59,6 +65,7 @@ export const useEditClipForm = () => {
     handleSubmit,
     handleBack,
     onSubmit,
+    onDelete,
     handleVisibilitySelect,
     handleOutsideClick,
     handleCategorySelect,

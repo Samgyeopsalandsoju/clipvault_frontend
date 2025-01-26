@@ -26,6 +26,7 @@ export default function Page() {
     onSubmit,
     register,
     trigger,
+    onDelete,
     hiddenButtonRef,
   } = useEditClipForm();
 
@@ -46,6 +47,7 @@ export default function Page() {
           handleVisibilitySelect={handleVisibilitySelect}
           clipInfo={data}
           setValue={setValue}
+          onDelete={onDelete}
         />
       )}
     </>

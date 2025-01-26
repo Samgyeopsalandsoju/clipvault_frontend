@@ -17,8 +17,6 @@ const ModifyDropdown = ({ onSelect, categories, category }: DropdownProps) => {
   const [color, setColor] = useState<string>(category?.color || '');
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  console.log('categories', categories);
-
   // 외부 클릭 감지를 위한 useEffect
   const handleClickOutside = useCallback((event: MouseEvent) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -54,6 +52,7 @@ const ModifyDropdown = ({ onSelect, categories, category }: DropdownProps) => {
           onChange={(e) => setSearchTerm(e.currentTarget.value)}
           onFocus={() => setIsOpen(true)}
           placeholder="카테고리"
+          readOnly
         />
         {searchTerm && (
           <CloseButton onClick={handleClearSearchTerm}>

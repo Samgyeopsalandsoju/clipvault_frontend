@@ -8,11 +8,11 @@ import GlobalStyles from '@/styles/GlobalStyles';
 import { useAtomValue } from 'jotai';
 import { themeModeAtom } from '@/atoms/theme.atom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Toaster } from 'react-hot-toast';
 function ThemeComponent({ children }: { children: React.ReactNode }) {
   const { theme, systemTheme } = useTheme();
   const isDark = useAtomValue(themeModeAtom);
 
-  // console.log('Current theme:', theme);
   // console.log('System theme:', systemTheme);
   // const currentTheme = systemTheme === 'dark' ? darkTheme : lightTheme;
   const currentTheme = isDark ? darkTheme : lightTheme;
@@ -20,8 +20,7 @@ function ThemeComponent({ children }: { children: React.ReactNode }) {
 }
 
 function ReactQueryProviders({ children }: { children: React.ReactNode }) {
-  const queryClient = new QueryClient(); // 컴포넌트 내부에서 생성
-
+  const queryClient = new QueryClient();
   return <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>;
 }
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
@@ -50,6 +49,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       <ReactQueryProviders>
         <ThemeComponent>
           <GlobalStyles />
+          <Toaster />
           {children}
         </ThemeComponent>
       </ReactQueryProviders>

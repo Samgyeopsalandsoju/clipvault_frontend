@@ -18,6 +18,14 @@ export interface ICreateClip extends IBaseClip {
   category: ICategoryResponse;
 }
 
+export interface IModifyClip extends IBaseClip {
+  id: string;
+  createdBy: string;
+  modifiedBy: string;
+  category: ICategoryResponse;
+  fork: string;
+}
+
 export interface IClipResponse extends ICreateClip {
   id: string;
   createdBy: string;

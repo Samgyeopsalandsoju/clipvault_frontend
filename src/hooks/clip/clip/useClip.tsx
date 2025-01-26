@@ -1,8 +1,14 @@
-import { getClip, getClips, postClip } from '@/services/clips';
+import { deleteClip, getClip, getClips, modifyClip, postClip } from '@/services/clips';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useMemo } from 'react';
+import { useClipPageTransition } from '../useClipPageTransition';
+import { createToastService } from '@/libs/hot-toast';
+import { useTheme } from 'styled-components';
 
 export const useClip = (rawId?: string | string[] | undefined) => {
+  const { handleClose } = useClipPageTransition();
+  const theme = useTheme();
+  const toast = createToastService(theme);
   // id 값 정제
   const id = useMemo(() => {
     if (!rawId) return undefined;
@@ -17,9 +23,10 @@ export const useClip = (rawId?: string | string[] | undefined) => {
 
   const createClipMutation = useMutation({
     mutationFn: postClip,
-    onSuccess: (data) => {
-      console.log('데이터 추가에 성공 하였습니다.', data);
+    onSuccess: () => {
+      toast.success('Your insight is now clipped! ✨');
       queryClient.invalidateQueries({ queryKey: ['clips'] });
+      handleClose();
     },
   });
 
@@ -32,6 +39,24 @@ export const useClip = (rawId?: string | string[] | undefined) => {
     enabled: !!id,
   });
 
+  const modifyClipMutation = useMutation({
+    mutationFn: modifyClip,
+    onSuccess: () => {
+      toast.success('Change is good, your clip is fresh now! ✨');
+      queryClient.invalidateQueries({ queryKey: ['clips'] });
+      handleClose();
+    },
+  });
+
+  const deleteClipMutation = useMutation({
+    mutationFn: deleteClip,
+    onSuccess: () => {
+      toast.success('Making space for new ideas! ✨');
+      queryClient.invalidateQueries({ queryKey: ['clips'] });
+      handleClose();
+    },
+  });
+
   return {
     clipList: {
       data: getClipsQuery.data ?? [],
@@ -39,6 +64,8 @@ export const useClip = (rawId?: string | string[] | undefined) => {
     clip: {
       data: getClipQuery.data,
       create: createClipMutation.mutate,
+      modify: modifyClipMutation.mutate,
+      delete: deleteClipMutation.mutate,
     },
   };
 };

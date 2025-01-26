@@ -1,4 +1,4 @@
-import { IClipResponse, ICreateClip } from '@/types/clip';
+import { IClipResponse, ICreateClip, IModifyClip } from '@/types/clip';
 import axios from 'axios';
 
 export const getClips = async () => {
@@ -18,6 +18,16 @@ export const postClip = async (data: ICreateClip) => {
 };
 
 export const getClip = async (id: string) => {
-  const response = await axios.get<ICreateClip>(`http://localhost:3001/clips/${id}`);
+  const response = await axios.get<IModifyClip>(`http://localhost:3001/clips/${id}`);
+  return response.data;
+};
+
+export const modifyClip = async (data: IModifyClip) => {
+  const response = await axios.put<IModifyClip>(`http://localhost:3001/clips/${data.id}`, data);
+  return response.data;
+};
+
+export const deleteClip = async (id: string) => {
+  const response = await axios.delete(`http://localhost:3001/clips/${id}`);
   return response.data;
 };

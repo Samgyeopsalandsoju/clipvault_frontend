@@ -14,8 +14,6 @@ export const useRegisterForm = () => {
   });
   const validator = useRegisterValidation(watch);
 
-  const onSubmit: SubmitHandler<RegisterFormValue> = (data) => {
-    console.log('form data', data);
-  };
+  const onSubmit: SubmitHandler<RegisterFormValue> = (data) => {};
   return { register, handleSubmit, trigger, errors, validator, onSubmit };
 };

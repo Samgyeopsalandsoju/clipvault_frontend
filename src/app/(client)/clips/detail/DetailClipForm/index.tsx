@@ -1,4 +1,4 @@
-import { ICreateClip } from '@/types/clip';
+import { ICreateClip, IModifyClip } from '@/types/clip';
 import {
   BorderLessButton,
   Container,
@@ -13,7 +13,7 @@ import {
 interface DetailClipFormProps {
   handleBack: () => void;
   handleEdit: () => void;
-  clipInfo: ICreateClip | undefined;
+  clipInfo: IModifyClip | undefined;
 }
 
 const DetailClipForm = ({ handleBack, handleEdit, clipInfo }: DetailClipFormProps) => {

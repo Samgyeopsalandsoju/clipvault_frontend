@@ -25,6 +25,10 @@ const Card = styled(Stack)`
   align-items: center;
   cursor: pointer;
   gap: 10px;
+
+  &:hover {
+    transform: scale(1.02);
+  }
 `;
 
 const Link = styled(Typography)`

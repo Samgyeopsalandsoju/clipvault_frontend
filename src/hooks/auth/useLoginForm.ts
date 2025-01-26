@@ -24,7 +24,6 @@ export const useLoginForm = () => {
   };
 
   const onSubmit: SubmitHandler<LoginFormValue> = (data) => {
-    console.log('form data', data);
     saveUsername(data.email);
   };
   return {

@@ -10,8 +10,8 @@ import {
 } from '../../styles';
 import VisibilityDropdown from '../../../../../components/dropdowns/VisibilityDropdown';
 import { FieldErrors, UseFormRegister, UseFormSetValue, UseFormTrigger } from 'react-hook-form';
-import { FormEventHandler, RefObject } from 'react';
-import { ICategoryResponse, ICreateClip, VisibilityType } from '@/types/clip';
+import { FormEventHandler, RefObject, useEffect } from 'react';
+import { ICategoryResponse, IModifyClip, VisibilityType } from '@/types/clip';
 import { useClipManagement } from '@/hooks/clip/useClipManagement';
 import ModifyDropdown from '@/components/dropdowns/ModifyDropdown';
 
@@ -21,12 +21,13 @@ interface EditClipFormProps {
   onSubmit: FormEventHandler<HTMLFormElement>;
   handleVisibilitySelect: (visibility: VisibilityType) => void;
   handleCategorySelect: (category: ICategoryResponse) => void;
-  errors: FieldErrors<ICreateClip>;
-  register: UseFormRegister<ICreateClip>;
-  trigger: UseFormTrigger<ICreateClip>;
+  errors: FieldErrors<IModifyClip>;
+  register: UseFormRegister<IModifyClip>;
+  trigger: UseFormTrigger<IModifyClip>;
   hiddenButtonRef: RefObject<HTMLButtonElement | null>;
-  clipInfo: ICreateClip | undefined;
-  setValue: UseFormSetValue<ICreateClip>;
+  clipInfo: IModifyClip | undefined;
+  setValue: UseFormSetValue<IModifyClip>;
+  onDelete: (id: string) => void;
 }
 
 const EditClipForm = ({
@@ -39,15 +40,22 @@ const EditClipForm = ({
   register,
   setValue,
   trigger,
+  onDelete,
   hiddenButtonRef,
   clipInfo,
 }: EditClipFormProps) => {
   const { categories } = useClipManagement();
 
   if (!clipInfo) return;
-  const { visible, category, link, title } = clipInfo;
-  setValue('link', link);
-  setValue('title', title);
+  const { visible, category, link, title, id } = clipInfo;
+
+  // initial data setting
+  useEffect(() => {
+    setValue('id', id);
+    setValue('link', link);
+    setValue('title', title);
+    setValue('category', category);
+  }, [clipInfo]);
 
   return (
     <Container>
@@ -91,7 +99,7 @@ const EditClipForm = ({
             })}
             onBlur={() => trigger('title')}
           />
-          <BorderLessButton $color={'#f44336'} disableRipple>
+          <BorderLessButton onClick={() => onDelete(id)} $color={'#f44336'} disableRipple>
             삭제
           </BorderLessButton>
           <button ref={hiddenButtonRef} type="submit" style={{ display: 'none' }} />
