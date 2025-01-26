@@ -1,28 +1,3 @@
 {
-  "clips": [
-    {
-      "id": "c37b",
-      "title": "천재",
-      "category": {
-        "id": "1737899990230-a2yolniwk",
-        "color": "hsl(6, 31%, 72%)",
-        "name": "현빈이"
-      },
-      "link": "링크",
-      "visible": "public",
-      "createdBy": "Sun Jan 26 2025 22:59:56 GMT+0900 (한국 표준시)"
-    },
-    {
-      "id": "fd2f",
-      "title": "111",
-      "category": {
-        "id": "1737903342590-0bm0z2wth",
-        "color": "hsl(99, 39%, 73%)",
-        "name": "현빈이입니다"
-      },
-      "link": "111",
-      "visible": "public",
-      "createdBy": "Sun Jan 26 2025 23:55:44 GMT+0900 (한국 표준시)"
-    }
-  ]
+  "clips": []
 }

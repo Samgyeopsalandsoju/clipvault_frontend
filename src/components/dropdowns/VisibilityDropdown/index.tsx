@@ -3,8 +3,9 @@
 import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { MdArrowDropDown } from 'react-icons/md';
-import { VisibilityType } from '@/types/clip';
+import { ICreateClip, VisibilityType } from '@/types/clip';
 import { Container, DropdownItem, DropdownList, Input, InputWrapper } from '../shared/dropdown.styles';
+import { UseFormRegister } from 'react-hook-form';
 
 const visibilities = [
   { name: '공개', code: 'public', color: '' },

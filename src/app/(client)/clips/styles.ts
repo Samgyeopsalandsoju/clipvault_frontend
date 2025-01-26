@@ -52,6 +52,7 @@ export const StyledInput = styled.input<{ $error?: boolean; $height?: string; $c
   border-radius: 4px;
   font-size: 14px;
   line-height: 1.5;
+  border: 2px solid ${(props) => props.$error && '#FF3B30'};
   background-color: ${(props) => (props.$color ? props.$color : props.theme.background.textfield)};
   transition: all 0.2s ease-in-out;
   height: ${(props) => props.$height || ''};
@@ -63,6 +64,7 @@ export const StyledInput = styled.input<{ $error?: boolean; $height?: string; $c
 export const Textarea = styled.textarea<{ $error?: boolean }>`
   width: 300px;
   background-color: ${(props) => props.theme.background.textfield};
+  border: 2px solid ${(props) => props.$error && '#FF3B30'};
   padding: 8px 12px;
   border-radius: 4px;
   font-size: 14px;

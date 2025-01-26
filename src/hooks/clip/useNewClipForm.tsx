@@ -6,10 +6,13 @@ import { useEffect } from 'react';
 import { ClipPageOpenAtom } from '@/atoms/clip.atom';
 import { VisibilityType, ICreateClip, ICategoryResponse, ICategory } from '@/types/clip';
 import { useClip } from './clip/useClip';
-import { generateUniqueId } from '@/utils/utils';
+import { generateUniqueId, createValidator } from '@/utils/utils';
+import { useTheme } from 'styled-components';
 
 export const useNewClipForm = () => {
   const setIsOpen = useSetAtom(ClipPageOpenAtom);
+  const theme = useTheme();
+  const validator = createValidator(theme);
   const {
     clip: { create },
   } = useClip();
@@ -49,6 +52,8 @@ export const useNewClipForm = () => {
 
   // 링크 생성
   const onSubmit: SubmitHandler<ICreateClip> = (data) => {
+    const result = validator.validateForm(data);
+    if (!result) return false;
     create(data);
   };
 
