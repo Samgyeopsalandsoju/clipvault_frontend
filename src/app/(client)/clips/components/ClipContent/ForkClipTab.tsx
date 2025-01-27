@@ -10,6 +10,7 @@ const FORK_CLIP_LIST: IClipResponse[] = [
     category: { id: '123', name: '카테고리', color: 'lightblue' },
     createdBy: '2025-01-25',
     visible: 'private',
+    fork: '1',
   },
 ];
 
