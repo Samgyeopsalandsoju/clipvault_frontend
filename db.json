@@ -1,3 +1,16 @@
 {
-  "clips": []
+  "clips": [
+    {
+      "id": "b78e",
+      "title": "1",
+      "category": {
+        "id": "1737955607982-lhnpsv1bo",
+        "color": "hsl(268, 27%, 78%)",
+        "name": "1"
+      },
+      "link": "1",
+      "visible": "public",
+      "createdBy": "Mon Jan 27 2025 14:26:49 GMT+0900 (한국 표준시)"
+    }
+  ]
 }

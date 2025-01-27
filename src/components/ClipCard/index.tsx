@@ -53,4 +53,5 @@ const Category = styled(Stack)<{ $color: string }>`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  /* font-family: 'Wanted sans'; */
 `;
