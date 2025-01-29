@@ -2,7 +2,7 @@ import { Stack } from '@mui/material';
 import styled from 'styled-components';
 import Clip from '@/components/ClipCard';
 import { IClipResponse } from '@/types/clip';
-import { useEditClipForm } from '@/hooks/clip/useEditClipForm';
+import { useEditClipForm } from '@/hooks/form/useEditClipForm';
 
 interface ClipList {
   list: IClipResponse[];
@@ -34,5 +34,11 @@ const ListWrapper = styled(Stack)`
 const ClipItem = styled(Stack)`
   &:hover button {
     opacity: 1;
+  }
+
+  @media screen and (max-width: 1024px) {
+    button {
+      opacity: 1;
+    }
   }
 `;

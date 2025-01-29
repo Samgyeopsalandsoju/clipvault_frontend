@@ -87,9 +87,11 @@ const CategoryDropdown = ({ onSelect, onCreator, categories }: DropdownProps) =>
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.currentTarget.value)}
           onFocus={() => setIsOpen(true)}
-          placeholder="카테고리"
+          placeholder="Category"
         />
-        {!isOpen && showCreateCategory && <ChangeColorButton onClick={handleChangeColor}>색 변경</ChangeColorButton>}
+        {!isOpen && showCreateCategory && (
+          <ChangeColorButton onClick={handleChangeColor}>Change color</ChangeColorButton>
+        )}
 
         {searchTerm && (
           <CloseButton onClick={handleClearSearchTerm}>
@@ -128,7 +130,8 @@ export default CategoryDropdown;
 
 const Input = styled.input<{ $bgColor?: string; $textColor?: string }>`
   width: 100%;
-  padding: 0.75rem 1rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
   background-color: ${(props) => (props.$bgColor ? props.$bgColor : props.theme.background.secondary)};
   border: 1px solid ${(props) => props.theme.border.secondary};
   border-radius: 0.5rem;
@@ -168,28 +171,28 @@ const CloseButton = styled.button`
 `;
 
 const CreateCategory = styled(Stack)`
-  padding: 4px 8px;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
   cursor: pointer;
   border: 2px solid #ddd;
-  margin: 2px 0;
-  border-radius: 4px;
   transition: all 0.2s ease;
   background-color: ${(props) => props.theme.border.divider};
   text-align: center;
 `;
 
 const ChangeColorButton = styled(Stack)`
-  border: 2px solid #20363646;
-  background-color: #3f5a5a;
+  border: 1px solid ${(props) => props.theme.border.secondary};
+  background-color: ${(props) => props.theme.background.secondary};
   position: absolute;
   right: 40px;
   top: 50%;
-  width: 50px;
+  width: 100px;
+  padding: 5px;
   border-radius: 4px;
   transform: translateY(-50%);
   cursor: pointer;
   font-size: 12px;
-  color: #fff;
+  color: ${(props) => props.theme.text.primary};
   text-align: center;
   font-weight: 700;
   user-select: none;

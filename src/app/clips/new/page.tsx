@@ -1,11 +1,12 @@
 'use client';
 
-import { useNewClipForm } from '@/hooks/clip/useNewClipForm';
 import VisibilityDropdown from '@/components/dropdowns/VisibilityDropdown';
 import CategoryDropdown from '@/components/dropdowns/CategoryDropdown';
-import { useClipManagement } from '@/hooks/clip/useClipManagement';
+import { useClipFilter } from '@/hooks/clip/useClipFilter';
 import styled from 'styled-components';
 import { Stack } from '@mui/material';
+import { useNewClipForm } from '@/hooks/form/useNewClipForm';
+import { useClipQuery } from '@/hooks/clip/clip/useClipQuery';
 
 export default function Page() {
   const {
@@ -18,7 +19,10 @@ export default function Page() {
     trigger,
     errors,
   } = useNewClipForm();
-  const { categories } = useClipManagement();
+  const {
+    clipList: { data },
+  } = useClipQuery();
+  const { categories } = useClipFilter(data);
 
   return (
     <Container>
@@ -31,13 +35,13 @@ export default function Page() {
         <CategoryDropdown onSelect={handleCategorySelect} onCreator={handleCreateCreate} categories={categories} />
         <Input
           $error={!!errors.title}
-          placeholder="클립 이름을 지어주세요!"
+          placeholder="Clip title"
           maxLength={30}
           {...register('title', {
-            required: '클립 이름을 작성해주세요!',
+            required: 'Enter Clip Title',
             maxLength: {
               value: 30,
-              message: '30글자 이상 작성할 수 없어요!',
+              message: '',
             },
             onChange: (e) => {
               const value = e.target.value;
@@ -49,13 +53,13 @@ export default function Page() {
         />
         <TextArea
           $error={!!errors.link}
-          placeholder="link를 복사 붙여넣기 해주세요!"
+          placeholder="Link"
           {...register('link', {
-            required: '저장할 링크를 복사 붙여넣기 해주세요!',
+            required: 'Enter Link',
           })}
-          onBlur={() => trigger('title')}
+          onBlur={() => trigger('link')}
         />
-        <SubmitButton type="submit">클립 만들기!</SubmitButton>
+        <SubmitButton type="submit">Add to Clips</SubmitButton>
       </Form>
     </Container>
   );

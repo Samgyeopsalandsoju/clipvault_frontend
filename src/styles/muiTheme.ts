@@ -29,12 +29,20 @@ const muiTheme = createTheme({
     },
   },
   components: {
+    MuiCssBaseline: {
+      styleOverrides: {
+        '@font-face': {
+          fontFamily: 'Wanted Sans',
+          src: `url('/fonts/WantedSansVariable.ttf') format('truetype-variations')`,
+          fontWeight: '100 900',
+        },
+      },
+    },
     MuiButton: {
       styleOverrides: {
         root: {
           borderRadius: '5px',
         },
-        contained: {},
       },
     },
   },

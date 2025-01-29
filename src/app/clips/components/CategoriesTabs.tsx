@@ -1,4 +1,4 @@
-import { Tag } from '@/components/styled/Tag';
+import { TabTag } from '@/components/styled/Tag';
 import { useDragX } from '@/hooks/useDragX';
 import { ICategoryResponse } from '@/types/clip';
 import { generateModernTagColors } from '@/utils/utils';
@@ -25,14 +25,14 @@ const CategoriesTabs = ({ categories, onSelect }: ICategoriesTabsProps) => {
         {categories.map((category, index) => {
           const colors = generateModernTagColors(Number(category.color));
           return (
-            <Tag
+            <TabTag
               key={index}
               $bgColor={colors.background}
               $textColor={colors.text}
               onClick={() => onSelect(category.id)}
             >
               {category.name}
-            </Tag>
+            </TabTag>
           );
         })}
       </Tabs>
@@ -44,22 +44,21 @@ export default CategoriesTabs;
 
 const TagsContainer = styled(Stack)`
   width: 100%;
+  padding: 0 1rem;
   &.active {
-    cursor: grabbing; /* 드래그 중일 때 커서 */
+    cursor: grabbing;
   }
 `;
 
 const Tabs = styled(Stack)`
-  display: inline-flex; /* 내용물 크기만큼 너비 확장 */
-  overflow-y: auto;
+  display: inline-flex;
+  overflow-x: auto;
   flex-direction: row;
   gap: 0.5rem;
   padding: 0.75rem 1rem;
   width: 100%;
   scrollbar-width: none;
-
-  // 추가된 스타일
-  white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+  white-space: nowrap;
 
   &::-webkit-scrollbar {
     display: none;

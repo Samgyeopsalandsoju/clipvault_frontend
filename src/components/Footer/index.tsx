@@ -16,7 +16,7 @@ const Footer = () => {
   return (
     <FooterContainer>
       <Section>
-        <Description>링크를 쉽게 저장하고 공유할 수 있는 서비스입니다.</Description>
+        <Description>A service for effortless link storage and sharing.</Description>
       </Section>
 
       <Section>

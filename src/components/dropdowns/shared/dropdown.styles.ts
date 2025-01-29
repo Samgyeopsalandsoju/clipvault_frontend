@@ -42,13 +42,14 @@ export const DropdownList = styled(Stack)`
 `;
 
 export const DropdownItem = styled(Stack)<{ $bgColor?: string; $textColor?: string }>`
-  padding: 4px 8px;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border: 2px solid #ddd;
+  border-radius: 0.5rem;
   cursor: pointer;
   background-color: ${(props) => props.$bgColor || props.theme.background.secondary};
   color: ${(props) => props.$textColor || props.theme.text.primary};
   margin: 2px 0;
-  border-radius: 4px;
   transition: all 0.2s ease;
-  font-size: 13px;
   font-weight: 600;
 `;

@@ -5,7 +5,7 @@ import { useClipPageTransition } from '../useClipPageTransition';
 import { createToastService } from '@/libs/hot-toast';
 import { useTheme } from 'styled-components';
 
-export const useClip = (rawId?: string | string[] | undefined) => {
+export const useClipQuery = (rawId?: string | string[] | undefined) => {
   const { handleClose } = useClipPageTransition();
   const theme = useTheme();
   const toast = createToastService(theme);

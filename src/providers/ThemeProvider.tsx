@@ -4,7 +4,6 @@ import { ThemeProvider as NextThemesProvider, useTheme } from 'next-themes';
 import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 import { useEffect, useState } from 'react';
 import { darkTheme, lightTheme } from '@/styles/theme';
-import GlobalStyles from '@/styles/GlobalStyles';
 import { useAtomValue } from 'jotai';
 import { themeModeAtom } from '@/atoms/theme.atom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -40,7 +39,6 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       defaultTheme="system" // 기본 테마 설정
       enableSystem={true} // 시스템 테마 감지 활성화
       value={{
-        // 사용 가능한 테마 정의
         light: 'light',
         dark: 'dark',
         system: 'system',
@@ -48,7 +46,6 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     >
       <ReactQueryProviders>
         <ThemeComponent>
-          <GlobalStyles />
           <Toaster />
           {children}
         </ThemeComponent>

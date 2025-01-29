@@ -1,13 +1,17 @@
 'use client';
 
-import { useClipManagement } from '@/hooks/clip/useClipManagement';
+import { useClipFilter } from '@/hooks/clip/useClipFilter';
 import CategoriesTabs from './components/CategoriesTabs';
 import ClipList from '@/components/ClipList';
 import { ScrollContainer } from './components/styles';
 import CreateClipButton from '@/components/CreateClipButton';
+import { useClipQuery } from '@/hooks/clip/clip/useClipQuery';
 
 const ClipsPage = () => {
-  const { filteredClipList, categories, handleCategorySelect } = useClipManagement();
+  const {
+    clipList: { data },
+  } = useClipQuery();
+  const { filteredClipList, categories, handleCategorySelect } = useClipFilter(data);
   return (
     <ScrollContainer>
       <CategoriesTabs categories={categories} onSelect={handleCategorySelect} />

@@ -1,11 +1,7 @@
-import { ICategoryResponse } from '@/types/clip';
+import { ICategoryResponse, IClipResponse } from '@/types/clip';
 import { useMemo, useState } from 'react';
-import { useClip } from './clip/useClip';
 
-export const useClipManagement = () => {
-  const {
-    clipList: { data },
-  } = useClip();
+export const useClipFilter = (data: IClipResponse[]) => {
   const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(null);
 
   const categories = useMemo(() => {

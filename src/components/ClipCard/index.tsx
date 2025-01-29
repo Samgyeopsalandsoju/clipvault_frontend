@@ -2,8 +2,8 @@ import { IClipResponse } from '@/types/clip';
 import { generateModernTagColors } from '@/utils/utils';
 import { IconButton, Stack, Typography } from '@mui/material';
 import styled from 'styled-components';
-import { ExternalLink } from 'lucide-react';
-import { Tag } from '@/components/styled/Tag';
+import { ExternalLink, Copy, GitFork } from 'lucide-react';
+import { CardTag } from '@/components/styled/Tag';
 
 const Clip = ({ title, category, link }: IClipResponse) => {
   const { background, text } = generateModernTagColors(Number(category.color));
@@ -13,13 +13,16 @@ const Clip = ({ title, category, link }: IClipResponse) => {
       <ClipContent>
         <ClipInfo>
           <TitleRow>
-            <Tag $bgColor={background} $textColor={text}>
+            <CardTag $bgColor={background} $textColor={text}>
               {category.name}
-            </Tag>
+            </CardTag>
             <ClipTitle>{title}</ClipTitle>
           </TitleRow>
           <ClipUrl>{link}</ClipUrl>
         </ClipInfo>
+        <LinkButton>
+          <Copy size={16} />
+        </LinkButton>
         <LinkButton>
           <ExternalLink size={16} />
         </LinkButton>
@@ -31,6 +34,7 @@ const Clip = ({ title, category, link }: IClipResponse) => {
 export default Clip;
 
 const ClipCard = styled(Stack)`
+  cursor: pointer;
   padding: 1rem;
   border-radius: 0.75rem;
   background-color: ${(props) => props.theme.background.secondaryWithOpacity};
@@ -48,17 +52,19 @@ const ClipContent = styled(Stack)`
   flex-direction: row;
   align-items: flex-start;
   justify-content: space-between;
+  gap: 5px;
 `;
 
 const ClipInfo = styled(Stack)`
   flex: 1;
   min-width: 0;
+  gap: 1rem;
 `;
 
 const TitleRow = styled(Stack)`
   flex-direction: row;
   align-items: center;
-  gap: 0.5rem;
+  gap: 1rem;
   margin-bottom: 0.25rem;
 `;
 
@@ -83,6 +89,7 @@ const LinkButton = styled(IconButton)`
   opacity: 0;
   transition: opacity 0.2s, background-color 0.2s;
   color: ${(props) => props.theme.text.primary};
+
   &:hover {
     background-color: #3f3f46;
   }

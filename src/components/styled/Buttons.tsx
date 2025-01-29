@@ -6,7 +6,6 @@ import styled from 'styled-components';
 // 아웃 라인 커스텀 버튼
 export const OutlineCustomButton = styled(Button)<{ $bgColor?: string }>`
   font-size: 15px;
-  font-family: 'Wanted Sans', sans-serif;
   font-weight: 500;
   text-transform: none;
   box-shadow: none;
@@ -22,7 +21,6 @@ export const OutlineCustomButton = styled(Button)<{ $bgColor?: string }>`
 // 솔리드 커스텀 버튼
 export const SolidCustomButton = styled(Button)<{ $color?: string }>`
   font-size: 15px;
-  font-family: 'Wanted Sans', sans-serif;
   font-weight: 500;
   text-transform: none;
   box-shadow: none;
@@ -39,7 +37,6 @@ export const SolidCustomButton = styled(Button)<{ $color?: string }>`
 export const SolidSmallCustomButton = styled(Button)`
   background-color: ${(props) => props.theme.background.primary};
   font-size: 15px;
-  font-family: 'Wanted Sans', sans-serif;
   color: ${(props) => props.theme.text.primary};
   text-transform: none;
   box-shadow: none;

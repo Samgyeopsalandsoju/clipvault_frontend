@@ -4,9 +4,9 @@ import { useSetAtom } from 'jotai';
 import { ClipPageOpenAtom, clipPopupTypeAtom } from '../../atoms/clip.atom';
 import { useEffect, useRef } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { ICategoryResponse, ICreateClip, IModifyClip, VisibilityType } from '@/types/clip';
-import { useClip } from './clip/useClip';
+import { ICategoryResponse, IModifyClip, VisibilityType } from '@/types/clip';
 import { useRouter } from 'next/navigation';
+import { useClipQuery } from '../clip/clip/useClipQuery';
 
 export const useEditClipForm = () => {
   const setIsOpen = useSetAtom(ClipPageOpenAtom);
@@ -14,7 +14,7 @@ export const useEditClipForm = () => {
   const router = useRouter();
   const {
     clip: { modify, delete: removeClip },
-  } = useClip();
+  } = useClipQuery();
   const hiddenButtonRef = useRef<HTMLButtonElement>(null);
   const {
     register,

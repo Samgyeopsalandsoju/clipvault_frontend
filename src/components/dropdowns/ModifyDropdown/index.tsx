@@ -1,9 +1,10 @@
 'use client';
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { IoClose } from 'react-icons/io5';
 import { ICategoryResponse } from '@/types/clip';
 import { Container, DropdownItem, DropdownList, Input, InputWrapper } from '../shared/dropdown.styles';
+import { generateModernTagColors } from '@/utils/utils';
 
 interface DropdownProps {
   onSelect: (category: ICategoryResponse) => void;
@@ -51,7 +52,7 @@ const ModifyDropdown = ({ onSelect, categories, category }: DropdownProps) => {
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.currentTarget.value)}
           onFocus={() => setIsOpen(true)}
-          placeholder="카테고리"
+          placeholder="Category"
           readOnly
         />
         {searchTerm && (
@@ -63,9 +64,11 @@ const ModifyDropdown = ({ onSelect, categories, category }: DropdownProps) => {
       {isOpen && (
         <DropdownList>
           {categories.map((category, index) => {
+            const { background, text } = generateModernTagColors(Number(category.color));
             return (
               <DropdownItem
-                $color={category.color}
+                $bgColor={background}
+                $textColor={text}
                 key={index}
                 onClick={() => {
                   setColor(category.color);

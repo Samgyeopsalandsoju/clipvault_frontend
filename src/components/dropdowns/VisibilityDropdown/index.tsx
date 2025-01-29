@@ -7,8 +7,8 @@ import { VisibilityType } from '@/types/clip';
 import { Container, DropdownItem, DropdownList, InputWrapper } from '../shared/dropdown.styles';
 
 const visibilities = [
-  { name: '공개', code: 'public', color: '' },
-  { name: '비공개', code: 'private', color: '' },
+  { name: 'Public', code: 'public', color: '' },
+  { name: 'Private', code: 'private', color: '' },
 ];
 
 interface DropdownProps {
@@ -34,13 +34,6 @@ const VisibilityDropdown = ({ onSelect, visible }: DropdownProps) => {
     };
   }, []);
 
-  useEffect(() => {
-    if (visible) {
-      const visibleType = visible === 'private' ? '비공개' : '공개';
-      setValue(visibleType);
-    }
-  }, []);
-
   return (
     <Container ref={dropdownRef}>
       <InputWrapper>
@@ -50,7 +43,7 @@ const VisibilityDropdown = ({ onSelect, visible }: DropdownProps) => {
           onChange={(e) => {
             setValue(e.currentTarget.value);
           }}
-          placeholder="공개 범위 설정"
+          placeholder="Visibility"
           value={value}
           readOnly
         />
@@ -84,7 +77,8 @@ export default VisibilityDropdown;
 
 const Input = styled.input<{ $bgColor?: string; $textColor?: string }>`
   width: 100%;
-  padding: 0.75rem 1rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
   background-color: ${(props) => (props.$bgColor ? props.$bgColor : props.theme.background.secondary)};
   border: 1px solid ${(props) => props.theme.border.secondary};
   border-radius: 0.5rem;

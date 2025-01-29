@@ -1,6 +1,5 @@
 'use client';
-import { useEditClipForm } from '@/hooks/clip/useEditClipForm';
-import { useClip } from '@/hooks/clip/clip/useClip';
+import { useClipQuery } from '@/hooks/clip/clip/useClipQuery';
 import { useParams } from 'next/navigation';
 import {
   BorderLessButton,
@@ -14,14 +13,16 @@ import {
 } from '../../components/styles';
 import VisibilityDropdown from '@/components/dropdowns/VisibilityDropdown';
 import { VisibilityType } from '@/types/clip';
-import { useClipManagement } from '@/hooks/clip/useClipManagement';
+import { useClipFilter } from '@/hooks/clip/useClipFilter';
 import ModifyDropdown from '@/components/dropdowns/ModifyDropdown';
+import { useEditClipForm } from '@/hooks/form/useEditClipForm';
 
 export default function Page() {
   const { clipId } = useParams();
   const {
     clip: { data },
-  } = useClip(clipId);
+    clipList: { data: list },
+  } = useClipQuery(clipId);
   const {
     errors,
     handleBack,
@@ -29,14 +30,13 @@ export default function Page() {
     handleOutsideClick,
     handleSubmit,
     handleVisibilitySelect,
-    setValue,
     onSubmit,
     register,
     trigger,
     onDelete,
     hiddenButtonRef,
   } = useEditClipForm();
-  const { categories } = useClipManagement();
+  const { categories } = useClipFilter(list);
 
   if (!data) return;
   const { visible, category, link, title, id } = data;

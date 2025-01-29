@@ -5,9 +5,9 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { useEffect } from 'react';
 import { ClipPageOpenAtom } from '@/atoms/clip.atom';
 import { VisibilityType, ICreateClip, ICategoryResponse, ICategory } from '@/types/clip';
-import { useClip } from './clip/useClip';
 import { generateUniqueId, createValidator } from '@/utils/utils';
 import { useTheme } from 'styled-components';
+import { useClipQuery } from '../clip/clip/useClipQuery';
 
 export const useNewClipForm = () => {
   const setIsOpen = useSetAtom(ClipPageOpenAtom);
@@ -15,7 +15,7 @@ export const useNewClipForm = () => {
   const validator = createValidator(theme);
   const {
     clip: { create },
-  } = useClip();
+  } = useClipQuery();
   const {
     register,
     trigger,

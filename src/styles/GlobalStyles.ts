@@ -1,14 +1,21 @@
+'use client';
+
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyles = createGlobalStyle`
   @font-face {
     font-family: 'Wanted Sans';
-    src: url('/fonts/WantedSansVariable.ttf') format('truetype-variations');
-    font-weight: 100 900;  // Variable 폰트의 weight 범위 설정
+    src: url('/fonts/WantedSansVariable.ttf') format('truetype-variable');
+    font-weight: 100 900;
     font-style: normal;
-    font-display: optional;   
+    font-display: optional;
   }
-  /* 모든 요소에 대한 기본 박스 모델 설정 */
+
+  * {
+    font-family: 'Wanted Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, 'Helvetica Neue', Arial, sans-serif !important;
+  }
+
   *, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
@@ -31,8 +38,8 @@ const GlobalStyles = createGlobalStyle`
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    font-family: 'Wanted Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', 
-      Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-family: 'Wanted Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, 'Helvetica Neue', Arial, sans-serif !important;
   }
 
   /* HTML5 display-role reset */

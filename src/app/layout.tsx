@@ -6,6 +6,7 @@ import Tabs from '@/components/Tabs';
 import AuthModal from '@/components/modal/AuthModal';
 import MUIRegistry from '@/providers/registries/mui-registry';
 import StyledComponentsRegistry from '@/providers/registries/styled-registry';
+import GlobalStyles from '@/styles/GlobalStyles';
 
 export const metadata: Metadata = {
   title: 'clipVault',
@@ -23,6 +24,7 @@ export default function RootLayout({
         <MUIRegistry>
           <StyledComponentsRegistry>
             <ThemeProvider>
+              <GlobalStyles />
               <MainContainer>
                 <HeaderComponent />
                 <Tabs />

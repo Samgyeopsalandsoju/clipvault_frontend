@@ -1,17 +1,15 @@
 'use client';
 
 import { Button } from '@mui/material';
-import { usePathname, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import styled from 'styled-components';
 
 const CreateClipButton = () => {
   const router = useRouter();
-  const params = usePathname();
   const handleNewClick = () => {
     router.push('/clips/new');
   };
 
-  const isVisible = params.includes('/new');
   return <CreateButton onClick={handleNewClick}>Create Clip!</CreateButton>;
 };
 
