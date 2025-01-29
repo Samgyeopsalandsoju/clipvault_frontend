@@ -4,8 +4,8 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { IoClose } from 'react-icons/io5';
 import { ICategoryResponse } from '@/types/clip';
-import { Container, DropdownItem, DropdownList, Input, InputWrapper } from '../shared/dropdown.styles';
-import { generateSoftColor, generateUniqueId } from '@/utils/utils';
+import { Container, DropdownItem, DropdownList, InputWrapper } from '../shared/dropdown.styles';
+import { generateModernTagColors, generateSoftColor, generateUniqueId } from '@/utils/utils';
 
 interface DropdownProps {
   onSelect: (category: ICategoryResponse) => void;
@@ -16,7 +16,7 @@ interface DropdownProps {
 const CategoryDropdown = ({ onSelect, onCreator, categories }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [searchTerm, setSearchTerm] = useState<string>('');
-  const [color, setColor] = useState<string>();
+  const [color, setColor] = useState<{ background: string; text: string }>();
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   // 외부 클릭 감지를 위한 useEffect
@@ -34,31 +34,31 @@ const CategoryDropdown = ({ onSelect, onCreator, categories }: DropdownProps) =>
 
   // 카테고리 인풋 박스 클린
   const handleClearSearchTerm = () => {
-    setColor('');
+    setColor({ background: '', text: '' });
     setSearchTerm('');
     setIsOpen(true);
   };
 
   // 신규 카테고리에 등록
   const handleCreateCategory = useCallback(() => {
-    const randomColor = generateSoftColor();
+    const { colorHue, background, text } = generateModernTagColors();
     const category: ICategoryResponse = {
       id: generateUniqueId(),
-      color: randomColor,
+      color: String(colorHue),
       name: searchTerm,
     };
     setIsOpen(false);
-    setColor(randomColor);
+    setColor({ background: background, text: text });
     onCreator(category);
   }, [searchTerm, onCreator]);
 
   // 신규 카테고리 색 변경
   const handleChangeColor = useCallback(() => {
-    const newColor = generateSoftColor();
-    setColor(newColor);
+    const { colorHue, background, text } = generateModernTagColors();
+    setColor({ background: background, text: text });
     const category: ICategoryResponse = {
       id: generateUniqueId(),
-      color: newColor,
+      color: String(colorHue),
       name: searchTerm,
     };
     onCreator(category);
@@ -81,7 +81,8 @@ const CategoryDropdown = ({ onSelect, onCreator, categories }: DropdownProps) =>
     <Container ref={dropdownRef}>
       <InputWrapper>
         <Input
-          $color={color}
+          $bgColor={color?.background}
+          $textColor={color?.text}
           type="text"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.currentTarget.value)}
@@ -99,12 +100,14 @@ const CategoryDropdown = ({ onSelect, onCreator, categories }: DropdownProps) =>
       {isOpen && (
         <DropdownList>
           {filteredCategories.map((category, index) => {
+            const { background, text } = generateModernTagColors(Number(category.color));
             return (
               <DropdownItem
-                $color={category.color}
+                $textColor={text}
+                $bgColor={background}
                 key={index}
                 onClick={() => {
-                  setColor(category.color);
+                  setColor({ background: background, text: text });
                   handleSelectCategory(category);
                   setIsOpen(false);
                   setSearchTerm(category.name);
@@ -122,6 +125,24 @@ const CategoryDropdown = ({ onSelect, onCreator, categories }: DropdownProps) =>
 };
 
 export default CategoryDropdown;
+
+const Input = styled.input<{ $bgColor?: string; $textColor?: string }>`
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background-color: ${(props) => (props.$bgColor ? props.$bgColor : props.theme.background.secondary)};
+  border: 1px solid ${(props) => props.theme.border.secondary};
+  border-radius: 0.5rem;
+  color: ${(props) => (props.$textColor ? props.$textColor : props.theme.text.primary)};
+
+  &::placeholder {
+    color: ${(props) => props.theme.text.placeholder};
+  }
+
+  &:focus {
+    outline: none;
+    border-color: ${(props) => props.theme.border.focus};
+  }
+`;
 
 const CloseButton = styled.button`
   position: absolute;

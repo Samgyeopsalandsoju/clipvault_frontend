@@ -1,15 +1,15 @@
 'use client';
 import styled from 'styled-components';
-import { FaPaperclip } from 'react-icons/fa6';
-import { IoMenu } from 'react-icons/io5';
-import { Stack } from '@mui/material';
-import { IconButton } from '@mui/material';
+import { Stack, IconButton, Box } from '@mui/material';
 import { useState } from 'react';
-import { Typography } from '@mui/material';
 import Link from 'next/link';
-import Navigation from '../Navigation';
+import { Link2, Menu } from 'lucide-react';
+import { useSetAtom } from 'jotai';
+import Footer from '../Footer';
+import { authModalAtom, authModeAtom } from '@/atoms/auth.atom';
+import { FormType } from '@/types/auth';
 
-const Header = () => {
+const HeaderComponent = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   const toggleDrawer = () => {
@@ -21,54 +21,125 @@ const Header = () => {
   };
 
   return (
-    <Container>
-      <LogoContainer>
-        <Link href={'/clips'}>
-          <FaPaperclip />
+    <Header>
+      <HeaderTitle>
+        <Link2 size={20} />
+        <Link href={'/'}>
+          <h1>clipVault</h1>
         </Link>
-      </LogoContainer>
-      <Link href={'/'}>
-        <Title>clipVault</Title>
-      </Link>
-      <IconSection size="large" edge="end" aria-label="menu" onClick={toggleDrawer}>
-        <IoMenu />
+      </HeaderTitle>
+      <IconSection edge="end" aria-label="menu" onClick={toggleDrawer}>
+        <Menu />
       </IconSection>
       <Navigation isOpen={drawerOpen} onClose={handleClose} />
-    </Container>
+    </Header>
   );
 };
-export default Header;
+export default HeaderComponent;
+
+const Header = styled.header`
+  padding: 0 1rem;
+  height: 3.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid ${(props) => props.theme.border.primary};
+`;
+
+const HeaderTitle = styled(Stack)`
+  flex-direction: row;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: ${(props) => props.theme.text.primary};
+
+  h1 {
+    font-size: 1.125rem;
+    font-weight: 500;
+  }
+`;
 
 const IconSection = styled(IconButton)`
   color: ${(props) => props.theme.text.primary};
 `;
 
-const Container = styled.header`
-  background-color: ${(props) => props.theme.background.primary};
-  position: sticky;
-  height: 60px;
-  padding: 0 20px;
-  /* border-bottom: 1px solid rgba(0, 0, 0, 0.1); */
-  border-bottom: 1px solid ${(props) => props.theme.border.divider};
-  display: flex;
-  align-items: center;
+interface NavBarProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+const Navigation = ({ isOpen, onClose }: NavBarProps) => {
+  const setMode = useSetAtom(authModeAtom);
+  const setIsAuthModalOpen = useSetAtom(authModalAtom);
+  const isToken = false;
+
+  const handleOpenModal = (type: FormType) => {
+    onClose();
+    setIsAuthModalOpen(true);
+    setMode(type);
+  };
+
+  return (
+    <>
+      <Overlay $isOpen={isOpen} onClick={onClose} />
+      <Container $isOpen={isOpen}>
+        {!isToken && (
+          <LinkWrapper>
+            <LinkItem onClick={() => handleOpenModal('register')}>Sign up</LinkItem>
+            <LinkItem onClick={() => handleOpenModal('login')}>Login</LinkItem>
+          </LinkWrapper>
+        )}
+        {isToken && (
+          <LinkWrapper>
+            <LinkItem>My page</LinkItem>
+            <LinkItem $color={'#f44336'}>Logout</LinkItem>
+          </LinkWrapper>
+        )}
+
+        <Footer />
+      </Container>
+    </>
+  );
+};
+
+const Overlay = styled(Stack)<{ $isOpen: boolean }>`
+  position: absolute;
+  top: 60px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(49, 49, 49, 0.607);
+  opacity: ${(props) => (props.$isOpen ? 1 : 0)};
+  visibility: ${(props) => (props.$isOpen ? 'visible' : 'hidden')};
+  transition: opacity 0.3s ease;
+  z-index: 998;
+  height: 100vh;
+`;
+const Container = styled.nav<{ $isOpen: boolean }>`
   justify-content: space-between;
-  z-index: 1000;
+  flex-direction: column;
+  display: flex;
+  padding: 25px;
+  position: absolute;
+  top: 60px;
+  right: ${(props) => (props.$isOpen ? '0' : '-100%')};
+  width: 80%;
+  height: calc(100vh - 60px);
+  background: ${(props) => props.theme.background.primary};
+  transition: right 0.3s ease-in-out;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+  z-index: 999;
 `;
 
-const LogoContainer = styled(Stack)`
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: ${(props) => props.theme.text.primary};
-  cursor: pointer;
-`;
+const LinkWrapper = styled(Stack)``;
 
-const Title = styled(Typography)`
+const LinkItem = styled(Box)<{ $color?: string }>`
+  color: ${(props) => props.$color || props.theme.text.primary};
+  padding: 25px 16px;
+  border-bottom: 1px solid ${(props) => props.theme.border.divider};
+  font-size: 24px;
+  font-weight: 600;
   cursor: pointer;
-  color: ${(props) => props.theme.text.primary};
-  font-weight: 800;
-  font-size: 32px;
-  letter-spacing: -3px;
   -webkit-user-select: none;
   user-select: none;
 `;

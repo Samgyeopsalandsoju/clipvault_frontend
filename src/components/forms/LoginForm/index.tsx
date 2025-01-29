@@ -1,6 +1,6 @@
 import { SOCIAL_LOGIN_OPTIONS } from '@/constants/auth.constants';
 import { Divider, Stack, TextField } from '@mui/material';
-import { OutlineCustomButton } from '@/components/button';
+import { OutlineCustomButton } from '@/components/styled/Buttons';
 import RememberMe from '../RememberMe';
 import { useLoginForm } from '@/hooks/auth/useLoginForm';
 import { Content, Form, Logo, TextFieldWrapper, Title } from '../styles';

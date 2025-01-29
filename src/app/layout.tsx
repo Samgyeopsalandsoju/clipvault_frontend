@@ -1,9 +1,11 @@
-import MUIRegistry from '@/libs/MUI/registry';
-import StyledComponentsRegistry from '@/libs/styled-components/registry';
+import HeaderComponent from '@/components/Header';
 import { ThemeProvider } from '@/providers/ThemeProvider';
 import { MainContainer } from '@/styles/MainContainer';
 import type { Metadata } from 'next';
-// app/layout.tsx 또는 최상위 컴포넌트
+import Tabs from '@/components/Tabs';
+import AuthModal from '@/components/modal/AuthModal';
+import MUIRegistry from '@/providers/registries/mui-registry';
+import StyledComponentsRegistry from '@/providers/registries/styled-registry';
 
 export const metadata: Metadata = {
   title: 'clipVault',
@@ -21,7 +23,12 @@ export default function RootLayout({
         <MUIRegistry>
           <StyledComponentsRegistry>
             <ThemeProvider>
-              <MainContainer>{children}</MainContainer>
+              <MainContainer>
+                <HeaderComponent />
+                <Tabs />
+                {children}
+                <AuthModal />
+              </MainContainer>
             </ThemeProvider>
           </StyledComponentsRegistry>
         </MUIRegistry>

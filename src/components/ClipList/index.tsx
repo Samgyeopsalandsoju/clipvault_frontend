@@ -2,20 +2,20 @@ import { Stack } from '@mui/material';
 import styled from 'styled-components';
 import Clip from '@/components/ClipCard';
 import { IClipResponse } from '@/types/clip';
-import { useDetailClipForm } from '@/hooks/clip/useDetailClipForm';
+import { useEditClipForm } from '@/hooks/clip/useEditClipForm';
 
 interface ClipList {
   list: IClipResponse[];
 }
 const ClipList = ({ list }: ClipList) => {
-  const { handleClipClick } = useDetailClipForm();
+  const { handleClipClick } = useEditClipForm();
   return (
     <ListWrapper>
       {list.map((clip, index) => {
         return (
-          <Stack key={index} onClick={() => handleClipClick(clip.id)}>
+          <ClipItem key={index} onClick={() => handleClipClick(clip.id)}>
             <Clip {...clip} />
-          </Stack>
+          </ClipItem>
         );
       })}
     </ListWrapper>
@@ -25,7 +25,14 @@ const ClipList = ({ list }: ClipList) => {
 export default ClipList;
 
 const ListWrapper = styled(Stack)`
-  gap: 16px;
-  padding: 24px 24px 80px 24px;
-  height: 100%;
+  padding: 0 1rem;
+  display: flex;
+  gap: 0.75rem;
+  padding-bottom: 5rem;
+`;
+
+const ClipItem = styled(Stack)`
+  &:hover button {
+    opacity: 1;
+  }
 `;

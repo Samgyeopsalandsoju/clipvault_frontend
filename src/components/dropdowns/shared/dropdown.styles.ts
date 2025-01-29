@@ -5,7 +5,6 @@ import styled from 'styled-components';
 export const Container = styled(Stack)`
   position: relative;
   width: 100%;
-  max-width: 300px;
 `;
 
 export const InputWrapper = styled(Stack)`
@@ -42,11 +41,11 @@ export const DropdownList = styled(Stack)`
   background-color: ${(props) => props.theme.background.primary};
 `;
 
-export const DropdownItem = styled(Stack)<{ $color?: string }>`
+export const DropdownItem = styled(Stack)<{ $bgColor?: string; $textColor?: string }>`
   padding: 4px 8px;
   cursor: pointer;
-  border: 2px solid ${(props) => props.$color || '#aa9f84'};
-  background-color: ${(props) => props.$color || '#d7c9a7'};
+  background-color: ${(props) => props.$bgColor || props.theme.background.secondary};
+  color: ${(props) => props.$textColor || props.theme.text.primary};
   margin: 2px 0;
   border-radius: 4px;
   transition: all 0.2s ease;

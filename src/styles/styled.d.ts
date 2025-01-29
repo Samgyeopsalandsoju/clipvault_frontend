@@ -7,6 +7,7 @@ declare module 'styled-components' {
     background: {
       primary: string;
       secondary: string;
+      secondaryWithOpacity: string;
       tertiary: string;
       textfield: string;
     };
@@ -15,12 +16,14 @@ declare module 'styled-components' {
       primary: string;
       secondary: string;
       tertiary: string;
+      placeholder?: string;
     };
 
     border: {
       primary: string;
       secondary: string;
       divider: string;
+      focus?: string;
     };
   }
 }

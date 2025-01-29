@@ -3,9 +3,8 @@
 import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { MdArrowDropDown } from 'react-icons/md';
-import { ICreateClip, VisibilityType } from '@/types/clip';
-import { Container, DropdownItem, DropdownList, Input, InputWrapper } from '../shared/dropdown.styles';
-import { UseFormRegister } from 'react-hook-form';
+import { VisibilityType } from '@/types/clip';
+import { Container, DropdownItem, DropdownList, InputWrapper } from '../shared/dropdown.styles';
 
 const visibilities = [
   { name: '공개', code: 'public', color: '' },
@@ -82,6 +81,24 @@ const VisibilityDropdown = ({ onSelect, visible }: DropdownProps) => {
 };
 
 export default VisibilityDropdown;
+
+const Input = styled.input<{ $bgColor?: string; $textColor?: string }>`
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background-color: ${(props) => (props.$bgColor ? props.$bgColor : props.theme.background.secondary)};
+  border: 1px solid ${(props) => props.theme.border.secondary};
+  border-radius: 0.5rem;
+  color: ${(props) => (props.$textColor ? props.$textColor : props.theme.text.primary)};
+
+  &::placeholder {
+    color: ${(props) => props.theme.text.placeholder};
+  }
+
+  &:focus {
+    outline: none;
+    border-color: ${(props) => props.theme.border.focus};
+  }
+`;
 
 const IconSection = styled.button`
   position: absolute;

@@ -6,7 +6,7 @@ export const MainContainer = styled.div`
   max-width: 480px;
   margin: 0 auto;
   position: relative;
-  border: 1px solid ${(props) => props.theme.border.divider};
+  border: 1px solid ${(props) => props.theme.border.secondary};
   border-radius: 12px;
   overflow: hidden;
   height: 100vh;

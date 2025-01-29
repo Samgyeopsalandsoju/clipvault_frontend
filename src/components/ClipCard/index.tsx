@@ -1,57 +1,89 @@
-import { IClipResponse, ICreateClip } from '@/types/clip';
-import { Stack, Typography } from '@mui/material';
+import { IClipResponse } from '@/types/clip';
+import { generateModernTagColors } from '@/utils/utils';
+import { IconButton, Stack, Typography } from '@mui/material';
 import styled from 'styled-components';
+import { ExternalLink } from 'lucide-react';
+import { Tag } from '@/components/styled/Tag';
 
-const Clip = ({ title, category, link }: IClipResponse | ICreateClip) => {
+const Clip = ({ title, category, link }: IClipResponse) => {
+  const { background, text } = generateModernTagColors(Number(category.color));
+
   return (
-    <Card>
-      <Category $color={category.color}>{category.name}</Category>
-      <Title>{title}</Title>
-      <Link> {link}</Link>
-    </Card>
+    <ClipCard>
+      <ClipContent>
+        <ClipInfo>
+          <TitleRow>
+            <Tag $bgColor={background} $textColor={text}>
+              {category.name}
+            </Tag>
+            <ClipTitle>{title}</ClipTitle>
+          </TitleRow>
+          <ClipUrl>{link}</ClipUrl>
+        </ClipInfo>
+        <LinkButton>
+          <ExternalLink size={16} />
+        </LinkButton>
+      </ClipContent>
+    </ClipCard>
   );
 };
 
 export default Clip;
 
-const Card = styled(Stack)`
-  justify-content: space-between;
-  flex-direction: row;
-  padding: 10px;
-  border-radius: 12px;
-  background-color: ${(props) => props.theme.background.textfield};
-  border: 1px solid ${(props) => props.theme.border.secondary};
-  transition: all 0.3s ease;
-  align-items: center;
-  cursor: pointer;
-  gap: 10px;
+const ClipCard = styled(Stack)`
+  padding: 1rem;
+  border-radius: 0.75rem;
+  background-color: ${(props) => props.theme.background.secondaryWithOpacity};
+  backdrop-filter: blur(16px);
+  border: 1px solid ${(props) => props.theme.background.secondaryWithOpacity};
+  transition: all 0.2s;
 
   &:hover {
-    transform: scale(1.02);
+    background-color: ${(props) => props.theme.background.secondary};
   }
 `;
 
-const Link = styled(Typography)`
-  width: 150px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+const ClipContent = styled(Stack)`
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
 `;
 
-const Title = styled(Typography)`
-  font-size: 18px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+const ClipInfo = styled(Stack)`
+  flex: 1;
+  min-width: 0;
 `;
 
-const Category = styled(Stack)<{ $color: string }>`
-  background-color: ${(props) => props.$color};
-  padding: 3px 8px;
-  color: #fff;
-  border-radius: 8px;
-  white-space: nowrap;
+const TitleRow = styled(Stack)`
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+`;
+
+const ClipTitle = styled(Typography)`
+  font-size: 0.875rem;
+  font-weight: 500;
   overflow: hidden;
   text-overflow: ellipsis;
-  /* font-family: 'Wanted sans'; */
+  white-space: nowrap;
+  color: ${(props) => props.theme.text.primary};
+`;
+
+const ClipUrl = styled(Typography)`
+  font-size: 0.75rem;
+  color: #a1a1aa;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`;
+
+const LinkButton = styled(IconButton)`
+  opacity: 0;
+  transition: opacity 0.2s, background-color 0.2s;
+  color: ${(props) => props.theme.text.primary};
+  &:hover {
+    background-color: #3f3f46;
+  }
 `;

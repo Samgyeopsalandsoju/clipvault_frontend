@@ -8,7 +8,6 @@ import { ClipPageOpenAtom } from '@/atoms/clip.atom';
 import ClipPage from './page';
 import styled from 'styled-components';
 import { useClipPageTransition } from '@/hooks/clip/useClipPageTransition';
-import CreateClipButton from './components/CreateClipButton';
 
 export default function ClipLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -25,7 +24,6 @@ export default function ClipLayout({ children }: { children: React.ReactNode }) 
     <LayoutContainer>
       <BaseLayer>
         <ClipPage />
-        <CreateClipButton />
       </BaseLayer>
 
       {shouldShowModal && (

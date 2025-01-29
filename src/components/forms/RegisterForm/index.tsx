@@ -1,5 +1,5 @@
 import { Stack, TextField } from '@mui/material';
-import { OutlineCustomButton } from '@/components/button';
+import { OutlineCustomButton } from '@/components/styled/Buttons';
 import { useRegisterForm } from '@/hooks/auth/useRegisterForm';
 import { Content, Form, TextFieldWrapper, Title } from '../styles';
 

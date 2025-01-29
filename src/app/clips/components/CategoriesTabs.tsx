@@ -1,5 +1,7 @@
+import { Tag } from '@/components/styled/Tag';
 import { useDragX } from '@/hooks/useDragX';
 import { ICategoryResponse } from '@/types/clip';
+import { generateModernTagColors } from '@/utils/utils';
 import { Stack } from '@mui/material';
 import styled from 'styled-components';
 
@@ -10,8 +12,9 @@ interface ICategoriesTabsProps {
 
 const CategoriesTabs = ({ categories, onSelect }: ICategoriesTabsProps) => {
   const { handleMouseDown, handleMouseLeave, handleMouseMove, isDragging, tabsRef, handleMouseUp } = useDragX();
+
   return (
-    <Container className={isDragging ? 'active' : ''}>
+    <TagsContainer className={isDragging ? 'active' : ''}>
       <Tabs
         ref={tabsRef}
         onMouseDown={handleMouseDown}
@@ -20,22 +23,27 @@ const CategoriesTabs = ({ categories, onSelect }: ICategoriesTabsProps) => {
         onMouseMove={handleMouseMove}
       >
         {categories.map((category, index) => {
+          const colors = generateModernTagColors(Number(category.color));
           return (
-            <Tab key={index} $color={category.color} onClick={() => onSelect(category.id)}>
+            <Tag
+              key={index}
+              $bgColor={colors.background}
+              $textColor={colors.text}
+              onClick={() => onSelect(category.id)}
+            >
               {category.name}
-            </Tab>
+            </Tag>
           );
         })}
       </Tabs>
-    </Container>
+    </TagsContainer>
   );
 };
 
 export default CategoriesTabs;
 
-const Container = styled(Stack)`
+const TagsContainer = styled(Stack)`
   width: 100%;
-  padding: 8px 24px 0 24px;
   &.active {
     cursor: grabbing; /* 드래그 중일 때 커서 */
   }
@@ -45,21 +53,15 @@ const Tabs = styled(Stack)`
   display: inline-flex; /* 내용물 크기만큼 너비 확장 */
   overflow-y: auto;
   flex-direction: row;
-  gap: 10px;
-
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  width: 100%;
   scrollbar-width: none;
+
+  // 추가된 스타일
+  white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+
   &::-webkit-scrollbar {
     display: none;
   }
-`;
-
-const Tab = styled(Stack)<{ $color: string }>`
-  background-color: ${(props) => props.$color};
-  padding: 4px 15px;
-  border-radius: 10px;
-  cursor: pointer;
-  /* 탭이 줄어들지 않도록 설정 */
-  flex-shrink: 0;
-  white-space: nowrap;
-  user-select: none;
 `;

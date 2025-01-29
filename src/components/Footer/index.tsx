@@ -15,8 +15,7 @@ const Footer = () => {
 
   return (
     <FooterContainer>
-      <Section sx={{ alignItems: 'center' }}>
-        <Title>clipVault</Title>
+      <Section>
         <Description>링크를 쉽게 저장하고 공유할 수 있는 서비스입니다.</Description>
       </Section>
 
@@ -73,15 +72,6 @@ const Section = styled(Stack)`
   margin: 20px 0;
   width: 100%;
 `;
-
-const Title = styled.h2`
-  font-size: 28px;
-  font-weight: bold;
-  margin-bottom: 16px;
-  color: ${(props) => props.theme.text.primary};
-  letter-spacing: -3px;
-`;
-
 const Description = styled.p`
   font-size: 14px;
   color: ${(props) => props.theme.text.tertiary};

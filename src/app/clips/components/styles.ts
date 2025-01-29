@@ -4,12 +4,14 @@ import { Button, Stack, Typography } from '@mui/material';
 import styled from 'styled-components';
 
 export const ScrollContainer = styled(Stack)`
+  position: relative;
   height: 100%;
   overflow: scroll;
   /** hide scroll */
   -ms-overflow-style: none;
   scrollbar-width: none;
-  background-color: ${(props) => props.theme.background.secondary};
+  background-color: ${(props) => props.theme.background.primary};
+  padding-bottom: 100px;
   .no-scroll::-webkit-scrollbar {
     display: none;
   }
@@ -19,7 +21,6 @@ export const Container = styled(Stack)`
   padding: 0px 32px 32px 32px;
   align-items: center;
   width: 100%;
-  pad: 20px;
 `;
 
 export const Wrapper = styled(Stack)`

@@ -6,10 +6,12 @@ import { useEffect, useRef } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { ICategoryResponse, ICreateClip, IModifyClip, VisibilityType } from '@/types/clip';
 import { useClip } from './clip/useClip';
+import { useRouter } from 'next/navigation';
 
 export const useEditClipForm = () => {
   const setIsOpen = useSetAtom(ClipPageOpenAtom);
   const setClipPopupType = useSetAtom(clipPopupTypeAtom);
+  const router = useRouter();
   const {
     clip: { modify, delete: removeClip },
   } = useClip();
@@ -52,6 +54,9 @@ export const useEditClipForm = () => {
   const onDelete = (id: string) => {
     removeClip(id);
   };
+  const handleClipClick = (id: string) => {
+    router.push(`/clips/edit/${id}`);
+  };
 
   const handleBack = () => {
     setClipPopupType('detail');
@@ -59,6 +64,7 @@ export const useEditClipForm = () => {
 
   return {
     errors,
+    handleClipClick,
     register,
     setValue,
     trigger,

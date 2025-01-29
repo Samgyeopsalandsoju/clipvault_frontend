@@ -1,17 +1,19 @@
-import { ScrollContainer } from '../../styles';
-import CategoriesTabs from '../CategoriesTabs';
-import ClipList from '@/components/ClipList';
+'use client';
+
 import { useClipManagement } from '@/hooks/clip/useClipManagement';
+import CategoriesTabs from './components/CategoriesTabs';
+import ClipList from '@/components/ClipList';
+import { ScrollContainer } from './components/styles';
+import CreateClipButton from '@/components/CreateClipButton';
 
-const MyClipTab = () => {
+const ClipsPage = () => {
   const { filteredClipList, categories, handleCategorySelect } = useClipManagement();
-
   return (
     <ScrollContainer>
       <CategoriesTabs categories={categories} onSelect={handleCategorySelect} />
       <ClipList list={filteredClipList} />
+      <CreateClipButton />
     </ScrollContainer>
   );
 };
-
-export default MyClipTab;
+export default ClipsPage;
