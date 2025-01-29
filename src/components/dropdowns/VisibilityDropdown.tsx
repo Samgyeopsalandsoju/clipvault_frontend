@@ -18,7 +18,7 @@ interface DropdownProps {
 
 const VisibilityDropdown = ({ onSelect, visible }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [value, setValue] = useState<string>('');
+  const [value, setValue] = useState<string | undefined>(visible);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   // 외부 클릭 감지를 위한 useEffect

@@ -18,7 +18,6 @@ import ModifyDropdown from '@/components/dropdowns/ModifyDropdown';
 import { useEditClipForm } from '@/hooks/form/useEditClipForm';
 import { useClipQuery } from '@/hooks/clip/useClipQuery';
 import { Stack } from '@mui/material';
-import styled from 'styled-components';
 
 export default function Page() {
   const { clipId } = useParams();
@@ -26,6 +25,7 @@ export default function Page() {
     clip: { data },
     clipList: { data: list },
   } = useClipQuery(clipId);
+
   const {
     errors,
     handleBack,
@@ -38,11 +38,13 @@ export default function Page() {
     trigger,
     onDelete,
     hiddenButtonRef,
+    initializeForm,
   } = useEditClipForm();
   const { categories } = useClipFilter(list);
-
   if (!data) return;
-  const { visible, category, link, title, id } = data;
+
+  initializeForm(data);
+  const { visible, category, id } = data;
 
   return (
     <Container>
@@ -65,13 +67,13 @@ export default function Page() {
         <ModifyDropdown onSelect={handleCategorySelect} categories={categories} category={category} />
         <Input
           $error={!!errors.title}
-          placeholder="클립 이름을 지어주세요!"
+          placeholder="Clip Title"
           maxLength={30}
           {...register('title', {
-            required: '클립 이름을 작성해주세요!',
+            required: 'Type your title here',
             maxLength: {
               value: 30,
-              message: '30글자 이상 작성할 수 없어요!',
+              message: 'Limited to 30 characters',
             },
             onChange: (e) => {
               const value = e.target.value;
@@ -83,14 +85,14 @@ export default function Page() {
         />
         <TextArea
           $error={!!errors.link}
-          placeholder="link를 복사 붙여넣기 해주세요!"
+          placeholder="Link"
           {...register('link', {
-            required: '저장할 링크를 복사 붙여넣기 해주세요!',
+            required: 'Paste your link here',
           })}
           onBlur={() => trigger('title')}
         />
         <BorderLessButton onClick={() => onDelete(id)} $color={'#f44336'} disableRipple>
-          삭제
+          Delete Clip
         </BorderLessButton>
         <button ref={hiddenButtonRef} type="submit" style={{ display: 'none' }} />
       </Form>

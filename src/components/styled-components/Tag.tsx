@@ -27,8 +27,7 @@ export const CardTag = styled(Typography)<TagProps>`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  display: inline-block;
-  max-width: 120px; // 필요한 경우 최대 너비 지정
+  max-width: 120px;
 
   @media screen and (max-width: 425px) {
     max-width: 80px;

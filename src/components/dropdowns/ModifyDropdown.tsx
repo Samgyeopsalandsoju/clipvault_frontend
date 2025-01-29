@@ -13,8 +13,8 @@ interface DropdownProps {
 
 const ModifyDropdown = ({ onSelect, categories, category }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [searchTerm, setSearchTerm] = useState<string>(category?.name || '');
-  const [color, setColor] = useState<{ background: string; text: string }>();
+  const [searchTerm, setSearchTerm] = useState<string | undefined>(category?.name);
+  const [color, setColor] = useState<{ background: string; text: string }>({ background: '', text: '' });
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   // 외부 클릭 감지를 위한 useEffect
@@ -23,11 +23,17 @@ const ModifyDropdown = ({ onSelect, categories, category }: DropdownProps) => {
       setIsOpen(false);
     }
   }, []);
+
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
+  }, []);
+
+  useEffect(() => {
+    const { background, text } = generateModernTagColors(Number(category?.color));
+    setColor({ background: background, text: text });
   }, []);
 
   // 카테고리 인풋 박스 클린

@@ -38,10 +38,10 @@ export default function Page() {
           placeholder="Clip title"
           maxLength={30}
           {...register('title', {
-            required: 'Enter Clip Title',
+            required: 'Type your title here',
             maxLength: {
               value: 30,
-              message: '',
+              message: 'Limited to 30 characters',
             },
             onChange: (e) => {
               const value = e.target.value;
@@ -55,7 +55,7 @@ export default function Page() {
           $error={!!errors.link}
           placeholder="Link"
           {...register('link', {
-            required: 'Enter Link',
+            required: 'Paste your link here',
           })}
           onBlur={() => trigger('link')}
         />

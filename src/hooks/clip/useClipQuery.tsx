@@ -1,14 +1,14 @@
-import { deleteClip, getClip, getClips, modifyClip, postClip } from '@/services/clips';
+import { deleteClip, getClip, getClips, modifyClip, postClip } from '@/services/clipsService';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useMemo } from 'react';
 import { createToastService } from '@/libs/hot-toast';
 import { useTheme } from 'styled-components';
 import { useClipPageTransition } from './useClipPageTransition';
+import { useToast } from '../useToast';
 
 export const useClipQuery = (rawId?: string | string[] | undefined) => {
   const { handleClose } = useClipPageTransition();
-  const theme = useTheme();
-  const toast = createToastService(theme);
+  const { successToast } = useToast();
   // id 값 정제
   const id = useMemo(() => {
     if (!rawId) return undefined;
@@ -24,7 +24,7 @@ export const useClipQuery = (rawId?: string | string[] | undefined) => {
   const createClipMutation = useMutation({
     mutationFn: postClip,
     onSuccess: () => {
-      toast.success('Your insight is now clipped! ✨');
+      successToast('Clip saved successfully ✨');
       queryClient.invalidateQueries({ queryKey: ['clips'] });
       handleClose();
     },
@@ -42,8 +42,8 @@ export const useClipQuery = (rawId?: string | string[] | undefined) => {
   const modifyClipMutation = useMutation({
     mutationFn: modifyClip,
     onSuccess: () => {
-      toast.success('Change is good, your clip is fresh now! ✨');
-      queryClient.invalidateQueries({ queryKey: ['clips'] });
+      successToast('Clip updated successfully ✨');
+      queryClient.invalidateQueries({ queryKey: ['clips', 'clip'] });
       handleClose();
     },
   });
@@ -51,7 +51,7 @@ export const useClipQuery = (rawId?: string | string[] | undefined) => {
   const deleteClipMutation = useMutation({
     mutationFn: deleteClip,
     onSuccess: () => {
-      toast.success('Making space for new ideas! ✨');
+      successToast('Clip deleted successfully 🗑️');
       queryClient.invalidateQueries({ queryKey: ['clips'] });
       handleClose();
     },

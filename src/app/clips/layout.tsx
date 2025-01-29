@@ -82,4 +82,8 @@ const ModalLayer = styled(Stack)`
   pointer-events: auto;
   background-color: ${(props) => props.theme.background.primary};
   border: 1px solid ${(props) => props.theme.border.primary};
+
+  @media screen and (max-width: 1024px) {
+    height: 65vh;
+  }
 `;

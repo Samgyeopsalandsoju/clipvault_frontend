@@ -5,11 +5,11 @@ import styled from 'styled-components';
 import { ExternalLink, Copy, GitFork } from 'lucide-react';
 import { CardTag } from '@/components/styled-components/Tag';
 
-const Clip = ({ title, category, link }: IClipResponse) => {
-  const { background, text } = generateModernTagColors(Number(category.color));
+const Clip = ({ title, category, link, visible, fork }: IClipResponse) => {
+  const { background, text, border } = generateModernTagColors(Number(category.color));
 
   return (
-    <ClipCard>
+    <ClipCard $isPublic={visible === 'public'} $border={border}>
       <ClipContent>
         <ClipInfo>
           <TitleRow>
@@ -23,9 +23,16 @@ const Clip = ({ title, category, link }: IClipResponse) => {
         <LinkButton>
           <Copy size={16} />
         </LinkButton>
-        <LinkButton>
-          <ExternalLink size={16} />
-        </LinkButton>
+        <Section>
+          <LinkButton>
+            <ExternalLink size={16} />
+          </LinkButton>
+          {visible === 'public' && (
+            <ForkSection>
+              <GitFork size={20} /> {fork || 0}
+            </ForkSection>
+          )}
+        </Section>
       </ClipContent>
     </ClipCard>
   );
@@ -33,7 +40,7 @@ const Clip = ({ title, category, link }: IClipResponse) => {
 
 export default Clip;
 
-const ClipCard = styled(Stack)`
+const ClipCard = styled(Stack)<{ $isPublic?: boolean; $border?: string }>`
   cursor: pointer;
   padding: 1rem;
   border-radius: 0.75rem;
@@ -41,6 +48,14 @@ const ClipCard = styled(Stack)`
   backdrop-filter: blur(16px);
   border: 1px solid ${(props) => props.theme.background.secondaryWithOpacity};
   transition: all 0.2s;
+
+  ${(props) => {
+    if (props.$isPublic) {
+      return `
+        box-shadow: 0 0 0 2px ${props.$border};
+      `;
+    }
+  }}
 
   &:hover {
     background-color: ${(props) => props.theme.background.secondary};
@@ -52,13 +67,13 @@ const ClipContent = styled(Stack)`
   flex-direction: row;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 5px;
+  gap: 2px;
 `;
 
 const ClipInfo = styled(Stack)`
   flex: 1;
   min-width: 0;
-  gap: 1rem;
+  gap: 8px;
 `;
 
 const TitleRow = styled(Stack)`
@@ -89,8 +104,30 @@ const LinkButton = styled(IconButton)`
   opacity: 0;
   transition: opacity 0.2s, background-color 0.2s;
   color: ${(props) => props.theme.text.primary};
-
+  justify-content: end;
   &:hover {
     background-color: #3f3f46;
+  }
+`;
+
+const Section = styled(Stack)`
+  justify-content: space-between;
+  height: 100%;
+  position: relative;
+`;
+
+const ForkSection = styled(Stack)`
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 5px;
+  color: ${(props) => props.theme.text.primary};
+  font-size: 0.8rem;
+  bottom: 0;
+  right: 8px;
+  svg {
+    min-width: 12px;
+    min-height: 12px;
   }
 `;

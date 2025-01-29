@@ -9,12 +9,19 @@ import styled from 'styled-components';
 const ClipTabs = () => {
   const params = usePathname();
 
+  const isActive = (path: string) => {
+    const currentPath = params.split('/')[1];
+    const menuPath = path.split('/')[1];
+    return currentPath === menuPath;
+  };
+
+  isActive(params);
   return (
     <Nav>
       <TabContainer>
         {MENU.map((item, index) => {
           return (
-            <Tab value={item.name} $isActive={item.path === params} key={index}>
+            <Tab value={item.name} $isActive={isActive(item.path)} key={index}>
               <Link href={item.path}>{item.name}</Link>
             </Tab>
           );
