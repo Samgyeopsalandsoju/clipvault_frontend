@@ -4,8 +4,8 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { IoClose } from 'react-icons/io5';
 import { ICategoryResponse } from '@/types/clip';
-import { Container, DropdownItem, DropdownList, InputWrapper } from '../shared/dropdown.styles';
-import { generateModernTagColors, generateSoftColor, generateUniqueId } from '@/utils/utils';
+import { CloseButton, Container, DropdownItem, DropdownList, Input, InputWrapper } from './dropdown.styles';
+import { generateModernTagColors, generateUniqueId } from '@/utils/utils';
 
 interface DropdownProps {
   onSelect: (category: ICategoryResponse) => void;
@@ -127,48 +127,6 @@ const CategoryDropdown = ({ onSelect, onCreator, categories }: DropdownProps) =>
 };
 
 export default CategoryDropdown;
-
-const Input = styled.input<{ $bgColor?: string; $textColor?: string }>`
-  width: 100%;
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  background-color: ${(props) => (props.$bgColor ? props.$bgColor : props.theme.background.secondary)};
-  border: 1px solid ${(props) => props.theme.border.secondary};
-  border-radius: 0.5rem;
-  color: ${(props) => (props.$textColor ? props.$textColor : props.theme.text.primary)};
-
-  &::placeholder {
-    color: ${(props) => props.theme.text.placeholder};
-  }
-
-  &:focus {
-    outline: none;
-    border-color: ${(props) => props.theme.border.focus};
-  }
-`;
-
-const CloseButton = styled.button`
-  position: absolute;
-  right: 8px;
-  top: 50%;
-  padding: 4px;
-  background: none;
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #666;
-  cursor: pointer;
-  transform: translateY(-50%);
-
-  &:hover {
-    color: #333;
-  }
-  svg {
-    width: 16px;
-    height: 16px;
-  }
-`;
 
 const CreateCategory = styled(Stack)`
   padding: 0.5rem 1rem;

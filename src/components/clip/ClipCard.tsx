@@ -3,7 +3,7 @@ import { generateModernTagColors } from '@/utils/utils';
 import { IconButton, Stack, Typography } from '@mui/material';
 import styled from 'styled-components';
 import { ExternalLink, Copy, GitFork } from 'lucide-react';
-import { CardTag } from '@/components/styled/Tag';
+import { CardTag } from '@/components/styled-components/Tag';
 
 const Clip = ({ title, category, link }: IClipResponse) => {
   const { background, text } = generateModernTagColors(Number(category.color));

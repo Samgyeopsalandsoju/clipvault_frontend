@@ -1,4 +1,5 @@
 'use client';
+
 import { Stack } from '@mui/material';
 import styled from 'styled-components';
 
@@ -11,22 +12,24 @@ export const InputWrapper = styled(Stack)`
   position: relative;
 `;
 
-export const Input = styled.input<{ $color?: string }>`
+export const Input = styled.input<{ $bgColor?: string; $textColor?: string }>`
   width: 100%;
-  border: 2px solid #ddd;
-  background-color: ${(props) => props.$color || props.theme.background.textfield};
-  padding: 8px 12px;
-  border-radius: 4px;
-  font-size: 13px;
-  font-weight: 600;
-  outline: none;
-  cursor: pointer;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  background-color: ${(props) => (props.$bgColor ? props.$bgColor : props.theme.background.secondary)};
+  border: 1px solid ${(props) => props.theme.border.secondary};
+  border-radius: 0.5rem;
+  color: ${(props) => (props.$textColor ? props.$textColor : props.theme.text.primary)};
+
+  &::placeholder {
+    color: ${(props) => props.theme.text.placeholder};
+  }
 
   &:focus {
-    border-color: #007aff;
+    outline: none;
+    border-color: ${(props) => props.theme.border.focus};
   }
 `;
-
 export const DropdownList = styled(Stack)`
   width: 100%;
   position: absolute;
@@ -52,4 +55,27 @@ export const DropdownItem = styled(Stack)<{ $bgColor?: string; $textColor?: stri
   margin: 2px 0;
   transition: all 0.2s ease;
   font-weight: 600;
+`;
+
+export const CloseButton = styled.button`
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  padding: 4px;
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  cursor: pointer;
+  transform: translateY(-50%);
+
+  &:hover {
+    color: #333;
+  }
+  svg {
+    width: 16px;
+    height: 16px;
+  }
 `;

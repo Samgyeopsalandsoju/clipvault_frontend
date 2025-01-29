@@ -5,9 +5,9 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { Link2, Menu } from 'lucide-react';
 import { useSetAtom } from 'jotai';
-import Footer from '../Footer';
 import { authModalAtom, authModeAtom } from '@/atoms/auth.atom';
 import { FormType } from '@/types/auth';
+import Footer from './Footer';
 
 const HeaderComponent = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);

@@ -7,7 +7,7 @@ import { ClipPageOpenAtom } from '@/atoms/clip.atom';
 import { VisibilityType, ICreateClip, ICategoryResponse, ICategory } from '@/types/clip';
 import { generateUniqueId, createValidator } from '@/utils/utils';
 import { useTheme } from 'styled-components';
-import { useClipQuery } from '../clip/clip/useClipQuery';
+import { useClipQuery } from '../clip/useClipQuery';
 
 export const useNewClipForm = () => {
   const setIsOpen = useSetAtom(ClipPageOpenAtom);

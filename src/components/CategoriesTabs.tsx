@@ -1,4 +1,4 @@
-import { TabTag } from '@/components/styled/Tag';
+import { TabTag } from '@/components/styled-components/Tag';
 import { useDragX } from '@/hooks/useDragX';
 import { ICategoryResponse } from '@/types/clip';
 import { generateModernTagColors } from '@/utils/utils';

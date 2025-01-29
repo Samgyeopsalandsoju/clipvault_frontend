@@ -1,7 +1,7 @@
 import { Stack, TextField } from '@mui/material';
-import { OutlineCustomButton } from '@/components/styled/Buttons';
+import { OutlineCustomButton } from '@/components/styled-components/Buttons';
 import { useRegisterForm } from '@/hooks/auth/useRegisterForm';
-import { Content, Form, TextFieldWrapper, Title } from '../styles';
+import { Content, Form, TextFieldWrapper, Title } from './form.styles';
 
 const RegisterForm = () => {
   const { errors, handleSubmit, onSubmit, register, trigger, validator } = useRegisterForm();

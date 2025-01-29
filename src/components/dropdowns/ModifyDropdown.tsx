@@ -1,9 +1,8 @@
 'use client';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import styled from 'styled-components';
 import { IoClose } from 'react-icons/io5';
 import { ICategoryResponse } from '@/types/clip';
-import { Container, DropdownItem, DropdownList, Input, InputWrapper } from '../shared/dropdown.styles';
+import { CloseButton, Container, DropdownItem, DropdownList, Input, InputWrapper } from './dropdown.styles';
 import { generateModernTagColors } from '@/utils/utils';
 
 interface DropdownProps {
@@ -15,7 +14,7 @@ interface DropdownProps {
 const ModifyDropdown = ({ onSelect, categories, category }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [searchTerm, setSearchTerm] = useState<string>(category?.name || '');
-  const [color, setColor] = useState<string>(category?.color || '');
+  const [color, setColor] = useState<{ background: string; text: string }>();
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   // 외부 클릭 감지를 위한 useEffect
@@ -33,7 +32,7 @@ const ModifyDropdown = ({ onSelect, categories, category }: DropdownProps) => {
 
   // 카테고리 인풋 박스 클린
   const handleClearSearchTerm = () => {
-    setColor('');
+    setColor({ background: '', text: '' });
     setSearchTerm('');
     setIsOpen(true);
   };
@@ -47,7 +46,8 @@ const ModifyDropdown = ({ onSelect, categories, category }: DropdownProps) => {
     <Container ref={dropdownRef}>
       <InputWrapper>
         <Input
-          $color={color}
+          $bgColor={color?.background}
+          $textColor={color?.text}
           type="text"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.currentTarget.value)}
@@ -71,7 +71,7 @@ const ModifyDropdown = ({ onSelect, categories, category }: DropdownProps) => {
                 $textColor={text}
                 key={index}
                 onClick={() => {
-                  setColor(category.color);
+                  setColor({ background: background, text: text });
                   handleSelectCategory(category);
                   setIsOpen(false);
                   setSearchTerm(category.name);
@@ -88,26 +88,3 @@ const ModifyDropdown = ({ onSelect, categories, category }: DropdownProps) => {
 };
 
 export default ModifyDropdown;
-
-const CloseButton = styled.button`
-  position: absolute;
-  right: 8px;
-  top: 50%;
-  padding: 4px;
-  background: none;
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #666;
-  cursor: pointer;
-  transform: translateY(-50%);
-
-  &:hover {
-    color: #333;
-  }
-  svg {
-    width: 16px;
-    height: 16px;
-  }
-`;

@@ -1,8 +1,8 @@
 import { Stack } from '@mui/material';
 import styled from 'styled-components';
-import Clip from '@/components/ClipCard';
 import { IClipResponse } from '@/types/clip';
 import { useEditClipForm } from '@/hooks/form/useEditClipForm';
+import ClipCard from './ClipCard';
 
 interface ClipList {
   list: IClipResponse[];
@@ -14,7 +14,7 @@ const ClipList = ({ list }: ClipList) => {
       {list.map((clip, index) => {
         return (
           <ClipItem key={index} onClick={() => handleClipClick(clip.id)}>
-            <Clip {...clip} />
+            <ClipCard {...clip} />
           </ClipItem>
         );
       })}

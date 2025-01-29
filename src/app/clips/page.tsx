@@ -1,11 +1,11 @@
 'use client';
 
 import { useClipFilter } from '@/hooks/clip/useClipFilter';
-import CategoriesTabs from './components/CategoriesTabs';
-import ClipList from '@/components/ClipList';
-import { ScrollContainer } from './components/styles';
 import CreateClipButton from '@/components/CreateClipButton';
-import { useClipQuery } from '@/hooks/clip/clip/useClipQuery';
+import { useClipQuery } from '@/hooks/clip/useClipQuery';
+import ClipList from '@/components/clip/ClipList';
+import { ScrollContainer } from './clips.styles';
+import CategoriesTabs from '@/components/CategoriesTabs';
 
 const ClipsPage = () => {
   const {

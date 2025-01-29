@@ -1,20 +1,7 @@
 'use client';
 
 import { Stack } from '@mui/material';
-import { Dialog } from '@mui/material';
 import styled from 'styled-components';
-
-export const StyledDialog = styled(Dialog)`
-  .MuiDialog-paper {
-    width: 100%;
-    max-width: 400px;
-    margin: 16px;
-    border-radius: 16px;
-    position: relative;
-    background-color: #f5f4ef;
-    padding: 20px;
-  }
-`;
 
 export const Content = styled(Stack)`
   display: flex;

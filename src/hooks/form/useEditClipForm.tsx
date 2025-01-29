@@ -6,7 +6,7 @@ import { useEffect, useRef } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { ICategoryResponse, IModifyClip, VisibilityType } from '@/types/clip';
 import { useRouter } from 'next/navigation';
-import { useClipQuery } from '../clip/clip/useClipQuery';
+import { useClipQuery } from '../clip/useClipQuery';
 
 export const useEditClipForm = () => {
   const setIsOpen = useSetAtom(ClipPageOpenAtom);
