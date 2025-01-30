@@ -5,7 +5,7 @@ import CreateClipButton from '@/components/CreateClipButton';
 import { useClipQuery } from '@/hooks/clip/useClipQuery';
 import ClipList from '@/components/clip/ClipList';
 import { ScrollContainer } from './clips.styles';
-import CategoriesTabs from '@/components/CategoriesTabs';
+import CategoriesTags from '@/components/CategoriesTags';
 import { useEditClipForm } from '@/hooks/form/useEditClipForm';
 import ClipCard from '@/components/clip/ClipCard';
 import { Stack } from '@mui/material';
@@ -19,7 +19,7 @@ const ClipsPage = () => {
   const { handleClipClick } = useEditClipForm();
   return (
     <PageContainer>
-      <CategoriesTabs categories={categories} onSelect={handleCategorySelect} />
+      <CategoriesTags categories={categories} onSelect={handleCategorySelect} />
       <ScrollContainer>
         <ClipList
           list={filteredClipList}

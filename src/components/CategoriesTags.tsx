@@ -10,7 +10,7 @@ interface ICategoriesTabsProps {
   onSelect: (id: string) => void;
 }
 
-const CategoriesTabs = ({ categories, onSelect }: ICategoriesTabsProps) => {
+const CategoriesTags = ({ categories, onSelect }: ICategoriesTabsProps) => {
   const { handleMouseDown, handleMouseLeave, handleMouseMove, isDragging, tabsRef, handleMouseUp } = useDragX();
 
   return (
@@ -40,11 +40,11 @@ const CategoriesTabs = ({ categories, onSelect }: ICategoriesTabsProps) => {
   );
 };
 
-export default CategoriesTabs;
+export default CategoriesTags;
 
 const TagsContainer = styled(Stack)`
   width: 100%;
-  padding: 0.75rem 1rem;
+  padding: 1rem 1rem 0 1rem;
   &.active {
     cursor: grabbing;
   }
@@ -55,7 +55,7 @@ const Tabs = styled(Stack)`
   overflow-x: auto;
   flex-direction: row;
   gap: 0.5rem;
-  padding: 0 1rem;
+
   width: 100%;
   scrollbar-width: none;
   white-space: nowrap;

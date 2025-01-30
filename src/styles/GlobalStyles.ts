@@ -8,7 +8,7 @@ const GlobalStyles = createGlobalStyle`
     src: url('/fonts/WantedSansVariable.ttf') format('truetype-variable');
     font-weight: 100 900;
     font-style: normal;
-    font-display: optional;
+    font-display: auto;
   }
 
   * {
