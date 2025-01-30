@@ -11,7 +11,7 @@ const RememberMe = () => {
     <Container>
       <RememberCheckbox
         control={<Checkbox size="small" checked={rememberMe} onChange={(e) => setRememberMe(e.target.checked)} />}
-        label="이메일 저장"
+        label="Remember me"
       />
     </Container>
   );

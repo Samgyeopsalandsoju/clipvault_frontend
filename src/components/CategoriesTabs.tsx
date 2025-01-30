@@ -44,7 +44,7 @@ export default CategoriesTabs;
 
 const TagsContainer = styled(Stack)`
   width: 100%;
-  padding: 0 1rem;
+  padding: 0.75rem 1rem;
   &.active {
     cursor: grabbing;
   }
@@ -55,7 +55,7 @@ const Tabs = styled(Stack)`
   overflow-x: auto;
   flex-direction: row;
   gap: 0.5rem;
-  padding: 0.75rem 1rem;
+  padding: 0 1rem;
   width: 100%;
   scrollbar-width: none;
   white-space: nowrap;

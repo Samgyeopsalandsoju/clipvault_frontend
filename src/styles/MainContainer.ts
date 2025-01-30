@@ -11,4 +11,6 @@ export const MainContainer = styled.div`
   overflow: hidden;
   height: 100vh;
   background-color: ${(props) => props.theme.background.primary};
+  display: flex;
+  flex-direction: column;
 `;

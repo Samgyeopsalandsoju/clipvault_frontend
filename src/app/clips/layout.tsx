@@ -41,12 +41,14 @@ export default function ClipLayout({ children }: { children: React.ReactNode }) 
 const LayoutContainer = styled(Stack)`
   position: relative;
   width: 100%;
+  flex: 1;
   height: 100%;
 `;
 
 const BaseLayer = styled(Stack)`
   position: relative;
   width: 100%;
+  flex: 1;
   height: 100%;
 `;
 

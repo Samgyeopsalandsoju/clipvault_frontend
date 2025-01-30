@@ -14,7 +14,7 @@ export const Title = styled.h2`
   font-weight: 600;
   text-align: center;
   margin-bottom: 16px;
-  color: ${(props) => props.theme.text.primary};
+  color: ${(props) => props.theme.background.primary};
 `;
 
 export const Form = styled.form`

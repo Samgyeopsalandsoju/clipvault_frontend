@@ -20,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html>
-      <body>
+      <body suppressHydrationWarning={true}>
         <MUIRegistry>
           <StyledComponentsRegistry>
             <ThemeProvider>

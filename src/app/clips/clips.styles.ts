@@ -4,9 +4,11 @@ import { Button, Stack } from '@mui/material';
 import styled from 'styled-components';
 
 export const ScrollContainer = styled(Stack)`
+  flex: 1;
   position: relative;
-  height: 100%;
-  overflow: scroll;
+  overflow: auto;
+  /* 부모의 높이를 유지 */
+  min-height: 0;
   /** hide scroll */
   -ms-overflow-style: none;
   scrollbar-width: none;

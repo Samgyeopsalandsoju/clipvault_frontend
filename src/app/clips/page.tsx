@@ -6,18 +6,37 @@ import { useClipQuery } from '@/hooks/clip/useClipQuery';
 import ClipList from '@/components/clip/ClipList';
 import { ScrollContainer } from './clips.styles';
 import CategoriesTabs from '@/components/CategoriesTabs';
+import { useEditClipForm } from '@/hooks/form/useEditClipForm';
+import ClipCard from '@/components/clip/ClipCard';
+import { Stack } from '@mui/material';
+import styled from 'styled-components';
 
 const ClipsPage = () => {
   const {
     clipList: { data },
   } = useClipQuery();
   const { filteredClipList, categories, handleCategorySelect } = useClipFilter(data);
+  const { handleClipClick } = useEditClipForm();
   return (
-    <ScrollContainer>
+    <PageContainer>
       <CategoriesTabs categories={categories} onSelect={handleCategorySelect} />
-      <ClipList list={filteredClipList} />
-      <CreateClipButton />
-    </ScrollContainer>
+      <ScrollContainer>
+        <ClipList
+          list={filteredClipList}
+          renderItem={(clip) => (
+            <div onClick={() => handleClipClick(clip.id)}>
+              <ClipCard {...clip} />
+            </div>
+          )}
+        />
+        <CreateClipButton />
+      </ScrollContainer>
+    </PageContainer>
   );
 };
 export default ClipsPage;
+
+const PageContainer = styled(Stack)`
+  flex: 1;
+  height: 100%;
+`;

@@ -1,8 +1,6 @@
 import { deleteClip, getClip, getClips, modifyClip, postClip } from '@/services/clipsService';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useMemo } from 'react';
-import { createToastService } from '@/libs/hot-toast';
-import { useTheme } from 'styled-components';
 import { useClipPageTransition } from './useClipPageTransition';
 import { useToast } from '../useToast';
 

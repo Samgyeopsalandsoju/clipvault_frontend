@@ -7,10 +7,10 @@ import { Content, Form, Logo, TextFieldWrapper, Title } from './form.styles';
 
 const loginValidationRules = {
   email: {
-    required: '이메일은 필수입니다.',
+    required: 'Email is required.',
     pattern: {
       value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-      message: '유효한 이메일 형식이 아닙니다.',
+      message: 'Invalid email format.',
     },
   },
 };

@@ -1,22 +1,16 @@
 import { Stack } from '@mui/material';
 import styled from 'styled-components';
 import { IClipResponse } from '@/types/clip';
-import { useEditClipForm } from '@/hooks/form/useEditClipForm';
-import ClipCard from './ClipCard';
 
 interface ClipList {
   list: IClipResponse[];
+  renderItem: (Clip: IClipResponse) => React.ReactNode;
 }
-const ClipList = ({ list }: ClipList) => {
-  const { handleClipClick } = useEditClipForm();
+const ClipList = ({ list, renderItem }: ClipList) => {
   return (
     <ListWrapper>
       {list.map((clip, index) => {
-        return (
-          <ClipItem key={index} onClick={() => handleClipClick(clip.id)}>
-            <ClipCard {...clip} />
-          </ClipItem>
-        );
+        return <ClipItem key={index}>{renderItem(clip)}</ClipItem>;
       })}
     </ListWrapper>
   );
@@ -25,7 +19,7 @@ const ClipList = ({ list }: ClipList) => {
 export default ClipList;
 
 const ListWrapper = styled(Stack)`
-  padding: 0 1rem;
+  padding: 1rem;
   display: flex;
   gap: 0.75rem;
   padding-bottom: 5rem;

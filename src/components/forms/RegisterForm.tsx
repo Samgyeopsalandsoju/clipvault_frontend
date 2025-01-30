@@ -22,13 +22,13 @@ const RegisterForm = () => {
           <Stack direction={'row'} gap={'8px'}>
             <TextField
               fullWidth
-              placeholder="인증 코드"
+              placeholder="Verify code"
               size="small"
               {...register('verifyCode')}
               error={!!errors.verifyCode}
               helperText={errors.verifyCode?.message || ' '}
             />
-            <OutlineCustomButton sx={{ height: '50%' }}>인증</OutlineCustomButton>
+            <OutlineCustomButton sx={{ height: '50%' }}>verify</OutlineCustomButton>
           </Stack>
           <TextField
             fullWidth

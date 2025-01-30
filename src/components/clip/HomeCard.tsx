@@ -1,16 +1,16 @@
 import { IClipResponse } from '@/types/clip';
 import { generateModernTagColors } from '@/utils/utils';
-import { IconButton, Stack, Typography } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
 import styled from 'styled-components';
-import { ExternalLink, Copy, GitFork } from 'lucide-react';
+import { GitFork } from 'lucide-react';
 import { CardTag } from '@/components/styled-components/Tag';
 
-const ClipCard = ({ title, category, link, visible, fork }: IClipResponse) => {
-  const { background, text, border } = generateModernTagColors(Number(category.color));
+const HomeCard = ({ title, category, link, fork }: IClipResponse) => {
+  const { background, text } = generateModernTagColors(Number(category.color));
 
   return (
-    <Card $isPublic={visible === 'public'} $border={border}>
-      <Content>
+    <ClipCard>
+      <ClipContent>
         <ClipInfo>
           <TitleRow>
             <CardTag $bgColor={background} $textColor={text}>
@@ -20,27 +20,17 @@ const ClipCard = ({ title, category, link, visible, fork }: IClipResponse) => {
           </TitleRow>
           <ClipUrl>{link}</ClipUrl>
         </ClipInfo>
-        <LinkButton>
-          <Copy size={16} />
-        </LinkButton>
-        <Section>
-          <LinkButton>
-            <ExternalLink size={16} />
-          </LinkButton>
-          {visible === 'public' && (
-            <ForkSection>
-              <GitFork size={20} /> {fork || 0}
-            </ForkSection>
-          )}
-        </Section>
-      </Content>
-    </Card>
+        <ForkSection>
+          <GitFork size={16} /> {fork || 0}
+        </ForkSection>
+      </ClipContent>
+    </ClipCard>
   );
 };
 
-export default ClipCard;
+export default HomeCard;
 
-const Card = styled(Stack)<{ $isPublic?: boolean; $border?: string }>`
+const ClipCard = styled(Stack)<{ $isPublic?: boolean; $border?: string }>`
   cursor: pointer;
   padding: 1rem;
   border-radius: 0.75rem;
@@ -62,7 +52,7 @@ const Card = styled(Stack)<{ $isPublic?: boolean; $border?: string }>`
   }
 `;
 
-const Content = styled(Stack)`
+const ClipContent = styled(Stack)`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -100,30 +90,14 @@ const ClipUrl = styled(Typography)`
   white-space: nowrap;
 `;
 
-const LinkButton = styled(IconButton)`
-  opacity: 0;
-  transition: opacity 0.2s, background-color 0.2s;
-  color: ${(props) => props.theme.text.primary};
-  justify-content: end;
-  &:hover {
-    background-color: #3f3f46;
-  }
-`;
-
-const Section = styled(Stack)`
-  justify-content: space-between;
-  height: 100%;
-  position: relative; // 상대 위치 설정
-`;
-
 const ForkSection = styled(Stack)`
-  position: absolute;
+  color: ${(props) => props.theme.text.placeholder};
+  flex-direction: row;
+  gap: 10px;
   align-items: center;
   justify-content: center;
-  flex-direction: row;
-  bottom: -24px;
-  right: 8px;
-  gap: 5px;
-  color: ${(props) => props.theme.text.primary};
-  font-size: 0.8rem;
+
+  &:hover {
+    color: ${(props) => props.theme.text.primary};
+  }
 `;
