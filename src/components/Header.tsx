@@ -38,8 +38,7 @@ const HeaderComponent = () => {
 export default HeaderComponent;
 
 const Header = styled.header`
-  padding: 0 1rem;
-  height: 3.5rem;
+  padding: 0.5rem 1rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -104,7 +103,7 @@ const Navigation = ({ isOpen, onClose }: NavBarProps) => {
 
 const Overlay = styled(Stack)<{ $isOpen: boolean }>`
   position: absolute;
-  top: 60px;
+  top: 57px;
   left: 0;
   right: 0;
   bottom: 0;
@@ -121,7 +120,7 @@ const Container = styled.nav<{ $isOpen: boolean }>`
   display: flex;
   padding: 25px;
   position: absolute;
-  top: 60px;
+  top: 57px;
   right: ${(props) => (props.$isOpen ? '0' : '-100%')};
   width: 80%;
   height: calc(100vh - 60px);
