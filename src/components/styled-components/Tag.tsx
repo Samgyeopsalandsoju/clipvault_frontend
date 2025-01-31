@@ -2,8 +2,8 @@ import { Typography } from '@mui/material';
 import styled from 'styled-components';
 
 interface TagProps {
-  $bgColor: string;
-  $textColor: string;
+  $bgColor?: string;
+  $textColor?: string;
 }
 
 export const TabTag = styled(Typography)<TagProps>`
@@ -14,8 +14,8 @@ export const TabTag = styled(Typography)<TagProps>`
   user-select: none;
   white-space: nowrap;
 
-  background-color: ${(props) => props.$bgColor};
-  color: ${(props) => props.$textColor};
+  background-color: ${(props) => props.$bgColor ?? props.theme.background.textfield};
+  color: ${(props) => props.$textColor ?? props.theme.background.primary};
 `;
 
 export const CardTag = styled(Typography)<TagProps>`

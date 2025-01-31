@@ -5,11 +5,11 @@ import CreateClipButton from '@/components/CreateClipButton';
 import { useClipQuery } from '@/hooks/clip/useClipQuery';
 import ClipList from '@/components/clip/ClipList';
 import { ScrollContainer } from './clips.styles';
-import CategoriesTags from '@/components/CategoriesTags';
 import { useEditClipForm } from '@/hooks/form/useEditClipForm';
 import ClipCard from '@/components/clip/ClipCard';
 import { Stack } from '@mui/material';
 import styled from 'styled-components';
+import CategoriesTags from '@/components/CategoriesTags';
 
 const ClipsPage = () => {
   const {
