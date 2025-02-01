@@ -43,6 +43,7 @@ const LayoutContainer = styled(Stack)`
   width: 100%;
   flex: 1;
   height: 100%;
+  overflow-x: hidden;
 `;
 
 const BaseLayer = styled(Stack)`
@@ -53,12 +54,13 @@ const BaseLayer = styled(Stack)`
 `;
 
 const OverlayContainer = styled(Stack)`
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   pointer-events: none;
+  z-index: 1000; // 레이어 순서 보장
 `;
 
 const Backdrop = styled(Stack)<{ $isOpen: boolean }>`
@@ -74,6 +76,8 @@ const Backdrop = styled(Stack)<{ $isOpen: boolean }>`
 `;
 
 const ModalLayer = styled(Stack)`
+  max-width: 480px;
+  margin: auto;
   position: absolute;
   bottom: 0;
   left: 0;
@@ -84,7 +88,6 @@ const ModalLayer = styled(Stack)`
   pointer-events: auto;
   background-color: ${(props) => props.theme.background.primary};
   border: 1px solid ${(props) => props.theme.border.primary};
-
   @media screen and (max-width: 1024px) {
     height: 65vh;
   }

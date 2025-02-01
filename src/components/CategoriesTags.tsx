@@ -21,7 +21,14 @@ const CategoriesTags = ({ categories, onSelect }: ICategoriesTabsProps) => {
   return (
     <TagsContainer ref={containerRef}>
       <Tabs ref={contentRef} $isExpanded={isExpanded}>
-        <TabTag onClick={() => onSelect('')}>All</TabTag>
+        <TabTag
+          onClick={() => {
+            onSelect('');
+            setIsExpanded(false);
+          }}
+        >
+          All
+        </TabTag>
         {categories.map((category, index) => {
           const colors = generateModernTagColors(Number(category.color));
           return (
@@ -31,25 +38,23 @@ const CategoriesTags = ({ categories, onSelect }: ICategoriesTabsProps) => {
               $textColor={colors.text}
               onClick={() => {
                 onSelect(category.id);
-                setIsExpanded((prev) => !prev);
+                setIsExpanded(false);
               }}
             >
               {category.name}
             </TabTag>
           );
         })}
-        {needsExpansion && (
-          <ExpansionButtonContainer>
-            <ExpansionButton
-              $isExpanded={isExpanded}
-              onClick={() => {
-                setIsExpanded((prev) => !prev);
-              }}
-            >
-              {isExpanded ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
-            </ExpansionButton>
-          </ExpansionButtonContainer>
-        )}
+        <ExpansionButtonContainer>
+          <ExpansionButton
+            $isExpanded={isExpanded}
+            onClick={() => {
+              setIsExpanded((prev) => !prev);
+            }}
+          >
+            {isExpanded ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+          </ExpansionButton>
+        </ExpansionButtonContainer>
       </Tabs>
     </TagsContainer>
   );

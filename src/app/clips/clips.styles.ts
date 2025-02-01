@@ -20,6 +20,8 @@ export const ScrollContainer = styled(Stack)`
 `;
 
 export const Container = styled(Stack)`
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
   background-color: ${(props) => props.theme.background.tertiary};
   padding: 1.5rem;
   width: 100%;

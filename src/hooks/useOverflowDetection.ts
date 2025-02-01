@@ -13,7 +13,10 @@ export const useOverflowDetection = <T>({ data }: UseOverflowDetectionProps<T>) 
   const checkOverflew = useCallback(() => {
     if (containerRef.current && contentRef.current) {
       const containerWidth = containerRef.current.clientWidth;
-      const contentWidth = contentRef.current.scrollWidth;
+
+      const actualContentWidth = contentRef.current.scrollWidth;
+      const contentWidth = actualContentWidth;
+
       setNeedsExpansion(containerWidth < contentWidth);
     }
   }, [data]); // data가 변경될 때마다 함수를 새로 생성
