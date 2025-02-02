@@ -1,53 +1,49 @@
 #!/bin/bash
 
-# nvm 환경 설정을 로드합니다
+# nvm 환경 설정
 export NVM_DIR="/home/ec2-user/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
-# 현재 환경 정보를 로깅하여 디버깅을 돕습니다
+# npm 전체 경로 설정
+NPM_PATH="/home/ec2-user/.nvm/versions/node/v22.13.1/bin/npm"
+
+# 현재 환경 정보 출력
 echo "Current environment:"
 echo "Node version: $(node -v)"
 echo "NPM path: $(which npm)"
 
-# EC2 사용자와 그룹을 설정합니다
+# EC2 사용자 설정
 EC2_USER="ec2-user"
 EC2_GROUP="ec2-user"
 APP_DIR="/home/ec2-user/frontend"
 
-# 기존 배포 디렉토리를 정리하고 새로 준비합니다
+# 배포 디렉토리 준비
 if [ -d $APP_DIR ]; then
     sudo rm -rf $APP_DIR
 fi
-
 sudo mkdir -p $APP_DIR
 sudo chown $EC2_USER:$EC2_GROUP $APP_DIR
 sudo chmod 755 $APP_DIR
 
-# 배포 디렉토리로 이동합니다
 cd $APP_DIR
 
-# pnpm이 없다면 설치합니다
-if ! command -v pnpm &> /dev/null; then
-    echo "Installing pnpm..."
-    $NVM_DIR/versions/node/v22.13.1/bin/npm install -g pnpm
-fi
+# pnpm 설치 (전체 경로 사용)
+echo "Installing pnpm..."
+$NPM_PATH install -g pnpm
 
-# PM2가 없다면 설치합니다
-if ! command -v pm2 &> /dev/null; then
-    echo "Installing PM2..."
-    $NVM_DIR/versions/node/v22.13.1/bin/npm install -g pm2
-fi
+# pnpm 경로를 환경 변수에 추가
+export PATH="/home/ec2-user/.nvm/versions/node/v22.13.1/bin:$PATH"
 
-# 프로젝트 의존성을 설치합니다
+# PM2 설치 (전체 경로 사용)
+echo "Installing PM2..."
+$NPM_PATH install -g pm2
+
+# 의존성 설치 (pnpm 전체 경로 사용)
 echo "Installing dependencies..."
-sudo -u $EC2_USER pnpm install --production
+/home/ec2-user/.nvm/versions/node/v22.13.1/bin/pnpm install --production
 
-# 애플리케이션을 시작하거나 재시작합니다
+# 애플리케이션 시작/재시작 (pm2 전체 경로 사용)
 echo "Restarting application..."
-if pm2 list | grep -q "clipvault"; then
-    sudo -u $EC2_USER pm2 restart clipvault
-else
-    sudo -u $EC2_USER pm2 start npm --name "clipvault" -- start
-fi
+/home/ec2-user/.nvm/versions/node/v22.13.1/bin/pm2 restart clipvault || /home/ec2-user/.nvm/versions/node/v22.13.1/bin/pm2 start npm --name "clipvault" -- start
 
 echo "Deployment complete!"
