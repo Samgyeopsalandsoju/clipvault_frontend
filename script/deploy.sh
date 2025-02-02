@@ -18,7 +18,7 @@ fi
 echo "Installing dependencies..."
 pnpm install --production
 
- 배포 디렉토리로 이동
+#배포 디렉토리로 이동
 cd /home/ec2-user/frontend
 
 # PM2가 설치되어 있는지 확인하고, 없으면 설치

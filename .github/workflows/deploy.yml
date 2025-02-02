@@ -1,10 +1,16 @@
 # .github/workflows/main.yml
-name: upload to AWS S3
+name: Deploy to AWS
 
 on:
   push:
     branches:
       - main
+
+env:
+  AWS_REGION: ap-northeast-2
+  S3_BUCKET_NAME: s3-clipvault
+  CODE_DEPLOY_APPLICATION_NAME: clipvault-frontend # CodeDeploy에서 생성한 애플리케이션 이름
+  CODE_DEPLOY_DEPLOYMENT_GROUP_NAME: clipvault-frontend # CodeDeploy에서 생성한 배포 그룹 이름
 
 jobs:
   build:
@@ -32,19 +38,30 @@ jobs:
       - name: Get short Git SHA
         run: echo "GIT_SHA=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
 
-      - name: zip create # S3에 업로드할 zip 파일 생성
-        run: zip -qq -r ./frontend-build-${{ env.GIT_SHA }}.zip
-        shell: bash
-        # -qq: quit 모드로 실행 (에러나 경고메세지만 출력하도록 함)
-        # -r: 지정된 디렉토리를 재귀적으로 압축 (하위 디렉토리와 파일들 모두 압축)
+      - name: Create deployment package
+        run: |
+          mkdir -p deploy-package
+          cp -r .next deploy-package/
+          cp -r public deploy-package/
+          cp -r scripts deploy-package/
+          cp package.json deploy-package/
+          cp appspec.yml deploy-package/
+          cd deploy-package && zip -qq -r ../frontend-build-${{ env.GIT_SHA }}.zip .
 
-      - name: Configure AWS credentials # AWS 인증 확인
+      - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
 
-      - name: Upload to S3 # zip 파일을 S3에 업로드
+      - name: Upload to S3
         run: |
-          aws s3 cp --region ap-northeast-2 ./frontend-build-${{ env.GIT_SHA }}.zip s3://s3-clipvault/frontend/frontend-build-${{ env.GIT_SHA }}.zip
+          aws s3 cp --region ap-northeast-2 ./frontend-build-${{ env.GIT_SHA }}.zip s3://${{ env.S3_BUCKET_NAME }}/frontend/frontend-build-${{ env.GIT_SHA }}.zip
+
+      - name: Start CodeDeploy Deployment
+        run: |
+          aws deploy create-deployment \
+            --application-name ${{ env.CODE_DEPLOY_APPLICATION_NAME }} \
+            --deployment-group-name ${{ env.CODE_DEPLOY_DEPLOYMENT_GROUP_NAME }} \
+            --s3-location bucket=${{ env.S3_BUCKET_NAME }},bundleType=zip,key=frontend/frontend-build-${{ env.GIT_SHA }}.zip
