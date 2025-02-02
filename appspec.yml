@@ -1,26 +1,27 @@
 version: 0.0
 os: linux
-
 files:
   - source: /
     destination: /home/ec2-user/frontend/releases/new-release/
-
 permissions:
-  - object: /home/ec2-user/frontend/releases/new-release
+  - object: /home/ec2-user/frontend
     pattern: '**'
     owner: ec2-user
     group: ec2-user
     mode: 755
+    type:
+      - file
+      - directory
 hooks:
   BeforeInstall:
     - location: scripts/setup_directories.sh
-      timeout: 30
+      timeout: 300
       runas: ec2-user
   AfterInstall:
     - location: scripts/change_symlink.sh
-      timeout: 30
+      timeout: 300
       runas: ec2-user
   ApplicationStart:
     - location: scripts/restart_service.sh
-      timeout: 30
+      timeout: 300
       runas: ec2-user
