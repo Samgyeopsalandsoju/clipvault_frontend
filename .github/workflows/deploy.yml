@@ -41,18 +41,35 @@ jobs:
       - name: Create deployment package
         run: |
           mkdir -p deploy-package
-          # .next 디렉토리 확인
+
+          # 현재 디렉토리 상태 확인
+          echo "Current directory contents:"
+          ls -la
+
+          # .next 디렉토리 존재 여부 확인
+          echo "\nChecking .next directory:"
           ls -la .next || echo ".next directory is missing!"
-          # 강제로 모든 파일 복사 (숨겨진 파일 포함)
+
+          # deploy-package에 파일 복사
+          echo "\nCopying files to deploy-package..."
           cp -ra .next deploy-package/ || echo "Failed to copy .next"
           cp ecosystem.config.js deploy-package/
           cp -r public deploy-package/
           cp -r scripts deploy-package/
           cp package.json deploy-package/
           cp appspec.yml deploy-package/
-          # 복사된 파일 확인
+
+          # deploy-package 디렉토리 내용 확인
+          echo "\nDeploy package contents:"
           ls -la deploy-package/
-          cd deploy-package && zip -qq -r ../frontend-build-${{ env.GIT_SHA }}.zip .
+
+          # zip 파일 생성
+          cd deploy-package && zip -v -r ../frontend-build-${{ env.GIT_SHA }}.zip .
+
+          # 생성된 zip 파일 내용 확인
+          cd ..
+          echo "\nZip file contents:"
+          unzip -l frontend-build-${{ env.GIT_SHA }}.zip
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
