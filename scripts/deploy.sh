@@ -45,7 +45,10 @@ else
     exit 1
 fi
 
-
+# PM2 설치 전에 Node.js 환경 확인
+echo "Node.js environment:"
+node -v
+npm -v
 
 # PM2로 애플리케이션 시작
 echo "Starting application with PM2..."
@@ -54,7 +57,15 @@ if ! command -v pm2 &> /dev/null; then
     npm install -g pm2
 fi
 
-pm2 restart clipvault --update-env || pm2 start ecosystem.config.js --env production
+# 기존 프로세스 제거 (있다면)
+pm2 delete clipvault 2>/dev/null || true
+
+# ecosystem.config.js를 사용하여 새로 시작
+pm2 start ecosystem.config.js --env production
+
+# PM2 상태 확인
+pm2 list
+pm2 logs clipvault --lines 20
 
 
 echo "Deployment complete!"

@@ -15,7 +15,7 @@ permissions:
   - object: /home/ec2-user/frontend/*
     pattern: '**'
     owner: ec2-user
-    group: ec2-userㅁ
+    group: ec2-user
     mode: 755
     type:
       - file
