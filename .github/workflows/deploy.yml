@@ -49,7 +49,7 @@ jobs:
           cp -r scripts deploy-package/
           cp package.json deploy-package/
           cp appspec.yml deploy-package/
-          cp ecosystem.config.js deploy-package/  # 이 줄 추가
+          cp ecosystem.config.js deploy-package/ 
           # 복사된 파일 확인
           ls -la deploy-package/
           cd deploy-package && zip -qq -r ../frontend-build-${{ env.GIT_SHA }}.zip .
