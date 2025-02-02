@@ -4,6 +4,13 @@ os: linux
 files:
   - source: /
     destination: /home/ec2-user/frontend/releases/new-release/
+
+permissions:
+  - object: /home/ec2-user/frontend/releases/new-release
+    pattern: '**'
+    owner: ec2-user
+    group: ec2-user
+    mode: 755
 hooks:
   BeforeInstall:
     - location: scripts/setup_directories.sh
