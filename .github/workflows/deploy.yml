@@ -37,14 +37,9 @@ jobs:
 
       - name: Get short Git SHA
         run: echo "GIT_SHA=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
-
       - name: Create deployment package
         run: |
           mkdir -p deploy-package
-
-          # 현재 디렉토리 상태 확인
-          echo "Current directory contents:"
-          ls -la
 
           # .next 디렉토리 존재 여부 확인
           echo "\nChecking .next directory:"
@@ -63,14 +58,13 @@ jobs:
           echo "\nDeploy package contents:"
           ls -la deploy-package/
 
-          # zip 파일 생성
+          # zip 파일 생성하고 내용 확인 (verbose 모드)
           cd deploy-package && zip -v -r ../frontend-build-${{ env.GIT_SHA }}.zip .
 
           # 생성된 zip 파일 내용 확인
           cd ..
           echo "\nZip file contents:"
           unzip -l frontend-build-${{ env.GIT_SHA }}.zip
-
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -80,7 +74,14 @@ jobs:
 
       - name: Upload to S3
         run: |
-          aws s3 cp --region ap-northeast-2 ./frontend-build-${{ env.GIT_SHA }}.zip s3://${{ env.S3_BUCKET_NAME }}/frontend/frontend-build-${{ env.GIT_SHA }}.zip
+          echo "Checking zip file contents before upload:"
+          unzip -l frontend-build-${{ env.GIT_SHA }}.zip         
+          echo "\nUploading to S3 with debug logging:"
+          aws s3 cp --debug \
+          frontend-build-${{ env.GIT_SHA }}.zip \
+          s3://${{ env.S3_BUCKET_NAME }}/frontend/frontend-build-${{ env.GIT_SHA }}.zip
+          echo "\nVerifying uploaded file in S3:"
+          aws s3 ls s3://${{ env.S3_BUCKET_NAME }}/frontend/frontend-build-${{ env.GIT_SHA }}.zip
 
       - name: Start CodeDeploy Deployment
         run: |
