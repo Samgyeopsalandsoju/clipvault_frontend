@@ -1,7 +1,7 @@
 module.exports = {
   apps: [
     {
-      name: 'clipVault',
+      name: 'clipvault',
       script: 'pnpm',
       args: 'start',
       instances: 'max',

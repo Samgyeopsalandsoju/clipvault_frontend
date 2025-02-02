@@ -54,6 +54,7 @@ if ! command -v pm2 &> /dev/null; then
     npm install -g pm2
 fi
 
-pm2 restart clipvault || pm2 start npm --name "clipvault" -- start
+pm2 restart clipvault --update-env || pm2 start ecosystem.config.js --env production
+
 
 echo "Deployment complete!"
