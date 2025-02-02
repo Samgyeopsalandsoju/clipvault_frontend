@@ -58,9 +58,9 @@ jobs:
           # S3에 업로드
           aws s3 cp frontend-build-${{ env.GIT_SHA }}.zip s3://${{ env.S3_BUCKET_NAME }}/frontend/frontend-build-${{ env.GIT_SHA }}.zip
 
-      # - name: Start CodeDeploy Deployment
-      #   run: |
-      #     aws deploy create-deployment \
-      #       --application-name ${{ env.CODE_DEPLOY_APPLICATION_NAME }} \
-      #       --deployment-group-name ${{ env.CODE_DEPLOY_DEPLOYMENT_GROUP_NAME }} \
-      #       --s3-location bucket=${{ env.S3_BUCKET_NAME }},bundleType=zip,key=frontend/frontend-build-${{ env.GIT_SHA }}.zip
+      - name: Start CodeDeploy Deployment
+        run: |
+          aws deploy create-deployment \
+            --application-name ${{ env.CODE_DEPLOY_APPLICATION_NAME }} \
+            --deployment-group-name ${{ env.CODE_DEPLOY_DEPLOYMENT_GROUP_NAME }} \
+            --s3-location bucket=${{ env.S3_BUCKET_NAME }},bundleType=zip,key=frontend/frontend-build-${{ env.GIT_SHA }}.zip

@@ -1,6 +1,19 @@
 version: 0.0
 os: linux
+
 files:
   - source: /
-    destination: /home/ec2-user/frontend
-    overwrite: yes
+    destination: ~/frontend/releases/new-release/
+hooks:
+  BeforeInstall:
+    - location: scripts/setup_directories.sh
+      timeout: 30
+      runas: ec2-user
+  AfterInstall:
+    - location: scripts/change_symlink.sh
+      timeout: 30
+      runas: ec2-user
+  ApplicationStart:
+    - location: scripts/restart_service.sh
+      timeout: 30
+      runas: ec2-user
