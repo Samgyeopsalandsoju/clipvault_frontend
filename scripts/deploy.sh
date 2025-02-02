@@ -29,6 +29,6 @@ fi
 
 # 애플리케이션 재시작 또는 새로 시작
 echo "Restarting application..."
-pm2 restart my-next-app || pm2 start npm --name "my-next-app" -- start
+pm2 restart my-next-app || pm2 start npm --name "clipvault" -- start
 
 echo "Deployment complete!"
