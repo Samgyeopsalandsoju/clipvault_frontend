@@ -3,7 +3,7 @@ os: linux
 
 files:
   - source: /
-    destination: ~/frontend/releases/new-release/
+    destination: /home/ec2-user/frontend/releases/new-release/
 hooks:
   BeforeInstall:
     - location: scripts/setup_directories.sh
