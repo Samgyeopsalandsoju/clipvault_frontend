@@ -1,5 +1,5 @@
 # .github/workflows/main.yml
-name: upload to S3
+name: upload to AWS S3
 
 on:
   push:
@@ -10,17 +10,24 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Git Checkout # Git Checkout
-        uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-      - name: Check Node v # 노드 버전 확인.
-        run: node -v
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '22'
 
-      - name: Install Dependencies # 의존성 설치
-        run: yarn install --frozen-lockfile
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 9
 
-      - name: Build # 빌드
-        run: yarn build
+      - name: Install Dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build application
+        run: pnpm build
 
       - name: zip create # S3에 업로드할 zip 파일 생성
         run: zip -qq -r ./frontend-build.zip .
