@@ -3,6 +3,10 @@ os: linux
 files:
   - source: /
     destination: /home/ec2-user/frontend/releases/new-release/
+    overwrite: true
+    patterns:
+      - '**/*' # 모든 일반 파일/폴더
+      - '.*/**/*' # 모든 숨김 파일/폴더
 permissions:
   - object: /home/ec2-user/frontend
     pattern: '**'
