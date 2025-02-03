@@ -6,6 +6,8 @@ CURRENT_LINK=/home/ec2-user/frontend/current
 mkdir -p "$DEPLOY_DIR"
 mv /home/ec2-user/frontend/releases/new-release/* "$DEPLOY_DIR"
 
+mv /home/ec2-user/frontend/releases/new-release/.* "$DEPLOY_DIR/" 2>/dev/null || true
+
 # 심볼릭 링크 변경
 ln -nfs "$DEPLOY_DIR" "$CURRENT_LINK"
 
