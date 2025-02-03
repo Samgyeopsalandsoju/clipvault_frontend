@@ -9,10 +9,10 @@ module.exports = {
       exec_mode: 'fork',
       watch: false,
       env: {
+        HOSTNAME: '127.0.0.1',
         PORT: 3000,
         NODE_ENV: 'production',
         NEXT_TELEMETRY_DISABLED: 1,
-        NODE_PATH: '.next/standalone/node_modules', // 여기서 설정
       },
       error_file: '/home/ec2-user/frontend/logs/error.log',
       out_file: '/home/ec2-user/frontend/logs/out.log',
