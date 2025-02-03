@@ -2,7 +2,9 @@ import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   output: 'standalone',
-  outputFileTracingRoot: process.cwd(),
+  env: {
+    NODE_PATH: '.next/standalone/node_modules', // 핵심 설정
+  },
   compiler: {
     styledComponents: true,
   },
