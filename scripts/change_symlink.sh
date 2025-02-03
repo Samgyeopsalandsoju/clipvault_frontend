@@ -7,7 +7,7 @@ mkdir -p "$DEPLOY_DIR"
 mv /home/ec2-user/frontend/releases/new-release/* "$DEPLOY_DIR"
 mv /home/ec2-user/frontend/releases/new-release/.* "$DEPLOY_DIR/" 2>/dev/null || true
 
-# nginx 그룹에 필요한 디렉토리만 접근 권한 부여
+# nginx 그룹에 필요한 디렉토리만 접근 권한 부여 합니다
 if ! id -nG nginx | grep -qw "ec2-user"; then
     sudo usermod -a -G ec2-user nginx
 fi
