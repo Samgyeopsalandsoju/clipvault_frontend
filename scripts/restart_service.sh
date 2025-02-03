@@ -8,7 +8,8 @@ if pm2 list | grep -q "clipvault"; then
     pm2 restart clipvault
 else
     echo "Starting Next.js server..."
-    pm2 start "pnpm start" --name clipvault
+    # ecosystem.config.js 파일을 이용해 clipvault 앱만 시작합니다.
+    pm2 start ecosystem.config.js --only clipvault
 fi
 
 # PM2 프로세스 리스트 저장 (재부팅 후 자동 실행 가능)
