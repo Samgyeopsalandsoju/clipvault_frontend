@@ -26,7 +26,7 @@ if $PM2_CMD list | grep -q "clipvault"; then
     $PM2_CMD restart clipvault
 else
     echo "Starting Next.js server..."
-    $PM2_CMD start "pnpm start" --name clipvault
+    $PM2_CMD start --watch "pnpm start" --name clipvault
 fi
 
 # PM2 프로세스 리스트 저장 (재부팅 후 자동 실행 가능)
