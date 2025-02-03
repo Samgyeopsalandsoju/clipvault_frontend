@@ -14,7 +14,7 @@ fi
 
 # 배포 폴더 전체 권한 설정
 sudo chown -R ec2-user:ec2-user "$DEPLOY_DIR"
-sudo chmod -R 750 "$DEPLOY_DIR"
+sudo chmod -R 755 "$DEPLOY_DIR"
 
 # 심볼릭 링크 변경
 ln -nfs "$DEPLOY_DIR" "$CURRENT_LINK"
