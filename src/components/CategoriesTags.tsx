@@ -45,6 +45,7 @@ const CategoriesTags = ({ categories, onSelect }: ICategoriesTabsProps) => {
             </TabTag>
           );
         })}
+
         <ExpansionButtonContainer>
           <ExpansionButton
             $isExpanded={isExpanded}

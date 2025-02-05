@@ -10,6 +10,7 @@ import ClipCard from '@/components/clip/ClipCard';
 import { Stack } from '@mui/material';
 import styled from 'styled-components';
 import CategoriesTags from '@/components/CategoriesTags';
+import ShareListButton from '@/components/ShareListButton';
 
 const ClipsPage = () => {
   const {
@@ -17,6 +18,7 @@ const ClipsPage = () => {
   } = useClipQuery();
   const { filteredClipList, categories, handleCategorySelect } = useClipFilter(data);
   const { handleClipClick } = useEditClipForm();
+
   return (
     <PageContainer>
       <CategoriesTags categories={categories} onSelect={handleCategorySelect} />
@@ -31,6 +33,7 @@ const ClipsPage = () => {
         />
         <CreateClipButton />
       </ScrollContainer>
+      <ShareListButton list={filteredClipList} />
     </PageContainer>
   );
 };
