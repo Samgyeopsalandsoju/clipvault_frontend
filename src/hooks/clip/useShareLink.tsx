@@ -13,6 +13,19 @@ export const useShareLink = (url?: string) => {
     expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
   });
 
+  const prepareFileData = ({ list }: { list: IClipResponse[] }) => {
+    const info = createUploadFileInfo(list);
+    const fileContent = JSON.stringify(info, null, 2);
+    const blob = new Blob([fileContent], { type: 'application/json' });
+    const fileName = `links/${info.id}.json`;
+
+    return {
+      id: info.id,
+      blob,
+      fileName,
+    };
+  };
+
   const uploadFileMutation = useMutation({
     mutationFn: uploadFile,
     onSuccess: (data) => {
@@ -27,7 +40,7 @@ export const useShareLink = (url?: string) => {
   });
 
   return {
-    createFileInfo: createUploadFileInfo,
+    prepareFileData: prepareFileData,
     fileData: getFileQuery.data,
     isFetching: getFileQuery.isPending,
     upload: uploadFileMutation.mutateAsync,

@@ -3,29 +3,27 @@ import { usePresignedUrl } from '@/hooks/usePresignedUrl';
 import { IClipResponse } from '@/types/clip';
 import { Stack } from '@mui/material';
 import { Share } from 'lucide-react';
+import { useState } from 'react';
 import styled from 'styled-components';
+import ShareLinkModal from './modal/ShareLinkModal';
 
 interface ShareButtonProps {
   list: IClipResponse[];
 }
 
 export const ShareListButton = ({ list }: ShareButtonProps) => {
-  const { createFileInfo, upload } = useShareLink();
-  const { generatePutUrl } = usePresignedUrl();
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
-  const handleShareLink = async () => {
-    const info = createFileInfo(list);
-    const fileContent = JSON.stringify(info, null, 2);
-    const blob = new Blob([fileContent], { type: 'application/json' });
-    const fileName = `links/${info.id}.json`;
-    const url = await generatePutUrl({ fileName, fileType: blob.type });
-    const shareUrl = await upload({ id: info.id, file: blob, fileType: blob.type, url });
-    console.log('shareUrl', shareUrl);
+  const handleShareLink = () => {
+    setIsOpen(true);
   };
   return (
-    <Section onClick={handleShareLink}>
-      <Share size={18} />
-    </Section>
+    <>
+      <Section onClick={handleShareLink}>
+        <Share size={18} />
+      </Section>
+      <ShareLinkModal isOpen={isOpen} setIsOpen={setIsOpen} list={list} />
+    </>
   );
 };
 

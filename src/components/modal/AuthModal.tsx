@@ -17,7 +17,7 @@ const AuthModal = () => {
 
 export default AuthModal;
 
-export const StyledDialog = styled(Dialog)`
+const StyledDialog = styled(Dialog)`
   .MuiDialog-paper {
     width: 100%;
     max-width: 400px;
