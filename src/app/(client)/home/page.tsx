@@ -40,7 +40,6 @@ const HomePage = () => {
         )}
       />
       <ScrollUpButton scrollContainerRef={containerRef} />
-      <Footer />
     </ScrollContainer>
   );
 };

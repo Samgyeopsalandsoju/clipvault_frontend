@@ -35,7 +35,7 @@ const ScrollUpButton = ({ scrollContainerRef }: ScrollUpButtonProps) => {
     }
   };
 
-  // if (!isVisible) return null;
+  if (!isVisible) return null;
 
   return (
     <StyledButton onClick={scrollToTop}>

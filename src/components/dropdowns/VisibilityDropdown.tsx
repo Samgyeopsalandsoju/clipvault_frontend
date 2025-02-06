@@ -1,9 +1,9 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
-import styled from 'styled-components';
-import { MdArrowDropDown } from 'react-icons/md';
 import { VisibilityType } from '@/types/clip';
+import { useEffect, useRef, useState } from 'react';
+import { MdArrowDropDown } from 'react-icons/md';
+import styled from 'styled-components';
 import { Container, DropdownItem, DropdownList, Input, InputWrapper } from './dropdown.styles';
 
 const visibilities = [
@@ -18,7 +18,8 @@ interface DropdownProps {
 
 const VisibilityDropdown = ({ onSelect, visible }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [value, setValue] = useState<string | undefined>(visible);
+  const displayName = visibilities.find((item) => item.code === visible)?.name || '';
+  const [value, setValue] = useState<string>(displayName);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   // 외부 클릭 감지를 위한 useEffect

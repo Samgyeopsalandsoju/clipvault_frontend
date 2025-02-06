@@ -3,7 +3,6 @@
 import CategoriesTags from '@/components/CategoriesTags';
 import ClipCard from '@/components/clip/ClipCard';
 import ClipList from '@/components/clip/ClipList';
-import Footer from '@/components/Footer';
 import ScrollUpButton from '@/components/ScrollUpButton';
 import { ScrollContainer } from '@/components/styled-components/ScrollContainer';
 import { useClipFilter } from '@/hooks/clip/useClipFilter';
@@ -47,9 +46,8 @@ const SharePage = () => {
             </div>
           )}
         />
-        <ScrollUpButton scrollContainerRef={containerRef} />
-        <Footer />
       </ScrollContainer>
+      <ScrollUpButton scrollContainerRef={containerRef} />
     </PageContainer>
   );
 };

@@ -2,6 +2,7 @@ import HeaderComponent from '@/components/Header';
 import { MainContainer } from '@/styles/MainContainer';
 import Tabs from '@/components/Tabs';
 import AuthModal from '@/components/modal/AuthModal';
+import Footer from '@/components/Footer';
 
 export default function ClientLayout({
   children,
@@ -14,6 +15,7 @@ export default function ClientLayout({
       <Tabs />
       {children}
       <AuthModal />
+      <Footer />
     </MainContainer>
   );
 }

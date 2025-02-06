@@ -30,4 +30,5 @@ const CreateButton = styled(Button)`
   margin: 0 auto;
   font-weight: 600;
   font-size: 15px;
+  z-index: 99;
 `;

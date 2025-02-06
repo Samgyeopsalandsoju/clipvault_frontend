@@ -7,8 +7,6 @@ import { CircularProgress, Dialog, Stack, Typography } from '@mui/material';
 import { Dispatch, SetStateAction, useState } from 'react';
 import { Copy, Loader2 } from 'lucide-react';
 import styled from 'styled-components';
-import toast from 'react-hot-toast';
-import { createToastService } from '@/libs/hot-toast';
 import { useToast } from '@/hooks/useToast';
 
 interface ShareLinkModalProps {

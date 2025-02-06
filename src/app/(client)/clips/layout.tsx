@@ -60,7 +60,7 @@ const OverlayContainer = styled(Stack)`
   right: 0;
   bottom: 0;
   pointer-events: none;
-  z-index: 1000; // 레이어 순서 보장
+  z-index: 99999; // 레이어 순서 보장
 `;
 
 const Backdrop = styled(Stack)<{ $isOpen: boolean }>`
@@ -88,6 +88,12 @@ const ModalLayer = styled(Stack)`
   pointer-events: auto;
   background-color: ${(props) => props.theme.background.primary};
   border: 1px solid ${(props) => props.theme.border.primary};
+
+  z-index: 1; // OverlayContainer 내부에서의 순서
+
+  /* 다른 요소들 위에 보이도록 하는 추가 속성들 */
+  isolation: isolate; // 새로운 쌓임 맥락 생성
+  transform: translateZ(0); // 하드웨어 가속 활성화
   @media screen and (max-width: 1024px) {
     height: 65vh;
   }
