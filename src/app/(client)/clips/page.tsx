@@ -28,7 +28,6 @@ const ClipsPage = () => {
       <ScrollContainer ref={containerRef}>
         {filteredClipList.length > 0 ? (
           <>
-            {' '}
             <ClipList
               list={filteredClipList}
               renderItem={(clip) => (

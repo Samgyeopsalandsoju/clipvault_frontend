@@ -89,18 +89,5 @@
       "visible": "public"
     }
   ],
-  "clips": [
-    {
-      "id": "9522",
-      "title": "a",
-      "category": {
-        "id": "1738856919655-65g310xk5",
-        "color": "53",
-        "name": "a"
-      },
-      "link": "a",
-      "visible": "public",
-      "createdBy": "Fri Feb 07 2025 00:48:41 GMT+0900 (한국 표준시)"
-    }
-  ]
+  "clips": []
 }

@@ -1,15 +1,15 @@
 'use client';
 
+import ExpiryDateSelector from '@/components/ExpiryDateSelector';
 import { useShareLink } from '@/hooks/clip/useShareLink';
 import { usePresignedUrl } from '@/hooks/usePresignedUrl';
+import { useToast } from '@/hooks/useToast';
 import { IClipResponse } from '@/types/clip';
 import { CircularProgress, Dialog, Stack, Typography } from '@mui/material';
-import { Dispatch, SetStateAction, useState } from 'react';
-import { Copy, Loader2 } from 'lucide-react';
-import styled from 'styled-components';
-import { useToast } from '@/hooks/useToast';
-import ExpiryDateSelector from '@/components/ExpiryDateSelector';
+import { Copy } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { Dispatch, SetStateAction, useState } from 'react';
+import styled from 'styled-components';
 
 interface ShareLinkModalProps {
   isOpen: boolean;
@@ -222,10 +222,4 @@ const MypageButton = styled.button`
   &:active {
     scale: 0.97;
   }
-`;
-
-const StyledLoader = styled(Loader2)`
-  width: 1rem;
-  height: 1rem;
-  animation: spin 1s infinite linear;
 `;
