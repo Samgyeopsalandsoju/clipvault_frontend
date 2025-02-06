@@ -22,7 +22,7 @@ const ListWrapper = styled(Stack)`
   padding: 1rem;
   display: flex;
   gap: 0.75rem;
-  padding-bottom: 5rem;
+  padding-bottom: 4rem;
 `;
 
 const ClipItem = styled(Stack)`

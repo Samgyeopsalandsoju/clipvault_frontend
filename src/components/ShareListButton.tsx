@@ -31,7 +31,7 @@ export default ShareListButton;
 
 const Section = styled(Stack)`
   position: absolute;
-  bottom: 80px;
+  bottom: 90px;
   left: 20px;
   color: ${(props) => props.theme.text.placeholder};
   border-radius: 20%;
@@ -42,7 +42,8 @@ const Section = styled(Stack)`
   align-items: center;
   cursor: pointer;
   &:hover {
-    scale: 1.1;
+    scale: 1.2;
     color: ${(props) => props.theme.text.primary};
+    background-color: ${(props) => props.theme.background.primary};
   }
 `;

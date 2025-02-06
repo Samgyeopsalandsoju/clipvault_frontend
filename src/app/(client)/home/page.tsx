@@ -1,20 +1,24 @@
 'use client';
 
-import { ScrollContainer } from '../clips/clips.styles';
 import ClipList from '@/components/clip/ClipList';
 import HomeCard from '@/components/clip/HomeCard';
 import TotalClipCount from '@/components/count/TotalClipCount';
 import TotalShared from '@/components/count/TotalShared';
+import Footer from '@/components/Footer';
+import ScrollUpButton from '@/components/ScrollUpButton';
+import { ScrollContainer } from '@/components/styled-components/ScrollContainer';
 import { useHomeClipQuery } from '@/hooks/home/useHomeClipQuery';
 import { Stack, Typography } from '@mui/material';
+import { useRef } from 'react';
 import styled from 'styled-components';
 
 const HomePage = () => {
   const {
     home: { list },
   } = useHomeClipQuery();
+  const containerRef = useRef<HTMLDivElement>(null);
   return (
-    <ScrollContainer>
+    <ScrollContainer ref={containerRef}>
       <HeroContainer>
         <Title>
           Discover & Share <Highlight as={'span'}>Valuable Links</Highlight>
@@ -35,6 +39,8 @@ const HomePage = () => {
           </div>
         )}
       />
+      <ScrollUpButton scrollContainerRef={containerRef} />
+      <Footer />
     </ScrollContainer>
   );
 };

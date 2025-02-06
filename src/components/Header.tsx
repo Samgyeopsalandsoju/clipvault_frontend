@@ -7,7 +7,7 @@ import { Link2, Menu } from 'lucide-react';
 import { useSetAtom } from 'jotai';
 import { authModalAtom, authModeAtom } from '@/atoms/auth.atom';
 import { FormType } from '@/types/auth';
-import Footer from './Footer';
+import ClipVaultInfo from './ClipVaultInfo';
 
 const HeaderComponent = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -95,7 +95,7 @@ const Navigation = ({ isOpen, onClose }: NavBarProps) => {
           </LinkWrapper>
         )}
 
-        <Footer />
+        <ClipVaultInfo />
       </Container>
     </>
   );

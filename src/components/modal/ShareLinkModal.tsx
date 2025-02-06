@@ -7,6 +7,9 @@ import { CircularProgress, Dialog, Stack, Typography } from '@mui/material';
 import { Dispatch, SetStateAction, useState } from 'react';
 import { Copy, Loader2 } from 'lucide-react';
 import styled from 'styled-components';
+import toast from 'react-hot-toast';
+import { createToastService } from '@/libs/hot-toast';
+import { useToast } from '@/hooks/useToast';
 
 interface ShareLinkModalProps {
   isOpen: boolean;
@@ -19,6 +22,7 @@ const ShareLinkModal = ({ isOpen, setIsOpen, list }: ShareLinkModalProps) => {
   const { generatePutUrl } = usePresignedUrl();
   const [shareLink, setShareLink] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { successToast, errorToast } = useToast();
 
   const prepareAndUpload = async () => {
     if (isLoading) return;
@@ -38,6 +42,16 @@ const ShareLinkModal = ({ isOpen, setIsOpen, list }: ShareLinkModalProps) => {
       console.error('Error sharing link:', error);
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(shareLink);
+      successToast('Link copied to clipboard!');
+    } catch (error) {
+      console.error('Failed to copy text:', error);
+      errorToast('Unable to copy link');
     }
   };
 
@@ -65,7 +79,7 @@ const ShareLinkModal = ({ isOpen, setIsOpen, list }: ShareLinkModalProps) => {
           {!!shareLink && (
             <TextFieldSection>
               <ShareLinkInput value={shareLink} readOnly />
-              <CopyButton>
+              <CopyButton onClick={handleCopy}>
                 <Copy size={16} />
               </CopyButton>
             </TextFieldSection>
@@ -145,6 +159,13 @@ const CopyButton = styled.button`
   background-color: ${(props) => props.theme.background.secondary};
   border-radius: 8px;
   padding: 10px;
+  &:hover {
+    background-color: ${(props) => props.theme.background.secondary};
+  }
+
+  &:active {
+    scale: 0.97;
+  }
 `;
 
 const ButtonGroup = styled(Stack)`

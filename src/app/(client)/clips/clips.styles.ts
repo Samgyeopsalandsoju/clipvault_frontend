@@ -3,22 +3,6 @@
 import { Button, Stack } from '@mui/material';
 import styled from 'styled-components';
 
-export const ScrollContainer = styled(Stack)`
-  flex: 1;
-  position: relative;
-  overflow: auto;
-  /* 부모의 높이를 유지 */
-  min-height: 0;
-  /** hide scroll */
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  background-color: ${(props) => props.theme.background.primary};
-  padding-bottom: 100px;
-  .no-scroll::-webkit-scrollbar {
-    display: none;
-  }
-`;
-
 export const Container = styled(Stack)`
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
