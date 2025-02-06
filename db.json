@@ -91,134 +91,16 @@
   ],
   "clips": [
     {
-      "title": "이태원 베트남 쌀국수",
-      "link": "http://localhost:3000/clips/new",
-      "id": "df70",
+      "id": "9522",
+      "title": "a",
       "category": {
-        "id": "1738164694872-sibvlhwkz",
-        "color": "308",
-        "name": "맛집"
+        "id": "1738856919655-65g310xk5",
+        "color": "53",
+        "name": "a"
       },
-      "visible": "private"
-    },
-    {
-      "id": "740a",
-      "title": "영어 강의 사이트",
-      "category": {
-        "id": "1738472667094-z122x09tb",
-        "color": "131",
-        "name": "공부"
-      },
-      "link": "123",
-      "visible": "private",
-      "createdBy": "Sun Feb 02 2025 14:04:35 GMT+0900 (한국 표준시)"
-    },
-    {
-      "id": "68dc",
-      "title": "1234",
-      "category": {
-        "id": "1738684536188-kahboigrf",
-        "color": "85",
-        "name": "맛집123123"
-      },
-      "link": "1234",
+      "link": "a",
       "visible": "public",
-      "createdBy": "Wed Feb 05 2025 00:55:37 GMT+0900 (한국 표준시)"
-    },
-    {
-      "id": "1ce7",
-      "title": "2135",
-      "category": {
-        "id": "1738684545628-wgjfyvr1s",
-        "color": "270",
-        "name": "맛집123515"
-      },
-      "link": "1235",
-      "visible": "public",
-      "createdBy": "Wed Feb 05 2025 00:55:47 GMT+0900 (한국 표준시)"
-    },
-    {
-      "title": "kd",
-      "link": "g",
-      "id": "3aae",
-      "category": {
-        "id": "1738766407816-ccj3ncko6",
-        "color": "350",
-        "name": "block web site"
-      },
-      "visible": "public"
-    },
-    {
-      "id": "81e5",
-      "title": "asdf",
-      "category": {
-        "id": "1738829824608-s5jkz9c83",
-        "color": "8",
-        "name": "asdf"
-      },
-      "link": "fdsa",
-      "visible": "public",
-      "createdBy": "Thu Feb 06 2025 17:17:06 GMT+0900 (한국 표준시)"
-    },
-    {
-      "id": "f6e4",
-      "title": "sadfdsaf",
-      "category": {
-        "id": "1738684536188-kahboigrf",
-        "color": "85",
-        "name": "맛집123123"
-      },
-      "link": "fdasfasdf",
-      "visible": "public",
-      "createdBy": "Thu Feb 06 2025 17:17:11 GMT+0900 (한국 표준시)"
-    },
-    {
-      "id": "7369",
-      "title": "asdfdsaf",
-      "category": {
-        "id": "1738684536188-kahboigrf",
-        "color": "85",
-        "name": "맛집123123"
-      },
-      "link": "asdfasdfasdf",
-      "visible": "private",
-      "createdBy": "Thu Feb 06 2025 17:17:17 GMT+0900 (한국 표준시)"
-    },
-    {
-      "id": "d979",
-      "title": "asdf",
-      "category": {
-        "id": "1738684536188-kahboigrf",
-        "color": "85",
-        "name": "맛집123123"
-      },
-      "link": "asdfdsaf",
-      "visible": "public",
-      "createdBy": "Thu Feb 06 2025 17:21:30 GMT+0900 (한국 표준시)"
-    },
-    {
-      "id": "697c",
-      "title": "ㅁㄴㅇㄹㅇㄴㅁㄹ",
-      "category": {
-        "id": "1738472667094-z122x09tb",
-        "color": "131",
-        "name": "공부"
-      },
-      "link": "ㅁㄴㅇㄹㅁㄴㅇㄹ",
-      "visible": "private",
-      "createdBy": "Thu Feb 06 2025 17:26:16 GMT+0900 (한국 표준시)"
-    },
-    {
-      "id": "5d14",
-      "title": "asdfasdf",
-      "category": {
-        "id": "1738843061939-futsw6tnc",
-        "color": "296",
-        "name": "fsadfasdf"
-      },
-      "link": "asdfasdfadsf",
-      "visible": "public",
-      "createdBy": "Thu Feb 06 2025 20:57:43 GMT+0900 (한국 표준시)"
+      "createdBy": "Fri Feb 07 2025 00:48:41 GMT+0900 (한국 표준시)"
     }
   ]
 }

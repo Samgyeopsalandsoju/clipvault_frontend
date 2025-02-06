@@ -8,7 +8,9 @@ const GlobalStyles = createGlobalStyle`
     src: url('/fonts/WantedSansVariable.ttf') format('truetype-variable');
     font-weight: 100 900;
     font-style: normal;
-    font-display: auto;
+    font-display: swap;
+
+;
   }
 
   * {
@@ -22,7 +24,6 @@ const GlobalStyles = createGlobalStyle`
     padding: 0;
   }
 
-  /* HTML root 설정 */
   html {
     line-height: 1.15;
     -webkit-text-size-adjust: 100%;

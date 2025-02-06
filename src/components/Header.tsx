@@ -90,7 +90,9 @@ const Navigation = ({ isOpen, onClose }: NavBarProps) => {
         )}
         {isToken && (
           <LinkWrapper>
-            <LinkItem>My page</LinkItem>
+            <LinkItem>
+              <Link href={'/mypage'}>My page</Link>
+            </LinkItem>
             <LinkItem $color={'#f44336'}>Logout</LinkItem>
           </LinkWrapper>
         )}

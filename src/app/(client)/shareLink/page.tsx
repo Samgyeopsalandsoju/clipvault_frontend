@@ -56,6 +56,7 @@ const TitleSection = styled(Stack)`
 const SubTitle = styled(Typography)`
   color: ${(props) => props.theme.text.placeholder};
   font-size: 0.9rem;
+  user-select: none;
 `;
 const ShareLinkSection = styled(Stack)`
   flex-direction: row;

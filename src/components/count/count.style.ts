@@ -12,13 +12,10 @@ export const ClipStatsContainer = styled(Stack)`
 
 export const StatNumber = styled(Typography)`
   font-weight: 600;
-  color: ${(props) => props.theme.text.secondary};
-  background: linear-gradient(to right, #3b82f6, #8b5cf6);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: white;
   font-size: 1.5rem;
   user-select: none;
+  text-shadow: 0px 0px 10px cyan, 0px 0px 20px cyan, 0px 0px 40px cyan, 0px 0px 80px cyan;
 `;
 
 export const Title = styled(Typography)`

@@ -24,20 +24,32 @@ const ClipsPage = () => {
 
   return (
     <PageContainer>
-      <CategoriesTags categories={categories} onSelect={handleCategorySelect} />
+      {filteredClipList.length && <CategoriesTags categories={categories} onSelect={handleCategorySelect} />}
       <ScrollContainer ref={containerRef}>
-        <ClipList
-          list={filteredClipList}
-          renderItem={(clip) => (
-            <div onClick={() => handleClipClick(clip.id)}>
-              <ClipCard {...clip} />
-            </div>
-          )}
-        />
-        <CreateClipButton />
-        <ScrollUpButton scrollContainerRef={containerRef} />
+        {filteredClipList.length > 0 ? (
+          <>
+            {' '}
+            <ClipList
+              list={filteredClipList}
+              renderItem={(clip) => (
+                <div onClick={() => handleClipClick(clip.id)}>
+                  <ClipCard {...clip} />
+                </div>
+              )}
+            />
+            <CreateClipButton />
+            <ScrollUpButton scrollContainerRef={containerRef} />
+          </>
+        ) : (
+          <EmptyPage>
+            Looks like you don't have any clips yet...
+            <br /> start adding some!
+            <CreateClipButton />
+          </EmptyPage>
+        )}
       </ScrollContainer>
-      <ShareListButton list={filteredClipList} />
+
+      {filteredClipList.length && <ShareListButton list={filteredClipList} />}
     </PageContainer>
   );
 };
@@ -46,4 +58,13 @@ export default ClipsPage;
 const PageContainer = styled(Stack)`
   flex: 1;
   height: 100%;
+`;
+
+const EmptyPage = styled(Stack)`
+  color: ${(props) => props.theme.text.placeholder};
+  justify-content: center;
+  align-items: center;
+  height: 50%;
+  text-align: center;
+  user-select: none;
 `;

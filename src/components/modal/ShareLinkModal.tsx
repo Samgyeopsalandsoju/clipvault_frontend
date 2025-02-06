@@ -8,6 +8,8 @@ import { Dispatch, SetStateAction, useState } from 'react';
 import { Copy, Loader2 } from 'lucide-react';
 import styled from 'styled-components';
 import { useToast } from '@/hooks/useToast';
+import ExpiryDateSelector from '@/components/ExpiryDateSelector';
+import { useRouter } from 'next/navigation';
 
 interface ShareLinkModalProps {
   isOpen: boolean;
@@ -21,6 +23,7 @@ const ShareLinkModal = ({ isOpen, setIsOpen, list }: ShareLinkModalProps) => {
   const [shareLink, setShareLink] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { successToast, errorToast } = useToast();
+  const router = useRouter();
 
   const prepareAndUpload = async () => {
     if (isLoading) return;
@@ -53,6 +56,14 @@ const ShareLinkModal = ({ isOpen, setIsOpen, list }: ShareLinkModalProps) => {
     }
   };
 
+  const handleSelect = (days: string) => {
+    console.log('days', days);
+  };
+
+  const redirectToShareLinkPage = () => {
+    router.push('/shareLink');
+  };
+
   return (
     <StyledDialog
       open={isOpen}
@@ -63,35 +74,38 @@ const ShareLinkModal = ({ isOpen, setIsOpen, list }: ShareLinkModalProps) => {
       }}
       fullWidth
     >
-      <Wrapper>
-        <TextSection>
-          <Title>Create share link</Title>
-        </TextSection>
+      <TextSection>
+        <Title>Create share link</Title>
+      </TextSection>
 
-        <Contents>
-          <Explain>
-            The shared link will expire 7 days after its creation. <br />
-            Once expired, the link will no longer be accessible.
-          </Explain>
+      <Contents>
+        <Explain>
+          The shared link will expire in 30 days. <br />
+          Once expired, it will no longer be accessible.
+        </Explain>
 
-          {!!shareLink && (
-            <TextFieldSection>
-              <ShareLinkInput value={shareLink} readOnly />
-              <CopyButton onClick={handleCopy}>
-                <Copy size={16} />
-              </CopyButton>
-            </TextFieldSection>
-          )}
+        {!!shareLink && (
+          <TextFieldSection>
+            <ShareLinkInput value={shareLink} readOnly />
+            <CopyButton onClick={handleCopy}>
+              <Copy size={16} />
+            </CopyButton>
+          </TextFieldSection>
+        )}
+        {!shareLink && (
+          <FieldWrapper>
+            <ShareLinkInput placeholder="Title" />
+            <ExpiryDateSelector onSelect={handleSelect} />
+          </FieldWrapper>
+        )}
+        <ButtonGroup>
+          <CreateButton onClick={handleShareLink} disabled={isLoading || !!shareLink} $display={!!shareLink}>
+            {!isLoading ? 'Create' : <CircularProgress size={20} color="inherit" />}
+          </CreateButton>
 
-          <ButtonGroup>
-            <CreateButton onClick={handleShareLink} disabled={isLoading || !!shareLink} $display={!!shareLink}>
-              {!isLoading ? 'Create' : <CircularProgress size={20} color="inherit" />}
-            </CreateButton>
-
-            <MypageButton>My Share Link</MypageButton>
-          </ButtonGroup>
-        </Contents>
-      </Wrapper>
+          <MypageButton onClick={redirectToShareLinkPage}>My Share Link</MypageButton>
+        </ButtonGroup>
+      </Contents>
     </StyledDialog>
   );
 };
@@ -110,13 +124,16 @@ const StyledDialog = styled(Dialog)`
   }
 `;
 
-const Wrapper = styled(Stack)``;
+const FieldWrapper = styled(Stack)`
+  gap: 0.7rem;
+`;
 
 const Title = styled(Typography)`
   color: ${(props) => props.theme.text.primary};
   font-size: 1.3rem;
   letter-spacing: -1px;
   font-weight: 700;
+  user-select: none;
 `;
 
 const TextSection = styled(Stack)`
@@ -131,8 +148,9 @@ const Contents = styled(Stack)`
 `;
 
 const Explain = styled(Typography)`
-  color: ${(props) => props.theme.text.placeholder};
-  font-size: 0.95rem;
+  color: ${(props) => props.theme.text.primary};
+  font-size: 1rem;
+  user-select: none;
 `;
 
 const TextFieldSection = styled(Stack)`
