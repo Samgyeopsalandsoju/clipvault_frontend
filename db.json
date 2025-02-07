@@ -89,5 +89,30 @@
       "visible": "public"
     }
   ],
-  "clips": []
+  "clips": [
+    {
+      "id": "3584",
+      "title": "test",
+      "category": {
+        "id": "1738908228933-0ypc2t0tm",
+        "color": "357",
+        "name": "test"
+      },
+      "link": "test",
+      "visible": "public",
+      "createdBy": "Fri Feb 07 2025 15:03:51 GMT+0900 (한국 표준시)"
+    },
+    {
+      "id": "45ad",
+      "title": "test",
+      "category": {
+        "id": "1738908263149-46jpth71o",
+        "color": "314",
+        "name": "test2"
+      },
+      "link": "test",
+      "visible": "public",
+      "createdBy": "Fri Feb 07 2025 15:04:28 GMT+0900 (한국 표준시)"
+    }
+  ]
 }

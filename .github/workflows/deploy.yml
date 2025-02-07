@@ -7,7 +7,6 @@ on:
       - main
 
 env:
-  AWS_REGION: ap-northeast-2
   S3_BUCKET_NAME: s3-clipvault
   CODE_DEPLOY_APPLICATION_NAME: codeDeploy-clipVault
   CODE_DEPLOY_DEPLOYMENT_GROUP_NAME: codeDeploy-clipVault-frontend
