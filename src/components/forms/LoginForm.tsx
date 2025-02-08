@@ -1,9 +1,9 @@
 import { SOCIAL_LOGIN_OPTIONS } from '@/constants/auth.constants';
-import { Divider, Stack, TextField } from '@mui/material';
+import { Stack } from '@mui/material';
 import { OutlineCustomButton } from '@/components/styled-components/Buttons';
 import RememberMe from './RememberMe';
 import { useLoginForm } from '@/hooks/auth/useLoginForm';
-import { Content, Form, Logo, TextFieldWrapper, Title } from './form.styles';
+import { Content, CustomTextField, Divider, Form, Logo, TextFieldWrapper, Title } from './form.styles';
 
 const loginValidationRules = {
   email: {
@@ -16,32 +16,31 @@ const loginValidationRules = {
 };
 
 const LoginForm = () => {
-  const { errors, handleClick, handleSubmit, onSubmit, register, trigger } = useLoginForm();
+  const { handleClick, handleSubmit, onSubmit, register, trigger, errors } = useLoginForm();
   return (
     <>
       <Content>
         <Title>Login</Title>
         <Form onSubmit={handleSubmit(onSubmit)}>
-          <TextFieldWrapper>
-            <TextField
-              fullWidth
-              placeholder="Email"
-              size="small"
-              {...register('email', {
-                pattern: loginValidationRules.email.pattern,
-              })}
-              onBlur={() => trigger('email')}
-              error={!!errors.email}
-              helperText={errors.email?.message || ' '}
-            />
-            <TextField fullWidth placeholder="Password" size="small" type="password" {...register('password')} />
+          <Stack>
+            <TextFieldWrapper gap={'10px !important'}>
+              <CustomTextField
+                size="small"
+                placeholder="Email"
+                {...register('email', {
+                  pattern: loginValidationRules.email.pattern,
+                })}
+                onBlur={() => trigger('email')}
+              />
+              <CustomTextField size="small" placeholder="Password" type="password" {...register('password')} />
+            </TextFieldWrapper>
             <RememberMe />
-          </TextFieldWrapper>
+          </Stack>
           <OutlineCustomButton type="submit">Login</OutlineCustomButton>
         </Form>
       </Content>
-      <Stack gap={'16px'} marginTop={'16px'}>
-        <Divider color={'#fff'}>or</Divider>
+      <Stack gap={'12px'} marginTop={'10px'}>
+        <Divider>or</Divider>
         <OutlineCustomButton onClick={handleClick}>
           <Logo src={SOCIAL_LOGIN_OPTIONS.EMAIL.logo} />
           {SOCIAL_LOGIN_OPTIONS.EMAIL.text}

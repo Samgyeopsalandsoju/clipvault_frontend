@@ -1,6 +1,6 @@
 'use client';
 import { Stack, Typography } from '@mui/material';
-import { Ban, Copy } from 'lucide-react';
+import { Trash2, Copy, ExternalLink } from 'lucide-react';
 import styled from 'styled-components';
 
 const shareLink = () => {
@@ -11,31 +11,40 @@ const shareLink = () => {
       </TitleSection>
       <Wrapper>
         <ShareLinkSection>
+          <DeleteButton>
+            <Trash2 size={16} />
+          </DeleteButton>
           <ShareLinkInput readOnly />
           <CopyButton>
             <Copy size={16} />
           </CopyButton>
-          <DeleteButton>
-            <Ban size={16} />
-          </DeleteButton>
+          <BlankButton>
+            <ExternalLink size={16} />
+          </BlankButton>
         </ShareLinkSection>
         <ShareLinkSection>
+          <DeleteButton>
+            <Trash2 size={16} />
+          </DeleteButton>
           <ShareLinkInput readOnly />
           <CopyButton>
             <Copy size={16} />
           </CopyButton>
-          <DeleteButton>
-            <Ban size={16} />
-          </DeleteButton>
+          <BlankButton>
+            <ExternalLink size={16} />
+          </BlankButton>
         </ShareLinkSection>
         <ShareLinkSection>
+          <DeleteButton>
+            <Trash2 size={16} />
+          </DeleteButton>
           <ShareLinkInput readOnly />
           <CopyButton>
             <Copy size={16} />
           </CopyButton>
-          <DeleteButton>
-            <Ban size={16} />
-          </DeleteButton>
+          <BlankButton>
+            <ExternalLink size={16} />
+          </BlankButton>
         </ShareLinkSection>
       </Wrapper>
     </Container>
@@ -79,6 +88,21 @@ const ShareLinkInput = styled.input`
 `;
 
 const CopyButton = styled.button`
+  color: ${(props) => props.theme.text.primary};
+  border: 1px solid ${(props) => props.theme.border.focus};
+  background-color: ${(props) => props.theme.background.secondary};
+  border-radius: 8px;
+  padding: 10px;
+  &:hover {
+    background-color: ${(props) => props.theme.background.secondary};
+  }
+
+  &:active {
+    scale: 0.97;
+  }
+`;
+
+const BlankButton = styled.button`
   color: ${(props) => props.theme.text.primary};
   border: 1px solid ${(props) => props.theme.border.focus};
   background-color: ${(props) => props.theme.background.secondary};

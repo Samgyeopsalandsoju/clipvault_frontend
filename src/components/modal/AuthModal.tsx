@@ -24,7 +24,8 @@ const StyledDialog = styled(Dialog)`
     margin: 16px;
     border-radius: 16px;
     position: relative;
-    background-color: #f5f4ef;
+    background-color: ${(props) => props.theme.background.primary};
     padding: 20px;
+    border: 1px solid ${(props) => props.theme.border.divider};
   }
 `;

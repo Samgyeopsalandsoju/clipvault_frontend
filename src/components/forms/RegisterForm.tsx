@@ -1,7 +1,7 @@
 import { Stack, TextField } from '@mui/material';
 import { OutlineCustomButton } from '@/components/styled-components/Buttons';
 import { useRegisterForm } from '@/hooks/auth/useRegisterForm';
-import { Content, Form, TextFieldWrapper, Title } from './form.styles';
+import { Content, CustomTextField, Form, TextFieldWrapper, Title } from './form.styles';
 
 const RegisterForm = () => {
   const { errors, handleSubmit, onSubmit, register, trigger, validator } = useRegisterForm();
@@ -10,38 +10,34 @@ const RegisterForm = () => {
       <Title>Sign in</Title>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <TextFieldWrapper>
-          <TextField
-            fullWidth
-            placeholder="Email"
+          <CustomTextField
             size="small"
+            placeholder="Email"
             {...register('email', validator.email)}
             onBlur={() => trigger('email')}
             error={!!errors.email}
             helperText={errors.email?.message || ' '}
           />
           <Stack direction={'row'} gap={'8px'}>
-            <TextField
-              fullWidth
-              placeholder="Verify code"
+            <CustomTextField
               size="small"
+              placeholder="Verify code"
               {...register('verifyCode')}
               error={!!errors.verifyCode}
               helperText={errors.verifyCode?.message || ' '}
             />
             <OutlineCustomButton sx={{ height: '50%' }}>verify</OutlineCustomButton>
           </Stack>
-          <TextField
-            fullWidth
-            placeholder="Password"
+          <CustomTextField
             size="small"
+            placeholder="Password"
             type="password"
             {...register('password', validator.password)}
             error={!!errors.password}
             helperText={errors.password?.message || ' '}
           />
-          <TextField
-            fullWidth
-            placeholder="Password"
+          <CustomTextField
+            placeholder="Confirm Password"
             size="small"
             type="password"
             {...register('confirmPassword', validator.confirmPassword)}

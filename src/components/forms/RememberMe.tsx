@@ -25,10 +25,12 @@ const Container = styled(Box)`
 `;
 
 const RememberCheckbox = styled(FormControlLabel)`
-  color: #565656;
+  color: ${(props) => props.theme.text.placeholder};
   line-height: 150%;
   letter-spacing: 0.15px;
-
+  .MuiSvgIcon-root {
+    color: ${(props) => props.theme.text.placeholder};
+  }
   .MuiFormControlLabel-label {
     font-size: 12px;
     -webkit-user-select: none;
