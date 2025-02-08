@@ -20,9 +20,10 @@ const HomePage = () => {
   return (
     <ScrollContainer ref={containerRef}>
       <HeroContainer>
-        <Title>
-          Discover & Share <Highlight as={'span'}>Valuable Links</Highlight>
-        </Title>
+        <TitleSection>
+          <Title>Discover & Share</Title> <Highlight as={'span'}>Valuable Links</Highlight>
+        </TitleSection>
+
         <Subtitle>Explore the community's curated links</Subtitle>
         <Divider />
       </HeroContainer>
@@ -70,6 +71,18 @@ const Subtitle = styled(Typography)`
   padding: 0 1rem;
 `;
 
+const TitleSection = styled(Stack)`
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+
+  @media screen and (max-width: 480px) {
+    flex-direction: column;
+    gap: 0;
+  }
+`;
+
 const Divider = styled(Stack)`
   width: 4rem;
   height: 1px;
@@ -77,13 +90,17 @@ const Divider = styled(Stack)`
   background: ${(props) => props.theme.text.tertiary};
   opacity: 0.3;
 `;
-const Highlight = styled(Typography)`
+const Highlight = styled.h1`
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+  text-align: center;
   border-radius: 5px;
   padding: 4px 6px;
   background-color: ${(props) => props.theme.text.primary};
   color: ${(props) => props.theme.background.primary};
   font-weight: 700;
   user-select: none;
+  line-height: 1.5;
 `;
 
 const CountSection = styled(Stack)`
