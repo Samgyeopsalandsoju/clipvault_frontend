@@ -1,5 +1,3 @@
-import HeaderComponent from '@/components/Header';
-import { MainContainer } from '@/styles/MainContainer';
 import Tabs from '@/components/Tabs';
 import AuthModal from '@/components/modal/AuthModal';
 import Footer from '@/components/Footer';
@@ -11,12 +9,12 @@ export default function ClientLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <MainContainer>
+    <div className="max-w-[480px] m-auto relative border-[1px] rounded-[12px] overflow-hidden h-[100vh] flex flex-col dark:border-border-secondary-dark dark:bg-background-primary-dark">
       <HeaderServer />
       <Tabs />
       {children}
       <AuthModal />
       <Footer />
-    </MainContainer>
+    </div>
   );
 }

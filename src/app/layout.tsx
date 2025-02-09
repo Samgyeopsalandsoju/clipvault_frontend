@@ -22,7 +22,6 @@ export default function RootLayout({
           <StyledComponentsRegistry>
             <ThemeProvider>
               <GlobalStyles />
-
               {children}
             </ThemeProvider>
           </StyledComponentsRegistry>

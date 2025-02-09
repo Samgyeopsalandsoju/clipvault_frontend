@@ -48,7 +48,7 @@ export default ScrollUpButton;
 const StyledButton = styled.button`
   margin-right: 20px;
   position: sticky;
-  bottom: 90px;
+  bottom: 55px;
   left: 425px;
   border-radius: 20%;
   width: 2rem;

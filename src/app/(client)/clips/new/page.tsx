@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import { useNewClipForm } from '@/hooks/form/useNewClipForm';
 import { useClipQuery } from '@/hooks/clip/useClipQuery';
 import { Container, Divider, Form, Input, TextArea, Title, TitleSection } from '../clips.styles';
+import classNames from 'classnames';
 
 export default function Page() {
   const {
@@ -28,7 +29,7 @@ export default function Page() {
     <Container>
       <TitleSection>
         <Divider />
-        <Title>Create Clip </Title>
+        <Title>Create Clip</Title>
       </TitleSection>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <VisibilityDropdown onSelect={handleVisibilitySelect} />
@@ -76,5 +77,8 @@ const SubmitButton = styled.button`
 
   &:hover {
     background-color: ${(props) => props.theme.border.secondary};
+  }
+  &:active {
+    scale: 0.97;
   }
 `;

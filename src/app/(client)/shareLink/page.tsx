@@ -1,132 +1,79 @@
 'use client';
-import { Stack, Typography } from '@mui/material';
+import classNames from 'classnames';
 import { Trash2, Copy, ExternalLink } from 'lucide-react';
 import styled from 'styled-components';
 
 const shareLink = () => {
   return (
-    <Container>
-      <TitleSection>
-        <SubTitle>Your clips, all neatly gathered here... take a look.</SubTitle>
-      </TitleSection>
-      <Wrapper>
-        <ShareLinkSection>
-          <DeleteButton>
+    <div className="flex flex-1 flex-col p-4">
+      <div className="pb-4 pl-2">
+        <p className="text-[0.9rem] select-none dark:text-text-placeholder-dark">
+          Your clips, all neatly gathered here... take a look.
+        </p>
+      </div>
+      <div className="gap-4">
+        <div className="flex gap-[10px]">
+          {/* <DeleteButton>
             <Trash2 size={16} />
-          </DeleteButton>
-          <ShareLinkInput readOnly />
-          <CopyButton>
+          </DeleteButton> */}
+          <input
+            className={classNames(
+              'flex flex-1 h-[40px] rounded-[8px] p-[10px] border dark:border-gray-600',
+              'dark:text-text-primary-dark dark:bg-background-secondary-dark'
+            )}
+            readOnly
+          />
+          <button className="border-[1px] dark:border-border-secondary-dark rounded-[8px] p-[10px] dark:text-text-primary-dark dark:bg-background-secondary-dark active:scale-[0.97]">
             <Copy size={16} />
-          </CopyButton>
-          <BlankButton>
+          </button>
+          {/* <BlankButton>
             <ExternalLink size={16} />
-          </BlankButton>
-        </ShareLinkSection>
-        <ShareLinkSection>
-          <DeleteButton>
-            <Trash2 size={16} />
-          </DeleteButton>
-          <ShareLinkInput readOnly />
-          <CopyButton>
-            <Copy size={16} />
-          </CopyButton>
-          <BlankButton>
-            <ExternalLink size={16} />
-          </BlankButton>
-        </ShareLinkSection>
-        <ShareLinkSection>
-          <DeleteButton>
-            <Trash2 size={16} />
-          </DeleteButton>
-          <ShareLinkInput readOnly />
-          <CopyButton>
-            <Copy size={16} />
-          </CopyButton>
-          <BlankButton>
-            <ExternalLink size={16} />
-          </BlankButton>
-        </ShareLinkSection>
-      </Wrapper>
-    </Container>
+          </BlankButton> */}
+        </div>
+      </div>
+    </div>
   );
 };
 
 export default shareLink;
 
-const Container = styled(Stack)`
-  flex: 1;
-  padding: 1rem;
-`;
+// const CopyButton = styled.button`
+//   color: ${(props) => props.theme.text.primary};
+//   border: 1px solid ${(props) => props.theme.border.focus};
+//   background-color: ${(props) => props.theme.background.secondary};
+//   border-radius: 8px;
+//   padding: 10px;
 
-const TitleSection = styled(Stack)`
-  padding-bottom: 1rem;
-  padding-left: 0.5rem;
-`;
-const SubTitle = styled(Typography)`
-  color: ${(props) => props.theme.text.placeholder};
-  font-size: 0.9rem;
-  user-select: none;
-`;
-const ShareLinkSection = styled(Stack)`
-  flex-direction: row;
-  gap: 10px;
-`;
+//   &:active {
+//     scale: 0.97;
+//   }
+// `;
 
-const Wrapper = styled(Stack)`
-  gap: 1rem;
-`;
+// const BlankButton = styled.button`
+//   color: ${(props) => props.theme.text.primary};
+//   border: 1px solid ${(props) => props.theme.border.focus};
+//   background-color: ${(props) => props.theme.background.secondary};
+//   border-radius: 8px;
+//   padding: 10px;
+//   &:hover {
+//     background-color: ${(props) => props.theme.background.secondary};
+//   }
 
-const ShareLinkInput = styled.input`
-  display: flex;
-  flex: 1;
-  color: ${(props) => props.theme.text.primary};
-  background-color: ${(props) => props.theme.background.secondary};
-  height: 40px;
-  border: 1px solid ${(props) => props.theme.border.focus};
-  border-radius: 8px;
-  padding: 10px;
-`;
+//   &:active {
+//     scale: 0.97;
+//   }
+// `;
+// const DeleteButton = styled.button`
+//   color: #f44336;
+//   border: 1px solid #f44336;
+//   background-color: ${(props) => props.theme.background.secondary};
+//   border-radius: 8px;
+//   padding: 10px;
+//   &:hover {
+//     background-color: ${(props) => props.theme.background.secondary};
+//   }
 
-const CopyButton = styled.button`
-  color: ${(props) => props.theme.text.primary};
-  border: 1px solid ${(props) => props.theme.border.focus};
-  background-color: ${(props) => props.theme.background.secondary};
-  border-radius: 8px;
-  padding: 10px;
-  &:hover {
-    background-color: ${(props) => props.theme.background.secondary};
-  }
-
-  &:active {
-    scale: 0.97;
-  }
-`;
-
-const BlankButton = styled.button`
-  color: ${(props) => props.theme.text.primary};
-  border: 1px solid ${(props) => props.theme.border.focus};
-  background-color: ${(props) => props.theme.background.secondary};
-  border-radius: 8px;
-  padding: 10px;
-  &:hover {
-    background-color: ${(props) => props.theme.background.secondary};
-  }
-
-  &:active {
-    scale: 0.97;
-  }
-`;
-const DeleteButton = styled.button`
-  color: #f44336;
-  border: 1px solid #f44336;
-  background-color: ${(props) => props.theme.background.secondary};
-  border-radius: 8px;
-  padding: 10px;
-  &:hover {
-    background-color: ${(props) => props.theme.background.secondary};
-  }
-
-  &:active {
-    scale: 0.97;
-  }
-`;
+//   &:active {
+//     scale: 0.97;
+//   }
+// `;

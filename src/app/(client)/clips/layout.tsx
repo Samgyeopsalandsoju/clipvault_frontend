@@ -1,13 +1,14 @@
 'use client';
 
-import { Slide, Stack } from '@mui/material';
+import { Slide } from '@mui/material';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useAtomValue } from 'jotai';
 import { ClipPageOpenAtom } from '@/atoms/clip.atom';
 import ClipPage from './page';
-import styled from 'styled-components';
 import { useClipPageTransition } from '@/hooks/clip/useClipPageTransition';
+import classNames from 'classnames';
+import CreateClipButton from '@/components/CreateClipButton';
 
 export default function ClipLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -18,83 +19,41 @@ export default function ClipLayout({ children }: { children: React.ReactNode }) 
     setMounted(true);
   }, []);
 
-  const modalPaths = ['/clips/new', '/clips/edit', '/clips/detail/'];
+  const modalPaths = ['/clips/new', '/clips/edit'];
   const shouldShowModal = modalPaths.some((path) => pathname.startsWith(path));
   return (
-    <LayoutContainer>
-      <BaseLayer>
+    <div className="flex flex-col flex-1 relative w-full h-full overflow-x-hidden">
+      <div className="relative w-full flex flex-col flex-1 h-full">
         <ClipPage />
-      </BaseLayer>
+        {!shouldShowModal && <CreateClipButton />}
+      </div>
 
       {shouldShowModal && (
-        <OverlayContainer>
-          <Backdrop $isOpen={isOpen} onClick={handleClose} />
+        <div className="fixed top-0 left-0 right-0 bottom-0 z-50 pointer-events-none">
+          <div
+            className={classNames(
+              'absolute top-0 left-0 right-0 bottom-0 bg-black bg-opacity-40 pointer-events-auto',
+              'transition-opacity duration-300',
+              {
+                'opacity-100': isOpen,
+                'opacity-0': !isOpen,
+              }
+            )}
+            onClick={handleClose}
+          />
           <Slide direction="up" in={isOpen && mounted}>
-            <ModalLayer>{children}</ModalLayer>
+            <div
+              className={classNames(
+                'max-w-[480px] m-auto absolute bottom-0 left-0 right-0 h-[60vh] pointer-events-auto',
+                'z-1000 rounded-tl-[16px] rounded-tr-[16px] isolate transform translate-z-0 lg:h-[65vh]',
+                'dark:bg-background-primary-dark dark:border-border-primary-dark'
+              )}
+            >
+              {children}
+            </div>
           </Slide>
-        </OverlayContainer>
+        </div>
       )}
-    </LayoutContainer>
+    </div>
   );
 }
-
-const LayoutContainer = styled(Stack)`
-  position: relative;
-  width: 100%;
-  flex: 1;
-  height: 100%;
-  overflow-x: hidden;
-`;
-
-const BaseLayer = styled(Stack)`
-  position: relative;
-  width: 100%;
-  flex: 1;
-  height: 100%;
-`;
-
-const OverlayContainer = styled(Stack)`
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  pointer-events: none;
-  z-index: 99999; // 레이어 순서 보장
-`;
-
-const Backdrop = styled(Stack)<{ $isOpen: boolean }>`
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.4);
-  pointer-events: auto;
-  opacity: ${(props) => (props.$isOpen ? 1 : 0)};
-  transition: opacity 300ms ease;
-`;
-
-const ModalLayer = styled(Stack)`
-  max-width: 480px;
-  margin: auto;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 60vh;
-  border-top-left-radius: 16px;
-  border-top-right-radius: 16px;
-  pointer-events: auto;
-  background-color: ${(props) => props.theme.background.primary};
-  border: 1px solid ${(props) => props.theme.border.primary};
-
-  z-index: 1; // OverlayContainer 내부에서의 순서
-
-  /* 다른 요소들 위에 보이도록 하는 추가 속성들 */
-  isolation: isolate; // 새로운 쌓임 맥락 생성
-  transform: translateZ(0); // 하드웨어 가속 활성화
-  @media screen and (max-width: 1024px) {
-    height: 65vh;
-  }
-`;

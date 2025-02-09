@@ -54,7 +54,7 @@ const Navigation = ({ isOpen, onClose }: NavBarProps) => {
     <>
       <div
         className={classNames(
-          'absolute top-[57px] left-0 right-0 bottom-0 bg-[rgba(49,49,49,0.607)] z-998 h-screen',
+          'absolute top-[57px] left-0 right-0 bottom-0 bg-[rgba(49,49,49,0.607)] z-[998] h-full',
           'transition-opacity duration-300 ease-in-out',
           {
             'opacity-100 visible': isOpen,

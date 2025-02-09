@@ -8,7 +8,7 @@ interface ClipList {
 }
 const ClipList = ({ list, renderItem }: ClipList) => {
   return (
-    <div className="flex flex-col p-4 gap-3 pd-8">
+    <div className="flex flex-col p-4 gap-3 pb-8">
       {list.map((clip, index) => {
         return (
           <div className="group relative" key={index}>

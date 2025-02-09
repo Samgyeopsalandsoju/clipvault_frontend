@@ -1,10 +1,9 @@
 'use client';
 
 import { MENU } from '@/constants/common.constants';
-import { Stack } from '@mui/material';
+import classNames from 'classnames';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import styled from 'styled-components';
 
 const ClipTabs = () => {
   const params = usePathname();
@@ -15,39 +14,26 @@ const ClipTabs = () => {
     return currentPath === menuPath;
   };
 
-  isActive(params);
   return (
-    <Nav>
-      <TabContainer>
+    <nav className="border-b dark:border-border-primary-dark">
+      <div className="flex flex-row items-center px-4">
         {MENU.map((item, index) => {
           return (
-            <Tab value={item.name} $isActive={isActive(item.path)} key={index}>
+            <button
+              className={classNames('px-4 py-[0.75rem] font-medium border-b-2', {
+                'text-gray-100 border-white': isActive(item.path),
+                'text-gray-400 border-transparent': !isActive(item.path),
+              })}
+              value={item.name}
+              key={index}
+            >
               <Link href={item.path}>{item.name}</Link>
-            </Tab>
+            </button>
           );
         })}
-      </TabContainer>
-    </Nav>
+      </div>
+    </nav>
   );
 };
 
 export default ClipTabs;
-
-const Nav = styled.nav`
-  border-bottom: 1px solid ${(props) => props.theme.border.primary};
-`;
-
-const TabContainer = styled(Stack)`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 0 1rem;
-`;
-
-const Tab = styled.button<{ $isActive?: boolean }>`
-  padding: 0.75rem 1rem;
-  font-size: 1rem;
-  font-weight: 500;
-  color: ${(props) => (props.$isActive ? '#f4f4f5' : '#a1a1aa')};
-  border-bottom: 2px solid ${(props) => (props.$isActive ? '#ffffff' : 'transparent')};
-`;

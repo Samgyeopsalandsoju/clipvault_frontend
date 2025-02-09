@@ -58,6 +58,50 @@
     {
       "title": "이태원 베트남 쌀국수",
       "link": "http://localhost:3000/clips/new",
+      "id": "df28",
+      "category": {
+        "id": "1738164694872-sibvlhwkz",
+        "color": "92",
+        "name": "맛집"
+      },
+      "visible": "public"
+    },
+    {
+      "title": "이태원 베트남 쌀국수",
+      "link": "http://localhost:3000/clips/new",
+      "id": "df28",
+      "category": {
+        "id": "1738164694872-sibvlhwkz",
+        "color": "92",
+        "name": "맛집"
+      },
+      "visible": "public"
+    },
+    {
+      "title": "이태원 베트남 쌀국수",
+      "link": "http://localhost:3000/clips/new",
+      "id": "df28",
+      "category": {
+        "id": "1738164694872-sibvlhwkz",
+        "color": "92",
+        "name": "맛집"
+      },
+      "visible": "public"
+    },
+    {
+      "title": "이태원 베트남 쌀국수",
+      "link": "http://localhost:3000/clips/new",
+      "id": "df28",
+      "category": {
+        "id": "1738164694872-sibvlhwkz",
+        "color": "92",
+        "name": "맛집"
+      },
+      "visible": "public"
+    },
+    {
+      "title": "이태원 베트남 쌀국수",
+      "link": "http://localhost:3000/clips/new",
       "id": "df68",
       "category": {
         "id": "1738164694872-sibvlhwkz",
@@ -125,6 +169,102 @@
       "link": "123",
       "visible": "private",
       "createdBy": "Sat Feb 08 2025 14:40:08 GMT+0900 (한국 표준시)"
+    },
+    {
+      "id": "1e49",
+      "title": "asdfasdf",
+      "category": {
+        "id": "1739112926169-8eej3w8iw",
+        "color": "316",
+        "name": "asdfa"
+      },
+      "link": "asdfasd",
+      "visible": "private",
+      "createdBy": "Sun Feb 09 2025 23:55:30 GMT+0900 (한국 표준시)"
+    },
+    {
+      "id": "89f1",
+      "title": "asdfasdfasdfadsf",
+      "category": {
+        "id": "1739112937035-jm0ro799g",
+        "color": "156",
+        "name": "asdfasdfasdf"
+      },
+      "link": "asdfdasfasdf",
+      "visible": "private",
+      "createdBy": "Sun Feb 09 2025 23:55:39 GMT+0900 (한국 표준시)"
+    },
+    {
+      "id": "7b6d",
+      "title": "asdfasdf",
+      "category": {
+        "id": "1739112947640-j9lbhiyvp",
+        "color": "33",
+        "name": "asdfdsafdasfasdf"
+      },
+      "link": "asdfadsf",
+      "visible": "public",
+      "createdBy": "Sun Feb 09 2025 23:55:49 GMT+0900 (한국 표준시)"
+    },
+    {
+      "id": "29fa",
+      "title": "asdfas",
+      "category": {
+        "id": "1739112937035-jm0ro799g",
+        "color": "156",
+        "name": "asdfasdfasdf"
+      },
+      "link": "asdfas",
+      "visible": "private",
+      "createdBy": "Mon Feb 10 2025 00:06:58 GMT+0900 (한국 표준시)"
+    },
+    {
+      "id": "b912",
+      "title": "safdasddfas",
+      "category": {
+        "id": "1738908263149-46jpth71o",
+        "color": "314",
+        "name": "test2"
+      },
+      "link": "asdfasdf",
+      "visible": "public",
+      "createdBy": "Mon Feb 10 2025 00:07:04 GMT+0900 (한국 표준시)"
+    },
+    {
+      "id": "faf5",
+      "title": "asdf",
+      "category": {
+        "id": "1739113855931-8m1i9nfhv",
+        "color": "156",
+        "name": "fasdfsdafasdf"
+      },
+      "link": "asdf",
+      "visible": "public",
+      "createdBy": "Mon Feb 10 2025 00:10:57 GMT+0900 (한국 표준시)"
+    },
+    {
+      "id": "1bd4",
+      "title": "asd",
+      "category": {
+        "id": "1738908228933-0ypc2t0tm",
+        "color": "357",
+        "name": "test"
+      },
+      "link": "asd",
+      "visible": "public",
+      "createdBy": "Mon Feb 10 2025 00:11:06 GMT+0900 (한국 표준시)"
+    },
+    {
+      "id": "fba3",
+      "title": "asdffdsa",
+      "category": {
+        "id": "1738908228933-0ypc2t0tm",
+        "color": "357",
+        "name": "test"
+      },
+      "link": "sadf",
+      "visible": "public",
+      "createdBy": "Mon Feb 10 2025 00:11:14 GMT+0900 (한국 표준시)"
     }
   ]
 }

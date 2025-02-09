@@ -7,6 +7,7 @@ import { Button, Stack } from '@mui/material';
 import styled from 'styled-components';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import { useOverflowDetection } from '@/hooks/useOverflowDetection';
+import classNames from 'classnames';
 
 interface ICategoriesTabsProps {
   categories: ICategoryResponse[];
@@ -19,8 +20,14 @@ const CategoriesTags = ({ categories, onSelect }: ICategoriesTabsProps) => {
   });
 
   return (
-    <TagsContainer ref={containerRef}>
-      <Tabs ref={contentRef} $isExpanded={isExpanded}>
+    <div className="py-2 px-4 relative" ref={containerRef}>
+      <div
+        className={classNames('gap-2 flex', {
+          'flex-wrap h-auto': isExpanded,
+          'whitespace-nowrap overflow-hidden': !isExpanded,
+        })}
+        ref={contentRef}
+      >
         <TabTag
           onClick={() => {
             onSelect('');
@@ -56,24 +63,12 @@ const CategoriesTags = ({ categories, onSelect }: ICategoriesTabsProps) => {
             {isExpanded ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
           </ExpansionButton>
         </ExpansionButtonContainer>
-      </Tabs>
-    </TagsContainer>
+      </div>
+    </div>
   );
 };
 
 export default CategoriesTags;
-
-const TagsContainer = styled(Stack)`
-  padding: 0.5rem 1rem;
-  position: relative;
-`;
-
-const Tabs = styled(Stack)<{ $isExpanded: boolean }>`
-  gap: 0.5rem;
-  flex-direction: row;
-  ${({ $isExpanded }) => $isExpanded && `flex-wrap: wrap;  height: auto;`}
-  ${({ $isExpanded }) => !$isExpanded && `white-space: nowrap; overflow: hidden;`}
-`;
 
 const ExpansionButtonContainer = styled(Stack)`
   position: absolute;
