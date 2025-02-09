@@ -3,6 +3,7 @@ import { MainContainer } from '@/styles/MainContainer';
 import Tabs from '@/components/Tabs';
 import AuthModal from '@/components/modal/AuthModal';
 import Footer from '@/components/Footer';
+import HeaderServer from '@/components/server/header/Header';
 
 export default function ClientLayout({
   children,
@@ -11,7 +12,7 @@ export default function ClientLayout({
 }>) {
   return (
     <MainContainer>
-      <HeaderComponent />
+      <HeaderServer />
       <Tabs />
       {children}
       <AuthModal />

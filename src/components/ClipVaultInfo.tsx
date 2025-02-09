@@ -15,148 +15,65 @@ const ClipVaultInfo = () => {
   ];
 
   return (
-    <FooterContainer>
-      <Section>
-        <Description>A service for effortless link storage and sharing.</Description>
-      </Section>
-
-      <Section>
-        <SubTitle>Tech Stack</SubTitle>
-        <TechGrid>
+    <footer className="w-full dark:bg-background-primary-dark border-t dark:border-border-divider-dark flex flex-col items-start">
+      <div className="my-[20px] mx-0 w-full">
+        <p className="text-[14px] mb-[16px] dark:text-text-tertiary-dark">
+          A service for effortless link storage and sharing.
+        </p>
+      </div>
+      <div className="my-[20px] mx-0 w-full">
+        <h3 className="text-[16px] font-semibold mb-[12px] dark:text-text-primary-dark">Tech Stack</h3>
+        <div className="grid gap-[12px] grid-cols-2">
           {techStack.map((tech, index) => (
-            <TechItem key={index}>
-              {tech.icon}
+            <div className="flex items-center gap-2 text-[14px] dark:text-text-tertiary-dark" key={index}>
+              <svg className="w-[16px] h-[16px]"> {tech.icon}</svg>
               <span>{tech.name}</span>
-            </TechItem>
+            </div>
           ))}
-        </TechGrid>
-      </Section>
+        </div>
+      </div>
+      <div className="my-[20px] mx-0 w-full">
+        <h3 className="text-[16px] font-semibold mb-[12px] dark:text-text-primary-dark">Links & Resources</h3>
+        <div className="flex flex-col gap-2">
+          <a
+            className="flex items-center gap-2 text-[12px] no-underline transition-color duration-200 dark:text-text-tertiary-dark"
+            href="https://github.com/Samgyeopsalandsoju/linkjoa_frontend"
+            target="_blank"
+          >
+            <svg className="w-[16px] h-[16px]">
+              <FaGithub />
+            </svg>
+            GitHub Repository
+          </a>
+          <a
+            className="flex items-center gap-2 text-[12px] no-underline transition-color duration-200 dark:text-text-tertiary-dark"
+            href="https://github.com/yourusername/project/docs"
+            target="_blank"
+          >
+            <svg className="w-[16px] h-[16px]">
+              <FaBook />
+            </svg>
+            Documentation
+          </a>
+          <a
+            className="flex items-center gap-2 text-[12px] no-underline transition-color duration-200 dark:text-text-tertiary-dark"
+            href="mailto:hyunbin.kim.3376@gamil.com"
+          >
+            <svg className="w-[16px] h-[16px]">
+              <FaEnvelope />
+            </svg>
+            Contact
+          </a>
+        </div>
+      </div>
 
-      <Section>
-        <SubTitle>Links & Resources</SubTitle>
-        <LinkGrid>
-          <Link href="https://github.com/Samgyeopsalandsoju/linkjoa_frontend" target="_blank">
-            <FaGithub /> GitHub Repository
-          </Link>
-          <Link href="https://github.com/yourusername/project/docs" target="_blank">
-            <FaBook /> Documentation
-          </Link>
-          <Link href="mailto:hyunbin.kim.3376@gamil.com">
-            <FaEnvelope /> Contact
-          </Link>
-        </LinkGrid>
-      </Section>
-
-      <Divider />
-
-      <BottomSection>
-        <Version>v{VERSION}</Version>
-        <Copyright>© 2025 clipVault. All rights reserved.</Copyright>
-        <UpdateInfo>Last updated: {LAST_UPDATE}</UpdateInfo>
-      </BottomSection>
-    </FooterContainer>
+      <div className="flex flex-col items-center gap-[4px] text-center flex-1 w-full">
+        <span className="text-[12px] dark:text-text-tertiary-dark">v{VERSION}</span>
+        <p className="text-[12px] dark:text-text-primary-dark">© 2025 clipVault. All rights reserved.</p>
+        <span className="text-[12px] dark:text-text-tertiary-dark">Last updated: {LAST_UPDATE}</span>
+      </div>
+    </footer>
   );
 };
 
 export default ClipVaultInfo;
-
-const FooterContainer = styled.footer`
-  width: 100%;
-  background: ${(props) => props.theme.background.primary};
-  border-top: 1px solid ${(props) => props.theme.border.divider};
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-`;
-
-const Section = styled(Stack)`
-  margin: 20px 0;
-  width: 100%;
-`;
-const Description = styled.p`
-  font-size: 14px;
-  color: ${(props) => props.theme.text.tertiary};
-  margin-bottom: 16px;
-`;
-
-const SubTitle = styled.h3`
-  font-size: 16px;
-  font-weight: 600;
-  margin-bottom: 12px;
-  color: ${(props) => props.theme.text.primary};
-`;
-
-const TechGrid = styled(Stack)`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-`;
-
-const TechItem = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 14px;
-  color: ${(props) => props.theme.text.tertiary};
-
-  svg {
-    width: 16px;
-    height: 16px;
-  }
-`;
-
-const LinkGrid = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-`;
-
-const Link = styled.a`
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 14px;
-  color: ${(props) => props.theme.text.tertiary};
-  text-decoration: none;
-  transition: color 0.2s ease;
-
-  &:hover {
-    color: ${(props) => props.theme.text.tertiary};
-  }
-
-  svg {
-    width: 16px;
-    height: 16px;
-  }
-`;
-
-const Divider = styled.hr`
-  border: none;
-  border-top: 1px solid ${(props) => props.theme.border.primary};
-  margin: 16px 0;
-`;
-
-const BottomSection = styled(Stack)`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  text-align: center;
-  flex: 1;
-  width: 100%;
-`;
-
-const Version = styled.span`
-  font-size: 12px;
-  color: ${(props) => props.theme.text.tertiary};
-`;
-
-const Copyright = styled.p`
-  font-size: 12px;
-  color: ${(props) => props.theme.text.primary};
-`;
-
-const UpdateInfo = styled.span`
-  font-size: 12px;
-  color: ${(props) => props.theme.text.tertiary};
-`;
