@@ -8,31 +8,16 @@ interface ClipList {
 }
 const ClipList = ({ list, renderItem }: ClipList) => {
   return (
-    <ListWrapper>
+    <div className="flex flex-col p-4 gap-3 pd-8">
       {list.map((clip, index) => {
-        return <ClipItem key={index}>{renderItem(clip)}</ClipItem>;
+        return (
+          <div className="group relative" key={index}>
+            {renderItem(clip)}
+          </div>
+        );
       })}
-    </ListWrapper>
+    </div>
   );
 };
 
 export default ClipList;
-
-const ListWrapper = styled(Stack)`
-  padding: 1rem;
-  display: flex;
-  gap: 0.75rem;
-  padding-bottom: 4rem;
-`;
-
-const ClipItem = styled(Stack)`
-  &:hover button {
-    opacity: 1;
-  }
-
-  @media screen and (max-width: 1024px) {
-    button {
-      opacity: 1;
-    }
-  }
-`;

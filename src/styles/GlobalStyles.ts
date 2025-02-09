@@ -3,6 +3,9 @@
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyles = createGlobalStyle`
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
   @font-face {
     font-family: 'Wanted Sans';
     src: url('/fonts/WantedSansVariable.ttf') format('truetype-variable');

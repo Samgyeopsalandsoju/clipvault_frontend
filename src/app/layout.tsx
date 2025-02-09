@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import MUIRegistry from '@/providers/registries/mui-registry';
 import StyledComponentsRegistry from '@/providers/registries/styled-registry';
 import GlobalStyles from '@/styles/GlobalStyles';
+import '@/styles/TailwindStyle.css';
 
 export const metadata: Metadata = {
   title: 'clipVault',
@@ -16,11 +17,12 @@ export default function RootLayout({
 }>) {
   return (
     <html>
-      <body suppressHydrationWarning={true}>
+      <body suppressHydrationWarning={true} className="dark">
         <MUIRegistry>
           <StyledComponentsRegistry>
             <ThemeProvider>
               <GlobalStyles />
+
               {children}
             </ThemeProvider>
           </StyledComponentsRegistry>

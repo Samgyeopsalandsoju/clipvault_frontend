@@ -1,44 +1,53 @@
 import { IClipResponse } from '@/types/clip';
 import { generateModernTagColors } from '@/utils/utils';
-import { Stack } from '@mui/material';
-import styled from 'styled-components';
 import { GitFork } from 'lucide-react';
-import { CardTag } from '@/components/styled-components/Tag';
-import { Card, ClipInfo, ClipTitle, ClipUrl, Content, TitleRow } from './clip.style';
+import classNames from 'classnames';
 
-const HomeCard = ({ title, category, link, fork, visible }: IClipResponse) => {
+const HomeCard = ({ title, category, link, fork }: IClipResponse) => {
   const { background, text, border } = generateModernTagColors(Number(category.color));
 
   return (
-    <Card $isPublic={visible === 'public'} $border={border}>
-      <Content>
-        <ClipInfo>
-          <TitleRow>
-            <CardTag $bgColor={background} $textColor={text}>
+    <div
+      className={classNames(
+        'cursor-pointer p-4 rounded-lg dark:bg-background.secondaryWithOpacity-dark',
+        'backdrop-blur transition-all duration-200',
+        'hover:dark:bg-background-secondary-dark'
+      )}
+      style={{
+        borderColor: border,
+        borderWidth: '2px',
+      }}
+    >
+      <div className="flex flex-row items-start justify-between gap-[2px]">
+        <div className="flex flex-col flex-1 gap-2 min-w-0">
+          <div className="flex flex-row item-center gap-4 mb-1">
+            <p
+              className={classNames(
+                'py-1 px-3 text-sm rounded-lg cursor-pointer select-none whitespace-nowrap',
+                'truncate max-w-[120px] sm:max-w-[80px]'
+              )}
+              style={{
+                backgroundColor: background,
+                color: text,
+              }}
+            >
               {category.name}
-            </CardTag>
-            <ClipTitle>{title}</ClipTitle>
-          </TitleRow>
-          <ClipUrl>{link}</ClipUrl>
-        </ClipInfo>
-        <ForkSection>
+            </p>
+            <p className="text-sm font-medium truncate dark:text-text-primary-dark">{title}</p>
+          </div>
+          <p className="text-[0.75rem] truncate text-[#a1a1aa]">{link}</p>
+        </div>
+        <div
+          className={classNames(
+            'dark:text-text-placeholder-dark flex flex-row gap-[10px] items-center justify-center',
+            'hover:dark:text-text-primary-dark'
+          )}
+        >
           <GitFork size={16} /> {fork || 0}
-        </ForkSection>
-      </Content>
-    </Card>
+        </div>
+      </div>
+    </div>
   );
 };
 
 export default HomeCard;
-
-const ForkSection = styled(Stack)`
-  color: ${(props) => props.theme.text.placeholder};
-  flex-direction: row;
-  gap: 10px;
-  align-items: center;
-  justify-content: center;
-
-  &:hover {
-    color: ${(props) => props.theme.text.primary};
-  }
-`;
