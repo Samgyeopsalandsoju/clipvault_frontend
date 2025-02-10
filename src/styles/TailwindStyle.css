@@ -24,3 +24,20 @@
     text-shadow: 0px 0px 10px cyan, 0px 0px 20px cyan, 0px 0px 40px cyan, 0px 0px 80px cyan;
   }
 }
+
+:root {
+  --autofill-bg: #fff;
+  --autofill-text: #f4f4f5;
+}
+
+.dark {
+  --autofill-bg: #18181b;
+  --autofill-text: #f4f4f5;
+}
+
+.autofill-fix:-webkit-autofill {
+  background-color: var(--autofill-bg) !important;
+  -webkit-text-fill-color: var(--autofill-text) !important;
+  -webkit-box-shadow: 0 0 0px 1000px var(--autofill-bg) inset !important;
+  transition: background-color 5000s ease-in-out 0s;
+}

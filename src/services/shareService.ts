@@ -1,5 +1,3 @@
-import { APIResponse } from '@/types/api';
-import { IShareLink } from '@/types/share';
 import axios from 'axios';
 
 export const uploadFile = async ({

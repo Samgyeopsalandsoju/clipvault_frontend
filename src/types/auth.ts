@@ -6,10 +6,11 @@ export interface LoginFormValue {
 }
 
 export interface RegisterFormValue {
-  email: string;
+  mail: string;
   password: string;
   confirmPassword: string;
   verifyCode: string;
+  verifiedMail: string;
 }
 
 export type FormType = 'login' | 'register';

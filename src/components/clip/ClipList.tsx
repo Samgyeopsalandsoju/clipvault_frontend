@@ -1,5 +1,3 @@
-import { Stack } from '@mui/material';
-import styled from 'styled-components';
 import { IClipResponse } from '@/types/clip';
 
 interface ClipList {

@@ -1,5 +1,4 @@
 export interface APIResponse<T> {
-  result: T;
-  message: string;
+  body: T;
   status: string;
 }

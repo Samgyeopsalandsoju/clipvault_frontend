@@ -4,15 +4,13 @@ import { useSetAtom } from 'jotai';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useEffect } from 'react';
 import { ClipPageOpenAtom } from '@/atoms/clip.atom';
-import { VisibilityType, ICreateClip, ICategoryResponse, ICategory } from '@/types/clip';
+import { VisibilityType, ICreateClip, ICategoryResponse } from '@/types/clip';
 import { generateUniqueId, createValidator } from '@/utils/utils';
-import { useTheme } from 'styled-components';
 import { useClipQuery } from '../clip/useClipQuery';
 
 export const useNewClipForm = () => {
   const setIsOpen = useSetAtom(ClipPageOpenAtom);
-  const theme = useTheme();
-  const validator = createValidator(theme);
+  const validator = createValidator();
   const {
     clip: { create },
   } = useClipQuery();

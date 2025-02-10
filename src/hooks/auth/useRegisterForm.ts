@@ -1,6 +1,7 @@
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { useRegisterValidation } from './useRegisterValidation';
 import { RegisterFormValue } from '@/types/auth';
+import { useAuth } from './useAuth';
 
 export const useRegisterForm = () => {
   const {
@@ -8,12 +9,28 @@ export const useRegisterForm = () => {
     handleSubmit,
     trigger,
     watch,
+    control,
+    setValue,
     formState: { errors },
   } = useForm<RegisterFormValue>({
     mode: 'onChange',
   });
   const validator = useRegisterValidation(watch);
+  const { register: signUp } = useAuth();
 
-  const onSubmit: SubmitHandler<RegisterFormValue> = (data) => {};
-  return { register, handleSubmit, trigger, errors, validator, onSubmit };
+  const onSubmit = (data: RegisterFormValue) => {
+    signUp(data);
+  };
+
+  return {
+    watch,
+    control,
+    register,
+    handleSubmit,
+    trigger,
+    errors,
+    validator,
+    onSubmit,
+    setValue,
+  };
 };

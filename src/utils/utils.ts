@@ -1,8 +1,7 @@
 'use client';
 
-import { createToastService } from '@/libs/hot-toast';
+import { createToast } from '@/libs/hot-toast';
 import { ICategoryResponse, ICreateClip } from '@/types/clip';
-import { DefaultTheme } from 'styled-components';
 
 export const generateModernTagColors = (hue?: number) => {
   // 색상(Hue): 지정된 값이 없으면 랜덤 생성
@@ -34,8 +33,8 @@ export const generateUniqueId = () => {
 };
 
 // create clip validator
-export const createValidator = (theme: DefaultTheme) => {
-  const toastService = createToastService(theme);
+export const createValidator = () => {
+  const toastService = createToast();
   const validateString = (field: string, message: string) => {
     if (!field || field.length === 0) {
       toastService.error(message);

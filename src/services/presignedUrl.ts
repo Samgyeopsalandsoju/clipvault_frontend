@@ -15,7 +15,7 @@ export const generatePutPresignedUrl = async ({ fileName, fileType }: { fileName
       },
     }
   );
-  return response.data.result;
+  return response.data.body;
 };
 
 export const generateGetPresignedUrl = async (fileName: string) => {
@@ -30,5 +30,5 @@ export const generateGetPresignedUrl = async (fileName: string) => {
     }
   );
 
-  return response.data.result;
+  return response.data.body;
 };

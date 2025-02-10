@@ -1,53 +1,90 @@
-import { Stack, TextField } from '@mui/material';
-import { OutlineCustomButton } from '@/components/styled-components/Buttons';
 import { useRegisterForm } from '@/hooks/auth/useRegisterForm';
-import { Content, CustomTextField, Form, TextFieldWrapper, Title } from './form.styles';
+import classNames from 'classnames';
+import { useEffect, useState } from 'react';
+import VerifyCodeCheck from './verifyCode.tsx';
+import { useDebounce } from '@/hooks/useDebounce';
+import { useWatch } from 'react-hook-form';
 
 const RegisterForm = () => {
-  const { errors, handleSubmit, onSubmit, register, trigger, validator } = useRegisterForm();
+  const { errors, handleSubmit, control, register, trigger, validator, onSubmit, setValue } = useRegisterForm();
+  const [isVerified, setIsVerified] = useState(false);
+  const [mail, setMail] = useState('');
+  const email = useWatch({ control, name: 'mail' });
+  const debouncedEmail = useDebounce(email, 300);
+
+  useEffect(() => {
+    setMail(debouncedEmail);
+  }, [debouncedEmail]);
+
+  const handleVerification = (data: { verified: boolean; encryptedEmail: string }) => {
+    setIsVerified(data.verified);
+    setValue('verifiedMail', data.encryptedEmail);
+  };
+
   return (
-    <Content>
-      <Title>Sign in</Title>
-      <Form onSubmit={handleSubmit(onSubmit)}>
-        <TextFieldWrapper>
-          <CustomTextField
-            size="small"
-            placeholder="Email"
-            {...register('email', validator.email)}
-            onBlur={() => trigger('email')}
-            error={!!errors.email}
-            helperText={errors.email?.message || ' '}
-          />
-          <Stack direction={'row'} gap={'8px'}>
-            <CustomTextField
-              size="small"
-              placeholder="Verify code"
-              {...register('verifyCode')}
-              error={!!errors.verifyCode}
-              helperText={errors.verifyCode?.message || ' '}
+    <div className="flex flex-col gap-[5px] h-[350px]">
+      <h2 className="text-2xl font-semibold text-center mb-3 dark:text-text-primary-dark">Sign up</h2>
+      <form className="flex flex-col gap-[20px]" onSubmit={handleSubmit(onSubmit)}>
+        <div className="flex flex-col">
+          <div>
+            <input
+              className={classNames(
+                'dark:text-text-primary-dark border-[1px] border-solid dark:border-border-focus-dark rounded-[5px]',
+                'dark:bg-background-primary-dark w-full h-[35px] px-3 autofill-fix'
+              )}
+              placeholder="Email"
+              {...register('mail', validator.mail)}
+              onBlur={() => trigger('mail')}
             />
-            <OutlineCustomButton sx={{ height: '50%' }}>verify</OutlineCustomButton>
-          </Stack>
-          <CustomTextField
-            size="small"
-            placeholder="Password"
-            type="password"
-            {...register('password', validator.password)}
-            error={!!errors.password}
-            helperText={errors.password?.message || ' '}
-          />
-          <CustomTextField
-            placeholder="Confirm Password"
-            size="small"
-            type="password"
-            {...register('confirmPassword', validator.confirmPassword)}
-            error={!!errors.confirmPassword}
-            helperText={errors.confirmPassword?.message || ' '}
-          />
-        </TextFieldWrapper>
-        <OutlineCustomButton type="submit">Sign in</OutlineCustomButton>
-      </Form>
-    </Content>
+            <span className="text-xs text-[#f44336] px-3 pb-1 min-h-[20px] block" />
+          </div>
+          <div>
+            <VerifyCodeCheck email={mail} onVerified={handleVerification} />
+            <span className="text-xs text-[#f44336] px-3 pb-1 min-h-[20px] block">
+              {errors.verifyCode?.message || ' '}
+            </span>
+          </div>
+          <div>
+            <input
+              className={classNames(
+                'dark:text-text-primary-dark border-[1px] border-solid dark:border-border-focus-dark rounded-[5px]',
+                'dark:bg-background-primary-dark w-full h-[35px] px-3'
+              )}
+              placeholder="Password"
+              type="password"
+              {...register('password', validator.password)}
+            />
+            <span className="text-xs text-[#f44336] px-3 py-1 min-h-[20px] block">
+              {errors.password?.message || ' '}
+            </span>
+          </div>
+          <div>
+            <input
+              className={classNames(
+                'dark:text-text-primary-dark border-[1px] border-solid dark:border-border-focus-dark rounded-[5px]',
+                'dark:bg-background-primary-dark w-full h-[35px] px-3'
+              )}
+              placeholder="Confirm Password"
+              type="password"
+              {...register('confirmPassword', validator.confirmPassword)}
+            />
+            <span className="text-xs text-[#f44336] px-3 py-1 min-h-[20px] block">
+              {errors.confirmPassword?.message || ' '}
+            </span>
+          </div>
+        </div>
+        <button
+          className={classNames(
+            'border-[1px] border-solid dark:border-border-focus-dark text-[15px] ',
+            'rounded-[5px] dark:text-text-primary-dark px-2 py-2 active:scale-[0.97]'
+          )}
+          type="submit"
+          disabled={!isVerified}
+        >
+          Sign up
+        </button>
+      </form>
+    </div>
   );
 };
 

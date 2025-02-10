@@ -1,7 +1,5 @@
-'use client';
 import classNames from 'classnames';
 import { Trash2, Copy, ExternalLink } from 'lucide-react';
-import styled from 'styled-components';
 
 const shareLink = () => {
   return (
@@ -13,22 +11,22 @@ const shareLink = () => {
       </div>
       <div className="gap-4">
         <div className="flex gap-[10px]">
-          {/* <DeleteButton>
+          <button className="border-solid border-[#f44336] rounded-[8px] p-[10px] text-[#f44336] dark:bg-background-secondary-dark active:scale-[0.97]">
             <Trash2 size={16} />
-          </DeleteButton> */}
+          </button>
           <input
             className={classNames(
-              'flex flex-1 h-[40px] rounded-[8px] p-[10px] border dark:border-gray-600',
+              'flex flex-1 h-[40px] rounded-[8px] p-[10px] border-solid dark:border-border-focus-dark',
               'dark:text-text-primary-dark dark:bg-background-secondary-dark'
             )}
             readOnly
           />
-          <button className="border-[1px] dark:border-border-secondary-dark rounded-[8px] p-[10px] dark:text-text-primary-dark dark:bg-background-secondary-dark active:scale-[0.97]">
+          <button className="border-solid dark:border-border-focus-dark rounded-[8px] p-[10px] dark:text-text-primary-dark dark:bg-background-secondary-dark active:scale-[0.97]">
             <Copy size={16} />
           </button>
-          {/* <BlankButton>
+          <button className="border-solid dark:border-border-focus-dark rounded-[8px] p-[10px] dark:text-text-primary-dark dark:bg-background-secondary-dark active:scale-[0.97]">
             <ExternalLink size={16} />
-          </BlankButton> */}
+          </button>
         </div>
       </div>
     </div>
@@ -36,44 +34,3 @@ const shareLink = () => {
 };
 
 export default shareLink;
-
-// const CopyButton = styled.button`
-//   color: ${(props) => props.theme.text.primary};
-//   border: 1px solid ${(props) => props.theme.border.focus};
-//   background-color: ${(props) => props.theme.background.secondary};
-//   border-radius: 8px;
-//   padding: 10px;
-
-//   &:active {
-//     scale: 0.97;
-//   }
-// `;
-
-// const BlankButton = styled.button`
-//   color: ${(props) => props.theme.text.primary};
-//   border: 1px solid ${(props) => props.theme.border.focus};
-//   background-color: ${(props) => props.theme.background.secondary};
-//   border-radius: 8px;
-//   padding: 10px;
-//   &:hover {
-//     background-color: ${(props) => props.theme.background.secondary};
-//   }
-
-//   &:active {
-//     scale: 0.97;
-//   }
-// `;
-// const DeleteButton = styled.button`
-//   color: #f44336;
-//   border: 1px solid #f44336;
-//   background-color: ${(props) => props.theme.background.secondary};
-//   border-radius: 8px;
-//   padding: 10px;
-//   &:hover {
-//     background-color: ${(props) => props.theme.background.secondary};
-//   }
-
-//   &:active {
-//     scale: 0.97;
-//   }
-// `;
