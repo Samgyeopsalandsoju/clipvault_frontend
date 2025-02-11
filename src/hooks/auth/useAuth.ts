@@ -1,23 +1,26 @@
-import { createToast } from '@/libs/hot-toast';
-import { login, register } from '@/services/authService';
+import { createToast } from '@/libs';
 import { useMutation } from '@tanstack/react-query';
-import { useAuthModal } from './useAuthModal';
+import { useAuthModal } from '@/hooks';
+import { login, register } from '@/services';
 
 export const useAuth = () => {
   const toast = createToast();
-  const { setMode, setIsOpen } = useAuthModal();
+  const { setModalMode, setIsAuthModalOpen } = useAuthModal();
+
+  // 회원가입
   const registerMutation = useMutation({
     mutationFn: register,
     onSuccess: () => {
       toast.success('You have successfully sign up!');
-      setMode('login');
+      setModalMode('login');
     },
   });
 
+  // 로그인
   const loginMutation = useMutation({
     mutationFn: login,
     onSuccess: () => {
-      setIsOpen(false);
+      setIsAuthModalOpen(false);
     },
   });
 

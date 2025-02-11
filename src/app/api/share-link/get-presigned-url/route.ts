@@ -1,4 +1,4 @@
-import { generateGetUrl } from '@/libs/s3/generateGetUrl';
+import { generateGetUrl } from '@/libs';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
@@ -22,8 +22,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({
       status: 200,
-      message: 'Successfully create signed url',
-      result: signedUrl,
+      body: signedUrl,
     });
   } catch (error) {
     return NextResponse.json(

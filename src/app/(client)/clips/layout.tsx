@@ -4,11 +4,11 @@ import { Slide } from '@mui/material';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useAtomValue } from 'jotai';
-import { ClipPageOpenAtom } from '@/atoms/clip.atom';
 import ClipPage from './page';
-import { useClipPageTransition } from '@/hooks/clip/useClipPageTransition';
 import classNames from 'classnames';
-import CreateClipButton from '@/components/CreateClipButton';
+import { useClipPageTransition } from '@/hooks';
+import { ClipPageOpenAtom } from '@/atoms';
+import { CreateClipButton } from '@/components';
 
 export default function ClipLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -18,9 +18,9 @@ export default function ClipLayout({ children }: { children: React.ReactNode }) 
   useEffect(() => {
     setMounted(true);
   }, []);
-
-  const modalPaths = ['/clips/new', '/clips/edit'];
-  const shouldShowModal = modalPaths.some((path) => pathname.startsWith(path));
+  // MODAL_PATH에 설정된 path는 페이지가 아래에서 올라오게 한다
+  const MODAL_PATH = ['/clips/new', '/clips/edit'];
+  const shouldShowModal = MODAL_PATH.some((path) => pathname.startsWith(path));
   return (
     <div className="flex flex-col flex-1 relative w-full h-full overflow-x-hidden">
       <div className="relative w-full flex flex-col flex-1 h-full">

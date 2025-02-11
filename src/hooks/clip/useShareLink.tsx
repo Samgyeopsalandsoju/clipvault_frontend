@@ -1,5 +1,5 @@
-import { fetchShareFileData, uploadFile } from '@/services/shareService';
-import { IClipResponse } from '@/types/clip';
+import { fetchShareFileData, uploadFile } from '@/services';
+import { IClipResponse } from '@/types';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { v4 as uuidv4 } from 'uuid';
 

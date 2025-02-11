@@ -1,4 +1,4 @@
-import { RegisterFormValue } from '@/types/auth';
+import { RegisterFormValue } from '@/types';
 import { UseFormWatch } from 'react-hook-form';
 
 export const useRegisterValidation = (getValues: UseFormWatch<RegisterFormValue>) => ({

@@ -1,15 +1,9 @@
 'use client';
 
-import CategoriesTags from '@/components/CategoriesTags';
-import ClipCard from '@/components/clip/ClipCard';
-import ClipList from '@/components/clip/ClipList';
-import ScrollUpButton from '@/components/ScrollUpButton';
-import { ScrollContainer } from '@/components/styled-components/ScrollContainer';
-import { useClipFilter } from '@/hooks/clip/useClipFilter';
-import { usePresignedUrl } from '@/hooks/usePresignedUrl';
-import { fetchShareFileData } from '@/services/shareService';
-import { IClipResponse } from '@/types/clip';
-import { IShareLink } from '@/types/share';
+import { CategoriesTags, ClipCard, ClipList, ScrollUpButton } from '@/components';
+import { useClipFilter, usePresignedUrl } from '@/hooks';
+import { fetchShareFileData } from '@/services';
+import { IClipResponse, IShareLink } from '@/types';
 import { Stack } from '@mui/material';
 import { useParams } from 'next/navigation';
 import { useCallback, useEffect, useRef, useState } from 'react';
@@ -37,7 +31,10 @@ const SharePage = () => {
   return (
     <PageContainer>
       {categories.length > 1 && <CategoriesTags categories={categories} onSelect={handleCategorySelect} />}
-      <ScrollContainer ref={containerRef}>
+      <div
+        ref={containerRef}
+        className="relative flex-1 pb-12 overflow-auto dark:bg-background-primary-dark scrollbar-none no-scroll"
+      >
         <ClipList
           list={(filteredClipList as IClipResponse[]) || []}
           renderItem={(clip) => (
@@ -46,7 +43,7 @@ const SharePage = () => {
             </div>
           )}
         />
-      </ScrollContainer>
+      </div>
       <ScrollUpButton scrollContainerRef={containerRef} />
     </PageContainer>
   );

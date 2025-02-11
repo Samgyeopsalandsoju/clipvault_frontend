@@ -1,5 +1,4 @@
-import { APIResponse } from '@/types/api';
-import { IShareLink } from '@/types/share';
+import { APIResponse } from '@/types';
 import axios from 'axios';
 
 export const generatePutPresignedUrl = async ({ fileName, fileType }: { fileName: string; fileType: string }) => {

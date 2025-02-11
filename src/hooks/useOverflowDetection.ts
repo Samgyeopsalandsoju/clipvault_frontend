@@ -1,3 +1,5 @@
+'use client';
+
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 interface UseOverflowDetectionProps<T> {
@@ -10,13 +12,12 @@ export const useOverflowDetection = <T>({ data }: UseOverflowDetectionProps<T>) 
   const containerRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
 
-  const checkOverflew = useCallback(() => {
+  // 텝의 전체 길이를 계산하고 카테고리 리스트 길이를 계산하고 화면에 보여줄때 어떻게 보여줄지 판단
+  const checkOverflew = useCallback((): void => {
     if (containerRef.current && contentRef.current) {
       const containerWidth = containerRef.current.clientWidth;
-
       const actualContentWidth = contentRef.current.scrollWidth;
       const contentWidth = actualContentWidth;
-
       setNeedsExpansion(containerWidth < contentWidth);
     }
   }, [data]); // data가 변경될 때마다 함수를 새로 생성

@@ -1,4 +1,4 @@
-import { publicAPI } from '@/libs/axios/instance';
+import { publicAPI } from '@/libs';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 

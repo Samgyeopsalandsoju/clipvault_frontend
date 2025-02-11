@@ -1,4 +1,4 @@
-import { IClipResponse, ICreateClip, IModifyClip } from '@/types/clip';
+import { IClipResponse, ICreateClip, IModifyClip } from '@/types';
 import axios from 'axios';
 
 export const getClips = async () => {

@@ -1,4 +1,4 @@
-import { api } from '@/libs/axios/instance';
+import { api } from '@/libs';
 import { LoginFormValue, RegisterFormValue } from '@/types/auth';
 import { signIn } from 'next-auth/react';
 

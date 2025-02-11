@@ -1,15 +1,15 @@
-import { useAtom, useAtomValue, useSetAtom } from 'jotai';
-import { authModalAtom, authModeAtom } from '../../atoms/auth.atom';
+import { authModalAtom, authModeAtom } from '@/atoms';
+import { useAtom } from 'jotai';
 
+// 로그인 & 회원가입 모달 컨트롤
 export const useAuthModal = () => {
-  const [isOpen, setIsOpen] = useAtom(authModalAtom);
-  const setMode = useSetAtom(authModeAtom);
-  const mode = useAtomValue(authModeAtom);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useAtom(authModalAtom);
+  const [modalMode, setModalMode] = useAtom(authModeAtom);
 
   return {
-    isOpen,
-    setIsOpen,
-    setMode,
-    mode,
+    isAuthModalOpen,
+    setIsAuthModalOpen,
+    setModalMode,
+    modalMode,
   };
 };

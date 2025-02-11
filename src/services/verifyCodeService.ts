@@ -1,4 +1,4 @@
-import { api } from '@/libs/axios/instance';
+import { api } from '@/libs';
 
 export const sendVerifyEmail = async (data: string) => {
   const response = await api.post('/auth/register/sendEmail', { mail: data });

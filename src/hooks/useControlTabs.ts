@@ -1,30 +1,29 @@
+'use client';
+
+import { MENU } from '@/constants';
+import { ITabs } from '@/types';
 import { useSession } from 'next-auth/react';
 import { usePathname } from 'next/navigation';
-import { MENU } from '@/constants/common.constants';
 import { useEffect, useState } from 'react';
 
 export const useControlTabs = () => {
+  const PROTECTED_TABS: string[] = ['clips', 'forks', 'shared'];
   const params = usePathname();
   const { data: _, status } = useSession();
-  const protectedMenu = ['clips', 'forks', 'shared'];
-  const [protectedTabs, setProtectedTabs] = useState<
-    {
-      path: string;
-      name: string;
-    }[]
-  >([]);
+  const [protectedTabs, setProtectedTabs] = useState<ITabs[]>([]);
 
+  // 텝 필터링
   useEffect(() => {
     if (status === 'unauthenticated') {
-      const tabs = MENU.filter((v) => !protectedMenu.includes(v.name));
-
+      const tabs = MENU.filter((v) => !PROTECTED_TABS.includes(v.name));
       setProtectedTabs(tabs);
     } else if (status === 'authenticated') {
       setProtectedTabs(MENU);
     }
   }, [status]);
 
-  const isActive = (path: string) => {
+  // 현재 텝이 눌러져있느지 확인
+  const isActive = (path: string): boolean => {
     const currentPath = params.split('/')[1];
     const menuPath = path.split('/')[1];
     return currentPath === menuPath;

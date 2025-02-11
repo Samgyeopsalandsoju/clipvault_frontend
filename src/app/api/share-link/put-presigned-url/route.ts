@@ -1,4 +1,4 @@
-import { generatePutUrl } from '@/libs/s3/generatePutUrl';
+import { generatePutUrl } from '@/libs';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
@@ -19,11 +19,10 @@ export async function POST(request: NextRequest) {
 
   try {
     const signedUrl = await generatePutUrl({ fileName, fileType, ownerToken: '123' });
-
     return NextResponse.json({
       status: 200,
       message: 'Successfully create signed url',
-      result: signedUrl,
+      body: signedUrl,
     });
   } catch (error) {
     return NextResponse.json(

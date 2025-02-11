@@ -1,11 +1,11 @@
-// hooks/useClipPageTransition.ts
-import { ClipPageOpenAtom, clipPopupTypeAtom } from '@/atoms/clip.atom';
+'use client';
+
+import { ClipPageOpenAtom } from '@/atoms';
 import { useSetAtom } from 'jotai';
 import { useRouter } from 'next/navigation';
 
 export function useClipPageTransition() {
   const setIsOpen = useSetAtom(ClipPageOpenAtom);
-  const setClipPopupType = useSetAtom(clipPopupTypeAtom);
 
   const router = useRouter();
 
@@ -16,7 +16,6 @@ export function useClipPageTransition() {
 
     // 애니메이션이 완료된 후 라우팅
     setTimeout(() => {
-      setClipPopupType('detail');
       router.push('/clips');
     }, 300);
   };

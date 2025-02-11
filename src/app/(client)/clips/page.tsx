@@ -1,14 +1,8 @@
 'use client';
 
-import { useClipFilter } from '@/hooks/clip/useClipFilter';
-import { useClipQuery } from '@/hooks/clip/useClipQuery';
-import ClipList from '@/components/clip/ClipList';
-import { useEditClipForm } from '@/hooks/form/useEditClipForm';
-import ClipCard from '@/components/clip/ClipCard';
-import CategoriesTags from '@/components/CategoriesTags';
-import ShareListButton from '@/components/ShareListButton';
 import { useRef } from 'react';
-import ScrollUpButton from '@/components/ScrollUpButton';
+import { useClipFilter, useClipQuery, useEditClipForm } from '@/hooks';
+import { CategoriesTags, ClipCard, ClipList, ScrollUpButton, ShareListButton } from '@/components';
 
 const ClipsPage = () => {
   const {

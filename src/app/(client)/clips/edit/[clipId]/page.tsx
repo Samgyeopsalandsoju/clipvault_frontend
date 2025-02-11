@@ -11,13 +11,10 @@ import {
   Input,
   TextArea,
 } from '../../clips.styles';
-import VisibilityDropdown from '@/components/dropdowns/VisibilityDropdown';
-import { VisibilityType } from '@/types/clip';
-import { useClipFilter } from '@/hooks/clip/useClipFilter';
-import ModifyDropdown from '@/components/dropdowns/ModifyDropdown';
-import { useEditClipForm } from '@/hooks/form/useEditClipForm';
-import { useClipQuery } from '@/hooks/clip/useClipQuery';
 import { Stack } from '@mui/material';
+import { useClipFilter, useClipQuery, useEditClipForm } from '@/hooks';
+import { VisibilityType } from '@/types';
+import { ModifyDropdown, VisibilityDropdown } from '@/components';
 
 export default function Page() {
   const { clipId } = useParams();
@@ -28,7 +25,7 @@ export default function Page() {
 
   const {
     errors,
-    handleBack,
+    handleClose,
     handleCategorySelect,
     handleOutsideClick,
     handleSubmit,
@@ -44,13 +41,14 @@ export default function Page() {
   if (!data) return;
 
   initializeForm(data);
+
   const { visible, category, id } = data;
 
   return (
     <Container>
       <TitleSection>
         <DragHandleSection>
-          <BorderLessButton onClick={handleBack} disableRipple>
+          <BorderLessButton onClick={handleClose} disableRipple>
             back
           </BorderLessButton>
           <Stack direction={'column'}>

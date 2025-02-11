@@ -1,21 +1,14 @@
 'use client';
 
 import { useSetAtom } from 'jotai';
-import { ClipPageOpenAtom, clipPopupTypeAtom } from '../../atoms/clip.atom';
 import { useEffect, useRef } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { ICategoryResponse, IModifyClip, VisibilityType } from '@/types/clip';
 import { useRouter } from 'next/navigation';
-import { useClipQuery } from '../clip/useClipQuery';
+import { ICategoryResponse, IModifyClip, VisibilityType } from '@/types';
+import { ClipPageOpenAtom } from '@/atoms';
+import { useClipQuery } from '@/hooks';
 
 export const useEditClipForm = () => {
-  const setIsOpen = useSetAtom(ClipPageOpenAtom);
-  const setClipPopupType = useSetAtom(clipPopupTypeAtom);
-  const router = useRouter();
-  const {
-    clip: { modify, delete: removeClip },
-  } = useClipQuery();
-  const hiddenButtonRef = useRef<HTMLButtonElement>(null);
   const {
     register,
     trigger,
@@ -25,7 +18,14 @@ export const useEditClipForm = () => {
   } = useForm<IModifyClip>({
     mode: 'onChange',
   });
+  const setIsClipPageOpen = useSetAtom(ClipPageOpenAtom);
+  const hiddenButtonRef = useRef<HTMLButtonElement>(null);
+  const router = useRouter();
+  const {
+    clip: { modify, delete: removeClip },
+  } = useClipQuery();
 
+  //
   const initializeForm = (data: {
     title: string;
     link: string;
@@ -41,48 +41,51 @@ export const useEditClipForm = () => {
   };
 
   useEffect(() => {
-    setIsOpen(true);
-    return () => setIsOpen(false);
-  }, [setIsOpen]);
+    setIsClipPageOpen(true);
+    return () => setIsClipPageOpen(false);
+  }, [setIsClipPageOpen]);
 
   // 카테고리 선택
-  const handleCategorySelect = (category: ICategoryResponse) => {
+  const handleCategorySelect = (category: ICategoryResponse): void => {
     setValue('category', category);
   };
   // 공개 범위 선택
-  const handleVisibilitySelect = (visibility: VisibilityType) => {
+  const handleVisibilitySelect = (visibility: VisibilityType): void => {
     setValue('visible', visibility);
   };
 
   // 숨겨진 버튼 클릭 트리거
-  const handleOutsideClick = () => {
+  const handleOutsideClick = (): void => {
     if (hiddenButtonRef.current) {
       hiddenButtonRef.current.click();
     }
   };
 
-  const onSubmit: SubmitHandler<IModifyClip> = (data) => {
-    modify(data);
-  };
-
-  const onDelete = (id: string) => {
+  // 클립 삭제
+  const onDelete = (id: string): void => {
     removeClip(id);
   };
-  const handleClipClick = (id: string) => {
+  // 클립 edit 오픈
+  const handleClipClick = (id: string): void => {
     router.push(`/clips/edit/${id}`);
   };
 
-  const handleBack = () => {
-    setClipPopupType('detail');
+  // edit 페이지 닫기
+  const handleClose = (): void => {
+    setIsClipPageOpen(false);
   };
 
+  // 서밋
+  const onSubmit: SubmitHandler<IModifyClip> = (data): void => {
+    modify(data);
+  };
   return {
     errors,
     handleClipClick,
     register,
     trigger,
     handleSubmit,
-    handleBack,
+    handleClose,
     onSubmit,
     onDelete,
     handleVisibilitySelect,

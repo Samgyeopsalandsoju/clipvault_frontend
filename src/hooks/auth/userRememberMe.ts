@@ -1,9 +1,9 @@
 'use client';
 
 import { useEffect } from 'react';
-import { STORAGE_KEYS } from '../../constants/auth.constants';
 import { useAtom } from 'jotai';
-import { rememberMeAtom } from '../../atoms/auth.atom';
+import { rememberMeAtom } from '@/atoms';
+import { STORAGE_KEYS } from '@/constants';
 
 export const useRememberMe = () => {
   const [rememberMe, setRememberMe] = useAtom(rememberMeAtom);

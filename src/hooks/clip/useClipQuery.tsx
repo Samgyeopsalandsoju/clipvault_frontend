@@ -1,12 +1,12 @@
-import { deleteClip, getClip, getClips, modifyClip, postClip } from '@/services/clipsService';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useMemo } from 'react';
-import { useClipPageTransition } from './useClipPageTransition';
-import { useToast } from '../useToast';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useClipPageTransition } from '@/hooks';
+import { createToast } from '@/libs';
+import { deleteClip, getClip, getClips, modifyClip, postClip } from '@/services';
 
 export const useClipQuery = (rawId?: string | string[] | undefined) => {
   const { handleClose } = useClipPageTransition();
-  const { successToast } = useToast();
+  const toast = createToast();
   // id 값 정제
   const id = useMemo(() => {
     if (!rawId) return undefined;
@@ -14,20 +14,23 @@ export const useClipQuery = (rawId?: string | string[] | undefined) => {
   }, [rawId]);
 
   const queryClient = useQueryClient();
+  // get 클립 리스트
   const getClipsQuery = useQuery({
     queryKey: ['clips'],
     queryFn: getClips,
   });
 
+  // create clip
   const createClipMutation = useMutation({
     mutationFn: postClip,
     onSuccess: () => {
-      successToast('Clip saved successfully ✨');
+      toast.success('Clip saved successfully ✨');
       queryClient.invalidateQueries({ queryKey: ['clips'] });
       handleClose();
     },
   });
 
+  // get clip ( 단일 )
   const getClipQuery = useQuery({
     queryKey: ['clip', id],
     queryFn: () => {
@@ -37,19 +40,21 @@ export const useClipQuery = (rawId?: string | string[] | undefined) => {
     enabled: !!id,
   });
 
+  // 클립 수정
   const modifyClipMutation = useMutation({
     mutationFn: modifyClip,
     onSuccess: () => {
-      successToast('Clip updated successfully ✨');
+      toast.success('Clip updated successfully ✨');
       queryClient.invalidateQueries({ queryKey: ['clips', 'clip'] });
       handleClose();
     },
   });
 
+  // 클립 삭제
   const deleteClipMutation = useMutation({
     mutationFn: deleteClip,
     onSuccess: () => {
-      successToast('Clip deleted successfully 🗑️');
+      toast.success('Clip deleted successfully 🗑️');
       queryClient.invalidateQueries({ queryKey: ['clips'] });
       handleClose();
     },

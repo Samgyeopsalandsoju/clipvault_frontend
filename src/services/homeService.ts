@@ -1,4 +1,4 @@
-import { IClipResponse } from '@/types/clip';
+import { IClipResponse } from '@/types';
 import axios from 'axios';
 
 export const getHomeClips = async () => {

@@ -1,13 +1,9 @@
 'use client';
 
-import VisibilityDropdown from '@/components/dropdowns/VisibilityDropdown';
-import CategoryDropdown from '@/components/dropdowns/CategoryDropdown';
-import { useClipFilter } from '@/hooks/clip/useClipFilter';
 import styled from 'styled-components';
-import { useNewClipForm } from '@/hooks/form/useNewClipForm';
-import { useClipQuery } from '@/hooks/clip/useClipQuery';
 import { Container, Divider, Form, Input, TextArea, Title, TitleSection } from '../clips.styles';
-import classNames from 'classnames';
+import { useClipFilter, useClipQuery, useNewClipForm } from '@/hooks';
+import { CategoryDropdown, VisibilityDropdown } from '@/components';
 
 export default function Page() {
   const {

@@ -1,7 +1,8 @@
+'use client';
+
+import { RegisterFormValue } from '@/types';
 import { useForm } from 'react-hook-form';
-import { useRegisterValidation } from './useRegisterValidation';
-import { RegisterFormValue } from '@/types/auth';
-import { useAuth } from './useAuth';
+import { useAuth, useRegisterValidation } from '@/hooks';
 
 export const useRegisterForm = () => {
   const {

@@ -1,5 +1,5 @@
-import { createToast } from '@/libs/hot-toast';
-import { sendVerifyEmail, verifyEmailCheck } from '@/services/verifyCodeService';
+import { createToast } from '@/libs/toast/toast.config';
+import { sendVerifyEmail, verifyEmailCheck } from '@/services';
 import { useMutation } from '@tanstack/react-query';
 
 export const useVerifyCode = () => {
