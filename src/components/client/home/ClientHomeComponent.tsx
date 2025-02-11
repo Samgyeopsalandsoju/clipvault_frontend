@@ -4,14 +4,17 @@ import ClipList from '@/components/clip/ClipList';
 import HomeCard from '@/components/clip/HomeCard';
 import StatCount from '@/components/count/StatCount';
 import ScrollUpButton from '@/components/ScrollUpButton';
+import { useAuthModal } from '@/hooks/auth/useAuthModal';
 import { useHomeClipQuery } from '@/hooks/home/useHomeClipQuery';
-import { useRef } from 'react';
+import { useSearchParams } from 'next/navigation';
+import { useEffect, useRef } from 'react';
 
 const ClientHomeComponent = () => {
   const {
     home: { list },
   } = useHomeClipQuery();
   const containerRef = useRef(null);
+
   return (
     <div
       ref={containerRef}

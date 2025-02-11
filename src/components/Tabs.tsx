@@ -1,23 +1,16 @@
 'use client';
 
-import { MENU } from '@/constants/common.constants';
+import { useControlTabs } from '@/hooks/useControlTabs';
 import classNames from 'classnames';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 
 const ClipTabs = () => {
-  const params = usePathname();
-
-  const isActive = (path: string) => {
-    const currentPath = params.split('/')[1];
-    const menuPath = path.split('/')[1];
-    return currentPath === menuPath;
-  };
+  const { isActive, protectedTabs } = useControlTabs();
 
   return (
     <nav className="border-b dark:border-border-primary-dark">
       <div className="flex flex-row items-center px-4">
-        {MENU.map((item, index) => {
+        {protectedTabs.map((item, index) => {
           return (
             <button
               className={classNames('px-4 py-[0.75rem] font-medium border-b-2', {

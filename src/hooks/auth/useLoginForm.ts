@@ -3,10 +3,12 @@ import { authModeAtom } from '../../atoms/auth.atom';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useRememberMe } from './userRememberMe';
 import { LoginFormValue } from '@/types/auth';
+import { useAuth } from './useAuth';
 
 export const useLoginForm = () => {
   const { saveUsername, getSaveUsername } = useRememberMe();
   const setMode = useSetAtom(authModeAtom);
+  const { signIn } = useAuth();
   const {
     register,
     handleSubmit,
@@ -14,7 +16,7 @@ export const useLoginForm = () => {
     formState: { errors },
   } = useForm<LoginFormValue>({
     defaultValues: {
-      email: getSaveUsername(),
+      mail: getSaveUsername(),
     },
     mode: 'onChange',
   });
@@ -24,7 +26,8 @@ export const useLoginForm = () => {
   };
 
   const onSubmit: SubmitHandler<LoginFormValue> = (data) => {
-    saveUsername(data.email);
+    saveUsername(data.mail);
+    signIn(data);
   };
   return {
     register,

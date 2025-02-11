@@ -1,12 +1,11 @@
 import { createToast } from '@/libs/hot-toast';
-import { register } from '@/services/authService';
+import { login, register } from '@/services/authService';
 import { useMutation } from '@tanstack/react-query';
-import { useSetAtom } from 'jotai';
-import { authModeAtom } from '@/atoms/auth.atom';
+import { useAuthModal } from './useAuthModal';
 
 export const useAuth = () => {
   const toast = createToast();
-  const setMode = useSetAtom(authModeAtom);
+  const { setMode, setIsOpen } = useAuthModal();
   const registerMutation = useMutation({
     mutationFn: register,
     onSuccess: () => {
@@ -15,7 +14,15 @@ export const useAuth = () => {
     },
   });
 
+  const loginMutation = useMutation({
+    mutationFn: login,
+    onSuccess: () => {
+      setIsOpen(false);
+    },
+  });
+
   return {
     register: registerMutation.mutate,
+    signIn: loginMutation.mutate,
   };
 };

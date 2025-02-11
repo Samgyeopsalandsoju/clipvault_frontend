@@ -28,10 +28,10 @@ const LoginForm = () => {
                   'dark:bg-background-secondary-dark w-full h-[40px] px-3 autofill-fix'
                 )}
                 placeholder="Email"
-                {...register('email', {
+                {...register('mail', {
                   pattern: loginValidationRules.email.pattern,
                 })}
-                onBlur={() => trigger('email')}
+                onBlur={() => trigger('mail')}
               />
               <input
                 className={classNames(

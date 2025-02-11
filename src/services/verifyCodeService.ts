@@ -7,6 +7,5 @@ export const sendVerifyEmail = async (data: string) => {
 
 export const verifyEmailCheck = async (data: { mail: string; authCode: string; authKey: string }) => {
   const response = await api.post('/auth/register/verifyCode', data);
-  console.log('response', response.data);
   return response.data.body;
 };

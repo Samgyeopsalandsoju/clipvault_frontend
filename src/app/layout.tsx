@@ -1,4 +1,4 @@
-import { ThemeProvider } from '@/providers/ThemeProvider';
+import { AllProvider } from '@/providers/AllProvider';
 import type { Metadata } from 'next';
 import MUIRegistry from '@/providers/registries/mui-registry';
 import StyledComponentsRegistry from '@/providers/registries/styled-registry';
@@ -20,10 +20,10 @@ export default function RootLayout({
       <body suppressHydrationWarning={true} className="dark">
         <MUIRegistry>
           <StyledComponentsRegistry>
-            <ThemeProvider>
+            <AllProvider>
               <GlobalStyles />
               {children}
-            </ThemeProvider>
+            </AllProvider>
           </StyledComponentsRegistry>
         </MUIRegistry>
       </body>

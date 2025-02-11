@@ -8,6 +8,7 @@ import { authModalAtom, authModeAtom } from '@/atoms/auth.atom';
 import { FormType } from '@/types/auth';
 import ClipVaultInfo from './ClipVaultInfo';
 import classNames from 'classnames';
+import { signOut, useSession } from 'next-auth/react';
 
 const HeaderComponent = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -42,7 +43,7 @@ interface NavBarProps {
 const Navigation = ({ isOpen, onClose }: NavBarProps) => {
   const setMode = useSetAtom(authModeAtom);
   const setIsAuthModalOpen = useSetAtom(authModalAtom);
-  const isToken = false;
+  const { data: _, status } = useSession();
 
   const handleOpenModal = (type: FormType) => {
     onClose();
@@ -77,7 +78,7 @@ const Navigation = ({ isOpen, onClose }: NavBarProps) => {
           height: 'calc(100vh - 60px)',
         }}
       >
-        {!isToken && (
+        {status === 'unauthenticated' && (
           <div>
             <div
               className={classNames(
@@ -99,7 +100,7 @@ const Navigation = ({ isOpen, onClose }: NavBarProps) => {
             </div>
           </div>
         )}
-        {isToken && (
+        {status === 'authenticated' && (
           <div>
             <div
               className={classNames(
@@ -107,12 +108,17 @@ const Navigation = ({ isOpen, onClose }: NavBarProps) => {
                 'dark:text-text-primary-dark'
               )}
             >
-              <Link href={'/mypage'}>My page</Link>
+              <Link href={'/mypage'} onClick={onClose}>
+                My page
+              </Link>
             </div>
             <div
               className={classNames(
                 'py-[16px] px-[25px] border-b dark:border-border-divider-dark text-[24px] font-semibold cursor-pointer select-none text-[#f44336]'
               )}
+              onClick={() => {
+                signOut();
+              }}
             >
               Logout
             </div>

@@ -1,7 +1,7 @@
 import { ComponentType } from 'react';
 
 export interface LoginFormValue {
-  email: string;
+  mail: string;
   password: string;
 }
 
