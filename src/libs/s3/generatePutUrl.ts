@@ -15,6 +15,7 @@ export const generatePutUrl = async ({ fileName, fileType, ownerToken }: Generat
   console.log('fileName : ', fileName);
   console.log('fileType : ', fileType);
   console.log('ownerToken : ', ownerToken);
+  console.log('s3 : ', s3);
 
   if (!bucketName) throw new Error('Bucket name is not defined');
 
@@ -27,11 +28,14 @@ export const generatePutUrl = async ({ fileName, fileType, ownerToken }: Generat
     },
   };
 
-  const command = new PutObjectCommand(params);
-  const signedUrl = await getSignedUrl(s3, command, { expiresIn: 60 });
+  try {
+    const command = new PutObjectCommand(params);
+    const signedUrl = await getSignedUrl(s3, command, { expiresIn: 60 });
 
-  console.log('signedUrl : ', signedUrl);
-
-  console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
-  return signedUrl;
+    console.log('signedUrl : ', signedUrl);
+    console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
+    return signedUrl;
+  } catch (error) {
+    console.error(`ERROR: create PUT getSignedUrl : `, error);
+  }
 };
