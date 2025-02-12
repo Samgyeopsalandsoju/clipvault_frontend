@@ -6,6 +6,9 @@ export async function POST(request: NextRequest) {
   const body = await request.json();
   const { key } = body;
 
+  console.log('get-presigned-url required data #########');
+  console.log('key : ', key);
+
   if (!key) {
     return NextResponse.json(
       {
@@ -19,6 +22,9 @@ export async function POST(request: NextRequest) {
 
   try {
     const signedUrl = await generateGetUrl({ key });
+
+    console.log('signedUrl : ', signedUrl);
+    console.log('get-presigned-url required data #########');
 
     return NextResponse.json({
       status: 200,
