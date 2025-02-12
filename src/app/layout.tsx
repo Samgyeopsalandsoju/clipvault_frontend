@@ -15,12 +15,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  console.log('@@@@@@@@@@@@@@@@@ 환경변수 확인 @@@@@@@@@@@@@@@@@@@@@@@@@@');
-  console.log('NEXTAUTH_SECRET : ', process.env.NEXTAUTH_SECRET);
-  console.log('AWS_REGION : ', process.env.AWS_REGION);
-  console.log('NEXTAUTH_URL : ', process.env.NEXTAUTH_URL);
-  console.log('API_URL : ', process.env.API_URL);
-  console.log('@@@@@@@@@@@@@@@@@ 환경변수 확인 @@@@@@@@@@@@@@@@@@@@@@@@@@');
   return (
     <html>
       <body suppressHydrationWarning={true} className="dark">

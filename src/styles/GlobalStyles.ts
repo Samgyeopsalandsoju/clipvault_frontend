@@ -3,23 +3,6 @@
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyles = createGlobalStyle`
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-  @font-face {
-    font-family: 'Wanted Sans';
-    src: url('/fonts/WantedSansVariable.ttf') format('truetype-variable');
-    font-weight: 100 900;
-    font-style: normal;
-    font-display: swap;
-
-;
-  }
-
-  * {
-    font-family: 'Wanted Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Roboto, 'Helvetica Neue', Arial, sans-serif !important;
-  }
 
   *, *::before, *::after {
     box-sizing: border-box;
@@ -42,8 +25,6 @@ const GlobalStyles = createGlobalStyle`
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    font-family: 'Wanted Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Roboto, 'Helvetica Neue', Arial, sans-serif !important;
   }
 
   /* HTML5 display-role reset */
