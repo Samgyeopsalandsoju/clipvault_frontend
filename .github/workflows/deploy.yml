@@ -31,6 +31,17 @@ jobs:
       - name: Set pnpm config
         run: pnpm config set node-linker hoisted
 
+        # 빌드 전에 .env.production 생성
+      - name: Create .env.production file
+        run: |
+          cat << EOF > .env.production
+          AWS_REGION=ap-northeast-2
+          AWS_S3_BUCKET_NAME=s3-clipvault-share-link
+          NEXTAUTH_URL=https://clipvault.info
+          NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }}
+          API_URL=http://localhost:8081
+          EOF
+
       - name: Install Dependencies
         run: pnpm install --frozen-lockfile
 
