@@ -5,7 +5,7 @@ export const HeroSection = () => {
         <h1 className="text-2xl font-medium  text-center dark:text-text-primary-dark select-none leading-[1.5]">
           Discover & Share
         </h1>
-        <h1 className="text-2xl font-bold select-none  rounded-[5px] text-center px-[6px] py-[4px] dark:bg-text-primary-dark dark:text-background-primary leading-[1.5]">
+        <h1 className="text-2xl font-bold select-none  rounded-[5px] text-center px-[6px] py-0 dark:bg-text-primary-dark dark:text-background-primary leading-[1.5]">
           Valuable Links
         </h1>
       </div>
