@@ -51,6 +51,11 @@ jobs:
       - name: Get short Git SHA
         run: echo "GIT_SHA=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
 
+      - name: Move public folder into standalone
+        run: |
+          mkdir -p .next/standalone/public
+          cp -r public/* .next/standalone/public/
+
       - name: Create deployment package
         run: |
           mkdir deploy-package
