@@ -6,6 +6,10 @@ export async function POST(request: NextRequest) {
   const body = await request.json();
   const { fileName, fileType } = body;
 
+  console.log('put-presigned-url required data @@@@@@@');
+  console.log('fileName : ', fileName);
+  console.log('fileType : ', fileType);
+
   if (!fileName || !fileType) {
     return NextResponse.json(
       {
@@ -19,6 +23,10 @@ export async function POST(request: NextRequest) {
 
   try {
     const signedUrl = await generatePutUrl({ fileName, fileType, ownerToken: '123' });
+
+    console.log('signedUrl : ', signedUrl);
+    console.log('put-presigned-url required data @@@@@@@');
+
     return NextResponse.json({
       status: 200,
       message: 'Successfully create signed url',
