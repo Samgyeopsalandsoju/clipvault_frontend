@@ -4,7 +4,7 @@ module.exports = {
       name: 'clipvault',
       // standalone 서버 파일을 직접 실행하도록 변경합니다.
       script: 'node',
-      args: '.next/standalone/server.js',
+      args: 'standalone/server.js',
       instances: 1,
       exec_mode: 'fork',
       watch: false,

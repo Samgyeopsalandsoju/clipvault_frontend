@@ -59,7 +59,7 @@ jobs:
       - name: Create deployment package
         run: |
           mkdir deploy-package
-          cp -r .next package.json ecosystem.config.js public scripts appspec.yml deploy-package/ || echo "Failed to copy files"
+          cp -r .next/standalone ecosystem.config.js public scripts appspec.yml deploy-package/ || echo "Failed to copy files"
           cd deploy-package && zip -r ../frontend-build-${{ env.GIT_SHA }}.zip . || echo "Failed to create zip"
 
       - name: Configure AWS credentials

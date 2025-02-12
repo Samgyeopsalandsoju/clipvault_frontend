@@ -11,7 +11,6 @@ export const register = async (data: RegisterFormValue) => {
 };
 
 export const login = async (data: LoginFormValue) => {
-  console.log(data);
   const response = await signIn('credentials', {
     mail: data.mail,
     password: data.password,
