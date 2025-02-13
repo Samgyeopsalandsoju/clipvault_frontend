@@ -5,10 +5,11 @@ import { useEffect, useRef, useState } from 'react';
 import { MdArrowDropDown } from 'react-icons/md';
 import styled from 'styled-components';
 import { Container, DropdownItem, DropdownList, Input, InputWrapper } from './dropdown.styles';
+import { EyeClosed, Eye } from 'lucide-react';
 
 const visibilities = [
-  { name: 'Public', code: 'public', color: '' },
-  { name: 'Private', code: 'private', color: '' },
+  { name: 'Public', code: 'public', icon: <Eye /> },
+  { name: 'Private', code: 'private', icon: <EyeClosed /> },
 ];
 
 interface DropdownProps {
@@ -18,9 +19,9 @@ interface DropdownProps {
 
 export const VisibilityDropdown = ({ onSelect, visible }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const displayName = visibilities.find((item) => item.code === visible)?.name || '';
   const [value, setValue] = useState<string>(displayName);
-  const dropdownRef = useRef<HTMLDivElement>(null);
 
   // 외부 클릭 감지를 위한 useEffect
   useEffect(() => {
@@ -34,7 +35,6 @@ export const VisibilityDropdown = ({ onSelect, visible }: DropdownProps) => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
-
   return (
     <Container ref={dropdownRef}>
       <InputWrapper>
@@ -64,7 +64,7 @@ export const VisibilityDropdown = ({ onSelect, visible }: DropdownProps) => {
                   onSelect(item.code as VisibilityType);
                 }}
               >
-                {item.name}
+                {item.icon} {item.name}
               </DropdownItem>
             );
           })}
@@ -73,6 +73,21 @@ export const VisibilityDropdown = ({ onSelect, visible }: DropdownProps) => {
     </Container>
   );
 };
+
+const IconWrapper = styled.div`
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  color: #666;
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+`;
 
 const IconSection = styled.button`
   position: absolute;

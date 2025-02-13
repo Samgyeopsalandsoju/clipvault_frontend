@@ -45,6 +45,9 @@ export const DropdownList = styled(Stack)`
 `;
 
 export const DropdownItem = styled(Stack)<{ $bgColor?: string; $textColor?: string }>`
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
   padding: 0.5rem 1rem;
   font-size: 1rem;
   border: 2px solid #ddd;

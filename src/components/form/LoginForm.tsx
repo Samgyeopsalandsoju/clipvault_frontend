@@ -1,4 +1,4 @@
-import { SOCIAL_LOGIN_OPTIONS } from '@/constants/auth.constants';
+import { SOCIAL_LOGIN_OPTIONS } from '@/constants';
 import { useLoginForm } from '@/hooks/auth/useLoginForm';
 import classNames from 'classnames';
 import { RememberMe } from '@/components';

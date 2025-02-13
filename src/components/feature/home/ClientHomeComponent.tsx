@@ -1,8 +1,12 @@
 'use client';
 
 import { useHomeClipQuery } from '@/hooks';
-import { useRef } from 'react';
-import { ScrollUpButton, ClipList, StatCount, HomeCard } from '@/components';
+import { memo, useCallback, useRef } from 'react';
+import { ScrollUpButton, ClipList, HomeCard, StatCountSection } from '@/components';
+import { IClipResponse } from '@/types';
+
+const MemoizedClipList = memo(ClipList);
+const MemoizedHomeCard = memo(HomeCard);
 
 export const ClientHomeComponent = () => {
   const {
@@ -10,16 +14,17 @@ export const ClientHomeComponent = () => {
   } = useHomeClipQuery();
   const containerRef = useRef(null);
 
+  const renderItem = useCallback((clip: IClipResponse) => {
+    return <MemoizedHomeCard {...clip} />;
+  }, []);
+
   return (
     <div
       ref={containerRef}
       className="relative flex-1 pb-12 overflow-auto dark:bg-background-primary-dark scrollbar-none no-scroll"
     >
-      <div className="flex items-center justify-evenly">
-        <StatCount title={'Total Clips'} count={10} />
-        <StatCount title={'Total Shared'} count={12} />
-      </div>
-      <ClipList list={list} renderItem={(clip) => <HomeCard {...clip} />} />
+      <StatCountSection />
+      <MemoizedClipList list={list} renderItem={renderItem} />
       <ScrollUpButton scrollContainerRef={containerRef} />
     </div>
   );

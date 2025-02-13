@@ -6,6 +6,7 @@ import styled from 'styled-components';
 
 export const CreateClipButton = () => {
   const router = useRouter();
+
   const handleNewClick = () => {
     router.push('/clips/new');
   };
@@ -18,7 +19,7 @@ const CreateButton = styled(Button)`
   border-radius: 0 0 18px 18px;
   background: ${(props) => props.theme.background.primary};
   color: ${(props) => props.theme.text.primary};
-  position: fixed;
+  position: absolute;
   text-transform: capitalize;
   bottom: 0;
   height: 60px;

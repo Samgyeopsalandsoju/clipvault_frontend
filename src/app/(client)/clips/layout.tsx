@@ -9,9 +9,9 @@ import classNames from 'classnames';
 import { useClipPageTransition } from '@/hooks';
 import { ClipPageOpenAtom } from '@/atoms';
 import { CreateClipButton } from '@/components';
+import { isModalPath } from '@/utils';
 
 export default function ClipLayout({ children }: { children: React.ReactNode }) {
-  const pathname = usePathname();
   const [mounted, setMounted] = useState(false);
   const isOpen = useAtomValue(ClipPageOpenAtom);
   const { handleClose } = useClipPageTransition();
@@ -19,13 +19,13 @@ export default function ClipLayout({ children }: { children: React.ReactNode }) 
     setMounted(true);
   }, []);
   // MODAL_PATH에 설정된 path는 페이지가 아래에서 올라오게 한다
-  const MODAL_PATH = ['/clips/new', '/clips/edit'];
-  const shouldShowModal = MODAL_PATH.some((path) => pathname.startsWith(path));
+  const pathname = usePathname();
+  const shouldShowModal = isModalPath(pathname);
   return (
     <div className="flex flex-col flex-1 relative w-full h-full overflow-x-hidden">
       <div className="relative w-full flex flex-col flex-1 h-full">
         <ClipPage />
-        {!shouldShowModal && <CreateClipButton />}
+        {!shouldShowModal ? <CreateClipButton /> : ''}
       </div>
 
       {shouldShowModal && (
@@ -46,7 +46,7 @@ export default function ClipLayout({ children }: { children: React.ReactNode }) 
               className={classNames(
                 'max-w-[480px] m-auto absolute bottom-0 left-0 right-0 h-[60vh] pointer-events-auto',
                 'z-1000 rounded-tl-[16px] rounded-tr-[16px] isolate transform translate-z-0 lg:h-[65vh]',
-                'dark:bg-background-primary-dark dark:border-border-primary-dark'
+                'dark:bg-background-primary-dark dark:border-border-primary-dark z-9999'
               )}
             >
               {children}

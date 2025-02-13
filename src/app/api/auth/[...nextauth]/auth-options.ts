@@ -29,7 +29,7 @@ export const authOptions: NextAuthOptions = {
 
           return {
             id: credentials?.mail ?? 'default_id',
-            result: data.body,
+            result: { token: data.body },
           };
         } catch (error) {
           console.error('Login error:', error);
@@ -42,14 +42,15 @@ export const authOptions: NextAuthOptions = {
     async jwt({ token, user }) {
       if (user) {
         token.accessToken = user.result.token;
+        token.id = user.id;
       }
       return token;
     },
     async session({ session, token }) {
-      return {
-        ...session,
-        accessToken: token.accessToken,
-      };
+      session.accessToken = token.accessToken;
+      session.id = token.id as string;
+
+      return session;
     },
   },
   pages: {

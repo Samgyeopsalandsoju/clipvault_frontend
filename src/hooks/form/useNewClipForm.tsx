@@ -5,8 +5,8 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { useEffect } from 'react';
 import { ClipPageOpenAtom } from '@/atoms';
 import { useClipQuery } from '@/hooks';
-import { ICategoryResponse, ICreateClip, VisibilityType } from '@/types';
-import { createClipValidator, generateUniqueId } from '@/utils';
+import { ICategoryRequest, ICreateClip, VisibilityType } from '@/types';
+import { createClipValidator } from '@/utils';
 
 export const useNewClipForm = () => {
   const setIsClipPageOpen = useSetAtom(ClipPageOpenAtom);
@@ -29,17 +29,13 @@ export const useNewClipForm = () => {
     return () => setIsClipPageOpen(false);
   }, [setIsClipPageOpen]);
 
-  // 새 카테고리 생성
-  const handleCreateCreate = (category: ICategoryResponse): void => {
-    const categoryWithId = {
-      ...category,
-      id: generateUniqueId(),
-    };
-    setValue('category', categoryWithId);
+  //  새카테고리
+  const handleCreateCategory = (category: ICategoryRequest): void => {
+    setValue('category', category);
   };
 
   // 카테고리 선택
-  const handleCategorySelect = (category: ICategoryResponse): void => {
+  const handleCategorySelect = (category: ICategoryRequest): void => {
     setValue('category', category);
   };
 
@@ -50,6 +46,7 @@ export const useNewClipForm = () => {
 
   // 링크 생성
   const onSubmit: SubmitHandler<ICreateClip> = (data): void => {
+    console.log('클립 생성 : ', data);
     const result = validator.validateForm(data);
     if (!result) return;
     create(data);
@@ -61,7 +58,7 @@ export const useNewClipForm = () => {
     handleSubmit,
     handleCategorySelect,
     handleVisibilitySelect,
-    handleCreateCreate,
+    handleCreateCategory,
     onSubmit,
     errors,
   };

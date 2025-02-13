@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import { useEffect, useState } from 'react';
 import { Loader } from 'lucide-react';
 import { useVerifyCode } from '@/hooks';
+import { normalizeInput } from '@/utils';
 
 export const VerifyCodeCheck = ({
   email,
@@ -18,9 +19,9 @@ export const VerifyCodeCheck = ({
   const [status, setStatus] = useState<'default' | 'processing' | 'verified'>('default');
   const [authKey, setAuthKey] = useState<string>('');
 
-  const onClickSend = async () => {
+  const onClickSend = async (): Promise<void> => {
     if (!email || email.length === 0) {
-      return false;
+      return;
     }
     setStatus('processing');
     try {
@@ -35,14 +36,10 @@ export const VerifyCodeCheck = ({
     }
   };
 
-  const normalizeInput = (value: string) => {
-    return value.trim().toUpperCase();
-  };
-
-  const verifyCode = async () => {
+  const verifyCode = async (): Promise<void> => {
     const normalizedValue = normalizeInput(value);
     if (normalizedValue.length < CODE_LENGTH) {
-      return false;
+      return;
     }
 
     try {

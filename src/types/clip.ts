@@ -1,3 +1,5 @@
+import { ICategoryRequest, ICategoryResponse } from './category';
+
 export type TabType = 'clip' | 'fork';
 
 export type VisibilityType = 'private' | 'public';
@@ -15,7 +17,7 @@ export interface IBaseClip {
 }
 
 export interface ICreateClip extends IBaseClip {
-  category: ICategoryResponse;
+  category: ICategoryResponse | ICategoryRequest;
 }
 
 export interface IModifyClip extends IBaseClip {
@@ -30,13 +32,4 @@ export interface IClipResponse extends ICreateClip {
   id: string;
   createdBy: string;
   fork: string;
-}
-
-export interface ICategory {
-  name: string;
-  color: string;
-}
-
-export interface ICategoryResponse extends ICategory {
-  id: string;
 }

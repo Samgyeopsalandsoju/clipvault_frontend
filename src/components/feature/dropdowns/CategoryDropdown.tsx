@@ -3,14 +3,14 @@ import { Stack } from '@mui/material';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { IoClose } from 'react-icons/io5';
-import { ICategoryResponse } from '@/types/clip';
+import { ICategoryRequest } from '@/types';
 import { CloseButton, Container, DropdownItem, DropdownList, Input, InputWrapper } from './dropdown.styles';
-import { generateModernTagColors, generateUniqueId } from '@/utils';
+import { generateModernTagColors } from '@/utils';
 
 interface DropdownProps {
-  onSelect: (category: ICategoryResponse) => void;
-  onCreator: (category: ICategoryResponse) => void;
-  categories: ICategoryResponse[];
+  onSelect: (category: ICategoryRequest) => void;
+  onCreator: (category: ICategoryRequest) => void;
+  categories: ICategoryRequest[];
 }
 
 export const CategoryDropdown = ({ onSelect, onCreator, categories }: DropdownProps) => {
@@ -22,6 +22,9 @@ export const CategoryDropdown = ({ onSelect, onCreator, categories }: DropdownPr
   // 외부 클릭 감지를 위한 useEffect
   const handleClickOutside = useCallback((event: MouseEvent) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (searchTerm) {
+        handleCreateCategory();
+      }
       setIsOpen(false);
     }
   }, []);
@@ -42,8 +45,8 @@ export const CategoryDropdown = ({ onSelect, onCreator, categories }: DropdownPr
   // 신규 카테고리에 등록
   const handleCreateCategory = useCallback(() => {
     const { colorHue, background, text } = generateModernTagColors();
-    const category: ICategoryResponse = {
-      id: generateUniqueId(),
+    const category: ICategoryRequest = {
+      id: '',
       color: String(colorHue),
       name: searchTerm,
     };
@@ -56,8 +59,8 @@ export const CategoryDropdown = ({ onSelect, onCreator, categories }: DropdownPr
   const handleChangeColor = useCallback(() => {
     const { colorHue, background, text } = generateModernTagColors();
     setColor({ background: background, text: text });
-    const category: ICategoryResponse = {
-      id: generateUniqueId(),
+    const category: ICategoryRequest = {
+      id: '',
       color: String(colorHue),
       name: searchTerm,
     };
@@ -65,7 +68,7 @@ export const CategoryDropdown = ({ onSelect, onCreator, categories }: DropdownPr
   }, [searchTerm, onCreator]);
 
   // 기존 카테고리에 등록
-  const handleSelectCategory = useCallback((category: ICategoryResponse) => {
+  const handleSelectCategory = useCallback((category: ICategoryRequest) => {
     onSelect(category);
   }, []);
 

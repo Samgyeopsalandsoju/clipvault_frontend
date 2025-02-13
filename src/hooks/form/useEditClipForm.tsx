@@ -14,6 +14,7 @@ export const useEditClipForm = () => {
     trigger,
     handleSubmit,
     setValue,
+    reset,
     formState: { errors },
   } = useForm<IModifyClip>({
     mode: 'onChange',
@@ -80,11 +81,11 @@ export const useEditClipForm = () => {
     modify(data);
   };
   return {
-    errors,
     handleClipClick,
     register,
     trigger,
     handleSubmit,
+    reset,
     handleClose,
     onSubmit,
     onDelete,
@@ -92,6 +93,5 @@ export const useEditClipForm = () => {
     handleOutsideClick,
     handleCategorySelect,
     hiddenButtonRef,
-    initializeForm,
   };
 };

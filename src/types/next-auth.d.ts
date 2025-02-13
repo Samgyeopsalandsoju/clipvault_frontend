@@ -5,7 +5,7 @@ import { AccountType } from './category';
 declare module 'next-auth' {
   interface Session {
     accessToken?: string;
-    user: UserInfo;
+    id: string;
   }
 
   interface User {
@@ -18,5 +18,6 @@ declare module 'next-auth' {
 declare module 'next-auth/jwt' {
   interface JWT {
     accessToken?: string;
+    id?: string;
   }
 }

@@ -10,7 +10,7 @@ export default function Page() {
     handleCategorySelect,
     handleSubmit,
     handleVisibilitySelect,
-    handleCreateCreate,
+    handleCreateCategory,
     onSubmit,
     register,
     trigger,
@@ -29,7 +29,7 @@ export default function Page() {
       </TitleSection>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <VisibilityDropdown onSelect={handleVisibilitySelect} />
-        <CategoryDropdown onSelect={handleCategorySelect} onCreator={handleCreateCreate} categories={categories} />
+        <CategoryDropdown onSelect={handleCategorySelect} onCreator={handleCreateCategory} categories={categories} />
         <Input
           $error={!!errors.title}
           placeholder="Clip title"

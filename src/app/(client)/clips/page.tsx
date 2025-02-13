@@ -2,7 +2,7 @@
 
 import { useRef } from 'react';
 import { useClipFilter, useClipQuery, useEditClipForm } from '@/hooks';
-import { CategoriesTags, ClipCard, ClipList, ScrollUpButton, ShareListButton } from '@/components';
+import { CategoriesTags, ClipCard, ClipList, CreateClipButton, ScrollUpButton, ShareListButton } from '@/components';
 
 const ClipsPage = () => {
   const {
@@ -14,7 +14,7 @@ const ClipsPage = () => {
 
   return (
     <div className="flex flex-col flex-1 h-full">
-      {filteredClipList.length && <CategoriesTags categories={categories} onSelect={handleCategorySelect} />}
+      {!!filteredClipList.length && <CategoriesTags categories={categories} onSelect={handleCategorySelect} />}
       <div
         ref={containerRef}
         className="relative flex-1 pb-8 overflow-auto dark:bg-background-primary-dark scrollbar-none no-scroll"
@@ -29,6 +29,7 @@ const ClipsPage = () => {
                 </div>
               )}
             />
+
             <ScrollUpButton scrollContainerRef={containerRef} />
           </>
         ) : (
