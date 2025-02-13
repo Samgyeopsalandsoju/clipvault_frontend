@@ -1,8 +1,7 @@
 'use client';
 
-import { Button } from '@mui/material';
+import classNames from 'classnames';
 import { useRouter } from 'next/navigation';
-import styled from 'styled-components';
 
 export const CreateClipButton = () => {
   const router = useRouter();
@@ -11,23 +10,17 @@ export const CreateClipButton = () => {
     router.push('/clips/new');
   };
 
-  return <CreateButton onClick={handleNewClick}>Create Clip!</CreateButton>;
+  return (
+    <button
+      className={classNames(
+        'border-t border-0 border-solid rounded-br-[18px] rounded-bl-[18px] absolute capitalize max-w-[480px]',
+        'bottom-0 left-0 right-0 h-[60px] m-auto font-semibold text-[15px] z-[2]',
+        'dark:bg-background-primary-dark dark:border-border-focus-dark',
+        'dark:text-text-primary-dark'
+      )}
+      onClick={handleNewClick}
+    >
+      Create Clip!
+    </button>
+  );
 };
-
-const CreateButton = styled(Button)`
-  border-top: 1px solid ${(props) => props.theme.border.primary};
-  border-radius: 0 0 18px 18px;
-  background: ${(props) => props.theme.background.primary};
-  color: ${(props) => props.theme.text.primary};
-  position: absolute;
-  text-transform: capitalize;
-  bottom: 0;
-  height: 60px;
-  left: 0;
-  right: 0;
-  max-width: 478px;
-  margin: 0 auto;
-  font-weight: 600;
-  font-size: 15px;
-  z-index: 99;
-`;

@@ -3,13 +3,12 @@ import { APIResponse, IClipResponse, ICreateClip, IModifyClip } from '@/types';
 import axios from 'axios';
 
 export const getClips = async () => {
-  const response = await axios.get<IClipResponse[]>('http://localhost:3001/clips');
-  return response.data;
+  const response = await api.get<APIResponse<IClipResponse[]>>('/clip/list');
+  return response.data.body;
 };
 
 export const postClip = async (data: ICreateClip) => {
   const response = await api.post<APIResponse<string>>('/clip/post', data);
-  console.log('postClip method return check : ', response.data);
   return response.data;
 };
 

@@ -1,9 +1,8 @@
 'use client';
 
-import { Stack } from '@mui/material';
-import styled from 'styled-components';
 import { Clock } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import classNames from 'classnames';
 
 const EXPIRY_OPTIONS = [
   { label: '1d', value: 1 },
@@ -36,11 +35,17 @@ export const ExpiryDateSelector = ({ onSelect, defaultValue = '7' }: ExpiryDateS
   }, [selectedDays]);
 
   return (
-    <Container>
-      <ClockIcon>
-        <Clock size={16} />
-      </ClockIcon>
-      <Selector
+    <div
+      className={classNames(
+        'flex gap-2 rounded-[8px] p-2 dark:bg-background-secondary-dark',
+        'border-solid border-[1px] dark:border-border-focus-dark h-[40px]'
+      )}
+    >
+      <div className="flex items-center justify-center">
+        <Clock className="dark:text-text-placeholder-dark" size={16} />
+      </div>
+      <select
+        className="w-[15%] h-full dark:text-text-placeholder-dark dark:bg-background-secondary-dark"
         value={selectedDays}
         onChange={(e) => {
           const {
@@ -55,46 +60,9 @@ export const ExpiryDateSelector = ({ onSelect, defaultValue = '7' }: ExpiryDateS
             {option.label}
           </option>
         ))}
-      </Selector>
-      <Divider />
-      <DisplayExpiryDate>Due: {expiryDate}</DisplayExpiryDate>
-    </Container>
+      </select>
+      <div className="h-full border-l-[1px] border-solid dark:border-border-focus-dark" />
+      <div className="flex flex-1 select-none pl-[0.4rem] dark:text-text-primary-dark">Due: {expiryDate}</div>
+    </div>
   );
 };
-
-const Container = styled(Stack)`
-  border: 1px solid ${(props) => props.theme.border.focus};
-  gap: 8px;
-  border-radius: 8px;
-  background-color: ${(props) => props.theme.background.secondary};
-  height: 40px;
-  flex-direction: row;
-  padding: 0.5rem;
-`;
-
-const ClockIcon = styled(Stack)`
-  align-items: center;
-  justify-content: center;
-  svg {
-    color: ${(props) => props.theme.text.placeholder};
-  }
-`;
-
-const Selector = styled.select`
-  width: 15%;
-  height: 100%;
-  background-color: ${(props) => props.theme.background.secondary};
-  color: ${(props) => props.theme.text.placeholder};
-`;
-
-const Divider = styled.div`
-  border-left: 1px solid ${(props) => props.theme.border.focus};
-  height: 100%;
-`;
-
-const DisplayExpiryDate = styled(Stack)`
-  color: ${(props) => props.theme.text.primary};
-  flex: 1;
-  user-select: none;
-  padding-left: 0.4rem;
-`;

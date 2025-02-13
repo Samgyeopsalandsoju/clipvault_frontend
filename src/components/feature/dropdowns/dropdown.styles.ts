@@ -37,7 +37,7 @@ export const DropdownList = styled(Stack)`
   background: white;
   max-height: 200px;
   overflow: auto;
-  z-index: 1000;
+  z-index: 1;
   border-radius: 6px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-top: 2px;

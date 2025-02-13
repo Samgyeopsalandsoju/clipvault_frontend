@@ -1,8 +1,11 @@
 'use client';
 
-import { useRef } from 'react';
+import { memo, useCallback, useRef } from 'react';
 import { useClipFilter, useClipQuery, useEditClipForm } from '@/hooks';
-import { CategoriesTags, ClipCard, ClipList, CreateClipButton, ScrollUpButton, ShareListButton } from '@/components';
+import { CategoriesTags, ClipCard, ClipList, ScrollUpButton, ShareListButton } from '@/components';
+import { IClipResponse } from '@/types';
+
+const MemoizationClipCard = memo(ClipCard);
 
 const ClipsPage = () => {
   const {
@@ -11,6 +14,14 @@ const ClipsPage = () => {
   const { filteredClipList, categories, handleCategorySelect } = useClipFilter(data);
   const { handleClipClick } = useEditClipForm();
   const containerRef = useRef<HTMLDivElement>(null);
+
+  const renderItem = useCallback((clip: IClipResponse) => {
+    return (
+      <div onClick={() => handleClipClick(clip.id)}>
+        <MemoizationClipCard {...clip} />
+      </div>
+    );
+  }, []);
 
   return (
     <div className="flex flex-col flex-1 h-full">
@@ -21,14 +32,7 @@ const ClipsPage = () => {
       >
         {filteredClipList.length > 0 ? (
           <>
-            <ClipList
-              list={filteredClipList}
-              renderItem={(clip) => (
-                <div onClick={() => handleClipClick(clip.id)}>
-                  <ClipCard {...clip} />
-                </div>
-              )}
-            />
+            <ClipList list={filteredClipList} renderItem={renderItem} />
 
             <ScrollUpButton scrollContainerRef={containerRef} />
           </>

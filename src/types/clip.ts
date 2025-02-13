@@ -1,9 +1,7 @@
 import { ICategoryRequest, ICategoryResponse } from './category';
 
 export type TabType = 'clip' | 'fork';
-
 export type VisibilityType = 'private' | 'public';
-export type ClipPopupType = 'detail' | 'edit';
 
 export interface ICurrentTabProps {
   currentTab: TabType;
@@ -17,19 +15,17 @@ export interface IBaseClip {
 }
 
 export interface ICreateClip extends IBaseClip {
-  category: ICategoryResponse | ICategoryRequest;
+  category: ICategoryRequest;
 }
 
 export interface IModifyClip extends IBaseClip {
   id: string;
-  createdBy: string;
-  modifiedBy: string;
-  category: ICategoryResponse;
+  category: ICategoryRequest;
   fork: string;
 }
 
-export interface IClipResponse extends ICreateClip {
+export interface IClipResponse extends IBaseClip {
   id: string;
-  createdBy: string;
-  fork: string;
+  forkedCount: string;
+  category: ICategoryResponse;
 }

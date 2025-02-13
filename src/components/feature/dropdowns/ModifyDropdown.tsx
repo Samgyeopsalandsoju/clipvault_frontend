@@ -1,14 +1,14 @@
 'use client';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { IoClose } from 'react-icons/io5';
-import { ICategoryResponse } from '@/types/clip';
 import { CloseButton, Container, DropdownItem, DropdownList, Input, InputWrapper } from './dropdown.styles';
 import { generateModernTagColors } from '@/utils';
+import { ICategoryRequest } from '@/types';
 
 interface DropdownProps {
-  onSelect: (category: ICategoryResponse) => void;
-  categories: ICategoryResponse[];
-  category?: ICategoryResponse | undefined;
+  onSelect: (category: ICategoryRequest) => void;
+  categories: ICategoryRequest[];
+  category?: ICategoryRequest | undefined;
 }
 
 export const ModifyDropdown = ({ onSelect, categories, category }: DropdownProps) => {
@@ -44,9 +44,9 @@ export const ModifyDropdown = ({ onSelect, categories, category }: DropdownProps
   };
 
   // 기존 카테고리에 등록
-  const handleSelectCategory = useCallback((category: ICategoryResponse) => {
+  const handleSelectCategory = (category: ICategoryRequest) => {
     onSelect(category);
-  }, []);
+  };
 
   return (
     <Container ref={dropdownRef}>

@@ -43,14 +43,27 @@ export const authOptions: NextAuthOptions = {
       if (user) {
         token.accessToken = user.result.token;
         token.id = user.id;
+        token.loginTime = Date.now();
       }
+
       return token;
     },
     async session({ session, token }) {
-      session.accessToken = token.accessToken;
-      session.id = token.id as string;
+      if (token.expired) {
+        return {
+          ...session,
+          expires: new Date(0).toISOString(),
+          error: 'TokenExpired',
+        };
+      }
 
-      return session;
+      return {
+        ...session,
+        accessToken: token.accessToken,
+        loginTime: token.loginTime,
+        id: token.id,
+        error: 'alive',
+      };
     },
   },
   pages: {
@@ -58,7 +71,12 @@ export const authOptions: NextAuthOptions = {
   },
   session: {
     strategy: 'jwt',
-    maxAge: 30 * 24 * 60 * 60, // 30 days
+    maxAge: 60 * 30,
+    updateAge: 24 * 60 * 60,
   },
+  jwt: {
+    maxAge: 60 * 30,
+  },
+
   debug: process.env.NODE_ENV === 'development',
 };

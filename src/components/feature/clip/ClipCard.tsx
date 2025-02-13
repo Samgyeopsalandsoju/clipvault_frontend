@@ -1,4 +1,5 @@
 'use client';
+
 import styled from 'styled-components';
 import { IconButton, Stack } from '@mui/material';
 import { ExternalLink, Copy, GitFork } from 'lucide-react';
@@ -7,7 +8,7 @@ import { CardTag } from '@/components/ui';
 import { IClipResponse } from '@/types/clip';
 import { Card, ClipInfo, ClipTitle, ClipUrl, Content, TitleRow } from './clip.style';
 
-export const ClipCard = ({ title, category, link, visible, fork }: IClipResponse) => {
+export const ClipCard = ({ title, category, link, visible, forkedCount }: IClipResponse) => {
   const { background, text, border } = generateModernTagColors(Number(category.color));
 
   return (
@@ -31,7 +32,7 @@ export const ClipCard = ({ title, category, link, visible, fork }: IClipResponse
           </LinkButton>
           {visible === 'public' && (
             <ForkSection>
-              <GitFork size={16} /> {fork || 0}
+              <GitFork size={16} /> {forkedCount}
             </ForkSection>
           )}
         </Section>

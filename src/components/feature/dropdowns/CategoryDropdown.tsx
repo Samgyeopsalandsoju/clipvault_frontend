@@ -28,6 +28,7 @@ export const CategoryDropdown = ({ onSelect, onCreator, categories }: DropdownPr
       setIsOpen(false);
     }
   }, []);
+
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
@@ -53,7 +54,7 @@ export const CategoryDropdown = ({ onSelect, onCreator, categories }: DropdownPr
     setIsOpen(false);
     setColor({ background: background, text: text });
     onCreator(category);
-  }, [searchTerm, onCreator]);
+  }, [searchTerm]);
 
   // 신규 카테고리 색 변경
   const handleChangeColor = useCallback(() => {
@@ -65,7 +66,7 @@ export const CategoryDropdown = ({ onSelect, onCreator, categories }: DropdownPr
       name: searchTerm,
     };
     onCreator(category);
-  }, [searchTerm, onCreator]);
+  }, [searchTerm]);
 
   // 기존 카테고리에 등록
   const handleSelectCategory = useCallback((category: ICategoryRequest) => {

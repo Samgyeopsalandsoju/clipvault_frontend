@@ -38,7 +38,7 @@ export const RegisterForm = () => {
               {...register('mail', validator.mail)}
               onBlur={() => trigger('mail')}
             />
-            <span className="text-xs text-[#f44336] px-3 pb-1 min-h-[20px] block" />
+            <span className="text-xs text-[#f44336] px-3 pb-1 min-h-[20px] block">{errors.mail?.message || ' '}</span>
           </div>
           <div>
             <VerifyCodeCheck email={mail} onVerified={handleVerification} />

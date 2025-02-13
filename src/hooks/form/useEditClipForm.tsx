@@ -26,21 +26,6 @@ export const useEditClipForm = () => {
     clip: { modify, delete: removeClip },
   } = useClipQuery();
 
-  //
-  const initializeForm = (data: {
-    title: string;
-    link: string;
-    id: string;
-    visible: string;
-    category: ICategoryResponse;
-  }) => {
-    setValue('title', data.title);
-    setValue('link', data.link);
-    setValue('id', data.id);
-    setValue('category', data.category);
-    setValue('visible', data.visible);
-  };
-
   useEffect(() => {
     setIsClipPageOpen(true);
     return () => setIsClipPageOpen(false);

@@ -45,10 +45,7 @@ export const useNewClipForm = () => {
   };
 
   // 링크 생성
-  const onSubmit: SubmitHandler<ICreateClip> = (data): void => {
-    console.log('클립 생성 : ', data);
-    const result = validator.validateForm(data);
-    if (!result) return;
+  const onSubmit = (data: ICreateClip): void => {
     create(data);
   };
 

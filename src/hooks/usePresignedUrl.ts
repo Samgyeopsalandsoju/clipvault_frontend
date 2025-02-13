@@ -5,17 +5,13 @@ export const usePresignedUrl = () => {
   // preSignedURL put 링크 생성
   const generatePutUrlMutation = useMutation({
     mutationFn: generatePutPresignedUrl,
-    onSuccess: (data) => {
-      console.log('generate Put Url data : ', data);
-    },
+    onSuccess: (data) => {},
   });
 
   // preSignedURL get 링크 생성
   const generateGetUrlMutation = useMutation({
     mutationFn: generateGetPresignedUrl,
-    onSuccess: (data) => {
-      console.log('generate Get Url data : ', data);
-    },
+    onSuccess: (data) => {},
   });
 
   //  preSignedURL delete 링크 생성

@@ -54,7 +54,7 @@ const Navigation = ({ isOpen, onClose }: NavBarProps) => {
     <>
       <div
         className={classNames(
-          'absolute top-[57px] left-0 right-0 bottom-0 bg-[rgba(49,49,49,0.607)] z-[998] h-full',
+          'absolute top-[57px] left-0 right-0 bottom-0 bg-[rgba(49,49,49,0.607)] z-[1] h-full',
           'transition-opacity duration-300 ease-in-out',
           {
             'opacity-100 visible': isOpen,
@@ -66,7 +66,7 @@ const Navigation = ({ isOpen, onClose }: NavBarProps) => {
       <nav
         className={classNames(
           'flex justify-between flex-col p-[25px] absolute top-[57px] w-[80%]',
-          'transition-all duration-300 ease-in-out shadow-[0_0_5px_rgba(0,_0,_0,_0.1)] z-[999]',
+          'transition-all duration-300 ease-in-out shadow-[0_0_5px_rgba(0,_0,_0,_0.1)] z-[10]',
           'dark:bg-background-primary-dark',
           {
             'right-0': isOpen,
@@ -84,18 +84,18 @@ const Navigation = ({ isOpen, onClose }: NavBarProps) => {
                 'py-[16px] px-[25px] border-b dark:border-border-divider-dark text-[24px] font-semibold cursor-pointer select-none',
                 'dark:text-text-primary-dark'
               )}
-              onClick={() => handleOpenModal('register')}
+              onClick={() => handleOpenModal('login')}
             >
-              Sign up
+              Login
             </div>
             <div
               className={classNames(
                 'py-[16px] px-[25px] border-b dark:border-border-divider-dark text-[24px] font-semibold cursor-pointer select-none',
                 'dark:text-text-primary-dark'
               )}
-              onClick={() => handleOpenModal('login')}
+              onClick={() => handleOpenModal('register')}
             >
-              Login
+              Sign up
             </div>
           </div>
         )}

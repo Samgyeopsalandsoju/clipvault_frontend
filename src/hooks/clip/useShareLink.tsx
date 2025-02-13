@@ -28,9 +28,7 @@ export const useShareLink = (url?: string) => {
 
   const uploadFileMutation = useMutation({
     mutationFn: uploadFile,
-    onSuccess: (data) => {
-      console.log('uploadFile data  : ', data);
-    },
+    onSuccess: (data) => {},
   });
 
   const getFileQuery = useQuery({

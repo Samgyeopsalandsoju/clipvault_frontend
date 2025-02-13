@@ -4,6 +4,7 @@ import MUIRegistry from '@/providers/registries/mui-registry';
 import StyledComponentsRegistry from '@/providers/registries/styled-registry';
 import GlobalStyles from '@/styles/GlobalStyles';
 import '@/styles/TailwindStyle.css';
+import { SessionManager } from '@/components/SessionManager';
 
 export const metadata: Metadata = {
   title: 'clipVault',
@@ -23,6 +24,7 @@ export default function RootLayout({
             <AllProvider>
               <GlobalStyles />
               {children}
+              <SessionManager />
             </AllProvider>
           </StyledComponentsRegistry>
         </MUIRegistry>

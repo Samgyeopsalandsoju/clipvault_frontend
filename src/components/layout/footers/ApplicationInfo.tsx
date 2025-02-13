@@ -1,12 +1,13 @@
 import { LAST_UPDATE, VERSION } from '@/constants';
 import { FaGithub, FaEnvelope, FaBook } from 'react-icons/fa';
-import { SiTypescript, SiNextdotjs, SiReactquery, SiStyledcomponents } from 'react-icons/si';
+import { SiTypescript, SiNextdotjs, SiReactquery, SiStyledcomponents, SiTailwindcss } from 'react-icons/si';
 
 export const ApplicationInfo = () => {
   const techStack = [
     { icon: <SiNextdotjs />, name: 'Next.js 14' },
     { icon: <SiTypescript />, name: 'TypeScript' },
     { icon: <SiReactquery />, name: 'React Query' },
+    { icon: <SiTailwindcss />, name: 'Tailwind CSS' },
     { icon: <SiStyledcomponents />, name: 'Styled Components' },
   ];
 
@@ -43,7 +44,7 @@ export const ApplicationInfo = () => {
           </a>
           <a
             className="flex items-center gap-2 text-[12px] no-underline transition-color duration-200 dark:text-text-tertiary-dark"
-            href="https://github.com/yourusername/project/docs"
+            href="https://hyunbin-kim.notion.site/clipVault-1801acfb02348009bdece4eacaf9e90b"
             target="_blank"
           >
             <svg className="w-[16px] h-[16px]">
