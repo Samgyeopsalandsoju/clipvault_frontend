@@ -18,14 +18,16 @@ export const useClipQuery = (rawId?: string | string[] | undefined) => {
   const getClipsQuery = useQuery({
     queryKey: ['clips'],
     queryFn: getClips,
+    staleTime: 0, // 데이터를 항상 stale로 설정
+    refetchOnMount: true, // 마운트시 항상 리페치
   });
 
   // create clip
   const createClipMutation = useMutation({
     mutationFn: postClip,
     onSuccess: () => {
-      toast.success('Clip saved successfully ✨');
       queryClient.invalidateQueries({ queryKey: ['clips'] });
+      toast.success('Clip saved successfully ✨');
       handleClose();
     },
   });

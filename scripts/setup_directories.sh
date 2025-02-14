@@ -1,8 +1,5 @@
 #!/bin/bash
 
-
-#
-sudo systemctl stop nginx
 # 기본 디렉토리 구조 생성
 mkdir -p /home/ec2-user/frontend/releases/new-release
 mkdir -p /home/ec2-user/frontend/releases/initial

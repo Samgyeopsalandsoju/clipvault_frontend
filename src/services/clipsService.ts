@@ -3,6 +3,7 @@ import { APIResponse, IClipResponse, ICreateClip, IModifyClip } from '@/types';
 import axios from 'axios';
 
 export const getClips = async () => {
+  console.log('getClips 호출됨');
   const response = await api.get<APIResponse<IClipResponse[]>>('/clip/list');
   return response.data.body;
 };

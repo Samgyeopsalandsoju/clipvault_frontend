@@ -15,6 +15,4 @@ fi
 # PM2 프로세스 리스트 저장 (재부팅 후 자동 실행 가능)
 pm2 save
 
-sudo systemctl start nginx
-
 echo "Next.js server restarted successfully!"
