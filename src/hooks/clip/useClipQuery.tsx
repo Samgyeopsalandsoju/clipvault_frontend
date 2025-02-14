@@ -3,10 +3,15 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useClipPageTransition } from '@/hooks';
 import { createToast } from '@/libs';
 import { deleteClip, getClip, getClips, modifyClip, postClip } from '@/services';
+import { usePathname } from 'next/navigation';
+import { isModalPath } from '@/utils';
 
 export const useClipQuery = (rawId?: string | string[] | undefined) => {
   const { handleClose } = useClipPageTransition();
   const toast = createToast();
+  const pathname = usePathname();
+  const isModalOpen = isModalPath(pathname);
+
   // id 값 정제
   const id = useMemo(() => {
     if (!rawId) return undefined;
@@ -18,8 +23,7 @@ export const useClipQuery = (rawId?: string | string[] | undefined) => {
   const getClipsQuery = useQuery({
     queryKey: ['clips'],
     queryFn: getClips,
-    staleTime: 0, // 데이터를 항상 stale로 설정
-    refetchOnMount: true, // 마운트시 항상 리페치
+    enabled: !isModalOpen,
     select: (data) => {
       console.log('useQuery data changed:', data);
       return data;
