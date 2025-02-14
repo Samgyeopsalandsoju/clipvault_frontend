@@ -20,6 +20,10 @@ export const useClipQuery = (rawId?: string | string[] | undefined) => {
     queryFn: getClips,
     staleTime: 0, // 데이터를 항상 stale로 설정
     refetchOnMount: true, // 마운트시 항상 리페치
+    select: (data) => {
+      console.log('useQuery data changed:', data);
+      return data;
+    },
   });
 
   // create clip

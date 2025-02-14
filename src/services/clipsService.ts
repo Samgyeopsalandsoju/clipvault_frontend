@@ -5,6 +5,7 @@ import axios from 'axios';
 export const getClips = async () => {
   console.log('getClips 호출됨');
   const response = await api.get<APIResponse<IClipResponse[]>>('/clip/list');
+  console.log('getClips 호출로의 결과값 확인 : ', response.data.body);
   return response.data.body;
 };
 
