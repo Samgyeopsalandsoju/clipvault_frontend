@@ -2,6 +2,7 @@ export * from './auth';
 export * from './clip';
 export * from './form';
 export * from './home';
+export * from './category';
 
 export * from './useControlTabs';
 export * from './useDebounce';

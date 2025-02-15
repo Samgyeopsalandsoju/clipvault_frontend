@@ -24,10 +24,6 @@ export const useClipQuery = (rawId?: string | string[] | undefined) => {
     queryKey: ['clips'],
     queryFn: getClips,
     enabled: !isModalOpen,
-    select: (data) => {
-      console.log('useQuery data changed:', data);
-      return data;
-    },
   });
 
   // create clip
@@ -71,8 +67,9 @@ export const useClipQuery = (rawId?: string | string[] | undefined) => {
   });
 
   return {
-    clipList: {
-      data: getClipsQuery.data ?? [],
+    clips: {
+      clipList: getClipsQuery.data ?? [],
+      isClipsLoading: getClipsQuery.isPending,
     },
     clip: {
       data: getClipQuery.data,

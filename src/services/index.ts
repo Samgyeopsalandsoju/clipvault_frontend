@@ -4,3 +4,4 @@ export * from './homeService';
 export * from './presignedUrl';
 export * from './shareService';
 export * from './verifyCodeService';
+export * from './categoryService';

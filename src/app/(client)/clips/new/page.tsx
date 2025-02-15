@@ -17,9 +17,9 @@ export default function Page() {
     errors,
   } = useNewClipForm();
   const {
-    clipList: { data },
+    clips: { clipList },
   } = useClipQuery();
-  const { categories } = useClipFilter(data);
+  const { categories } = useClipFilter(clipList);
 
   return (
     <Container>
