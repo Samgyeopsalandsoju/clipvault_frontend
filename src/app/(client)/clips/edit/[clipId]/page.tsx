@@ -11,7 +11,7 @@ export default function Page() {
   const { clipId } = useParams();
   const {
     clip: { data },
-    clipList: { data: list },
+    clips: { clipList },
   } = useClipQuery(clipId);
 
   const {
@@ -27,7 +27,7 @@ export default function Page() {
     reset,
     hiddenButtonRef,
   } = useEditClipForm();
-  const { categories } = useClipFilter(list);
+  const { categories } = useClipFilter(clipList);
 
   useEffect(() => {
     if (data) {
