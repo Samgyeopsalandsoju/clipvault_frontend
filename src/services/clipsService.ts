@@ -1,6 +1,5 @@
 import { api } from '@/libs';
 import { APIResponse, IClipResponse, ICreateClip, IModifyClip } from '@/types';
-import axios from 'axios';
 
 export const getClips = async () => {
   const response = await api.get<APIResponse<IClipResponse[]>>('/clip/list');
@@ -23,6 +22,6 @@ export const modifyClip = async (data: IModifyClip) => {
 };
 
 export const deleteClip = async (id: string) => {
-  const response = await axios.delete(`http://localhost:3001/clips/${id}`);
+  const response = await api.delete(`/clip/delete/${id}`);
   return response.data;
 };

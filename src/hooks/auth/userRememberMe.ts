@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 import { STORAGE_KEYS } from '@/constants';
-import { useRememberMeStore } from '@/stores/useRememberMeStore';
+import { useRememberMeStore } from '@/stores';
 
 export const useRememberMe = () => {
   const { rememberMe, setRememberMe } = useRememberMeStore();

@@ -1,7 +1,6 @@
 'use client';
 
 import { usePresignedUrl, useShareFile, useShareLink } from '@/hooks';
-import { createToast } from '@/libs';
 import { IClipResponse, IShareLinkRequest } from '@/types';
 import { CircularProgress, Dialog } from '@mui/material';
 import classNames from 'classnames';
@@ -20,19 +19,18 @@ interface ShareLinkModalProps {
 }
 
 export const ShareLinkModal = ({ isOpen, setIsOpen, list }: ShareLinkModalProps) => {
-  const { register, handleSubmit, setValue } = useForm<IShareLinkRequest>();
+  const { register, handleSubmit, setValue, getValues } = useForm<IShareLinkRequest>();
   const { prepareFileData, upload } = useShareFile();
   const { postShareLink } = useShareLink();
   const { generatePutUrl } = usePresignedUrl();
   const [shareLink, setShareLink] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const toast = createToast();
   const router = useRouter();
 
   const prepareAndUpload = async () => {
     if (isLoading) return;
 
-    const { blob, fileName, id } = prepareFileData({ list });
+    const { blob, fileName, id } = prepareFileData({ list, title: getValues('title'), due: getValues('due') });
     const url = await generatePutUrl({ fileName, fileType: blob.type });
     const shareUrl = await upload({ id, file: blob, fileType: blob.type, url });
     setShareLink(shareUrl);
@@ -63,7 +61,6 @@ export const ShareLinkModal = ({ isOpen, setIsOpen, list }: ShareLinkModalProps)
 
   const onSubmit = async (data: IShareLinkRequest) => {
     const url = await handleShareLink();
-    console.log(url);
     if (!url) {
       console.error('쉐어링크 생성 실패');
       return;

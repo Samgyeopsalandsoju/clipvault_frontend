@@ -8,7 +8,7 @@ import classNames from 'classnames';
 import { useClipPageTransition } from '@/hooks';
 import { CreateClipButton } from '@/components';
 import { isModalPath } from '@/utils';
-import { useClipPageStore } from '@/stores/useClipPageStore';
+import { useClipPageStore } from '@/stores';
 
 const MemoizationCreateClipButton = memo(CreateClipButton);
 

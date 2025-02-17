@@ -4,7 +4,7 @@ import { memo, useCallback, useRef } from 'react';
 import { useCategoryQuery, useClipQuery, useEditClipForm } from '@/hooks';
 import { CategoriesTags, ClipCard, ClipList, ScrollUpButton, ShareListButton } from '@/components';
 import { IClipResponse } from '@/types';
-import { useClipStore } from '@/stores/useClipStore';
+import { useClipStore } from '@/stores';
 import { SkeletonUI } from '@/components/skeleton/SkeletonUI';
 
 const MemoizationClipCard = memo(ClipCard);

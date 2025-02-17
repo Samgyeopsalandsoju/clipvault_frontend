@@ -1,21 +1,25 @@
 'use client';
 
 import { CountDownTimer } from '@/components';
-import { SkeletonUI } from '@/components/skeleton/SkeletonUI';
+import { ConfirmModal, SkeletonUI } from '@/components';
 import { useShareLink } from '@/hooks';
 import { IShareLinkResponse } from '@/types';
 import { handleCopy, openInNewTab } from '@/utils';
 import classNames from 'classnames';
 import { Trash2, Copy, ExternalLink } from 'lucide-react';
+import { useState } from 'react';
 
 const shareLink = () => {
   const {
     shareLinks: { data, isLoading },
     deleteShareLink,
   } = useShareLink();
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [selectedItem, setSelectedItem] = useState<IShareLinkResponse | null>(null);
 
   const handleDeleteShareLink = async ({ id, link }: IShareLinkResponse) => {
-    deleteShareLink({ id, link });
+    await deleteShareLink({ id, link });
+    setIsOpen(false);
   };
 
   if (isLoading)
@@ -40,7 +44,10 @@ const shareLink = () => {
                   <div className="flex gap-[10px]">
                     <button
                       className="border-solid border-[1px] border-[#f44336] rounded-[8px] p-[10px] text-[#f44336] dark:bg-background-secondary-dark active:scale-[0.97]"
-                      onClick={() => handleDeleteShareLink(item)}
+                      onClick={() => {
+                        setIsOpen(true);
+                        setSelectedItem(item);
+                      }}
                     >
                       <Trash2 size={16} />
                     </button>
@@ -77,6 +84,22 @@ const shareLink = () => {
             </p>
           </div>
         </>
+      )}
+      {isOpen && (
+        <ConfirmModal
+          setIsOpen={setIsOpen}
+          text={'Are you sure you want to delete?'}
+          onAgree={() => {
+            if (selectedItem) {
+              handleDeleteShareLink(selectedItem);
+            }
+            setSelectedItem(null);
+          }}
+          onCancel={() => {
+            setIsOpen(false);
+            setSelectedItem(null);
+          }}
+        />
       )}
     </div>
   );

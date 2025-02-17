@@ -1,16 +1,15 @@
 import { AuthModal, Footer, HeaderServer } from '@/components';
-import { MainContainer } from '@/styles/MainContainer';
 export default function ShareLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <MainContainer>
+    <div className="max-w-[480px] m-auto relative border-[1px] rounded-[18px] overflow-hidden h-[100vh] flex flex-col dark:border-border-secondary-dark dark:bg-background-primary-dark">
       <HeaderServer />
       {children}
       <AuthModal />
       <Footer />
-    </MainContainer>
+    </div>
   );
 }

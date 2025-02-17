@@ -63,7 +63,7 @@ export const useClipQuery = (rawId?: string | string[] | undefined) => {
     mutationFn: deleteClip,
     onSuccess: () => {
       toast.success('Clip deleted successfully 🗑️');
-      queryClient.invalidateQueries({ queryKey: ['clips'] });
+      queryClient.invalidateQueries({ queryKey: ['clips', 'categories'] });
       handleClose();
     },
   });

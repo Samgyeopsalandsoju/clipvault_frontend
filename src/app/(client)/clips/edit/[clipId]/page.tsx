@@ -105,7 +105,7 @@ export default function Page() {
           </>
         )}
 
-        <button className="text-[15px] text-[#f44336] font-semibold" onClick={() => onDelete(id)}>
+        <button type="button" className="text-[15px] text-[#f44336] font-semibold" onClick={() => onDelete(id)}>
           Delete Clip
         </button>
         <button ref={hiddenButtonRef} type="submit" style={{ display: 'none' }} />

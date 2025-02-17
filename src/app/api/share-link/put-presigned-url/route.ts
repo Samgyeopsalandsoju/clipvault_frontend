@@ -1,8 +1,14 @@
 import { generatePutUrl } from '@/libs';
+import { getServerSession } from 'next-auth';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { authOptions } from '../../auth/[...nextauth]/auth-options';
 
 export async function POST(request: NextRequest) {
+  const session = await getServerSession(authOptions);
+
+  if (!session || !session?.accessToken) throw Error('No Session Error');
+
   const body = await request.json();
   const { fileName, fileType } = body;
 
@@ -22,7 +28,7 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    const signedUrl = await generatePutUrl({ fileName, fileType, ownerToken: '123' });
+    const signedUrl = await generatePutUrl({ fileName, fileType, ownerToken: session.accessToken });
 
     console.log('signedUrl : ', signedUrl);
     console.log('put-presigned-url required data @@@@@@@');

@@ -9,8 +9,6 @@ export async function GET(request: NextRequest) {
     // api 요청
     const { status, data } = await privateAPI.get<APIResponse<IClipResponse[]>>('/v1/clip/list');
 
-    console.log('/v1/clip/list api response check ', status, data.body);
-
     // 통신 체크
     if (status !== 200 || !data) {
       return NextResponse.json({ status: 500, message: 'Failed to create clip' }, { status: 500 });

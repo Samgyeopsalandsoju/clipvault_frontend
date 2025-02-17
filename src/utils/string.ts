@@ -22,6 +22,6 @@ export const handleCopy = async (shareLink: string): Promise<void> => {
 };
 
 export const openInNewTab = (url: string) => {
-  console.log(url);
-  window.open(`http://${url}`, '_blank', 'noopener,noreferrer');
+  console.log('url', url);
+  window.open(url, '_blank', 'noopener,noreferrer');
 };

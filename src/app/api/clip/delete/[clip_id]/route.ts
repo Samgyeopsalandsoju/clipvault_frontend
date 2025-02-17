@@ -1,17 +1,22 @@
 import { privateAPI } from '@/libs';
-import { APIResponse, IShareLinkResponse } from '@/types';
+import { APIResponse } from '@/types';
 import { AxiosError } from 'axios';
-import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
+import { NextResponse, NextRequest } from 'next/server';
 
-export async function GET(request: NextRequest) {
+export async function DELETE(request: NextRequest, context: any) {
+  const params = await context.params;
+  const { clip_id } = params;
+  if (!clip_id) return NextResponse.json({ status: 500, message: 'clip_id does not exist' }, { status: 500 });
+
   try {
     // api 요청
-    const { status, data } = await privateAPI.get<APIResponse<IShareLinkResponse[]>>('/v1/share/list');
+    const { status, data } = await privateAPI.delete<APIResponse<string>>(`/v1/clip/delete/${clip_id}`);
+
+    console.log('/v1/clip/delete/[clip_id] api response check ', status, data.body);
 
     // 통신 체크
     if (status !== 200 || !data) {
-      return NextResponse.json({ status: 500, message: 'Failed to get share list' }, { status: 500 });
+      return NextResponse.json({ status: 500, message: 'Failed to delete clip' }, { status: 500 });
     }
 
     // 결과 값 리턴

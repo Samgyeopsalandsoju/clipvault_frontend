@@ -3,12 +3,6 @@ import { APIResponse, IClipResponse } from '@/types';
 import { AxiosError } from 'axios';
 import { NextResponse, NextRequest } from 'next/server';
 
-type Props = {
-  params: {
-    clip_id: string;
-  };
-};
-
 export async function GET(request: NextRequest, context: any) {
   const params = await context.params;
   const { clip_id } = params;

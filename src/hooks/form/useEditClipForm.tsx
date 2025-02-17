@@ -5,7 +5,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import { ICategoryResponse, IModifyClip, VisibilityType } from '@/types';
 import { useClipQuery } from '@/hooks';
-import { useClipPageStore } from '@/stores/useClipPageStore';
+import { useClipPageStore } from '@/stores';
 
 export const useEditClipForm = () => {
   const {

@@ -12,7 +12,7 @@ export const uploadFile = async ({
   file: Blob;
 }) => {
   await axios.put(url, file, { headers: { 'Content-Type': fileType } });
-  return `https:/www.clipvault.com/${id}`;
+  return `https:/clipvault.info/share/${id}`;
 };
 
 export const deleteFile = async (url: string) => {

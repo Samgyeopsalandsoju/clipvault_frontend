@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import { useClipQuery } from '@/hooks';
 import { ICategoryRequest, ICreateClip, VisibilityType } from '@/types';
 import { createClipValidator } from '@/utils';
-import { useClipPageStore } from '@/stores/useClipPageStore';
+import { useClipPageStore } from '@/stores';
 
 export const useNewClipForm = () => {
   const { setIsOpen: setIsClipPageOpen } = useClipPageStore();

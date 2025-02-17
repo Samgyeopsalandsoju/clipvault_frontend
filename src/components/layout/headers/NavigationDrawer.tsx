@@ -7,8 +7,7 @@ import classNames from 'classnames';
 import { signOut, useSession } from 'next-auth/react';
 import { ApplicationInfo } from '@/components';
 import { FormType } from '@/types';
-import { useAuthModalStore } from '@/stores/useAuthModalStore';
-import { useAuthModeStore } from '@/stores/useAuthModeStore';
+import { useAuthModalStore, useAuthModeStore } from '@/stores';
 
 export const NavigationDrawer = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);

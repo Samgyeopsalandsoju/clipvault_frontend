@@ -57,6 +57,6 @@ export const useShareLink = () => {
       isLoading: getShareLinksQuery.isPending,
     },
     postShareLink: uploadShareLinkMutation.mutateAsync,
-    deleteShareLink: deleteShareLinksMutation.mutate,
+    deleteShareLink: deleteShareLinksMutation.mutateAsync,
   };
 };

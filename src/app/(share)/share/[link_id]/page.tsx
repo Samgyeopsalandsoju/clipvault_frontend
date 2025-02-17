@@ -1,17 +1,17 @@
 'use client';
 
-import { CategoriesTags, ClipCard, ClipList, ScrollUpButton } from '@/components';
+import { CategoriesTags, ClipCard, ClipList, ScrollUpButton, ShareInfoSection } from '@/components';
 import { useClipFilter, usePresignedUrl } from '@/hooks';
 import { fetchShareFileData } from '@/services';
+import { useClipStore } from '@/stores';
 import { IClipResponse } from '@/types';
 import { useParams } from 'next/navigation';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 interface IShareLink {
   id: string;
-  email: string;
+  title: string;
   clips: IClipResponse[];
-  createdBy: string;
   expiresAt: string;
 }
 
@@ -19,39 +19,38 @@ const SharePage = () => {
   const { link_id } = useParams();
   const { generateGetUrl } = usePresignedUrl();
   const [shareData, setShareData] = useState<IShareLink>();
-  const containerRef = useRef<HTMLDivElement>(null);
-  const { filteredClipList, categories, handleCategorySelect } = useClipFilter(
-    (shareData?.clips as IClipResponse[]) || []
-  );
+  const { getFilteredClips, setSelectedCategoryId } = useClipStore();
+  const { categories } = useClipFilter((shareData?.clips as IClipResponse[]) || []);
+  const clipList = getFilteredClips(shareData?.clips as IClipResponse[]);
 
-  const fetchData = useCallback(async () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const fetchData = async () => {
     const generatedUrl = await generateGetUrl(link_id as string);
     const data = await fetchShareFileData({ url: generatedUrl });
     setShareData(data);
-  }, [link_id, generateGetUrl]);
+  };
 
   useEffect(() => {
     fetchData();
   }, [link_id]);
 
+  const renderItem = (clip: IClipResponse) => {
+    return <ClipCard {...clip} />;
+  };
+
   return (
-    <div className="flex flex-1 flex-col h-full pd-[50px]">
-      {categories.length > 1 && <CategoriesTags categories={categories} onSelect={handleCategorySelect} />}
+    <>
+      <ShareInfoSection title={shareData?.title || ''} due={shareData?.expiresAt || ''} />
+      {categories.length > 1 && <CategoriesTags categories={categories} onSelect={setSelectedCategoryId} />}
       <div
         ref={containerRef}
         className="relative flex-1 pb-12 overflow-auto dark:bg-background-primary-dark scrollbar-none no-scroll"
       >
-        <ClipList
-          list={(filteredClipList as IClipResponse[]) || []}
-          renderItem={(clip) => (
-            <div>
-              <ClipCard {...clip} />
-            </div>
-          )}
-        />
+        <ClipList list={(clipList as IClipResponse[]) || []} renderItem={renderItem} />
+        <ScrollUpButton scrollContainerRef={containerRef} />
       </div>
-      <ScrollUpButton scrollContainerRef={containerRef} />
-    </div>
+    </>
   );
 };
 

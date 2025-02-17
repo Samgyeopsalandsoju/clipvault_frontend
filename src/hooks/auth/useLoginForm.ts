@@ -3,7 +3,7 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useAuth, useRememberMe } from '@/hooks';
 import { LoginFormValue } from '@/types';
-import { useAuthModeStore } from '@/stores/useAuthModeStore';
+import { useAuthModeStore } from '@/stores';
 import { useState } from 'react';
 
 export const useLoginForm = () => {

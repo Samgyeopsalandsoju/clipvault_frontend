@@ -19,7 +19,7 @@ export const CategoriesTags = ({ categories, onSelect }: ICategoriesTabsProps) =
     data: categories,
   });
   return (
-    <div className="py-2 px-4 relative" ref={containerRef}>
+    <div className="py-4 px-4 relative  border-solid border-b-[1px] dark:border-border-primary-dark" ref={containerRef}>
       <div
         className={classNames('gap-2 flex', {
           'flex-wrap h-auto': isExpanded,
@@ -70,7 +70,7 @@ export const CategoriesTags = ({ categories, onSelect }: ICategoriesTabsProps) =
 const ExpansionButtonContainer = styled(Stack)`
   position: absolute;
   right: 1rem;
-  bottom: 0;
+  bottom: 8px;
   display: flex;
   align-items: center;
   transform: translateY(-31%);

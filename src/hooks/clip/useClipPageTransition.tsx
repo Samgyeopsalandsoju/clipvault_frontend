@@ -1,6 +1,6 @@
 'use client';
 
-import { useClipPageStore } from '@/stores/useClipPageStore';
+import { useClipPageStore } from '@/stores';
 import { useRouter } from 'next/navigation';
 
 export function useClipPageTransition() {

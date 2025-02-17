@@ -1,5 +1,4 @@
-import { useAuthModalStore } from '@/stores/useAuthModalStore';
-import { useAuthModeStore } from '@/stores/useAuthModeStore';
+import { useAuthModalStore, useAuthModeStore } from '@/stores';
 
 // 로그인 & 회원가입 모달 컨트롤
 export const useAuthModal = () => {
