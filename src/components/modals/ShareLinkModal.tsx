@@ -63,6 +63,7 @@ export const ShareLinkModal = ({ isOpen, setIsOpen, list }: ShareLinkModalProps)
 
   const onSubmit = async (data: IShareLinkRequest) => {
     const url = await handleShareLink();
+    console.log(url);
     if (!url) {
       console.error('쉐어링크 생성 실패');
       return;
@@ -147,7 +148,9 @@ export const ShareLinkModal = ({ isOpen, setIsOpen, list }: ShareLinkModalProps)
             {!isLoading ? 'Create' : <CircularProgress size={20} color="inherit" />}
           </button>
 
-          <MypageButton onClick={redirectToShareLinkPage}>My Share Link</MypageButton>
+          <MypageButton type="button" onClick={redirectToShareLinkPage}>
+            My Share Link
+          </MypageButton>
         </div>
       </form>
     </StyledDialog>

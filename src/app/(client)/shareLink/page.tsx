@@ -33,38 +33,40 @@ const shareLink = () => {
               Your clips, all neatly gathered here... take a look. ( {data.length}/10 )
             </p>
           </div>
-          {data.map((item, index) => {
-            return (
-              <div className="gap-4" key={index}>
-                <div className="flex gap-[10px]">
-                  <button
-                    className="border-solid border-[1px] border-[#f44336] rounded-[8px] p-[10px] text-[#f44336] dark:bg-background-secondary-dark active:scale-[0.97]"
-                    onClick={() => handleDeleteShareLink(item)}
-                  >
-                    <Trash2 size={16} />
-                  </button>
-                  <div
-                    className={classNames(
-                      'flex flex-1 h-[40px] border-[1px]  rounded-[8px] p-[10px] border-solid dark:border-border-focus-dark',
-                      'dark:text-text-placeholder-dark dark:bg-background-secondary-dark justify-between px-4'
-                    )}
-                  >
-                    {item.title}
-                    <CountDownTimer targetDate={item.due} />
+          <div className="flex flex-col gap-4">
+            {data.map((item, index) => {
+              return (
+                <div key={index}>
+                  <div className="flex gap-[10px]">
+                    <button
+                      className="border-solid border-[1px] border-[#f44336] rounded-[8px] p-[10px] text-[#f44336] dark:bg-background-secondary-dark active:scale-[0.97]"
+                      onClick={() => handleDeleteShareLink(item)}
+                    >
+                      <Trash2 size={16} />
+                    </button>
+                    <div
+                      className={classNames(
+                        'flex flex-1 h-[40px] border-[1px]  rounded-[8px] p-[10px] border-solid dark:border-border-focus-dark',
+                        'dark:text-text-placeholder-dark dark:bg-background-secondary-dark justify-between px-4'
+                      )}
+                    >
+                      {item.title}
+                      <CountDownTimer targetDate={item.due} />
+                    </div>
+                    <button
+                      className="border-solid border-[1px]  dark:border-border-focus-dark rounded-[8px] p-[10px] dark:text-text-primary-dark dark:bg-background-secondary-dark active:scale-[0.97]"
+                      onClick={() => handleCopy(item.link)}
+                    >
+                      <Copy size={16} />
+                    </button>
+                    <button className="border-solid border-[1px]  dark:border-border-focus-dark rounded-[8px] p-[10px] dark:text-text-primary-dark dark:bg-background-secondary-dark active:scale-[0.97]">
+                      <ExternalLink size={16} onClick={() => openInNewTab(item.link)} />
+                    </button>
                   </div>
-                  <button
-                    className="border-solid border-[1px]  dark:border-border-focus-dark rounded-[8px] p-[10px] dark:text-text-primary-dark dark:bg-background-secondary-dark active:scale-[0.97]"
-                    onClick={() => handleCopy(item.link)}
-                  >
-                    <Copy size={16} />
-                  </button>
-                  <button className="border-solid border-[1px]  dark:border-border-focus-dark rounded-[8px] p-[10px] dark:text-text-primary-dark dark:bg-background-secondary-dark active:scale-[0.97]">
-                    <ExternalLink size={16} onClick={() => openInNewTab(item.link)} />
-                  </button>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </>
       ) : (
         <>
