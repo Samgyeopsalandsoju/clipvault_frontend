@@ -1,9 +1,9 @@
-import { fetchShareFileData, uploadFile } from '@/services';
+import { fetchShareFileData, uploadFile, uploadShareLink } from '@/services';
 import { IClipResponse } from '@/types';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { v4 as uuidv4 } from 'uuid';
 
-export const useShareLink = (url?: string) => {
+export const useShareFile = (url?: string) => {
   // 파일 생성에 필요한 데이터 생성
   const createUploadFileInfo = (clips: IClipResponse[]) => ({
     id: uuidv4(),

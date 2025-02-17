@@ -1,12 +1,11 @@
 'use client';
 
-import { useSetAtom } from 'jotai';
 import { useEffect, useRef } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import { ICategoryResponse, IModifyClip, VisibilityType } from '@/types';
-import { ClipPageOpenAtom } from '@/atoms';
 import { useClipQuery } from '@/hooks';
+import { useClipPageStore } from '@/stores/useClipPageStore';
 
 export const useEditClipForm = () => {
   const {
@@ -19,7 +18,7 @@ export const useEditClipForm = () => {
   } = useForm<IModifyClip>({
     mode: 'onChange',
   });
-  const setIsClipPageOpen = useSetAtom(ClipPageOpenAtom);
+  const { setIsOpen: setIsClipPageOpen } = useClipPageStore();
   const hiddenButtonRef = useRef<HTMLButtonElement>(null);
   const router = useRouter();
   const {

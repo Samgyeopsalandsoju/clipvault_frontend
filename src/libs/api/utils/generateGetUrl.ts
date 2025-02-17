@@ -5,9 +5,6 @@ import s3 from '../config/s3Client';
 export const generateGetUrl = async ({ key }: { key: string }) => {
   const bucketName = process.env.AWS_S3_BUCKET_NAME;
 
-  console.log('@@@@@  check s3 instance @@@@@@@@@@');
-  console.log('bucketName : ', bucketName);
-  console.log('s3 : ', s3);
   if (!bucketName) throw new Error('Bucket name is not defined');
 
   const params = {
@@ -18,8 +15,6 @@ export const generateGetUrl = async ({ key }: { key: string }) => {
   try {
     const command = new GetObjectCommand(params);
     const signedUrl = await getSignedUrl(s3, command, { expiresIn: 60 });
-    console.log('signedUrl : ', signedUrl);
-    console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
     return signedUrl;
   } catch (error) {
     console.error('ERROR : create GET generateGetUrl : ', error);

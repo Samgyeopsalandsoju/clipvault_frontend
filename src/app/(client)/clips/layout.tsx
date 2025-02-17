@@ -3,19 +3,18 @@
 import { Slide } from '@mui/material';
 import { usePathname } from 'next/navigation';
 import { memo, useEffect, useState } from 'react';
-import { useAtomValue } from 'jotai';
 import ClipPage from './page';
 import classNames from 'classnames';
 import { useClipPageTransition } from '@/hooks';
-import { ClipPageOpenAtom } from '@/atoms';
 import { CreateClipButton } from '@/components';
 import { isModalPath } from '@/utils';
+import { useClipPageStore } from '@/stores/useClipPageStore';
 
 const MemoizationCreateClipButton = memo(CreateClipButton);
 
 export default function ClipLayout({ children }: { children: React.ReactNode }) {
   const [mounted, setMounted] = useState(false);
-  const isOpen = useAtomValue(ClipPageOpenAtom);
+  const { isOpen } = useClipPageStore();
   const { handleClose } = useClipPageTransition();
 
   useEffect(() => {

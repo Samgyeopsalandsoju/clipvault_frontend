@@ -3,6 +3,7 @@ export * from './clip';
 export * from './form';
 export * from './home';
 export * from './category';
+export * from './share';
 
 export * from './useControlTabs';
 export * from './useDebounce';

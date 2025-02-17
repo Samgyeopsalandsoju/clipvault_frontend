@@ -4,20 +4,16 @@ import { ThemeProvider as NextThemesProvider, useTheme } from 'next-themes';
 import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 import { useEffect, useState } from 'react';
 import { darkTheme, lightTheme } from '@/styles/theme';
-import { useAtomValue } from 'jotai';
-import { themeModeAtom } from '@/atoms/theme.atom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Toaster } from 'react-hot-toast';
 import { SessionProvider } from 'next-auth/react';
 
 function ThemeComponent({ children }: { children: React.ReactNode }) {
   const { theme, systemTheme } = useTheme();
-  const isDark = useAtomValue(themeModeAtom);
 
   // console.log('System theme:', systemTheme);
   // const currentTheme = systemTheme === 'dark' ? darkTheme : lightTheme;
-  const currentTheme = isDark ? darkTheme : lightTheme;
-  return <StyledThemeProvider theme={currentTheme}>{children}</StyledThemeProvider>;
+  return <StyledThemeProvider theme={darkTheme}>{children}</StyledThemeProvider>;
 }
 
 function ReactQueryProviders({ children }: { children: React.ReactNode }) {

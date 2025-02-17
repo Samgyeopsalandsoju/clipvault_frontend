@@ -3,9 +3,7 @@ import { APIResponse, IClipResponse, ICreateClip, IModifyClip } from '@/types';
 import axios from 'axios';
 
 export const getClips = async () => {
-  console.log('getClips 호출됨');
   const response = await api.get<APIResponse<IClipResponse[]>>('/clip/list');
-  console.log('getClips 호출로의 결과값 확인 : ', response.data.body);
   return response.data.body;
 };
 
@@ -15,13 +13,13 @@ export const postClip = async (data: ICreateClip) => {
 };
 
 export const getClip = async (id: string) => {
-  const response = await axios.get<IModifyClip>(`http://localhost:3001/clips/${id}`);
-  return response.data;
+  const response = await api.get<APIResponse<IClipResponse>>(`/clip/${id}`);
+  return response.data.body;
 };
 
 export const modifyClip = async (data: IModifyClip) => {
-  const response = await axios.put<IModifyClip>(`http://localhost:3001/clips/${data.id}`, data);
-  return response.data;
+  const response = await api.patch<APIResponse<string>>(`/clip/modify`, data);
+  return response.data.body;
 };
 
 export const deleteClip = async (id: string) => {

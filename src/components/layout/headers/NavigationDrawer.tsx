@@ -3,12 +3,12 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { Menu } from 'lucide-react';
-import { useSetAtom } from 'jotai';
 import classNames from 'classnames';
 import { signOut, useSession } from 'next-auth/react';
 import { ApplicationInfo } from '@/components';
-import { authModalAtom, authModeAtom } from '@/atoms';
 import { FormType } from '@/types';
+import { useAuthModalStore } from '@/stores/useAuthModalStore';
+import { useAuthModeStore } from '@/stores/useAuthModeStore';
 
 export const NavigationDrawer = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -40,13 +40,13 @@ interface NavBarProps {
 }
 
 const Navigation = ({ isOpen, onClose }: NavBarProps) => {
-  const setMode = useSetAtom(authModeAtom);
-  const setIsAuthModalOpen = useSetAtom(authModalAtom);
+  const { setMode } = useAuthModeStore();
+  const { setIsOpen } = useAuthModalStore();
   const { data: _, status } = useSession();
 
   const handleOpenModal = (type: FormType) => {
     onClose();
-    setIsAuthModalOpen(true);
+    setIsOpen(true);
     setMode(type);
   };
 

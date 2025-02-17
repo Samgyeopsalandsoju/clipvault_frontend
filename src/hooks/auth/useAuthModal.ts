@@ -1,15 +1,15 @@
-import { authModalAtom, authModeAtom } from '@/atoms';
-import { useAtom } from 'jotai';
+import { useAuthModalStore } from '@/stores/useAuthModalStore';
+import { useAuthModeStore } from '@/stores/useAuthModeStore';
 
 // 로그인 & 회원가입 모달 컨트롤
 export const useAuthModal = () => {
-  const [isAuthModalOpen, setIsAuthModalOpen] = useAtom(authModalAtom);
-  const [modalMode, setModalMode] = useAtom(authModeAtom);
+  const { isOpen, setIsOpen } = useAuthModalStore();
+  const { mode, setMode } = useAuthModeStore();
 
   return {
-    isAuthModalOpen,
-    setIsAuthModalOpen,
-    setModalMode,
-    modalMode,
+    isAuthModalOpen: isOpen,
+    setIsAuthModalOpen: setIsOpen,
+    setModalMode: setMode,
+    modalMode: mode,
   };
 };

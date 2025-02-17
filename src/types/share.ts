@@ -1,9 +1,8 @@
-import { IClipResponse } from './clip';
-
-export interface IShareLink {
-  id: string;
-  email: string;
-  clips: IClipResponse[];
-  createdBy: string;
-  expiresAt: string;
+interface IShareLinkBase {
+  title: string;
+  link: string;
+  due: string;
 }
+
+export type IShareLinkRequest = IShareLinkBase;
+export type IShareLinkResponse = IShareLinkBase;

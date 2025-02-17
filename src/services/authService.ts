@@ -16,7 +16,8 @@ export const login = async (data: LoginFormValue) => {
     password: data.password,
     redirect: false,
   });
+
   if (!response?.ok) {
-    throw new Error(response?.error || 'Login failed');
+    throw new Error(`error occurred : ${response?.error}`);
   }
 };

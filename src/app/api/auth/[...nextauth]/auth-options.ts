@@ -18,9 +18,8 @@ export const authOptions: NextAuthOptions = {
             mail: credentials?.mail,
             password: credentials?.password,
           });
-          console.log('Login response:', status, data);
           if (status !== 200) {
-            throw new Error('Login failed');
+            return null;
           }
 
           if (!data.status) {
@@ -32,7 +31,7 @@ export const authOptions: NextAuthOptions = {
             result: { token: data.body },
           };
         } catch (error) {
-          console.error('Login error:', error);
+          console.error(error);
           return null;
         }
       },

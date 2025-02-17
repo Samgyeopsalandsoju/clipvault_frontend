@@ -3,7 +3,7 @@
 import styled from 'styled-components';
 import { IconButton, Stack } from '@mui/material';
 import { ExternalLink, Copy, GitFork } from 'lucide-react';
-import { generateModernTagColors } from '@/utils';
+import { generateModernTagColors, handleCopy, openInNewTab } from '@/utils';
 import { CardTag } from '@/components/ui';
 import { IClipResponse } from '@/types/clip';
 import { Card, ClipInfo, ClipTitle, ClipUrl, Content, TitleRow } from './clip.style';
@@ -23,11 +23,21 @@ export const ClipCard = ({ title, category, link, visible, forkedCount }: IClipR
           </TitleRow>
           <ClipUrl>{link}</ClipUrl>
         </ClipInfo>
-        <LinkButton>
+        <LinkButton
+          onClick={(e) => {
+            e.stopPropagation();
+            handleCopy(link);
+          }}
+        >
           <Copy size={16} />
         </LinkButton>
         <Section>
-          <LinkButton>
+          <LinkButton
+            onClick={(e) => {
+              e.stopPropagation();
+              openInNewTab(link);
+            }}
+          >
             <ExternalLink size={16} />
           </LinkButton>
           {visible === 'public' && (

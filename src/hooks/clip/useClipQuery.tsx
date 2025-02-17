@@ -1,3 +1,5 @@
+'use client';
+
 import { useMemo } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useClipPageTransition } from '@/hooks';
@@ -23,14 +25,14 @@ export const useClipQuery = (rawId?: string | string[] | undefined) => {
   const getClipsQuery = useQuery({
     queryKey: ['clips'],
     queryFn: getClips,
-    enabled: !isModalOpen,
+    enabled: !isModalOpen, // isModalOpen 모달이 열려있으면 실행하지않는다.
   });
 
   // create clip
   const createClipMutation = useMutation({
     mutationFn: postClip,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['clips'] });
+      queryClient.invalidateQueries({ queryKey: ['clips', 'categories'] });
       toast.success('Clip saved successfully ✨');
       handleClose();
     },
@@ -43,7 +45,7 @@ export const useClipQuery = (rawId?: string | string[] | undefined) => {
       if (!id) throw new Error('Invalid ID');
       return getClip(id);
     },
-    enabled: !!id,
+    enabled: !!id, // id 갑이 있을때만 호출
   });
 
   // 클립 수정
@@ -51,7 +53,7 @@ export const useClipQuery = (rawId?: string | string[] | undefined) => {
     mutationFn: modifyClip,
     onSuccess: () => {
       toast.success('Clip updated successfully ✨');
-      queryClient.invalidateQueries({ queryKey: ['clips', 'clip'] });
+      queryClient.invalidateQueries({ queryKey: ['clips', 'clip', 'categories'] });
       handleClose();
     },
   });
@@ -72,7 +74,8 @@ export const useClipQuery = (rawId?: string | string[] | undefined) => {
       isClipsLoading: getClipsQuery.isPending,
     },
     clip: {
-      data: getClipQuery.data,
+      clip: getClipQuery.data,
+      isClipLoading: getClipQuery.isPending,
       create: createClipMutation.mutate,
       modify: modifyClipMutation.mutate,
       delete: deleteClipMutation.mutate,

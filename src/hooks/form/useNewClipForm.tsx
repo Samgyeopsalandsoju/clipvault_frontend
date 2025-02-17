@@ -1,15 +1,14 @@
 'use client';
 
-import { useSetAtom } from 'jotai';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { useEffect } from 'react';
-import { ClipPageOpenAtom } from '@/atoms';
 import { useClipQuery } from '@/hooks';
 import { ICategoryRequest, ICreateClip, VisibilityType } from '@/types';
 import { createClipValidator } from '@/utils';
+import { useClipPageStore } from '@/stores/useClipPageStore';
 
 export const useNewClipForm = () => {
-  const setIsClipPageOpen = useSetAtom(ClipPageOpenAtom);
+  const { setIsOpen: setIsClipPageOpen } = useClipPageStore();
   const validator = createClipValidator();
   const {
     clip: { create },

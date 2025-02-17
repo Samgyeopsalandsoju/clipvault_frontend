@@ -3,11 +3,17 @@
 import { CategoriesTags, ClipCard, ClipList, ScrollUpButton } from '@/components';
 import { useClipFilter, usePresignedUrl } from '@/hooks';
 import { fetchShareFileData } from '@/services';
-import { IClipResponse, IShareLink } from '@/types';
-import { Stack } from '@mui/material';
+import { IClipResponse } from '@/types';
 import { useParams } from 'next/navigation';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import styled from 'styled-components';
+
+interface IShareLink {
+  id: string;
+  email: string;
+  clips: IClipResponse[];
+  createdBy: string;
+  expiresAt: string;
+}
 
 const SharePage = () => {
   const { link_id } = useParams();
@@ -29,7 +35,7 @@ const SharePage = () => {
   }, [link_id]);
 
   return (
-    <PageContainer>
+    <div className="flex flex-1 flex-col h-full pd-[50px]">
       {categories.length > 1 && <CategoriesTags categories={categories} onSelect={handleCategorySelect} />}
       <div
         ref={containerRef}
@@ -45,14 +51,8 @@ const SharePage = () => {
         />
       </div>
       <ScrollUpButton scrollContainerRef={containerRef} />
-    </PageContainer>
+    </div>
   );
 };
 
 export default SharePage;
-
-const PageContainer = styled(Stack)`
-  flex: 1;
-  height: 100%;
-  padding-bottom: 50px;
-`;

@@ -1,11 +1,10 @@
 'use client';
 
-import { ClipPageOpenAtom } from '@/atoms';
-import { useSetAtom } from 'jotai';
+import { useClipPageStore } from '@/stores/useClipPageStore';
 import { useRouter } from 'next/navigation';
 
 export function useClipPageTransition() {
-  const setIsOpen = useSetAtom(ClipPageOpenAtom);
+  const { setIsOpen } = useClipPageStore();
 
   const router = useRouter();
 

@@ -5,20 +5,21 @@ import { useCategoryQuery, useClipQuery, useEditClipForm } from '@/hooks';
 import { CategoriesTags, ClipCard, ClipList, ScrollUpButton, ShareListButton } from '@/components';
 import { IClipResponse } from '@/types';
 import { useClipStore } from '@/stores/useClipStore';
+import { SkeletonUI } from '@/components/skeleton/SkeletonUI';
 
 const MemoizationClipCard = memo(ClipCard);
 
 const ClipsPage = () => {
   const {
-    clips: { clipList },
+    clips: { clipList, isClipsLoading },
   } = useClipQuery();
   const {
     category: { categoryList, loading },
   } = useCategoryQuery();
   const { getFilteredClips, setSelectedCategoryId } = useClipStore();
   const { handleClipClick } = useEditClipForm();
-  const containerRef = useRef<HTMLDivElement>(null);
 
+  const containerRef = useRef<HTMLDivElement>(null);
   const filteredClipsList = getFilteredClips(clipList);
 
   const renderItem = useCallback((clip: IClipResponse) => {
@@ -31,14 +32,31 @@ const ClipsPage = () => {
 
   return (
     <div className="flex flex-col flex-1 h-full">
-      {!!filteredClipsList.length && <CategoriesTags categories={categoryList} onSelect={setSelectedCategoryId} />}
+      {loading ? (
+        <SkeletonUI.Tag />
+      ) : (
+        <>
+          {!!filteredClipsList.length && <CategoriesTags categories={categoryList} onSelect={setSelectedCategoryId} />}
+        </>
+      )}
+
       <div
         ref={containerRef}
         className="relative flex-1 pb-8 overflow-auto dark:bg-background-primary-dark scrollbar-none no-scroll"
       >
         {filteredClipsList.length > 0 ? (
           <>
-            <ClipList list={filteredClipsList} renderItem={renderItem} />
+            {isClipsLoading ? (
+              <div className="flex flex-col p-4 gap-3 pb-8">
+                <SkeletonUI.Clip />
+                <SkeletonUI.Clip />
+                <SkeletonUI.Clip />
+                <SkeletonUI.Clip />
+                <SkeletonUI.Clip />
+              </div>
+            ) : (
+              <ClipList list={filteredClipsList} renderItem={renderItem} />
+            )}
 
             <ScrollUpButton scrollContainerRef={containerRef} />
           </>

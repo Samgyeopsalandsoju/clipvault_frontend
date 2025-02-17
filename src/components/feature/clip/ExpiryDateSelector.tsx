@@ -3,6 +3,7 @@
 import { Clock } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import classNames from 'classnames';
+import { formatTimestamp } from '@/utils';
 
 const EXPIRY_OPTIONS = [
   { label: '1d', value: 1 },
@@ -20,6 +21,7 @@ interface ExpiryDateSelectorProps {
 export const ExpiryDateSelector = ({ onSelect, defaultValue = '7' }: ExpiryDateSelectorProps) => {
   const [selectedDays, setSelectedDays] = useState<string>(defaultValue);
   const [expiryDate, setExpiryDate] = useState<string>('');
+  const [rawDate, setRawDate] = useState<string>('');
 
   useEffect(() => {
     const date = new Date();
@@ -32,7 +34,15 @@ export const ExpiryDateSelector = ({ onSelect, defaultValue = '7' }: ExpiryDateS
       })
       .replace(/\s/g, '');
     setExpiryDate(formatted);
+    setRawDate(formatTimestamp(date));
   }, [selectedDays]);
+
+  // expiryDate가 업데이트 될 때마다 onSelect 호출 (마운트 시에도 적용됨)
+  useEffect(() => {
+    if (expiryDate) {
+      onSelect(rawDate);
+    }
+  }, [expiryDate]);
 
   return (
     <div
@@ -52,7 +62,6 @@ export const ExpiryDateSelector = ({ onSelect, defaultValue = '7' }: ExpiryDateS
             currentTarget: { value },
           } = e;
           setSelectedDays(value);
-          onSelect(expiryDate);
         }}
       >
         {EXPIRY_OPTIONS.map((option) => (

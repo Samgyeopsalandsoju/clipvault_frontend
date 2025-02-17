@@ -18,7 +18,6 @@ export const CategoriesTags = ({ categories, onSelect }: ICategoriesTabsProps) =
   const { containerRef, contentRef, isExpanded, needsExpansion, setIsExpanded } = useOverflowDetection({
     data: categories,
   });
-
   return (
     <div className="py-2 px-4 relative" ref={containerRef}>
       <div

@@ -21,6 +21,16 @@ export const Card = styled(Stack)<{ $isPublic?: boolean; $border?: string }>`
 
   &:hover {
     background-color: ${(props) => props.theme.background.secondary};
+
+    button {
+      opacity: 1;
+    }
+  }
+
+  @media screen and (max-width: 900px) {
+    button {
+      opacity: 0.3;
+    }
   }
 `;
 

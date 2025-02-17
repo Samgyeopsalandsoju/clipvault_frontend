@@ -1,12 +1,11 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useAtom } from 'jotai';
-import { rememberMeAtom } from '@/atoms';
 import { STORAGE_KEYS } from '@/constants';
+import { useRememberMeStore } from '@/stores/useRememberMeStore';
 
 export const useRememberMe = () => {
-  const [rememberMe, setRememberMe] = useAtom(rememberMeAtom);
+  const { rememberMe, setRememberMe } = useRememberMeStore();
 
   useEffect(() => {
     const remembered = !!localStorage.getItem(STORAGE_KEYS.REMEMBER_ME);

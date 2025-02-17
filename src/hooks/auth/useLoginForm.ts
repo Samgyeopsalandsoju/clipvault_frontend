@@ -1,14 +1,13 @@
 'use client';
 
-import { useSetAtom } from 'jotai';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { authModeAtom } from '@/atoms';
 import { useAuth, useRememberMe } from '@/hooks';
 import { LoginFormValue } from '@/types';
+import { useAuthModeStore } from '@/stores/useAuthModeStore';
 
 export const useLoginForm = () => {
   const { saveUsername, getSaveUsername } = useRememberMe();
-  const setMode = useSetAtom(authModeAtom);
+  const { setMode } = useAuthModeStore();
   const { signIn } = useAuth();
   const {
     register,

@@ -21,7 +21,6 @@ export interface ICreateClip extends IBaseClip {
 export interface IModifyClip extends IBaseClip {
   id: string;
   category: ICategoryRequest;
-  fork: string;
 }
 
 export interface IClipResponse extends IBaseClip {

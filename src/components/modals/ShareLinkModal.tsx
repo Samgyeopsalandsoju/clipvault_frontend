@@ -1,8 +1,8 @@
 'use client';
 
-import { usePresignedUrl, useShareLink } from '@/hooks';
+import { usePresignedUrl, useShareFile, useShareLink } from '@/hooks';
 import { createToast } from '@/libs';
-import { IClipResponse } from '@/types';
+import { IClipResponse, IShareLinkRequest } from '@/types';
 import { CircularProgress, Dialog } from '@mui/material';
 import classNames from 'classnames';
 import { Copy } from 'lucide-react';
@@ -10,6 +10,8 @@ import { useRouter } from 'next/navigation';
 import { Dispatch, SetStateAction, useState } from 'react';
 import styled from 'styled-components';
 import { ExpiryDateSelector } from '@/components';
+import { useForm } from 'react-hook-form';
+import { handleCopy } from '@/utils';
 
 interface ShareLinkModalProps {
   isOpen: boolean;
@@ -18,27 +20,32 @@ interface ShareLinkModalProps {
 }
 
 export const ShareLinkModal = ({ isOpen, setIsOpen, list }: ShareLinkModalProps) => {
-  const { prepareFileData, upload } = useShareLink();
+  const { register, handleSubmit, setValue } = useForm<IShareLinkRequest>();
+  const { prepareFileData, upload } = useShareFile();
+  const { postShareLink } = useShareLink();
   const { generatePutUrl } = usePresignedUrl();
   const [shareLink, setShareLink] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const toast = createToast();
   const router = useRouter();
 
-  const prepareAndUpload = async (): Promise<void> => {
+  const prepareAndUpload = async () => {
     if (isLoading) return;
 
     const { blob, fileName, id } = prepareFileData({ list });
     const url = await generatePutUrl({ fileName, fileType: blob.type });
     const shareUrl = await upload({ id, file: blob, fileType: blob.type, url });
     setShareLink(shareUrl);
+
+    return shareUrl;
   };
 
-  const handleShareLink = async (): Promise<void> => {
+  const handleShareLink = async () => {
     if (shareLink || isLoading) return;
     try {
       setIsLoading(true);
-      await prepareAndUpload();
+      const url = await prepareAndUpload();
+      return url;
     } catch (error) {
       console.error('Error sharing link:', error);
     } finally {
@@ -46,22 +53,21 @@ export const ShareLinkModal = ({ isOpen, setIsOpen, list }: ShareLinkModalProps)
     }
   };
 
-  const handleCopy = async (): Promise<void> => {
-    try {
-      await navigator.clipboard.writeText(shareLink);
-      toast.success('Link copied to clipboard!');
-    } catch (error) {
-      console.error('Failed to copy text:', error);
-      toast.error('Unable to copy link');
-    }
-  };
-
   const handleSelect = (days: string): void => {
-    console.log('days', days);
+    setValue('due', days);
   };
 
   const redirectToShareLinkPage = (): void => {
     router.push('/shareLink');
+  };
+
+  const onSubmit = async (data: IShareLinkRequest) => {
+    const url = await handleShareLink();
+    if (!url) {
+      console.error('쉐어링크 생성 실패');
+      return;
+    }
+    await postShareLink({ ...data, link: url });
   };
 
   return (
@@ -80,7 +86,7 @@ export const ShareLinkModal = ({ isOpen, setIsOpen, list }: ShareLinkModalProps)
         </h1>
       </div>
 
-      <div className="flex flex-col py-[26px] px-4 gap-5">
+      <form className="flex flex-col py-[26px] px-4 gap-5" onSubmit={handleSubmit(onSubmit)}>
         <p className="select-none dark:text-text-primary-dark">
           The shared link will expire in 30 days. <br />
           Once expired, it will no longer be accessible.
@@ -97,12 +103,13 @@ export const ShareLinkModal = ({ isOpen, setIsOpen, list }: ShareLinkModalProps)
               readOnly
             />
             <button
+              type="button"
               className={classNames(
                 'border-solid border-[1px] dark:border-border-focus-dark dark:text-text-primary-dark',
                 'dark:bg-background-secondary-dark rounded-[8px] p-[10px] hover:dark:bg-background-primary-dark',
                 'active:scale-[0.97]'
               )}
-              onClick={handleCopy}
+              onClick={() => handleCopy(shareLink)}
             >
               <Copy size={16} />
             </button>
@@ -115,6 +122,10 @@ export const ShareLinkModal = ({ isOpen, setIsOpen, list }: ShareLinkModalProps)
                 'flex flex-1 h-[40px] rounded-[8px] p-[10px] dark:text-text-primary-dark',
                 'dark:bg-background-secondary-dark border-solid border-[1px] dark:border-border-focus-dark'
               )}
+              {...register('title', {
+                required: 'title is required',
+                maxLength: { value: 10, message: 'up to 10 letters' },
+              })}
               placeholder="Title"
             />
             <ExpiryDateSelector onSelect={handleSelect} />
@@ -130,7 +141,7 @@ export const ShareLinkModal = ({ isOpen, setIsOpen, list }: ShareLinkModalProps)
                 invisible: !!shareLink,
               }
             )}
-            onClick={handleShareLink}
+            type="submit"
             disabled={isLoading || !!shareLink}
           >
             {!isLoading ? 'Create' : <CircularProgress size={20} color="inherit" />}
@@ -138,7 +149,7 @@ export const ShareLinkModal = ({ isOpen, setIsOpen, list }: ShareLinkModalProps)
 
           <MypageButton onClick={redirectToShareLinkPage}>My Share Link</MypageButton>
         </div>
-      </div>
+      </form>
     </StyledDialog>
   );
 };
@@ -152,24 +163,6 @@ const StyledDialog = styled(Dialog)`
     position: relative;
     background-color: ${(props) => props.theme.background.primary};
     border: 1px solid ${(props) => props.theme.border.divider};
-  }
-`;
-
-const CreateButton = styled.button<{ $display: boolean }>`
-  visibility: ${(props) => (props.$display ? 'hidden' : '')};
-  color: ${(props) => props.theme.text.primary};
-  border: 1px solid ${(props) => props.theme.border.divider};
-  padding: 0.45rem;
-  border-radius: 8px;
-  font-size: 0.9rem;
-  height: 40px;
-  width: 64%;
-  &:hover {
-    background-color: ${(props) => props.theme.background.secondary};
-  }
-
-  &:active {
-    scale: 0.97;
   }
 `;
 

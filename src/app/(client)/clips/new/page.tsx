@@ -1,11 +1,11 @@
 'use client';
 
-import styled from 'styled-components';
 import { Container, Divider, Form, Input, TextArea, Title, TitleSection } from '../clips.styles';
-import { useClipFilter, useClipQuery, useNewClipForm } from '@/hooks';
+import { useCategoryQuery, useNewClipForm } from '@/hooks';
 import { CategoryDropdown, VisibilityDropdown } from '@/components';
+import classNames from 'classnames';
 
-export default function Page() {
+export default function ClipNewPage() {
   const {
     handleCategorySelect,
     handleSubmit,
@@ -17,9 +17,10 @@ export default function Page() {
     errors,
   } = useNewClipForm();
   const {
-    clips: { clipList },
-  } = useClipQuery();
-  const { categories } = useClipFilter(clipList);
+    category: { categoryList, loading },
+  } = useCategoryQuery();
+
+  if (loading) return false;
 
   return (
     <Container>
@@ -29,7 +30,7 @@ export default function Page() {
       </TitleSection>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <VisibilityDropdown onSelect={handleVisibilitySelect} />
-        <CategoryDropdown onSelect={handleCategorySelect} onCreator={handleCreateCategory} categories={categories} />
+        <CategoryDropdown onSelect={handleCategorySelect} onCreator={handleCreateCategory} categories={categoryList} />
         <Input
           $error={!!errors.title}
           placeholder="Clip title"
@@ -56,25 +57,17 @@ export default function Page() {
           })}
           onBlur={() => trigger('link')}
         />
-        <SubmitButton type="submit">Add to Clips</SubmitButton>
+        <button
+          className={classNames(
+            'w-full p-3 rounded-[0.5rem] font-medium transition-color duration-200 transform',
+            'dark:bg-background-secondary-dark dark:text-text-primary-dark',
+            'hover:dark:bg-border-secondary-dark active:scale-[0.97]'
+          )}
+          type="submit"
+        >
+          Add to Clips
+        </button>
       </Form>
     </Container>
   );
 }
-
-const SubmitButton = styled.button`
-  width: 100%;
-  padding: 0.75rem;
-  background-color: ${(props) => props.theme.background.secondary};
-  color: ${(props) => props.theme.text.primary};
-  border-radius: 0.5rem;
-  font-weight: 500;
-  transition: background-color 0.2s;
-
-  &:hover {
-    background-color: ${(props) => props.theme.border.secondary};
-  }
-  &:active {
-    scale: 0.97;
-  }
-`;

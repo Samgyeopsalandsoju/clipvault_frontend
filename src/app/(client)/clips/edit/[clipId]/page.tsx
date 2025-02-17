@@ -1,19 +1,14 @@
 'use client';
 
 import { useParams } from 'next/navigation';
-import { useClipFilter, useClipQuery, useEditClipForm } from '@/hooks';
+import { useCategoryQuery, useClipQuery, useEditClipForm } from '@/hooks';
 import { VisibilityType } from '@/types';
 import { ModifyDropdown, VisibilityDropdown } from '@/components';
 import classNames from 'classnames';
 import { useEffect } from 'react';
+import { SkeletonUI } from '@/components/skeleton/SkeletonUI';
 
 export default function Page() {
-  const { clipId } = useParams();
-  const {
-    clip: { data },
-    clips: { clipList },
-  } = useClipQuery(clipId);
-
   const {
     handleClose,
     handleCategorySelect,
@@ -27,16 +22,25 @@ export default function Page() {
     reset,
     hiddenButtonRef,
   } = useEditClipForm();
-  const { categories } = useClipFilter(clipList);
+  const { clipId } = useParams();
+  const {
+    clip: { clip, isClipLoading },
+  } = useClipQuery(clipId);
+
+  const {
+    category: { categoryList, loading },
+  } = useCategoryQuery();
 
   useEffect(() => {
-    if (data) {
-      reset(data);
+    if (clip) {
+      reset(clip);
     }
-  }, [data]);
+  }, [clip]);
 
-  if (!data) return;
-  const { visible, category, id } = data;
+  if (!clip) return;
+  const { visible, category, id } = clip;
+
+  if (loading || isClipLoading) false;
 
   return (
     <div className="rounded-tl-[16px] rounded-tr-[16px] p-[1.5rem] w-full dark:bg-background-tertiary-dark">
@@ -55,43 +59,52 @@ export default function Page() {
         </div>
       </div>
       <form className="flex flex-col gap-[1rem] max-w-[24rem] m-auto w-full]" onSubmit={handleSubmit(onSubmit)}>
-        <VisibilityDropdown onSelect={handleVisibilitySelect} visible={visible as VisibilityType} />
-        <ModifyDropdown onSelect={handleCategorySelect} categories={categories} category={category} />
-        <input
-          className={classNames(
-            'w-full py-3 px-4 rounded-[0.5rem] border-solid border-[1px] dark:border-border-secondary-dark',
-            'dark:bg-background-secondary-dark dark:text-text-primary-dark dark:placeholder-text-placeholder-dark',
-            'focus:outline-none focus:dark:border-border-focus-dark'
-          )}
-          placeholder="Clip Title"
-          maxLength={30}
-          {...register('title', {
-            required: 'Type your title here',
-            maxLength: {
-              value: 30,
-              message: 'Limited to 30 characters',
-            },
-            // onChange: (e) => {
-            //   const value = e.target.value;
-            //   if (value.length > 30) {
-            //     e.target.value = value.slice(0, 30);
-            //   }
-            // },
-          })}
-        />
-        <textarea
-          className={classNames(
-            'w-full py-3 px-4 min-h-[100px] resize-none rounded-[0.5rem]',
-            'border-solid border-[1px] dark:border-border-secondary-dark dark:text-text-primary-dark',
-            'dark:bg-background-secondary-dark dark:placeholder-text-placeholder-dark',
-            'focus:dark:border-border-focus-dark focus:outline-none'
-          )}
-          placeholder="Link"
-          {...register('link', {
-            required: 'Paste your link here',
-          })}
-          onBlur={() => trigger('title')}
-        />
+        {loading || isClipLoading ? (
+          <>
+            <SkeletonUI.Edit />
+          </>
+        ) : (
+          <>
+            <VisibilityDropdown onSelect={handleVisibilitySelect} visible={visible as VisibilityType} />
+            <ModifyDropdown onSelect={handleCategorySelect} categories={categoryList} category={category} />
+            <input
+              className={classNames(
+                'w-full py-3 px-4 rounded-[0.5rem] border-solid border-[1px] dark:border-border-secondary-dark',
+                'dark:bg-background-secondary-dark dark:text-text-primary-dark dark:placeholder-text-placeholder-dark',
+                'focus:outline-none focus:dark:border-border-focus-dark'
+              )}
+              placeholder="Clip Title"
+              maxLength={30}
+              {...register('title', {
+                required: 'Type your title here',
+                maxLength: {
+                  value: 30,
+                  message: 'Limited to 30 characters',
+                },
+                // onChange: (e) => {
+                //   const value = e.target.value;
+                //   if (value.length > 30) {
+                //     e.target.value = value.slice(0, 30);
+                //   }
+                // },
+              })}
+            />
+            <textarea
+              className={classNames(
+                'w-full py-3 px-4 min-h-[100px] resize-none rounded-[0.5rem]',
+                'border-solid border-[1px] dark:border-border-secondary-dark dark:text-text-primary-dark',
+                'dark:bg-background-secondary-dark dark:placeholder-text-placeholder-dark',
+                'focus:dark:border-border-focus-dark focus:outline-none'
+              )}
+              placeholder="Link"
+              {...register('link', {
+                required: 'Paste your link here',
+              })}
+              onBlur={() => trigger('title')}
+            />
+          </>
+        )}
+
         <button className="text-[15px] text-[#f44336] font-semibold" onClick={() => onDelete(id)}>
           Delete Clip
         </button>
