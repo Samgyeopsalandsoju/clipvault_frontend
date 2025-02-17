@@ -46,7 +46,6 @@ export const useShareLink = () => {
       toast.success('Successfully delete share link!');
     },
     onError: () => {
-      console.log('delete 실패');
       toast.error('Failed to delete is. try later..');
     },
   });
