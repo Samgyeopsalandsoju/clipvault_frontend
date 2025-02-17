@@ -31,3 +31,18 @@ export const generateGetPresignedUrl = async (fileName: string) => {
 
   return response.data.body;
 };
+
+export const generateDeletePresignedUrl = async (fileName: string) => {
+  const key = `links/${fileName}.json`;
+  const response = await axios.post<APIResponse<string>>(
+    `/api/share-link/delete-presigned-url`,
+    { key },
+    {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+  );
+
+  return response.data.body;
+};

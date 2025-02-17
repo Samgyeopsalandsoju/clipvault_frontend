@@ -1,40 +1,29 @@
 import { privateAPI } from '@/libs';
-import { IShareLinkRequest } from '@/types';
 import { AxiosError } from 'axios';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-export async function POST(request: NextRequest) {
+export async function DELETE(request: NextRequest, { params }: { params: { share_id: string } }) {
   try {
-    const body: IShareLinkRequest = await request.json();
+    const parameters = await params;
+    const share_id = parameters.share_id;
 
-    // body 값 검증
-    if (!body || typeof body !== 'object') {
-      return NextResponse.json({ status: 400, message: 'Invalid JSON data' }, { status: 400 });
-    }
-
-    // 필수 값 체크
-    const { title, link, due } = body;
-    if (!title || !link || !due) {
-      return NextResponse.json({ status: 400, message: 'Missing required fields' }, { status: 400 });
-    }
-
-    console.info('@ /api/share-link/post 요청 데이터:', body);
+    console.info('@ /api/share-link/delete called', share_id);
 
     // api 요청
-    const { status, data } = await privateAPI.post('/v1/share/create', body);
+    const { status, data } = await privateAPI.delete(`/v1/share/delete/${share_id}`);
 
-    console.log('/v1/share/create api response check ', status, data);
+    console.log('/v1/share/delete api response check ', status, data);
 
     // 통신 체크
     if (status !== 200 || !data) {
-      return NextResponse.json({ status: 500, message: 'Failed to create Share Link' }, { status: 500 });
+      return NextResponse.json({ status: 500, message: 'Failed to delete Share Link' }, { status: 500 });
     }
 
     // 결과 값 리턴
     return NextResponse.json({
       status: data.status,
-      body: data.body,
+      body: null,
     });
   } catch (error) {
     if (error instanceof AxiosError) {

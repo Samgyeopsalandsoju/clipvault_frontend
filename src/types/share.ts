@@ -4,5 +4,8 @@ interface IShareLinkBase {
   due: string;
 }
 
+export interface IShareLinkResponse extends IShareLinkBase {
+  id: string;
+}
+
 export type IShareLinkRequest = IShareLinkBase;
-export type IShareLinkResponse = IShareLinkBase;

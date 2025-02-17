@@ -2,6 +2,7 @@ import { SOCIAL_LOGIN_OPTIONS } from '@/constants';
 import { useLoginForm } from '@/hooks/auth/useLoginForm';
 import classNames from 'classnames';
 import { RememberMe } from '@/components';
+import { Loader } from 'lucide-react';
 
 const loginValidationRules = {
   email: {
@@ -14,7 +15,8 @@ const loginValidationRules = {
 };
 
 export const LoginForm = () => {
-  const { handleClick, handleSubmit, onSubmit, register, trigger } = useLoginForm();
+  const { handleClick, handleSubmit, onSubmit, register, trigger, isLoading } = useLoginForm();
+
   return (
     <>
       <div className="flex flex-col gap-[5px]">
@@ -51,8 +53,9 @@ export const LoginForm = () => {
               'rounded-[5px] dark:text-text-primary-dark px-2 py-2 active:scale-[0.97]'
             )}
             type="submit"
+            disabled={isLoading}
           >
-            Login
+            {isLoading ? <Loader className="animate-spin dark:text-text-primary-dark h-[18px]" /> : 'login'}
           </button>
         </form>
       </div>

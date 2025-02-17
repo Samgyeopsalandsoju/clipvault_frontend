@@ -7,7 +7,7 @@ export const Footer = () => {
       className={classNames(
         'border-t dark:border-border-primary-dark rounded-bl-[18px] rounded-br-[18px]',
         'dark:bg-background-primary-dark fixed bottom-0 right-0 left-0 max-w-[478px] m-auto',
-        'flex justify-center items-center flex-col pt-[10px] h-[60px]',
+        'flex justify-center items-center flex-col pt-[10px] pb-[10px] h-[60px]',
         'dark:text-text-primary-dark'
       )}
     >

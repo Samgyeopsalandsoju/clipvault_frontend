@@ -4,8 +4,10 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { useAuth, useRememberMe } from '@/hooks';
 import { LoginFormValue } from '@/types';
 import { useAuthModeStore } from '@/stores/useAuthModeStore';
+import { useState } from 'react';
 
 export const useLoginForm = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const { saveUsername, getSaveUsername } = useRememberMe();
   const { setMode } = useAuthModeStore();
   const { signIn } = useAuth();
@@ -25,9 +27,21 @@ export const useLoginForm = () => {
     setMode('register');
   };
 
-  const onSubmit: SubmitHandler<LoginFormValue> = (data) => {
-    saveUsername(data.mail);
-    signIn(data);
+  const onSubmit: SubmitHandler<LoginFormValue> = async (data) => {
+    if (isLoading) {
+      return;
+    }
+    try {
+      setIsLoading(true);
+
+      saveUsername(data.mail);
+      await signIn(data);
+    } catch (error) {
+      console.error('Error: ', error);
+      setIsLoading(false);
+    } finally {
+      setIsLoading(false);
+    }
   };
   return {
     register,
@@ -36,5 +50,6 @@ export const useLoginForm = () => {
     handleClick,
     onSubmit,
     errors,
+    isLoading,
   };
 };

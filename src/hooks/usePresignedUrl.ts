@@ -1,4 +1,4 @@
-import { generateGetPresignedUrl, generatePutPresignedUrl } from '@/services';
+import { generateDeletePresignedUrl, generateGetPresignedUrl, generatePutPresignedUrl } from '@/services';
 import { useMutation } from '@tanstack/react-query';
 
 export const usePresignedUrl = () => {
@@ -15,9 +15,14 @@ export const usePresignedUrl = () => {
   });
 
   //  preSignedURL delete 링크 생성
+  const generateDeleteUrlMutation = useMutation({
+    mutationFn: generateDeletePresignedUrl,
+    onSuccess: () => {},
+  });
 
   return {
     generatePutUrl: generatePutUrlMutation.mutateAsync,
     generateGetUrl: generateGetUrlMutation.mutateAsync,
+    generateDeleteUrl: generateDeleteUrlMutation.mutateAsync,
   };
 };

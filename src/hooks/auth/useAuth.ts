@@ -34,6 +34,6 @@ export const useAuth = () => {
 
   return {
     register: registerMutation.mutate,
-    signIn: loginMutation.mutate,
+    signIn: loginMutation.mutateAsync,
   };
 };

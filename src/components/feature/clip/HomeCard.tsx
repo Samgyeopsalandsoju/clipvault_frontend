@@ -62,6 +62,9 @@ export const HomeCard = ({ title, category, link, forkedCount }: IClipResponse) 
                   'dark:text-text-placeholder-dark flex flex-row gap-[10px] items-center justify-center',
                   'hover:dark:text-text-primary-dark'
                 )}
+                onClick={(e) => {
+                  e.stopPropagation();
+                }}
               >
                 <GitFork size={16} /> {forkedCount}
               </div>
