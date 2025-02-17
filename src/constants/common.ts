@@ -17,5 +17,5 @@ export const MENU = [
   },
 ];
 
-export const VERSION = '1.3.0';
+export const VERSION = '1.8.0';
 export const LAST_UPDATE = '2025.02.07';
