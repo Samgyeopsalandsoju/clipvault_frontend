@@ -1,13 +1,11 @@
 import { privateAPI } from '@/libs';
 import { AxiosError } from 'axios';
-import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
+import { NextResponse, NextRequest } from 'next/server';
 
-export async function DELETE(request: NextRequest, { params }: { params: { share_id: string } }) {
+export async function DELETE(request: NextRequest, context: any) {
   try {
-    const parameters = await params;
-    const share_id = parameters.share_id;
-
+    const params = await context.params;
+    const { share_id } = params;
     console.info('@ /api/share-link/delete called', share_id);
 
     // api 요청

@@ -1,13 +1,17 @@
 import { privateAPI } from '@/libs';
 import { APIResponse, IClipResponse } from '@/types';
 import { AxiosError } from 'axios';
-import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
+import { NextResponse, NextRequest } from 'next/server';
 
-export async function GET(request: NextRequest, { params }: { params: { clip_id: string } }) {
-  const parameters = await params;
-  const clip_id = parameters.clip_id;
+type Props = {
+  params: {
+    clip_id: string;
+  };
+};
 
+export async function GET(request: NextRequest, context: any) {
+  const params = await context.params;
+  const { clip_id } = params;
   if (!clip_id) return NextResponse.json({ status: 500, message: 'clip_id does not exist' }, { status: 500 });
 
   try {

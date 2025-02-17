@@ -135,7 +135,7 @@ export const ShareLinkModal = ({ isOpen, setIsOpen, list }: ShareLinkModalProps)
           <button
             className={classNames(
               'dark:text-text-primary-dark border-solid border-[1px] p-[0.45rem] rounded-[8px]',
-              'text-[0.9rem] h-[40px] w-[64%] hover:dark:bg-background-secondary-dark active:scale-[0.97]',
+              'text-[0.9rem] h-[40px] w-[60%] hover:dark:bg-background-secondary-dark active:scale-[0.97]',
               {
                 visible: !shareLink,
                 invisible: !!shareLink,
@@ -173,6 +173,9 @@ const MypageButton = styled.button`
   border-radius: 8px;
   height: 40px;
   font-size: 0.9rem;
+  display: flex;
+  flex: 1;
+  justify-content: center;
   &:hover {
     color: ${(props) => props.theme.text.primary};
     border: 1px solid ${(props) => props.theme.border.divider};
