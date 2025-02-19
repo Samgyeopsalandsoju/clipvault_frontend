@@ -17,11 +17,16 @@ export const useNewClipForm = () => {
     register,
     trigger,
     handleSubmit,
+    watch,
     setValue,
+    setError,
+    clearErrors,
     formState: { errors },
   } = useForm<ICreateClip>({
     mode: 'onChange',
   });
+  const category = watch('category.name');
+  const visible = watch('visible');
 
   useEffect(() => {
     setIsClipPageOpen(true);
@@ -30,21 +35,33 @@ export const useNewClipForm = () => {
 
   //  새카테고리
   const handleCreateCategory = (category: ICategoryRequest): void => {
+    clearErrors(['category']);
     setValue('category', category);
   };
 
   // 카테고리 선택
   const handleCategorySelect = (category: ICategoryRequest): void => {
+    clearErrors(['category']);
     setValue('category', category);
   };
 
   // 공개 범위 선택
   const handleVisibilitySelect = (visibility: VisibilityType): void => {
+    clearErrors(['visible']);
     setValue('visible', visibility);
   };
 
   // 링크 생성
   const onSubmit = (data: ICreateClip): void => {
+    if (!visible) {
+      setError('visible', { type: 'manual', message: 'Visibility is required.' });
+      return;
+    }
+    if (!category) {
+      setError('category', { type: 'manual', message: 'Category is required.' });
+      return;
+    }
+
     create(data);
   };
 
@@ -56,6 +73,7 @@ export const useNewClipForm = () => {
     handleVisibilitySelect,
     handleCreateCategory,
     onSubmit,
+    watch,
     errors,
   };
 };

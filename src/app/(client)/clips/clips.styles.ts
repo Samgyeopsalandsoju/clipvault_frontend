@@ -55,7 +55,6 @@ export const DragHandleSection = styled(Stack)`
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
   max-width: 24rem;
   margin: 0 auto;
   width: 100%;

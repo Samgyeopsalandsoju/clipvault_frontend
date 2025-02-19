@@ -19,7 +19,15 @@ interface ShareLinkModalProps {
 }
 
 export const ShareLinkModal = ({ isOpen, setIsOpen, list }: ShareLinkModalProps) => {
-  const { register, handleSubmit, setValue, getValues } = useForm<IShareLinkRequest>();
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    getValues,
+    trigger,
+    reset,
+    formState: { errors },
+  } = useForm<IShareLinkRequest>();
   const { prepareFileData, upload } = useShareFile();
   const { postShareLink } = useShareLink();
   const { generatePutUrl } = usePresignedUrl();
@@ -75,6 +83,7 @@ export const ShareLinkModal = ({ isOpen, setIsOpen, list }: ShareLinkModalProps)
         setIsOpen(false);
         setShareLink('');
         setIsLoading(false);
+        reset();
       }}
       fullWidth
     >
@@ -118,12 +127,23 @@ export const ShareLinkModal = ({ isOpen, setIsOpen, list }: ShareLinkModalProps)
             <input
               className={classNames(
                 'flex flex-1 h-[40px] rounded-[8px] p-[10px] dark:text-text-primary-dark',
-                'dark:bg-background-secondary-dark border-solid border-[1px] dark:border-border-focus-dark'
+                'dark:bg-background-secondary-dark border-solid border-[1px]',
+                {
+                  'dark:border-border-focus-dark': !errors.title,
+                  'border-[#f44336]': !!errors.title,
+                }
               )}
               {...register('title', {
                 required: 'title is required',
                 maxLength: { value: 10, message: 'up to 10 letters' },
+                onChange: (e) => {
+                  const value = e.target.value;
+                  if (value.length > 10) {
+                    e.target.value = value.slice(0, 10);
+                  }
+                },
               })}
+              onBlur={() => trigger('title')}
               placeholder="Title"
             />
             <ExpiryDateSelector onSelect={handleSelect} />

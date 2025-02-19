@@ -55,7 +55,7 @@ export const LoginForm = () => {
             type="submit"
             disabled={isLoading}
           >
-            {isLoading ? <Loader className="animate-spin dark:text-text-primary-dark h-[18px]" /> : 'login'}
+            {isLoading ? <Loader className="animate-spin dark:text-text-primary-dark h-[17px]" /> : 'login'}
           </button>
         </form>
       </div>
