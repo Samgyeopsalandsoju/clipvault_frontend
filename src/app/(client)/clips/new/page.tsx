@@ -68,7 +68,7 @@ export default function ClipNewPage() {
         <div>
           <TextArea
             $error={!!errors.link}
-            placeholder="Link"
+            placeholder="https:// or http://"
             {...register('link', {
               required: 'Paste your link here',
             })}

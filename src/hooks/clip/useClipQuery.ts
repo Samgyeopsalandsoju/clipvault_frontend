@@ -76,7 +76,7 @@ export const useClipQuery = (rawId?: string | string[] | undefined) => {
     clip: {
       clip: getClipQuery.data,
       isClipLoading: getClipQuery.isPending,
-      create: createClipMutation.mutate,
+      create: createClipMutation.mutateAsync,
       modify: modifyClipMutation.mutate,
       delete: deleteClipMutation.mutate,
     },

@@ -2,17 +2,19 @@
 
 import { useForm } from 'react-hook-form';
 import { useEffect } from 'react';
-import { useClipQuery } from '@/hooks';
+import { useClipQuery, useSafeBrowsingApiQuery } from '@/hooks';
 import { ICategoryRequest, ICreateClip, VisibilityType } from '@/types';
-import { createClipValidator } from '@/utils';
 import { useClipPageStore } from '@/stores';
+import { checkProtocol, filterXSSInUrl, isValidURLFormat, normalizeUrl } from '@/utils/link';
+import { createToast } from '@/libs';
 
 export const useNewClipForm = () => {
   const { setIsOpen: setIsClipPageOpen } = useClipPageStore();
-  const validator = createClipValidator();
   const {
     clip: { create },
   } = useClipQuery();
+
+  const { validate } = useSafeBrowsingApiQuery();
   const {
     register,
     trigger,
@@ -27,6 +29,7 @@ export const useNewClipForm = () => {
   });
   const category = watch('category.name');
   const visible = watch('visible');
+  const toast = createToast();
 
   useEffect(() => {
     setIsClipPageOpen(true);
@@ -51,8 +54,29 @@ export const useNewClipForm = () => {
     setValue('visible', visibility);
   };
 
+  const validateLink = (link: string) => {
+    const isValidUrl = isValidURLFormat(link);
+    const isValidXSS = filterXSSInUrl(link);
+    const isValidProtocol = checkProtocol(link);
+    if (!isValidUrl.isValid) {
+      return isValidUrl;
+    }
+    if (!isValidXSS.isValid) {
+      return isValidXSS;
+    }
+
+    if (!isValidProtocol.isValid) {
+      return isValidProtocol;
+    }
+
+    return {
+      isValid: true,
+      message: 'Valid and safe URL',
+    };
+  };
+
   // 링크 생성
-  const onSubmit = (data: ICreateClip): void => {
+  const onSubmit = async (data: ICreateClip) => {
     if (!visible) {
       setError('visible', { type: 'manual', message: 'Visibility is required.' });
       return;
@@ -61,8 +85,20 @@ export const useNewClipForm = () => {
       setError('category', { type: 'manual', message: 'Category is required.' });
       return;
     }
+    const normalizedUrl = normalizeUrl(data.link);
+    const { isValid, message } = validateLink(normalizedUrl);
 
-    create(data);
+    if (!isValid) {
+      toast.error(message);
+      return;
+    }
+
+    const { matches } = await validate({ url: normalizedUrl });
+    if (matches.length > 0) {
+      toast.error('Warning: This URL may be harmful');
+    } else {
+      await create(data);
+    }
   };
 
   return {

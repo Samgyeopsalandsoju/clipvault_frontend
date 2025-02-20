@@ -1,10 +1,32 @@
 import { publicAPI } from '@/libs';
 import { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
+import GoogleProvider from 'next-auth/providers/google';
 
 export const authOptions: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   providers: [
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+      async profile(profile) {
+        console.log('profile', profile);
+
+        // 구글 로그인 후 받은 프로필에서 id_token을 사용해 백엔드 서버에 요청
+        // const res = await fetch('https://your-backend-server.com/api/auth/google', {
+        //   method: 'POST',
+        //   body: JSON.stringify({ id_token: profile.id_token }), // 구글에서 받은 id_token을 서버에 전달
+        //   headers: {
+        //     'Content-Type': 'application/json',
+        //   },
+        // });
+
+        // const { token } = await res.json(); // 백엔드에서 반환한 서비스 토큰을 받아옴
+
+        // // 토큰을 포함한 프로필 반환
+        return { ...profile };
+      },
+    }),
     CredentialsProvider({
       name: 'Credentials',
       credentials: {

@@ -13,12 +13,12 @@ export const SessionManager = () => {
 
   useEffect(() => {
     if (!session) return;
-
     // useRef로 설정된 값을 값이 변경되도 리렌더링이 안되며 다른 요인으로 리렌더링이 일어나도
     // 값이 초기화 되지 않는다.
     const resetTimer = () => {
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
       timeoutRef.current = setTimeout(() => {
+        console.log('resetTimer called');
         signOut();
         router.push('/home');
       }, THIRTY_MIN);

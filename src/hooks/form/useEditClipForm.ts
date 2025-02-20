@@ -64,6 +64,7 @@ export const useEditClipForm = () => {
   const onSubmit: SubmitHandler<IModifyClip> = (data): void => {
     modify(data);
   };
+
   return {
     handleClipClick,
     register,
