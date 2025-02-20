@@ -6,7 +6,7 @@ import { useCategoryQuery } from '@/hooks';
 import { CategoryCard } from '@/components';
 import { memo, useEffect, useState } from 'react';
 import { ICategoryResponse } from '@/types';
-import { Plus } from 'lucide-react';
+import { Plus, Loader2 } from 'lucide-react';
 import classNames from 'classnames';
 import { generateModernTagColors } from '@/utils';
 
@@ -54,7 +54,20 @@ export const CategoryList = () => {
     });
   };
 
-  if (loading) return <div className="dark:text-text-placeholder-dark">Loading... </div>;
+  // 카드 색상 업데이트 함수
+  const updateCardColor = (id: string, newColor: string) => {
+    const updatedCategories = categories.map((category) =>
+      category.id === id ? { ...category, color: newColor } : category
+    );
+    setCategories(updatedCategories);
+  };
+
+  if (loading)
+    return (
+      <div className="h-[300px] w-hull flex justify-center items-center dark:text-text-placeholder-dark">
+        <Loader2 className="animate-spin h-[60px] w-[60px]" />
+      </div>
+    );
 
   return (
     <DndContext
@@ -70,7 +83,7 @@ export const CategoryList = () => {
         <div className="flex flex-col gap-4">
           {categories &&
             categories.map((category, index) => {
-              return <MemorizedCard {...category} key={index} />;
+              return <MemorizedCard {...category} key={index} onChangeColor={updateCardColor} />;
             })}
 
           {categories.length < MAX_CATEGORY_COUNT && (

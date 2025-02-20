@@ -5,17 +5,13 @@ import { generateModernTagColors } from '@/utils';
 import { useSortable } from '@dnd-kit/sortable';
 import classNames from 'classnames';
 import { Pen, GripVertical, RefreshCcw } from 'lucide-react';
-import { useState } from 'react';
 
-interface ICategoryCardProps extends ICategoryResponse {}
+interface ICategoryCardProps extends ICategoryResponse {
+  onChangeColor: (id: string, newColor: string) => void;
+}
 
-export const CategoryCard = ({ id, color, name }: ICategoryCardProps) => {
+export const CategoryCard = ({ id, color, name, onChangeColor }: ICategoryCardProps) => {
   const { background, text, border } = generateModernTagColors(Number(color));
-  const [cardColor, setCardColor] = useState<{ background: string; text: string; border: string }>({
-    background,
-    text,
-    border,
-  });
   const { attributes, listeners, setNodeRef, transform, transition, isDragging, setActivatorNodeRef } = useSortable({
     id,
   });
@@ -32,8 +28,8 @@ export const CategoryCard = ({ id, color, name }: ICategoryCardProps) => {
   };
 
   const handleChangeColor = () => {
-    const color = generateModernTagColors();
-    setCardColor({ background: color.background, text: color.text, border: color.border });
+    const newColor = generateModernTagColors();
+    onChangeColor(id, String(newColor.colorHue)); // 상위 상태 업데이트
   };
 
   return (
@@ -53,14 +49,14 @@ export const CategoryCard = ({ id, color, name }: ICategoryCardProps) => {
       <div
         className={classNames('border-solid border-[1px] flex justify-between px-4 py-2', 'rounded-xl w-full')}
         style={{
-          backgroundColor: cardColor.background,
-          borderColor: cardColor.border,
+          backgroundColor: background,
+          borderColor: border,
         }}
       >
         <div
           className="dark:text-text-primary-dark select-none cursor-pointer active:rotate-180 transition-transform duration-200"
           style={{
-            color: cardColor.text,
+            color: text,
           }}
           onClick={handleChangeColor}
         >
@@ -69,7 +65,7 @@ export const CategoryCard = ({ id, color, name }: ICategoryCardProps) => {
         <div
           className="dark:text-text-primary-dark select-none"
           style={{
-            color: cardColor.text,
+            color: text,
           }}
         >
           {name}
