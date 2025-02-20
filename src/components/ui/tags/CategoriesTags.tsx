@@ -6,7 +6,7 @@ import { ChevronDown, ChevronUp } from 'lucide-react';
 import classNames from 'classnames';
 import { ICategoryResponse } from '@/types';
 import { useOverflowDetection } from '@/hooks';
-import { TabTag } from './Tag';
+import { TabTag, CategoryManageTag } from '@/components';
 import { generateModernTagColors } from '@/utils';
 
 interface ICategoriesTabsProps {
@@ -51,7 +51,7 @@ export const CategoriesTags = ({ categories, onSelect }: ICategoriesTabsProps) =
             </TabTag>
           );
         })}
-
+        <CategoryManageTag />
         <ExpansionButtonContainer>
           <ExpansionButton
             $isExpanded={isExpanded}

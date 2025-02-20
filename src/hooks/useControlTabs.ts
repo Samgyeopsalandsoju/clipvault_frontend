@@ -26,6 +26,10 @@ export const useControlTabs = () => {
   const isActive = (path: string): boolean => {
     const currentPath = params.split('/')[1];
     const menuPath = path.split('/')[1];
+    if (currentPath === 'category' && menuPath === 'clips') {
+      return true;
+    }
+
     return currentPath === menuPath;
   };
   return {
