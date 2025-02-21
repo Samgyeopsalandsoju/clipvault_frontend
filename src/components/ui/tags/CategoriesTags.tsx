@@ -15,7 +15,7 @@ interface ICategoriesTabsProps {
 }
 
 export const CategoriesTags = ({ categories, onSelect }: ICategoriesTabsProps) => {
-  const { containerRef, contentRef, isExpanded, needsExpansion, setIsExpanded } = useOverflowDetection({
+  const { containerRef, contentRef, isExpanded, setIsExpanded } = useOverflowDetection({
     data: categories,
   });
   return (

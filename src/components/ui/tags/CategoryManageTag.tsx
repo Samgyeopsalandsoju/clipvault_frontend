@@ -4,8 +4,9 @@ import classNames from 'classnames';
 import { TabTag } from './Tag';
 import { PencilLine } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { withHideOnPaths } from '@/hoc/withHideOnPaths';
 
-export const CategoryManageTag = () => {
+export const CategoryManageTag = withHideOnPaths(['/share'])(() => {
   const router = useRouter();
 
   return (
@@ -22,4 +23,4 @@ export const CategoryManageTag = () => {
       <PencilLine size={20} />
     </TabTag>
   );
-};
+});
