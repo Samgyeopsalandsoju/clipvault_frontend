@@ -4,14 +4,23 @@ import { ICategoryResponse } from '@/types';
 import { generateModernTagColors } from '@/utils';
 import { useSortable } from '@dnd-kit/sortable';
 import classNames from 'classnames';
-import { Pen, GripVertical, RefreshCcw } from 'lucide-react';
+import { GripVertical } from 'lucide-react';
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
+import { ModifyMode, NormalMode } from '@/components';
 
 interface ICategoryCardProps extends ICategoryResponse {
   onChangeColor: (id: string, newColor: string) => void;
+  onChangeName: (id: string, newName: string) => void;
+  onDelete: () => void;
 }
 
-export const CategoryCard = ({ id, color, name, onChangeColor }: ICategoryCardProps) => {
-  const { background, text, border } = generateModernTagColors(Number(color));
+export const CategoryCard = ({ id, color, name, onChangeColor, onChangeName, onDelete }: ICategoryCardProps) => {
+  const { background: bgColor, text: textColor, border: borderColor } = generateModernTagColors(Number(color));
+  const [isEditing, setIsEditing] = useState<boolean>(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [tempColor, setTempColor] = useState(color);
+  const [newName, setNewName] = useState<string>(name);
+
   const { attributes, listeners, setNodeRef, transform, transition, isDragging, setActivatorNodeRef } = useSortable({
     id,
   });
@@ -27,10 +36,37 @@ export const CategoryCard = ({ id, color, name, onChangeColor }: ICategoryCardPr
     zIndex: isDragging ? 1 : 0,
   };
 
-  const handleChangeColor = () => {
-    const newColor = generateModernTagColors();
-    onChangeColor(id, String(newColor.colorHue)); // 상위 상태 업데이트
+  // 색 변경 부모 컴포넌트에 바로 업데이트
+  const handleChangeColor = (): void => {
+    const newColor = generateModernTagColors().colorHue;
+    onChangeColor(id, String(newColor));
   };
+
+  // 수정 모드 오픈
+  const handleOpenEditingMode = (): void => {
+    setIsEditing(true);
+    setTempColor(color);
+  };
+
+  // 수정 캔슬
+  const handleCancel = (): void => {
+    setTempColor(color);
+    onChangeColor(id, tempColor);
+    setIsEditing(false);
+  };
+
+  // 수정 삭제
+  const handleSave = (): void => {
+    onChangeName(id, newName);
+    setIsEditing(false);
+  };
+
+  // 수정 모드 집입시 인풋 포커싱
+  useEffect(() => {
+    if (isEditing) {
+      inputRef.current?.focus();
+    }
+  }, [isEditing]);
 
   return (
     <div
@@ -49,35 +85,28 @@ export const CategoryCard = ({ id, color, name, onChangeColor }: ICategoryCardPr
       <div
         className={classNames('border-solid border-[1px] flex justify-between px-4 py-2', 'rounded-xl w-full')}
         style={{
-          backgroundColor: background,
-          borderColor: border,
+          backgroundColor: bgColor,
+          borderColor: borderColor,
         }}
       >
-        <div
-          className="dark:text-text-primary-dark select-none cursor-pointer active:rotate-180 transition-transform duration-200"
-          style={{
-            color: text,
-          }}
-          onClick={handleChangeColor}
-        >
-          <RefreshCcw />
-        </div>
-        <div
-          className="dark:text-text-primary-dark select-none"
-          style={{
-            color: text,
-          }}
-        >
-          {name}
-        </div>
-        <div
-          className={classNames(
-            'dark:text-text-placeholder-dark cursor-pointer hover:dark:text-text-primary-dark select-none',
-            'flex justify-center items-center'
-          )}
-        >
-          <Pen size={18} />
-        </div>
+        {isEditing ? (
+          <ModifyMode
+            inputRef={inputRef}
+            newName={newName}
+            onChangeName={(e: ChangeEvent<HTMLInputElement>) => {
+              const { value } = e.currentTarget;
+              if (value.length > 10) return;
+              setNewName(e.currentTarget.value);
+            }}
+            onChangeColor={handleChangeColor}
+            onSave={handleSave}
+            onCancel={handleCancel}
+            text={textColor}
+            border={borderColor}
+          />
+        ) : (
+          <NormalMode name={name} text={textColor} onDelete={onDelete} onEdit={handleOpenEditingMode} />
+        )}
       </div>
     </div>
   );

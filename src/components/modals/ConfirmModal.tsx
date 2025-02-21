@@ -22,10 +22,11 @@ export const ConfirmModal = ({ setIsOpen, text, onCancel, onAgree }: ConfirmModa
           className={classNames(
             'fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2',
             'w-[350px] h-[180px] border-solid border-[1px] dark:border-border-divider-dark',
-            'rounded-xl flex flex-col justify-center items-center select-none gap-8 z-[9999]'
+            'rounded-xl flex flex-col justify-center items-center select-none gap-8 z-[9999]',
+            'dark:bg-background-primary-dark p-3'
           )}
         >
-          <h3 className="dark:text-text-primary-dark text-xl">{text}</h3>
+          <p className="dark:text-text-primary-dark text-[1.3rem] text-center">{text}</p>
           <div className="flex gap-6">
             <button
               type="button"
