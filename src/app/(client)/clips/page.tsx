@@ -36,7 +36,9 @@ const ClipsPage = () => {
         <SkeletonUI.Tag />
       ) : (
         <>
-          {!!filteredClipsList.length && <CategoriesTags categories={categoryList} onSelect={setSelectedCategoryId} />}
+          {!!filteredClipsList.length && (
+            <CategoriesTags categories={categoryList || []} onSelect={setSelectedCategoryId} />
+          )}
         </>
       )}
 

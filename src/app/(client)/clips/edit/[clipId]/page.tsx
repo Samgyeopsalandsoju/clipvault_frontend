@@ -66,7 +66,7 @@ export default function Page() {
         ) : (
           <>
             <VisibilityDropdown onSelect={handleVisibilitySelect} visible={visible as VisibilityType} />
-            <ModifyDropdown onSelect={handleCategorySelect} categories={categoryList} category={category} />
+            <ModifyDropdown onSelect={handleCategorySelect} categories={categoryList || []} category={category} />
             <input
               className={classNames(
                 'w-full py-3 px-4 rounded-[0.5rem] border-solid border-[1px] dark:border-border-secondary-dark',

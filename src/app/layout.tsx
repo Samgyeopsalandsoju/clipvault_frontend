@@ -7,8 +7,32 @@ import '@/styles/TailwindStyle.css';
 import { SessionManager } from '@/components/SessionManager';
 
 export const metadata: Metadata = {
-  title: 'clipVault',
-  description: 'save and share',
+  title: 'ClipVault',
+  description: "Explore the community's curated links",
+  metadataBase: new URL('https://clipvault.info'),
+  openGraph: {
+    title: '📎 clipVault',
+    description: 'Save, share, and explore your favorite links.',
+    url: 'https://clipvault.info',
+    siteName: 'clipVault',
+    images: [
+      {
+        url: '/meta.png', // public 폴더에 저장된 이미지 경로
+        width: 1200,
+        height: 630,
+      },
+    ],
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: '📎 clipVault',
+    description: 'Save, share, and explore your favorite links.',
+    images: ['/meta.png'], // public 폴더에 저장된 이미지 경로
+  },
+  icons: {
+    icon: '/clipvault-favicon.svg',
+  },
 };
 
 export default function RootLayout({

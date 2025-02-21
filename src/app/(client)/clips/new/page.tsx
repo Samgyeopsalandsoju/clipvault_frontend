@@ -38,7 +38,7 @@ export default function ClipNewPage() {
           <CategoryDropdown
             onSelect={handleCategorySelect}
             onCreator={handleCreateCategory}
-            categories={categoryList}
+            categories={categoryList || []}
           />
           <span className="text-[#f44336] py-1 pl-2 text-xs">{errors.category?.message || ' '}</span>
         </div>
