@@ -64,17 +64,16 @@ export const HomeCard = ({ id, title, category, link, forkedCount, isForking, on
                 </div>
                 <p className="text-[0.75rem] truncate text-[#a1a1aa] select-none">{link}</p>
               </div>
-              <div className="min-w-[64px] h-full flex flex-col justify-end">
-                {/* {/* <div className="h-full flex flex-col justify-between"> */}
-                <div className="flex flex-row opacity-50 hover:opacity-100">
-                  <div
-                    className={classNames('dark:text-text-primary-dark p-2 pb-0')}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setForkCount((prev) => prev + 1);
-                      onFork(id);
-                    }}
-                  >
+              <div className="min-w-[64px] h-full flex flex-col justify-end ">
+                <div
+                  className="flex flex-row opacity-50 hover:opacity-100"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setForkCount((prev) => prev + 1);
+                    onFork(id);
+                  }}
+                >
+                  <div className={classNames('dark:text-text-primary-dark p-2 pb-0')}>
                     <Bookmark size={16} />
                   </div>
                   <p
@@ -86,7 +85,6 @@ export const HomeCard = ({ id, title, category, link, forkedCount, isForking, on
                     {forkCount}
                   </p>
                 </div>
-                {/* </div> */}
               </div>
             </div>
           </div>
