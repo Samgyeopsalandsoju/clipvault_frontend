@@ -11,4 +11,3 @@ export * from './useControlTabs';
 export * from './useDebounce';
 export * from './useOverflowDetection';
 export * from './usePresignedUrl';
-export * from './useStateQuery';
