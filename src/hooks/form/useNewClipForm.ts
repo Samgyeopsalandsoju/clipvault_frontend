@@ -94,7 +94,7 @@ export const useNewClipForm = () => {
     }
 
     const { matches } = await validate({ url: normalizedUrl });
-    if (matches.length > 0) {
+    if (matches && matches.length > 0) {
       toast.error('Warning: This URL may be harmful');
     } else {
       await create(data);

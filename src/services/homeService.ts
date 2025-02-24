@@ -1,8 +1,7 @@
-import { IClipResponse } from '@/types';
-import axios from 'axios';
+import { api } from '@/libs';
+import { APIResponse, IClipResponse } from '@/types';
 
 export const getHomeClips = async () => {
-  // const response = await axios.get<IClipResponse[]>(`http://localhost:3001/home`);
-  // return response.data;
-  return null;
+  const response = await api.get<APIResponse<IClipResponse[]>>(`/clip/public-get`);
+  return response.data.body;
 };

@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     siteName: 'clipVault',
     images: [
       {
-        url: '/meta.png', // public 폴더에 저장된 이미지 경로
+        url: '/meta.png',
         width: 1200,
         height: 630,
       },
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: '📎 clipVault',
     description: 'Save, share, and explore your favorite links.',
-    images: ['/meta.png'], // public 폴더에 저장된 이미지 경로
+    images: ['/meta.png'],
   },
   icons: {
     icon: '/clipvault-favicon.svg',

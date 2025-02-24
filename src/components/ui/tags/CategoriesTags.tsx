@@ -79,15 +79,6 @@ const ExpansionButtonContainer = styled(Stack)`
   background: rgba(40, 40, 40, 0.8);
   backdrop-filter: blur(8px);
   padding: 2px;
-
-  &::before {
-    content: '';
-    position: absolute;
-    right: 100%;
-    top: 0;
-    height: 100%;
-    width: 24px;
-  }
 `;
 
 const ExpansionButton = styled(Button)<{ $isExpanded: boolean }>`

@@ -1,5 +1,12 @@
+import { ClientForkComponents, TitleSection } from '@/components';
+
 const ForksPage = () => {
-  return <>Forks</>;
+  return (
+    <>
+      <TitleSection />
+      <ClientForkComponents />
+    </>
+  );
 };
 
 export default ForksPage;

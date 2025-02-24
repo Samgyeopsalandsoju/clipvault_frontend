@@ -1,10 +1,12 @@
 import { StatCount } from '@/components/ui';
+import { useStateQuery } from '@/hooks';
 
 export const StatCountSection = () => {
+  const { counts } = useStateQuery();
   return (
     <div className="flex items-center justify-evenly">
-      <StatCount title={'Total Clips'} count={10} />
-      <StatCount title={'Total Shared'} count={20} />
+      <StatCount title={'Total Clips'} count={counts?.clipCount || 0} />
+      <StatCount title={'Total Shared'} count={counts?.shareCount || 0} />
     </div>
   );
 };

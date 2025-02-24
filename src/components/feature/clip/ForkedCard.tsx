@@ -2,11 +2,23 @@
 
 import { ExternalLink, Copy, Bookmark } from 'lucide-react';
 import { generateModernTagColors, handleCopy, openInNewTab } from '@/utils';
-import { IClipResponse } from '@/types/clip';
+import { IForkedClipResponse } from '@/types';
 import classNames from 'classnames';
 
-export const ClipCard = ({ title, category, link, visible, forkedCount }: IClipResponse) => {
-  const { background, text, border } = generateModernTagColors(Number(category.color));
+interface IForkedCardProps extends IForkedClipResponse {
+  onDelete: (data: { clipId: string; forkId: string }) => void;
+}
+
+export const ForkedCard = ({
+  categoryColor,
+  categoryName,
+  clipId,
+  clipLink,
+  clipTitle,
+  id,
+  onDelete,
+}: IForkedCardProps) => {
+  const { background, text, border } = generateModernTagColors(Number(categoryColor));
 
   return (
     <div className="relative w-full h-[93px] max-w-md mx-auto p-0 hover:scale-[1.03]">
@@ -15,15 +27,12 @@ export const ClipCard = ({ title, category, link, visible, forkedCount }: IClipR
           ' w-full h-full',
           'absolute cursor-pointer p-4 rounded-[0.75rem]',
           'backdrop-blur transition-all duration-200',
-          'hover:dark:bg-background-secondary-dark',
-          {
-            'dark:bg-background-secondaryWithOpacity-dark': !(visible === 'public'),
-          }
+          'hover:dark:bg-background-secondary-dark'
         )}
         style={{
-          backgroundColor: visible === 'public' ? background : undefined,
-          borderColor: visible === 'public' ? border : undefined,
-          borderWidth: visible === 'public' ? '2px' : undefined,
+          backgroundColor: background,
+          borderColor: border,
+          borderWidth: '2px',
           backfaceVisibility: 'hidden',
         }}
       >
@@ -40,11 +49,11 @@ export const ClipCard = ({ title, category, link, visible, forkedCount }: IClipR
                   color: text,
                 }}
               >
-                {category.name}
+                {categoryName}
               </p>
-              <p className="text-sm font-medium truncate dark:text-text-primary-dark select-none">{title}</p>
+              <p className="text-sm font-medium truncate dark:text-text-primary-dark select-none">{clipTitle}</p>
             </div>
-            <p className="text-[0.75rem] truncate text-[#a1a1aa] select-none">{link}</p>
+            <p className="text-[0.75rem] truncate text-[#a1a1aa] select-none">{clipLink}</p>
           </div>
           <div className="min-w-[32px]">
             <div className="flex flex-row">
@@ -63,11 +72,11 @@ export const ClipCard = ({ title, category, link, visible, forkedCount }: IClipR
                   'dark:text-text-primary-dark',
                   'opacity-0 group-hover:opacity-100',
                   'transition-opacity duration-500',
-                  'max-md:opacity-30 '
+                  'max-md:opacity-30'
                 )}
                 onClick={(e) => {
                   e.stopPropagation();
-                  handleCopy(link);
+                  handleCopy(clipLink);
                 }}
               >
                 <Copy size={16} />
@@ -91,32 +100,26 @@ export const ClipCard = ({ title, category, link, visible, forkedCount }: IClipR
                 )}
                 onClick={(e) => {
                   e.stopPropagation();
-                  openInNewTab(link);
+                  openInNewTab(clipLink);
                 }}
               >
                 <ExternalLink size={16} />
               </button>
             </div>
-            {visible === 'public' && (
-              <div className="flex flex-row">
-                <div
-                  className={classNames(
-                    'flex flex-row gap-[5px] items-center justify-end w-full',
-                    'dark:text-text-primary-dark pr-2 pt-2'
-                  )}
-                >
-                  <Bookmark size={16} fill="currentColor" />
-                </div>
-                <p
-                  className={classNames(
-                    'flex flex-row gap-[5px] items-end w-full leading-none',
-                    'dark:text-text-primary-dark pr-2 pt-2 text-[15px]'
-                  )}
-                >
-                  {forkedCount}
-                </p>
+            <div className="flex flex-1 flex-row">
+              <div
+                className={classNames(
+                  'flex flex-row gap-[5px] items-center justify-end w-full',
+                  'dark:text-text-primary-dark pr-2 pt-2'
+                )}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onDelete({ clipId, forkId: id });
+                }}
+              >
+                <Bookmark size={16} fill="currentColor" />
               </div>
-            )}
+            </div>
           </div>
         </div>
       </div>

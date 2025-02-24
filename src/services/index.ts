@@ -6,3 +6,5 @@ export * from './shareService';
 export * from './verifyCodeService';
 export * from './categoryService';
 export * from './s3Service';
+export * from './forkService';
+export * from './stateService';
