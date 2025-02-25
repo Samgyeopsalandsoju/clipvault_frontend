@@ -66,29 +66,32 @@ export default function Page() {
           </button>
         </div>
       </div>
-      <form className="flex flex-col gap-[1rem] max-w-[24rem] m-auto w-full]" onSubmit={handleSubmit(onSubmit)}>
+      <form className="flex flex-col max-w-[24rem] m-auto w-full" onSubmit={handleSubmit(onSubmit)}>
         {loading || isClipLoading ? (
           <>
             <SkeletonUI.Edit />
           </>
         ) : (
           <>
+            <div>
+              <div
+                className={classNames(
+                  'w-full px-4 py-3 rounded-[0.5rem] border-solid border-[1px] focus:outline-none focus:dark:border-border-focus-dark',
+                  'dark:placeholder-text-placeholder-dark dark:border-border-secondary-dark dark:bg-background-primary-dark',
+                  'dark:text-text-primary-dark'
+                )}
+              >
+                {visible}
+              </div>
+              <span className="text-yellow-500 text-sm py-1 pl-2">Visibility cannot be edited.</span>
+            </div>
             {isPublic ? (
               <>
                 <div
                   className={classNames(
                     'w-full px-4 py-3 rounded-[0.5rem] border-solid border-[1px] focus:outline-none focus:dark:border-border-focus-dark',
                     'dark:placeholder-text-placeholder-dark dark:border-border-secondary-dark dark:bg-background-secondary-dark',
-                    'dark:text-text-primary-dark'
-                  )}
-                >
-                  {visible}
-                </div>
-                <div
-                  className={classNames(
-                    'w-full px-4 py-3 rounded-[0.5rem] border-solid border-[1px] focus:outline-none focus:dark:border-border-focus-dark',
-                    'dark:placeholder-text-placeholder-dark dark:border-border-secondary-dark dark:bg-background-secondary-dark',
-                    'dark:text-text-primary-dark'
+                    'dark:text-text-primary-dark mb-[20px]'
                   )}
                   style={{
                     backgroundColor: background,
@@ -100,8 +103,9 @@ export default function Page() {
               </>
             ) : (
               <>
-                <VisibilityDropdown onSelect={handleVisibilitySelect} visible={visible as VisibilityType} />
-                <ModifyDropdown onSelect={handleCategorySelect} categories={categoryList || []} category={category} />
+                <div className="mb-[20px]">
+                  <ModifyDropdown onSelect={handleCategorySelect} categories={categoryList || []} category={category} />
+                </div>
               </>
             )}
 
@@ -109,7 +113,7 @@ export default function Page() {
               className={classNames(
                 'w-full py-3 px-4 rounded-[0.5rem] border-solid border-[1px] dark:border-border-secondary-dark',
                 'dark:bg-background-secondary-dark dark:text-text-primary-dark dark:placeholder-text-placeholder-dark',
-                'focus:outline-none focus:dark:border-border-focus-dark'
+                'focus:outline-none focus:dark:border-border-focus-dark mb-[20px]'
               )}
               placeholder="Clip Title"
               maxLength={30}
@@ -124,10 +128,10 @@ export default function Page() {
             />
             <textarea
               className={classNames(
-                'w-full py-3 px-4 min-h-[100px] resize-none rounded-[0.5rem]',
+                'w-full py-3 px-4 min-h-[150px] resize-none rounded-[0.5rem]',
                 'border-solid border-[1px] dark:border-border-secondary-dark dark:text-text-primary-dark',
                 'dark:bg-background-secondary-dark dark:placeholder-text-placeholder-dark',
-                'focus:dark:border-border-focus-dark focus:outline-none'
+                'focus:dark:border-border-focus-dark focus:outline-none mb-[20px]'
               )}
               placeholder="Link"
               {...register('link', {
@@ -136,7 +140,6 @@ export default function Page() {
               onBlur={() => trigger('title')}
               disabled={isPublic}
             />
-            {isPublic && <div className="text-yellow-500 text-sm text-center">Public clips cannot be edited.</div>}
           </>
         )}
 

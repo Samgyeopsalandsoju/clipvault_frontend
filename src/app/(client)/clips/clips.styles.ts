@@ -85,7 +85,7 @@ export const TextArea = styled.textarea<{ $error: boolean }>`
   border: 1px solid ${(props) => props.theme.border.secondary};
   border-radius: 0.5rem;
   color: ${(props) => props.theme.text.primary};
-  min-height: 100px;
+  min-height: 125px;
   resize: none;
 
   &::placeholder {

@@ -33,7 +33,13 @@ export default function ClipNewPage() {
       <Form onSubmit={handleSubmit(onSubmit)}>
         <div>
           <VisibilityDropdown onSelect={handleVisibilitySelect} />
-          <span className="text-[#f44336] py-1 pl-2 text-xs">{errors.visible?.message || ' '}</span>
+          {errors.visible ? (
+            <span className="text-[#f44336] py-1 pl-2 text-xs">{errors.visible?.message}</span>
+          ) : watch('visible') ? (
+            <span className="text-yellow-500 text-sm py-1 pl-2">Visibility cannot be edited.</span>
+          ) : (
+            <span className="py-1 pl-2">&nbsp;</span>
+          )}
         </div>
         <div>
           <CategoryDropdown

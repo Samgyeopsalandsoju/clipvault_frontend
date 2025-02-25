@@ -1,6 +1,6 @@
 interface StatCountProps {
   title: string;
-  count: number;
+  count: string;
 }
 
 export const StatCount = ({ title, count }: StatCountProps) => {
