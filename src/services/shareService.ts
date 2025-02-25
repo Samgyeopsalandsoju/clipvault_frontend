@@ -1,10 +1,17 @@
 import { api } from '@/libs/api';
 import { APIResponse, IShareLinkRequest, IShareLinkResponse } from '@/types';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 
 export const fetchShareFileData = async ({ url }: { url: string }) => {
-  const response = await axios.get(url);
-  return response.data;
+  try {
+    const response = await axios.get(url);
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error) && error.response?.status === 404) {
+      return null;
+    }
+    throw error;
+  }
 };
 
 export const uploadShareLink = async (data: IShareLinkRequest) => {
