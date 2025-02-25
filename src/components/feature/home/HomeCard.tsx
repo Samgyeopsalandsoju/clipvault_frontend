@@ -1,9 +1,9 @@
 'use client';
 
 import { IClipResponse } from '@/types/clip';
-import { Bookmark } from 'lucide-react';
+import { Bookmark, Copy, ExternalLink } from 'lucide-react';
 import classNames from 'classnames';
-import { generateModernTagColors } from '@/utils';
+import { generateModernTagColors, handleCopy, openInNewTab } from '@/utils';
 import { useState } from 'react';
 
 interface HomeCardProps extends IClipResponse {
@@ -15,8 +15,6 @@ export const HomeCard = ({ id, title, category, link, forkedCount, isForking, on
   const [isFlipped, setIsFlipped] = useState(false);
   const [forkCount, setForkCount] = useState(forkedCount);
   const { background, text, border } = generateModernTagColors(Number(category.color));
-
-  const handleClickFork = () => {};
 
   return (
     <div className="relative w-full h-[93px] max-w-md mx-auto p-0 hover:scale-[1.03]">
@@ -67,8 +65,34 @@ export const HomeCard = ({ id, title, category, link, forkedCount, isForking, on
                 <p className="text-[0.75rem] truncate text-[#a1a1aa] select-none">{link}</p>
               </div>
               <div className="min-w-[64px] h-full flex flex-col justify-end ">
+                <div className="flex flex-row w-full justify-end">
+                  <button
+                    className={classNames(
+                      'rounded-full p-2',
+                      'hover:bg-black/[0.04]',
+                      'active:bg-black/[0.1]',
+                      'dark:hover:bg-white/[0.08]',
+                      'dark:active:bg-white/[0.12]',
+                      'transition-colors duration-200',
+                      'relative overflow-hidden',
+                      'disabled:opacity-50',
+                      'disabled:pointer-events-none',
+                      'inline-flex items-center justify-center',
+                      'dark:text-text-primary-dark',
+                      'max-md:opacity-30',
+                      'opacity-0 group-hover:opacity-100',
+                      'transition-opacity duration-500'
+                    )}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      openInNewTab(link);
+                    }}
+                  >
+                    <ExternalLink size={16} />
+                  </button>
+                </div>
                 <div
-                  className="flex flex-row opacity-50 hover:opacity-100"
+                  className="flex flex-row opacity-50 hover:opacity-100 w-full justify-end"
                   onClick={(e) => {
                     e.stopPropagation();
                     onFork(id);

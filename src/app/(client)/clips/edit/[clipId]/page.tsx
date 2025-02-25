@@ -83,7 +83,7 @@ export default function Page() {
               >
                 {visible}
               </div>
-              <span className="text-yellow-500 text-sm py-1 pl-2">Visibility cannot be edited.</span>
+              <span className="text-yellow-500 text-sm py-1 pl-2 select-none">Visibility cannot be edited.</span>
             </div>
             {isPublic ? (
               <>

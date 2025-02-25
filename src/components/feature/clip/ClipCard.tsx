@@ -98,19 +98,14 @@ export const ClipCard = ({ title, category, link, visible, forkedCount }: IClipR
               </button>
             </div>
             {visible === 'public' && (
-              <div className="flex flex-row">
-                <div
-                  className={classNames(
-                    'flex flex-row gap-[5px] items-center justify-end w-full',
-                    'dark:text-text-primary-dark pr-2 pt-2'
-                  )}
-                >
+              <div className="flex flex-row opacity-50 hover:opacity-100 w-full justify-end">
+                <div className={classNames('dark:text-text-primary-dark p-2 pb-0')}>
                   <Bookmark size={16} fill="currentColor" />
                 </div>
                 <p
                   className={classNames(
-                    'flex flex-row gap-[5px] items-end w-full leading-none',
-                    'dark:text-text-primary-dark pr-2 pt-2 text-[15px] select-none'
+                    'text-[15px] pr-2 pt-2 pb-0 text-center leading-none',
+                    'dark:text-text-primary-dark select-none'
                   )}
                 >
                   {forkedCount}

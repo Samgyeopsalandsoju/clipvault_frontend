@@ -34,9 +34,9 @@ export default function ClipNewPage() {
         <div>
           <VisibilityDropdown onSelect={handleVisibilitySelect} />
           {errors.visible ? (
-            <span className="text-[#f44336] py-1 pl-2 text-xs">{errors.visible?.message}</span>
+            <span className="text-[#f44336] py-1 pl-2 text-xs select-none">{errors.visible?.message}</span>
           ) : watch('visible') ? (
-            <span className="text-yellow-500 text-sm py-1 pl-2">Visibility cannot be edited.</span>
+            <span className="text-yellow-500 text-sm py-1 pl-2 select-none">Visibility cannot be edited.</span>
           ) : (
             <span className="py-1 pl-2">&nbsp;</span>
           )}
@@ -47,7 +47,7 @@ export default function ClipNewPage() {
             onCreator={handleCreateCategory}
             categories={categoryList || []}
           />
-          <span className="text-[#f44336] py-1 pl-2 text-xs">{errors.category?.message || ' '}</span>
+          <span className="text-[#f44336] py-1 pl-2 text-xs select-none">{errors.category?.message || ' '}</span>
         </div>
         <div>
           <Input
