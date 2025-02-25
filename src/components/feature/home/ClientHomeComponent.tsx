@@ -3,9 +3,10 @@
 import { useForkQuery, useHomeClipQuery } from '@/hooks';
 import { memo, useCallback, useRef } from 'react';
 import { IClipResponse } from '@/types';
-import { ClipList, HomeCard } from '../clip';
 import { StatCountSection } from './StatCountSection';
-import { ScrollUpButton } from '@/components/ui';
+import { ClipList } from '../clip/ClipList';
+import { HomeCard } from '../clip/HomeCard';
+import { ScrollUpButton } from '@/components/ui/buttons/ScrollUpButton';
 
 const MemoizedClipList = memo(ClipList);
 const MemoizedHomeCard = memo(HomeCard);

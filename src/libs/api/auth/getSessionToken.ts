@@ -1,7 +1,7 @@
 import { getServerSession } from 'next-auth';
-import { authOptions } from '@/app/api/auth/[...nextauth]/auth-options';
+import type { NextAuthOptions } from 'next-auth';
 
-export async function getSessionToken() {
+export async function getSessionToken(authOptions: NextAuthOptions) {
   const session = await getServerSession(authOptions);
   return session?.accessToken || null;
 }

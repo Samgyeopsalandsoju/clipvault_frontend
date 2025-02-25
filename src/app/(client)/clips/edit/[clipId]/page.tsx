@@ -5,8 +5,9 @@ import { useCategoryQuery, useClipQuery, useEditClipForm } from '@/hooks';
 import { VisibilityType } from '@/types';
 import classNames from 'classnames';
 import { useEffect } from 'react';
-import { ModifyDropdown, VisibilityDropdown } from '@/components/feature';
 import { SkeletonUI } from '@/components/skeleton/SkeletonUI';
+import { VisibilityDropdown } from '@/components/feature/dropdowns/VisibilityDropdown';
+import { ModifyDropdown } from '@/components/feature/dropdowns/ModifyDropdown';
 
 export default function Page() {
   const {

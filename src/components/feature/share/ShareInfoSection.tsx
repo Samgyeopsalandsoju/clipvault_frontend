@@ -1,4 +1,4 @@
-import { CountDownTimer } from '@/components/ui';
+import { CountDownTimer } from '@/components/ui/CountDownTimer';
 
 export const ShareInfoSection = ({ title, due }: { title: string; due: string }) => {
   return (

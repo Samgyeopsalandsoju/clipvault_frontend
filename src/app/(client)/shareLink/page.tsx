@@ -1,8 +1,8 @@
 'use client';
 
-import { ConfirmModal } from '@/components/modals';
+import { ConfirmModal } from '@/components/modals/ConfirmModal';
 import { SkeletonUI } from '@/components/skeleton/SkeletonUI';
-import { CountDownTimer } from '@/components/ui';
+import { CountDownTimer } from '@/components/ui/CountDownTimer';
 import { useShareLink } from '@/hooks';
 import { IShareLinkResponse } from '@/types';
 import { handleCopy, openInNewTab } from '@/utils';

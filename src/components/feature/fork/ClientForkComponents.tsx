@@ -2,10 +2,10 @@
 
 import { memo, useCallback, useRef } from 'react';
 import { IForkedClipResponse } from '@/types';
-import { ScrollUpButton } from '@/components/ui';
 import { useForkQuery } from '@/hooks';
 import { ForkedList } from './ForkedList';
-import { ForkedCard } from '../clip';
+import { ForkedCard } from '../clip/ForkedCard';
+import { ScrollUpButton } from '@/components/ui/buttons/ScrollUpButton';
 
 const MemoizedClipList = memo(ForkedList);
 const MemoizedForkCard = memo(ForkedCard);

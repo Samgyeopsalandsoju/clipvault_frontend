@@ -1,8 +1,8 @@
-import { generatePutUrl } from '@/libs';
 import { getServerSession } from 'next-auth';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { authOptions } from '../../auth/[...nextauth]/auth-options';
+import { generatePutUrl } from '@/libs/api';
 
 export async function POST(request: NextRequest) {
   const session = await getServerSession(authOptions);

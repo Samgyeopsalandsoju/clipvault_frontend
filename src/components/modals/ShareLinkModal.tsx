@@ -10,7 +10,7 @@ import { Dispatch, SetStateAction, useState } from 'react';
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
 import { handleCopy } from '@/utils';
-import { ExpiryDateSelector } from '../feature';
+import { ExpiryDateSelector } from '../feature/clip/ExpiryDateSelector';
 
 interface ShareLinkModalProps {
   isOpen: boolean;

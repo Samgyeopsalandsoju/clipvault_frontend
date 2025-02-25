@@ -5,8 +5,11 @@ import { useCategoryQuery, useClipQuery, useEditClipForm } from '@/hooks';
 import { IClipResponse } from '@/types';
 import { useClipStore } from '@/stores';
 import { SkeletonUI } from '@/components/skeleton/SkeletonUI';
-import { ClipCard, ClipList } from '@/components/feature';
-import { CategoriesTags, ScrollUpButton, ShareListButton } from '@/components/ui';
+import { ClipCard } from '@/components/feature/clip/ClipCard';
+import { CategoriesTags } from '@/components/ui/tags/CategoriesTags';
+import { ClipList } from '@/components/feature/clip/ClipList';
+import { ScrollUpButton } from '@/components/ui/buttons/ScrollUpButton';
+import { ShareListButton } from '@/components/ui/buttons/ShareListButton';
 
 const MemoizationClipCard = memo(ClipCard);
 

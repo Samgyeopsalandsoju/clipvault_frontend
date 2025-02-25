@@ -1,5 +1,6 @@
 import axios, { InternalAxiosRequestConfig } from 'axios';
 import { getSessionToken } from '../auth/getSessionToken';
+import { authOptions } from '@/app/api/auth/[...nextauth]/auth-options';
 
 export const api = axios.create({
   baseURL: '/api',
@@ -18,7 +19,7 @@ export const publicAPI = axios.create({
 
 privateAPI.interceptors.request.use(
   async (config: InternalAxiosRequestConfig<any>) => {
-    const token = await getSessionToken();
+    const token = await getSessionToken(authOptions);
     try {
       // if no token
       if (!token) {

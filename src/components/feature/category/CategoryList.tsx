@@ -9,7 +9,7 @@ import { Plus, Loader2 } from 'lucide-react';
 import classNames from 'classnames';
 import { generateModernTagColors } from '@/utils';
 import { CategoryCard } from './CategoryCard';
-import { ConfirmModal } from '@/components/modals';
+import { ConfirmModal } from '@/components/modals/ConfirmModal';
 
 export const CategoryList = () => {
   const MAX_CATEGORY_COUNT = 10;

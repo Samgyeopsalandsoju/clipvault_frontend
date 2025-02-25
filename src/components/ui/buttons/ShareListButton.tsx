@@ -4,7 +4,7 @@ import { IClipResponse } from '@/types/clip';
 import { Share } from 'lucide-react';
 import { useState } from 'react';
 import classNames from 'classnames';
-import { ShareLinkModal } from '@/components/modals';
+import { ShareLinkModal } from '@/components/modals/ShareLinkModal';
 
 interface ShareButtonProps {
   list: IClipResponse[];

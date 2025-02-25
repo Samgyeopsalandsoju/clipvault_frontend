@@ -1,5 +1,6 @@
-import { Footer, HeaderServer } from '@/components/layout';
-import { AuthModal } from '@/components/modals';
+import Footer from '@/components/layout/footers/Footer';
+import { HeaderServer } from '@/components/layout/headers/Header';
+import { AuthModal } from '@/components/modals/AuthModal';
 
 export default function ShareLayout({
   children,

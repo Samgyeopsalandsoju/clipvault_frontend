@@ -1,4 +1,4 @@
-import { StatCount } from '@/components/ui';
+import { StatCount } from '@/components/ui/stats/StatCount';
 
 export const StatCountSection = () => {
   return (
