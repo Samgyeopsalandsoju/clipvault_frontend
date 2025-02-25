@@ -1,3 +1,3 @@
 export { AuthModal } from './AuthModal';
-export { ShareLinkModal } from './ShareLinkModal';
 export { ConfirmModal } from './ConfirmModal';
+export { ShareLinkModal } from './ShareLinkModal';
