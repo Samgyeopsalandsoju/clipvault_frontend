@@ -1,4 +1,4 @@
-import { api } from '@/libs';
+import { api } from '@/libs/api';
 import { APIResponse, IClipResponse, ICreateClip, IModifyClip } from '@/types';
 
 export const getClips = async () => {

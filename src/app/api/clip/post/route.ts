@@ -1,4 +1,4 @@
-import { privateAPI } from '@/libs';
+import { privateAPI } from '@/libs/api';
 import { ICreateClip } from '@/types';
 import { AxiosError } from 'axios';
 import { NextResponse } from 'next/server';

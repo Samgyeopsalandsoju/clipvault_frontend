@@ -1,4 +1,6 @@
-import { AuthModal, Footer, HeaderServer, Tabs } from '@/components';
+import { Footer, HeaderServer } from '@/components/layout';
+import { AuthModal } from '@/components/modals';
+import { Tabs } from '@/components/ui';
 
 export default function ClientLayout({
   children,

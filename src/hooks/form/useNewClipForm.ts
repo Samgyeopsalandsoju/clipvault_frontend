@@ -6,7 +6,7 @@ import { useClipQuery, useSafeBrowsingApiQuery } from '@/hooks';
 import { ICategoryRequest, ICreateClip, VisibilityType } from '@/types';
 import { useClipPageStore } from '@/stores';
 import { checkProtocol, filterXSSInUrl, isValidURLFormat, normalizeUrl } from '@/utils/link';
-import { createToast } from '@/libs';
+import { createToast } from '@/libs/toast';
 
 export const useNewClipForm = () => {
   const { setIsOpen: setIsClipPageOpen } = useClipPageStore();

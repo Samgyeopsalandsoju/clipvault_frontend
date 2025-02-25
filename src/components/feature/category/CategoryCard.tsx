@@ -6,7 +6,8 @@ import { useSortable } from '@dnd-kit/sortable';
 import classNames from 'classnames';
 import { GripVertical } from 'lucide-react';
 import { ChangeEvent, useEffect, useRef, useState } from 'react';
-import { ModifyMode, NormalMode } from '@/components';
+import { ModifyMode } from './mode/ModifyMode';
+import { NormalMode } from './mode/NormalMode';
 
 interface ICategoryCardProps extends ICategoryResponse {
   onChangeColor: (id: string, newColor: string) => void;

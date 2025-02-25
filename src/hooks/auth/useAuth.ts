@@ -1,7 +1,7 @@
-import { createToast } from '@/libs';
 import { useMutation } from '@tanstack/react-query';
 import { useAuthModal } from '@/hooks';
 import { login, register } from '@/services';
+import { createToast } from '@/libs/toast';
 
 export const useAuth = () => {
   const toast = createToast();

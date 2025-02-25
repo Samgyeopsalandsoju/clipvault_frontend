@@ -8,9 +8,9 @@ import { Copy } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { Dispatch, SetStateAction, useState } from 'react';
 import styled from 'styled-components';
-import { ExpiryDateSelector } from '@/components';
 import { useForm } from 'react-hook-form';
 import { handleCopy } from '@/utils';
+import { ExpiryDateSelector } from '../feature';
 
 interface ShareLinkModalProps {
   isOpen: boolean;

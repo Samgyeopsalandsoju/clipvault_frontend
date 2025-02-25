@@ -1,6 +1,6 @@
 import { Link2 } from 'lucide-react';
 import Link from 'next/link';
-import { NavigationDrawer } from '@/components';
+import { NavigationDrawer } from './NavigationDrawer';
 
 export const HeaderServer = () => {
   return (

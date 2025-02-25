@@ -3,10 +3,10 @@
 import { useMemo } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useClipPageTransition } from '@/hooks';
-import { createToast } from '@/libs';
 import { deleteClip, getClip, getClips, modifyClip, postClip } from '@/services';
 import { usePathname } from 'next/navigation';
 import { isModalPath } from '@/utils';
+import { createToast } from '@/libs/toast';
 
 export const useClipQuery = (rawId?: string | string[] | undefined) => {
   const { handleClose } = useClipPageTransition();

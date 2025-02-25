@@ -1,4 +1,4 @@
-import { api } from '@/libs';
+import { api } from '@/libs/api';
 import { LoginFormValue, RegisterFormValue } from '@/types/auth';
 import { signIn } from 'next-auth/react';
 

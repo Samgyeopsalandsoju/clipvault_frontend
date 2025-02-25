@@ -1,4 +1,5 @@
 import type { NextConfig } from 'next';
+const CircularDependencyPlugin = require('circular-dependency-plugin');
 
 const nextConfig: NextConfig = {
   output: 'standalone',
@@ -7,6 +8,15 @@ const nextConfig: NextConfig = {
   },
   eslint: {
     ignoreDuringBuilds: true, // 모든 ESLint 규칙 무시
+  },
+  webpack: (config) => {
+    config.plugins.push(
+      new CircularDependencyPlugin({
+        exclude: /node_modules/,
+        failOnError: true,
+      })
+    );
+    return config;
   },
   async redirects() {
     return [

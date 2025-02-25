@@ -1,4 +1,4 @@
-import { api } from '@/libs';
+import { api } from '@/libs/api';
 import { APIResponse, ICategoryResponse } from '@/types';
 
 export const getCategories = async () => {

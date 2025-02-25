@@ -6,9 +6,9 @@ import { memo, useEffect, useState } from 'react';
 import ClipPage from './page';
 import classNames from 'classnames';
 import { useClipPageTransition } from '@/hooks';
-import { CreateClipButton } from '@/components';
 import { isModalPath } from '@/utils';
 import { useClipPageStore } from '@/stores';
+import { CreateClipButton } from '@/components/ui';
 
 const MemoizationCreateClipButton = memo(CreateClipButton);
 

@@ -3,9 +3,9 @@
 import { useParams } from 'next/navigation';
 import { useCategoryQuery, useClipQuery, useEditClipForm } from '@/hooks';
 import { VisibilityType } from '@/types';
-import { ModifyDropdown, VisibilityDropdown } from '@/components';
 import classNames from 'classnames';
 import { useEffect } from 'react';
+import { ModifyDropdown, VisibilityDropdown } from '@/components/feature';
 import { SkeletonUI } from '@/components/skeleton/SkeletonUI';
 
 export default function Page() {

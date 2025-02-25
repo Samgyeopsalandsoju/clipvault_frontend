@@ -1,6 +1,8 @@
 'use client';
 
-import { CategoriesTags, ClipCard, ClipList, ScrollUpButton, ShareInfoSection } from '@/components';
+import { ClipCard, ClipList } from '@/components/feature';
+import { ShareInfoSection } from '@/components/feature/share/ShareInfoSection';
+import { CategoriesTags, ScrollUpButton } from '@/components/ui';
 import { useClipFilter, usePresignedUrl } from '@/hooks';
 import { fetchShareFileData } from '@/services';
 import { useClipStore } from '@/stores';

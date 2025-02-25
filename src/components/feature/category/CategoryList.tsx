@@ -3,12 +3,13 @@
 import { DndContext, DragEndEvent, useSensor, useSensors, MouseSensor, MeasuringStrategy } from '@dnd-kit/core';
 import { SortableContext, arrayMove, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { useCategoryQuery } from '@/hooks';
-import { CategoryCard, ConfirmModal } from '@/components';
 import { useEffect, useState } from 'react';
 import { ICategoryResponse } from '@/types';
 import { Plus, Loader2 } from 'lucide-react';
 import classNames from 'classnames';
 import { generateModernTagColors } from '@/utils';
+import { CategoryCard } from './CategoryCard';
+import { ConfirmModal } from '@/components/modals';
 
 export const CategoryList = () => {
   const MAX_CATEGORY_COUNT = 10;

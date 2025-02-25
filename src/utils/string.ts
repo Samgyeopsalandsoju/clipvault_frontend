@@ -1,4 +1,4 @@
-import { createToast } from '@/libs';
+import { createToast } from '@/libs/toast';
 
 const toast = createToast();
 

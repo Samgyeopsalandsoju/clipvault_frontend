@@ -1,4 +1,4 @@
-import { api } from '@/libs';
+import { api } from '@/libs/api';
 
 export const sendVerifyEmail = async (data: string) => {
   const response = await api.post('/auth/register/sendEmail', { mail: data });

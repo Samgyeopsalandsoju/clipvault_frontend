@@ -6,8 +6,9 @@ import { ChevronDown, ChevronUp } from 'lucide-react';
 import classNames from 'classnames';
 import { ICategoryResponse } from '@/types';
 import { useOverflowDetection } from '@/hooks';
-import { TabTag, CategoryManageTag } from '@/components';
 import { generateModernTagColors } from '@/utils';
+import { TabTag } from './Tag';
+import { CategoryManageTag } from './CategoryManageTag';
 
 interface ICategoriesTabsProps {
   categories: ICategoryResponse[];

@@ -1,4 +1,6 @@
-import { AuthModal, Footer, HeaderServer } from '@/components';
+import { Footer, HeaderServer } from '@/components/layout';
+import { AuthModal } from '@/components/modals';
+
 export default function ShareLayout({
   children,
 }: Readonly<{

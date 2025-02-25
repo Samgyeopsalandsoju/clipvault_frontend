@@ -1,9 +1,9 @@
 'use client';
 
-import { createToast } from '@/libs';
 import { deleteFile, deleteShareLink, fetchSharedLinkList, uploadShareLink } from '@/services';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { usePresignedUrl } from '../usePresignedUrl';
+import { createToast } from '@/libs/toast';
 
 export const useShareLink = () => {
   const toast = createToast();

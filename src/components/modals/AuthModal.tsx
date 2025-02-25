@@ -3,7 +3,7 @@
 import { useAuthModal } from '@/hooks';
 import { Dialog, DialogContent } from '@mui/material';
 import styled from 'styled-components';
-import { LoginForm, RegisterForm } from '@/components';
+import { LoginForm, RegisterForm } from '../form';
 
 export const AuthModal = () => {
   const { isAuthModalOpen, modalMode, setIsAuthModalOpen } = useAuthModal();

@@ -2,8 +2,6 @@
 import Link from 'next/link';
 import { Bookmark, Share2, Heart } from 'lucide-react';
 
-export const dynamic = 'force-static';
-
 export default function LandingPage() {
   return (
     <div className="min-h-screen bg-zinc-900">

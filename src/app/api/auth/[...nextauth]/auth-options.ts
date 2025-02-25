@@ -1,4 +1,4 @@
-import { publicAPI } from '@/libs';
+import { publicAPI } from '@/libs/api/config/axios.config';
 import { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from 'next-auth/providers/google';

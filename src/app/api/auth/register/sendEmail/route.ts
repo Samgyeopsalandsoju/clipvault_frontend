@@ -1,4 +1,4 @@
-import { publicAPI } from '@/libs';
+import { publicAPI } from '@/libs/api';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 

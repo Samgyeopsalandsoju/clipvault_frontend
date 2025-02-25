@@ -5,9 +5,9 @@ import Link from 'next/link';
 import { Menu } from 'lucide-react';
 import classNames from 'classnames';
 import { signOut, useSession } from 'next-auth/react';
-import { ApplicationInfo } from '@/components';
 import { FormType } from '@/types';
 import { useAuthModalStore, useAuthModeStore } from '@/stores';
+import { ApplicationInfo } from '../footers';
 
 export const NavigationDrawer = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);

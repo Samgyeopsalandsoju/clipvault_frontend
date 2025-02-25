@@ -1,9 +1,9 @@
 import { SOCIAL_LOGIN_OPTIONS } from '@/constants';
 import { useLoginForm } from '@/hooks/auth/useLoginForm';
 import classNames from 'classnames';
-import { RememberMe } from '@/components';
 import { Loader } from 'lucide-react';
 import { signIn } from 'next-auth/react';
+import { RememberMe } from './RememberMe';
 
 const loginValidationRules = {
   email: {

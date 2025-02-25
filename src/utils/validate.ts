@@ -1,4 +1,4 @@
-import { createToast } from '@/libs';
+import { createToast } from '@/libs/toast';
 import { ICategoryResponse, ICreateClip } from '@/types';
 
 // create clip validator

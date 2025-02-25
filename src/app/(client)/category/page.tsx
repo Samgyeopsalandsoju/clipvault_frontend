@@ -1,4 +1,4 @@
-import { CategoryList } from '@/components';
+import { CategoryList } from '@/components/feature';
 
 export default function CategoryPage() {
   return (

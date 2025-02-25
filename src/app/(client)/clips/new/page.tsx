@@ -1,8 +1,8 @@
 'use client';
 
+import { CategoryDropdown, VisibilityDropdown } from '@/components/feature';
 import { Container, Divider, Form, Input, TextArea, Title, TitleSection } from '../clips.styles';
 import { useCategoryQuery, useNewClipForm } from '@/hooks';
-import { CategoryDropdown, VisibilityDropdown } from '@/components';
 import classNames from 'classnames';
 
 export default function ClipNewPage() {

@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import { useEffect, useState } from 'react';
 import { useDebounce } from '@/hooks/useDebounce';
 import { useWatch } from 'react-hook-form';
-import { VerifyCodeCheck } from '@/components';
+import { VerifyCodeCheck } from '../ui';
 
 export const RegisterForm = () => {
   const { errors, handleSubmit, control, register, trigger, validator, onSubmit, setValue } = useRegisterForm();

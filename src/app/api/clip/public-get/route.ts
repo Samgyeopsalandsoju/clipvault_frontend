@@ -1,4 +1,4 @@
-import { publicAPI } from '@/libs';
+import { publicAPI } from '@/libs/api';
 import { APIResponse, IClipResponse } from '@/types';
 import { AxiosError } from 'axios';
 import { NextResponse } from 'next/server';

@@ -1,4 +1,4 @@
-import { api } from '@/libs';
+import { api } from '@/libs/api';
 import { APIResponse, IShareLinkRequest, IShareLinkResponse } from '@/types';
 import axios from 'axios';
 

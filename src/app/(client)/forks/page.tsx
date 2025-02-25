@@ -1,4 +1,4 @@
-import { ClientForkComponents, TitleSection } from '@/components';
+import { ClientForkComponents, TitleSection } from '@/components/feature';
 
 const ForksPage = () => {
   return (

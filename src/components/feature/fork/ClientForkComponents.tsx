@@ -1,10 +1,11 @@
 'use client';
 
 import { memo, useCallback, useRef } from 'react';
-import { ForkedList, ForkedCard } from '@/components';
 import { IForkedClipResponse } from '@/types';
 import { ScrollUpButton } from '@/components/ui';
 import { useForkQuery } from '@/hooks';
+import { ForkedList } from './ForkedList';
+import { ForkedCard } from '../clip';
 
 const MemoizedClipList = memo(ForkedList);
 const MemoizedForkCard = memo(ForkedCard);

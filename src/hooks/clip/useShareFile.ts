@@ -1,4 +1,4 @@
-import { createToast } from '@/libs';
+import { createToast } from '@/libs/toast';
 import { fetchShareFileData, uploadFile } from '@/services';
 import { IClipResponse } from '@/types';
 import { useMutation, useQuery } from '@tanstack/react-query';

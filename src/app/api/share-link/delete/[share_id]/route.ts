@@ -1,4 +1,4 @@
-import { privateAPI } from '@/libs';
+import { privateAPI } from '@/libs/api';
 import { AxiosError } from 'axios';
 import { NextResponse, NextRequest } from 'next/server';
 
