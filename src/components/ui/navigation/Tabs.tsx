@@ -20,7 +20,9 @@ export const Tabs = () => {
               value={item.name}
               key={index}
             >
-              <Link href={item.path}>{item.name}</Link>
+              <Link href={item.path} className="select-none">
+                {item.name}
+              </Link>
             </button>
           );
         })}

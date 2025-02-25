@@ -16,6 +16,8 @@ export const HomeCard = ({ id, title, category, link, forkedCount, isForking, on
   const [forkCount, setForkCount] = useState(forkedCount);
   const { background, text, border } = generateModernTagColors(Number(category.color));
 
+  const handleClickFork = () => {};
+
   return (
     <div className="relative w-full h-[93px] max-w-md mx-auto p-0 hover:scale-[1.03]">
       <div
@@ -69,7 +71,6 @@ export const HomeCard = ({ id, title, category, link, forkedCount, isForking, on
                   className="flex flex-row opacity-50 hover:opacity-100"
                   onClick={(e) => {
                     e.stopPropagation();
-                    setForkCount((prev) => prev + 1);
                     onFork(id);
                   }}
                 >
@@ -79,7 +80,7 @@ export const HomeCard = ({ id, title, category, link, forkedCount, isForking, on
                   <p
                     className={classNames(
                       'text-[15px] pr-2 pt-2 pb-0 text-center leading-none',
-                      'dark:text-text-primary-dark'
+                      'dark:text-text-primary-dark select-none'
                     )}
                   >
                     {forkCount}
@@ -101,7 +102,7 @@ export const HomeCard = ({ id, title, category, link, forkedCount, isForking, on
               backgroundColor: background,
             }}
           >
-            <span className="text-2xl font-bold tracking-tight">clipVault</span>
+            <span className="text-2xl font-bold tracking-tight select-none">clipVault</span>
           </div>
         </div>
       </div>

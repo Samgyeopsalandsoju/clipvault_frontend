@@ -75,7 +75,7 @@ export const VisibilityDropdown = ({ onSelect, visible }: DropdownProps) => {
                 key={index}
                 className={classNames(
                   'flex px-4 py-2 cursor-pointer items-center transition-colors duration-200',
-                  'border-b last:border-none dark:border-border-focus-dark',
+                  'border-b last:border-none dark:border-border-focus-dark select-none',
                   'dark:hover:bg-background-secondary-dark dark:text-text-primary-dark'
                 )}
                 onClick={() => {

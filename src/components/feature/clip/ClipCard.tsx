@@ -110,7 +110,7 @@ export const ClipCard = ({ title, category, link, visible, forkedCount }: IClipR
                 <p
                   className={classNames(
                     'flex flex-row gap-[5px] items-end w-full leading-none',
-                    'dark:text-text-primary-dark pr-2 pt-2 text-[15px]'
+                    'dark:text-text-primary-dark pr-2 pt-2 text-[15px] select-none'
                   )}
                 >
                   {forkedCount}

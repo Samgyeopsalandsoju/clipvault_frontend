@@ -39,6 +39,8 @@ jobs:
           AWS_S3_BUCKET_NAME=s3-clipvault-share-link
           NEXTAUTH_URL=https://clipvault.info
           NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }}
+          SAFE_BROWSING_API_KEY=${{secrets.SAFE_BROWSING_API_KEY}}
+          SAFE_BROWSING_BASE_URL=https://safebrowsing.googleapis.com/v4/threatMatches:find
           API_URL=http://localhost:8081
           EOF
 
