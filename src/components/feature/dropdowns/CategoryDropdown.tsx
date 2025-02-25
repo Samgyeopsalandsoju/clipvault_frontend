@@ -1,11 +1,10 @@
 'use client';
-import { Stack } from '@mui/material';
+
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import styled from 'styled-components';
-import { IoClose } from 'react-icons/io5';
+import { RefreshCw, X } from 'lucide-react';
 import { ICategoryRequest } from '@/types';
-import { CloseButton, Container, DropdownItem, DropdownList, Input, InputWrapper } from './dropdown.styles';
 import { generateModernTagColors } from '@/utils';
+import classNames from 'classnames';
 
 interface DropdownProps {
   onSelect: (category: ICategoryRequest) => void;
@@ -79,14 +78,22 @@ export const CategoryDropdown = ({ onSelect, onCreator, categories }: DropdownPr
   }, [searchTerm, categories]);
 
   // searchTerm 이 비어있지 않고 filterCategories가 비어잇는 경우
-  const showCreateCategory = searchTerm.trim() !== '' && filteredCategories.length === 0;
+  const showCreateCategory =
+    searchTerm.trim() !== '' && !filteredCategories.some((item) => item.name === searchTerm.trim());
 
   return (
-    <Container ref={dropdownRef}>
-      <InputWrapper>
-        <Input
-          $bgColor={color?.background}
-          $textColor={color?.text}
+    <div className="relative w-full" ref={dropdownRef}>
+      <div className="relative">
+        <input
+          className={classNames(
+            'w-full px-4 py-3 rounded-[0.5rem] border-solid border-[1px] focus:outline-none focus:dark:border-border-focus-dark',
+            'dark:placeholder-text-placeholder-dark dark:border-border-secondary-dark dark:bg-background-secondary-dark',
+            'dark:text-text-primary-dark cursor-pointer'
+          )}
+          style={{
+            backgroundColor: color?.background,
+            color: color?.text,
+          }}
           type="text"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.currentTarget.value)}
@@ -94,23 +101,56 @@ export const CategoryDropdown = ({ onSelect, onCreator, categories }: DropdownPr
           placeholder="Category"
         />
         {!isOpen && showCreateCategory && (
-          <ChangeColorButton onClick={handleChangeColor}>Change color</ChangeColorButton>
+          <div
+            className={classNames(
+              'absolute right-[40px] top-[50%] translate-y-[-50%]',
+              'cursor-pointer select-none',
+              'transform transition-transform duration-300 active:rotate-180'
+            )}
+            style={{
+              color: color?.text,
+            }}
+            onClick={handleChangeColor}
+          >
+            <RefreshCw size={20} />
+          </div>
         )}
 
         {searchTerm && (
-          <CloseButton onClick={handleClearSearchTerm}>
-            <IoClose />
-          </CloseButton>
+          <button
+            className={classNames(
+              'absolute right-[8px] top-[50%] px-1 flex items-center justify-center',
+              'cursor-pointer transform translate-y-[-50%] dark:text-text-primary-dark'
+            )}
+            style={{
+              color: color?.text,
+            }}
+            onClick={handleClearSearchTerm}
+          >
+            <X className="w-4 h-4" />
+          </button>
         )}
-      </InputWrapper>
+      </div>
       {isOpen && (
-        <DropdownList>
+        <div
+          className={classNames(
+            'w-full absolute top-[100%] max-h-[200px] overflow-auto z-[10] rounded-lg shadow-md',
+            'dark:bg-background-primary-dark border dark:border-border-focus-dark'
+          )}
+        >
           {filteredCategories.map((category, index) => {
             const { background, text } = generateModernTagColors(Number(category.color));
             return (
-              <DropdownItem
-                $textColor={text}
-                $bgColor={background}
+              <div
+                className={classNames(
+                  'flex px-4 py-2 cursor-pointer items-center transition-colors duration-200',
+                  'border-b last:border-none dark:border-border-focus-dark',
+                  'dark:hover:bg-background-secondary-dark dark:text-text-primary-dark'
+                )}
+                style={{
+                  backgroundColor: background,
+                  color: text,
+                }}
                 key={index}
                 onClick={() => {
                   setColor({ background: background, text: text });
@@ -120,40 +160,24 @@ export const CategoryDropdown = ({ onSelect, onCreator, categories }: DropdownPr
                 }}
               >
                 {category.name}
-              </DropdownItem>
+              </div>
             );
           })}
-          {isOpen && showCreateCategory && <CreateCategory onClick={handleCreateCategory}>+ category </CreateCategory>}
-        </DropdownList>
+          {isOpen && showCreateCategory && (
+            <div
+              className={classNames(
+                'py-2 px-4 rounded-lg cursor-pointer text-center',
+                'border-b last:border-none dark:border-border-focus-dark',
+                'border-solid border-[1px] dark:border-border-secondary-dark',
+                'dark:text-text-primary-dark dark:bg-background-secondary-dark'
+              )}
+              onClick={handleCreateCategory}
+            >
+              + category
+            </div>
+          )}
+        </div>
       )}
-    </Container>
+    </div>
   );
 };
-
-const CreateCategory = styled(Stack)`
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
-  cursor: pointer;
-  border: 2px solid #ddd;
-  transition: all 0.2s ease;
-  background-color: ${(props) => props.theme.border.divider};
-  text-align: center;
-`;
-
-const ChangeColorButton = styled(Stack)`
-  border: 1px solid ${(props) => props.theme.border.secondary};
-  background-color: ${(props) => props.theme.background.secondary};
-  position: absolute;
-  right: 40px;
-  top: 50%;
-  width: 100px;
-  padding: 5px;
-  border-radius: 4px;
-  transform: translateY(-50%);
-  cursor: pointer;
-  font-size: 12px;
-  color: ${(props) => props.theme.text.primary};
-  text-align: center;
-  font-weight: 700;
-  user-select: none;
-`;

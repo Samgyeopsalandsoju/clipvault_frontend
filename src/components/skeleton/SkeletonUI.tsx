@@ -2,7 +2,7 @@ export const SkeletonUI = {
   // tag
   Tag: () => {
     return (
-      <div className="flex space-x-2 px-4 py-2">
+      <div className="flex space-x-2 p-4">
         <div className="h-7 w-20 bg-gray-600/50 rounded-[8px] animate-pulse"></div>
         <div className="h-7 w-20 bg-gray-600/50 rounded-[8px] animate-pulse"></div>
         <div className="h-7 w-20 bg-gray-600/50 rounded-[8px] animate-pulse"></div>
@@ -14,28 +14,28 @@ export const SkeletonUI = {
 
   ShareLink: () => {
     return (
-      <div className="flex flex-col items-center pt-[37px] justify-center gap-[1rem]">
-        <div className="flex gap-[1rem]">
+      <div className="flex flex-col items-center  p-4 justify-center gap-[1rem]">
+        <div className="flex w-full gap-[1rem]">
+          <div className="border-solid border-[1px] border-gray-600/50 rounded-[0.5rem] w-[40px] h-[40px] rounded-[8px] animate-pulse" />
+          <div className="h-[40px] flex flex-1 border-solid border-[1px] border-gray-600/50 rounded animate-pulse t"></div>
+          <div className="border-solid border-[1px] border-gray-600/50 rounded-[0.5rem] w-[40px] h-[40px] rounded-[8px] animate-pulse" />
+          <div className="border-solid border-[1px] border-gray-600/50 rounded-[0.5rem] w-[40px] h-[40px] rounded-[8px] animate-pulse" />
+        </div>
+        <div className="flex w-full gap-[1rem]">
           <div className="border-solid border-[1px] border-gray-600/50 rounded-[0.5rem] w-[40px] h-[40px] rounded-[8px] p-[10px] animate-pulse" />
-          <div className="h-[40px] w-[300px] border-solid border-[1px] border-gray-600/50 rounded animate-pulse t"></div>
+          <div className="h-[40px]flex flex-1 border-solid border-[1px] border-gray-600/50 rounded animate-pulse t"></div>
           <div className="border-solid border-[1px] border-gray-600/50 rounded-[0.5rem] w-[40px] h-[40px] rounded-[8px] p-[10px] animate-pulse" />
           <div className="border-solid border-[1px] border-gray-600/50 rounded-[0.5rem] w-[40px] h-[40px] rounded-[8px] p-[10px] animate-pulse" />
         </div>
-        <div className="flex gap-[1rem]">
+        <div className="flex w-full gap-[1rem]">
           <div className="border-solid border-[1px] border-gray-600/50 rounded-[0.5rem] w-[40px] h-[40px] rounded-[8px] p-[10px] animate-pulse" />
-          <div className="h-[40px] w-[300px] border-solid border-[1px] border-gray-600/50 rounded animate-pulse t"></div>
-          <div className="border-solid border-[1px] border-gray-600/50 rounded-[0.5rem] w-[40px] h-[40px] rounded-[8px] p-[10px] animate-pulse" />
-          <div className="border-solid border-[1px] border-gray-600/50 rounded-[0.5rem] w-[40px] h-[40px] rounded-[8px] p-[10px] animate-pulse" />
-        </div>
-        <div className="flex gap-[1rem]">
-          <div className="border-solid border-[1px] border-gray-600/50 rounded-[0.5rem] w-[40px] h-[40px] rounded-[8px] p-[10px] animate-pulse" />
-          <div className="h-[40px] w-[300px] border-solid border-[1px] border-gray-600/50 rounded animate-pulse t"></div>
+          <div className="h-[40px] flex flex-1 border-solid border-[1px] border-gray-600/50 rounded animate-pulse t"></div>
           <div className="border-solid border-[1px] border-gray-600/50 rounded-[0.5rem] w-[40px] h-[40px] rounded-[8px] p-[10px] animate-pulse" />
           <div className="border-solid border-[1px] border-gray-600/50 rounded-[0.5rem] w-[40px] h-[40px] rounded-[8px] p-[10px] animate-pulse" />
         </div>
-        <div className="flex gap-[1rem]">
+        <div className="flex w-full gap-[1rem]">
           <div className="border-solid border-[1px] border-gray-600/50 rounded-[0.5rem] w-[40px] h-[40px] rounded-[8px] p-[10px] animate-pulse" />
-          <div className="h-[40px] w-[300px] border-solid border-[1px] border-gray-600/50 rounded animate-pulse t"></div>
+          <div className="h-[40px] flex flex-1 border-solid border-[1px] border-gray-600/50 rounded animate-pulse t"></div>
           <div className="border-solid border-[1px] border-gray-600/50 rounded-[0.5rem] w-[40px] h-[40px] rounded-[8px] p-[10px] animate-pulse" />
           <div className="border-solid border-[1px] border-gray-600/50 rounded-[0.5rem] w-[40px] h-[40px] rounded-[8px] p-[10px] animate-pulse" />
         </div>
@@ -65,6 +65,18 @@ export const SkeletonUI = {
           </div>
         </div>
         <div className="h-6 w-[300px] bg-gray-600/50 rounded animate-pulse t"></div>
+      </div>
+    );
+  },
+
+  ClipList: ({ numCards }: { numCards: number }) => {
+    return (
+      <div className="flex flex-col p-4 gap-3">
+        {Array(numCards)
+          .fill(null)
+          .map((_, index) => (
+            <SkeletonUI.Clip key={`skeleton-${index}`} />
+          ))}
       </div>
     );
   },

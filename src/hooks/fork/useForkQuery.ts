@@ -39,6 +39,7 @@ export const useForkQuery = () => {
     doFork: doForkMutation.mutate,
     isForking: doForkMutation.isPaused,
     list: forkedListQuery.data ?? [],
+    isClipLoading: forkedListQuery.isPending,
     deleteFork: deleteForkedClipMutation.mutate,
   };
 };

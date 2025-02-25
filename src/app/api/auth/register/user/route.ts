@@ -8,7 +8,6 @@ export async function POST(request: NextRequest) {
 
   try {
     const { data } = await publicAPI.post('/v1/member/sign-up', userJsonData);
-    console.log(data);
 
     if (!data.status) {
       return NextResponse.json(

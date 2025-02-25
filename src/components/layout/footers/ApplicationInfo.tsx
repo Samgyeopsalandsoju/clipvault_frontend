@@ -8,7 +8,6 @@ export const ApplicationInfo = () => {
     { icon: <SiTypescript />, name: 'TypeScript' },
     { icon: <SiReactquery />, name: 'React Query' },
     { icon: <SiTailwindcss />, name: 'Tailwind CSS' },
-    { icon: <SiStyledcomponents />, name: 'Styled Components' },
   ];
 
   return (

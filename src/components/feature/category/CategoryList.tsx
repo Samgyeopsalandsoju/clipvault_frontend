@@ -86,7 +86,6 @@ export const CategoryList = () => {
 
   // 카드 name 업데이트 함수
   const handleChangeName = (id: string, name: string) => {
-    console.log('name', name);
     setCategories((prev) => {
       return prev.map((category) => (category.id === id ? { ...category, name } : { ...category }));
     });

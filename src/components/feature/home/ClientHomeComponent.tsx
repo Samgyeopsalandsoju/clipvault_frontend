@@ -7,13 +7,14 @@ import { StatCountSection } from './StatCountSection';
 import { ClipList } from '../clip/ClipList';
 import { HomeCard } from '../clip/HomeCard';
 import { ScrollUpButton } from '@/components/ui/buttons/ScrollUpButton';
+import { SkeletonUI } from '@/components/skeleton/SkeletonUI';
 
 const MemoizedClipList = memo(ClipList);
 const MemoizedHomeCard = memo(HomeCard);
 
 export const ClientHomeComponent = () => {
   const {
-    home: { list },
+    home: { list, isClipLoading },
   } = useHomeClipQuery();
   const { doFork, isForking } = useForkQuery();
   const containerRef = useRef(null);
@@ -32,7 +33,14 @@ export const ClientHomeComponent = () => {
       className="relative flex-1 pb-12 overflow-auto dark:bg-background-primary-dark scrollbar-none no-scroll"
     >
       <StatCountSection />
-      <MemoizedClipList list={list} renderItem={renderItem} />
+      {isClipLoading ? (
+        <div className="flex flex-col p-4 gap-3">
+          <SkeletonUI.ClipList numCards={5} />
+        </div>
+      ) : (
+        <MemoizedClipList list={list} renderItem={renderItem} />
+      )}
+
       <ScrollUpButton scrollContainerRef={containerRef} />
     </div>
   );

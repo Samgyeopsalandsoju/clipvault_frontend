@@ -41,7 +41,6 @@ const SharePage = () => {
       setShareData(null);
     }
   };
-  console.log('shareData', shareData);
   useEffect(() => {
     fetchData();
   }, [link_id]);

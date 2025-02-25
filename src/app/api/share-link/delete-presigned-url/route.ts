@@ -18,9 +18,7 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    console.log('delete presigned url', key);
     const signedUrl = await generateDeleteUrl({ key });
-    console.log('signedUrl', signedUrl);
 
     return NextResponse.json({
       status: 200,

@@ -8,6 +8,7 @@ import { useEffect } from 'react';
 import { SkeletonUI } from '@/components/skeleton/SkeletonUI';
 import { VisibilityDropdown } from '@/components/feature/dropdowns/VisibilityDropdown';
 import { ModifyDropdown } from '@/components/feature/dropdowns/ModifyDropdown';
+import { generateModernTagColors } from '@/utils';
 
 export default function Page() {
   const {
@@ -40,8 +41,10 @@ export default function Page() {
 
   if (!clip) return;
   const { visible, category, id } = clip;
-
+  const isPublic = clip?.visible === 'public';
   if (loading || isClipLoading) false;
+
+  const { background, text } = generateModernTagColors(Number(category.color));
 
   return (
     <div className="rounded-tl-[16px] rounded-tr-[16px] p-[1.5rem] w-full dark:bg-background-tertiary-dark">
@@ -54,7 +57,11 @@ export default function Page() {
             <div className="w-[2.5rem] h-[0.25rem] bg-[#3f3f46] rounded-[9999px] mx-auto mt-0 mb-4" />
             <h1 className="text-[1.5rem] dark:text-text-primary-dark">Edit Clip</h1>
           </div>
-          <button className="text-[15px] text-[#007AFF] font-semibold" onClick={handleOutsideClick}>
+          <button
+            className="text-[15px] text-[#007AFF] font-semibold"
+            onClick={isPublic ? undefined : handleOutsideClick}
+            disabled={isPublic}
+          >
             Save
           </button>
         </div>
@@ -66,8 +73,38 @@ export default function Page() {
           </>
         ) : (
           <>
-            <VisibilityDropdown onSelect={handleVisibilitySelect} visible={visible as VisibilityType} />
-            <ModifyDropdown onSelect={handleCategorySelect} categories={categoryList || []} category={category} />
+            {isPublic ? (
+              <>
+                <div
+                  className={classNames(
+                    'w-full px-4 py-3 rounded-[0.5rem] border-solid border-[1px] focus:outline-none focus:dark:border-border-focus-dark',
+                    'dark:placeholder-text-placeholder-dark dark:border-border-secondary-dark dark:bg-background-secondary-dark',
+                    'dark:text-text-primary-dark'
+                  )}
+                >
+                  {visible}
+                </div>
+                <div
+                  className={classNames(
+                    'w-full px-4 py-3 rounded-[0.5rem] border-solid border-[1px] focus:outline-none focus:dark:border-border-focus-dark',
+                    'dark:placeholder-text-placeholder-dark dark:border-border-secondary-dark dark:bg-background-secondary-dark',
+                    'dark:text-text-primary-dark'
+                  )}
+                  style={{
+                    backgroundColor: background,
+                    color: text,
+                  }}
+                >
+                  {category.name}
+                </div>
+              </>
+            ) : (
+              <>
+                <VisibilityDropdown onSelect={handleVisibilitySelect} visible={visible as VisibilityType} />
+                <ModifyDropdown onSelect={handleCategorySelect} categories={categoryList || []} category={category} />
+              </>
+            )}
+
             <input
               className={classNames(
                 'w-full py-3 px-4 rounded-[0.5rem] border-solid border-[1px] dark:border-border-secondary-dark',
@@ -82,13 +119,8 @@ export default function Page() {
                   value: 30,
                   message: 'Limited to 30 characters',
                 },
-                // onChange: (e) => {
-                //   const value = e.target.value;
-                //   if (value.length > 30) {
-                //     e.target.value = value.slice(0, 30);
-                //   }
-                // },
               })}
+              disabled={isPublic}
             />
             <textarea
               className={classNames(
@@ -102,7 +134,9 @@ export default function Page() {
                 required: 'Paste your link here',
               })}
               onBlur={() => trigger('title')}
+              disabled={isPublic}
             />
+            {isPublic && <div className="text-yellow-500 text-sm text-center">Public clips cannot be edited.</div>}
           </>
         )}
 

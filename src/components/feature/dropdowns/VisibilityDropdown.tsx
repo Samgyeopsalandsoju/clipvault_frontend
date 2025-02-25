@@ -2,14 +2,12 @@
 
 import { VisibilityType } from '@/types/clip';
 import { useEffect, useRef, useState } from 'react';
-import { MdArrowDropDown } from 'react-icons/md';
-import styled from 'styled-components';
-import { Container, DropdownItem, DropdownList, Input, InputWrapper } from './dropdown.styles';
-import { EyeClosed, Eye } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
+import classNames from 'classnames';
 
 const visibilities = [
-  { name: 'Public', code: 'public', icon: <Eye /> },
-  { name: 'Private', code: 'private', icon: <EyeClosed /> },
+  { name: 'Public', code: 'public' },
+  { name: 'Private', code: 'private' },
 ];
 
 interface DropdownProps {
@@ -35,10 +33,16 @@ export const VisibilityDropdown = ({ onSelect, visible }: DropdownProps) => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
+
   return (
-    <Container ref={dropdownRef}>
-      <InputWrapper>
-        <Input
+    <div className="relative w-full" ref={dropdownRef}>
+      <div className="relative">
+        <input
+          className={classNames(
+            'w-full px-4 py-3 rounded-[0.5rem] border-solid border-[1px] focus:outline-none focus:dark:border-border-focus-dark',
+            'dark:placeholder-text-placeholder-dark dark:border-border-secondary-dark dark:bg-background-secondary-dark',
+            'dark:text-text-primary-dark cursor-pointer'
+          )}
           type="text"
           onFocus={() => setIsOpen(true)}
           onChange={(e) => {
@@ -48,64 +52,44 @@ export const VisibilityDropdown = ({ onSelect, visible }: DropdownProps) => {
           value={value}
           readOnly
         />
-        <IconSection>
-          <MdArrowDropDown />
-        </IconSection>
-      </InputWrapper>
+        <button
+          type="button"
+          className={classNames(
+            'absolute right-2 top-[50%] p-1 flex items-center justify-center',
+            'text-[#666] translate-y-[-50%] pointer-events-none'
+          )}
+        >
+          <ChevronDown className="w-4 h-4" />
+        </button>
+      </div>
       {isOpen && (
-        <DropdownList>
+        <div
+          className={classNames(
+            'w-full absolute top-[100%] max-h-[200px] overflow-auto z-[10] rounded-lg shadow-md',
+            'dark:bg-background-primary-dark border dark:border-border-focus-dark'
+          )}
+        >
           {visibilities.map((item, index) => {
             return (
-              <DropdownItem
+              <div
                 key={index}
+                className={classNames(
+                  'flex px-4 py-2 cursor-pointer items-center transition-colors duration-200',
+                  'border-b last:border-none dark:border-border-focus-dark',
+                  'dark:hover:bg-background-secondary-dark dark:text-text-primary-dark'
+                )}
                 onClick={() => {
                   setValue(item.name);
                   setIsOpen(false);
                   onSelect(item.code as VisibilityType);
                 }}
               >
-                {item.icon} {item.name}
-              </DropdownItem>
+                {item.name}
+              </div>
             );
           })}
-        </DropdownList>
+        </div>
       )}
-    </Container>
+    </div>
   );
 };
-
-const IconWrapper = styled.div`
-  position: absolute;
-  left: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  align-items: center;
-  color: #666;
-
-  svg {
-    width: 16px;
-    height: 16px;
-  }
-`;
-
-const IconSection = styled.button`
-  position: absolute;
-  right: 8px;
-  top: 50%;
-  padding: 4px;
-  background: none;
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #666;
-  cursor: pointer;
-  pointer-events: none;
-  transform: translateY(-50%);
-
-  svg {
-    width: 16px;
-    height: 16px;
-  }
-`;

@@ -10,8 +10,6 @@ export const authOptions: NextAuthOptions = {
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
       async profile(profile) {
-        console.log('profile', profile);
-
         // 구글 로그인 후 받은 프로필에서 id_token을 사용해 백엔드 서버에 요청
         // const res = await fetch('https://your-backend-server.com/api/auth/google', {
         //   method: 'POST',

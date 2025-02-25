@@ -165,9 +165,17 @@ export const ShareLinkModal = ({ isOpen, setIsOpen, list }: ShareLinkModalProps)
             {!isLoading ? 'Create' : <CircularProgress size={20} color="inherit" />}
           </button>
 
-          <MypageButton type="button" onClick={redirectToShareLinkPage}>
+          <button
+            className={classNames(
+              'dark:text-text-placeholder-dark border-solid border-[1px] dark:border-border-focus-dark',
+              'p-[0.7rem] rounded-[8px] h-[40px] text-[0.9rem] flex flex-1 hover:text-text-primary-dark',
+              'hover:dark:border-border-divider-dark active:scale-[0.97] justify-center'
+            )}
+            type="button"
+            onClick={redirectToShareLinkPage}
+          >
             My Share Link
-          </MypageButton>
+          </button>
         </div>
       </form>
     </StyledDialog>
@@ -183,25 +191,5 @@ const StyledDialog = styled(Dialog)`
     position: relative;
     background-color: ${(props) => props.theme.background.primary};
     border: 1px solid ${(props) => props.theme.border.divider};
-  }
-`;
-
-const MypageButton = styled.button`
-  color: ${(props) => props.theme.text.placeholder};
-  border: 1px solid ${(props) => props.theme.border.focus};
-  padding: 0.7rem;
-  border-radius: 8px;
-  height: 40px;
-  font-size: 0.9rem;
-  display: flex;
-  flex: 1;
-  justify-content: center;
-  &:hover {
-    color: ${(props) => props.theme.text.primary};
-    border: 1px solid ${(props) => props.theme.border.divider};
-  }
-
-  &:active {
-    scale: 0.97;
   }
 `;

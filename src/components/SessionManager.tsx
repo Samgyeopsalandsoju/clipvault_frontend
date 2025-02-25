@@ -18,7 +18,6 @@ export const SessionManager = () => {
     const resetTimer = () => {
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
       timeoutRef.current = setTimeout(() => {
-        console.log('resetTimer called');
         signOut();
         router.push('/home');
       }, THIRTY_MIN);

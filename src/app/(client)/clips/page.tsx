@@ -39,38 +39,31 @@ const ClipsPage = () => {
       {loading ? (
         <SkeletonUI.Tag />
       ) : (
-        <>
-          {!!filteredClipsList.length && (
-            <CategoriesTags categories={categoryList || []} onSelect={setSelectedCategoryId} />
-          )}
-        </>
+        <CategoriesTags categories={categoryList || []} onSelect={setSelectedCategoryId} />
       )}
 
       <div
         ref={containerRef}
         className="relative flex-1 pb-8 overflow-auto dark:bg-background-primary-dark scrollbar-none no-scroll"
       >
-        {filteredClipsList.length > 0 ? (
-          <>
-            {isClipsLoading ? (
-              <div className="flex flex-col p-4 gap-3 pb-8">
-                <SkeletonUI.Clip />
-                <SkeletonUI.Clip />
-                <SkeletonUI.Clip />
-                <SkeletonUI.Clip />
-                <SkeletonUI.Clip />
-              </div>
-            ) : (
-              <ClipList list={filteredClipsList} renderItem={renderItem} />
-            )}
-
-            <ScrollUpButton scrollContainerRef={containerRef} />
-          </>
-        ) : (
-          <div className="flex flex-col items-center justify-center text-center select-none h-[50%] dark:text-text-placeholder-dark">
-            Looks like you don't have any clips yet...
-            <br /> start adding some!
+        {isClipsLoading ? (
+          <div className="flex flex-col p-4 gap-3">
+            <SkeletonUI.ClipList numCards={5} />
           </div>
+        ) : (
+          <>
+            {filteredClipsList.length > 0 ? (
+              <>
+                <ClipList list={filteredClipsList} renderItem={renderItem} />
+                <ScrollUpButton scrollContainerRef={containerRef} />
+              </>
+            ) : (
+              <div className="flex flex-col items-center justify-center text-center select-none h-[50%] dark:text-text-placeholder-dark">
+                Looks like you don't have any clips yet...
+                <br /> start adding some!
+              </div>
+            )}
+          </>
         )}
       </div>
 

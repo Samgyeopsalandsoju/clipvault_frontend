@@ -1,8 +1,8 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import styled from 'styled-components';
 import { ChevronUp } from 'lucide-react';
+import classNames from 'classnames';
 
 interface ScrollUpButtonProps {
   scrollContainerRef: React.RefObject<HTMLDivElement | null>;
@@ -15,7 +15,7 @@ export const ScrollUpButton = ({ scrollContainerRef }: ScrollUpButtonProps) => {
     if (!scrollContainerRef.current) return;
     const container = scrollContainerRef.current;
     const toggleVisibility = () => {
-      if (container.scrollTop > 300) {
+      if (container.scrollTop > 50) {
         setIsVisible(true);
       } else {
         setIsVisible(false);
@@ -40,37 +40,17 @@ export const ScrollUpButton = ({ scrollContainerRef }: ScrollUpButtonProps) => {
   if (!isVisible) return null;
 
   return (
-    <StyledButton onClick={scrollToTop}>
+    <button
+      className={classNames(
+        'mr-[20px] sticky bottom-[55px] left-[425px] rounded-[20%] w-[2rem] h-[2rem] flex',
+        'items-center justify-center cursor-pointer dark:text-text-primary-dark',
+        'dark:bg-background-primary-dark border-solid border-[1px] dark:border-border-secondary-dark',
+        'hover:translate-y-[-2px] hover:dark:bg-background-secondary-dark',
+        'active:translate-y-0 transition-all duration-300 ease-in-out'
+      )}
+      onClick={scrollToTop}
+    >
       <ChevronUp size={24} />
-    </StyledButton>
+    </button>
   );
 };
-
-const StyledButton = styled.button`
-  margin-right: 20px;
-  position: sticky;
-  bottom: 55px;
-  left: 425px;
-  border-radius: 20%;
-  width: 2rem;
-  height: 2rem;
-  background-color: ${(props) => props.theme.background.primary};
-  border: 1px solid ${(props) => props.theme.border.secondary};
-  color: ${(props) => props.theme.text.primary};
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
-  cursor: pointer;
-
-  &:hover {
-    transform: translateY(-2px);
-    background-color: ${(props) => props.theme.background.secondary};
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  }
-
-  &:active {
-    transform: translateY(0);
-  }
-`;

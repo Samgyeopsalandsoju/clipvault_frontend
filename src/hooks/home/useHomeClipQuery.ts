@@ -11,6 +11,7 @@ export const useHomeClipQuery = () => {
   return {
     home: {
       list: homeClipQuery.data ?? [],
+      isClipLoading: homeClipQuery.isPending,
     },
   };
 };
