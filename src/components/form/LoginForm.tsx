@@ -75,7 +75,7 @@ export const LoginForm = () => {
           <img className="pr-6 h-[20px]" src={SOCIAL_LOGIN_OPTIONS.EMAIL.logo} />
           {SOCIAL_LOGIN_OPTIONS.EMAIL.text}
         </button>
-        <button
+        {/* <button
           className={classNames(
             'flex justify-center border-[1px] border-solid dark:border-border-focus-dark text-[15px] ',
             'rounded-[5px] dark:text-text-primary-dark px-2 py-2 active:scale-[0.97]'
@@ -84,15 +84,6 @@ export const LoginForm = () => {
         >
           <img className="pr-6 h-[20px]" src={SOCIAL_LOGIN_OPTIONS.GOOGLE.logo} />
           {SOCIAL_LOGIN_OPTIONS.GOOGLE.text}
-        </button>
-        {/* <button
-          className={classNames(
-            'flex justify-center border-[1px] border-solid dark:border-border-focus-dark text-[15px] ',
-            'rounded-[5px] text-[#000] px-2 py-2 active:scale-[0.97] bg-[#FAE300]'
-          )}
-        >
-          <img className="pr-6 h-[20px]" src={SOCIAL_LOGIN_OPTIONS.KAKAO.logo} />
-          {SOCIAL_LOGIN_OPTIONS.KAKAO.text}
         </button> */}
       </div>
     </>

@@ -2,11 +2,12 @@ import { useMutation } from '@tanstack/react-query';
 import { useAuthModal } from '@/hooks';
 import { login, register } from '@/services';
 import { createToast } from '@/libs/toast';
+import { useSessionStore } from '@/stores/useSessionStore';
 
 export const useAuth = () => {
   const toast = createToast();
   const { setModalMode, setIsAuthModalOpen } = useAuthModal();
-
+  const { setIsAuthenticated } = useSessionStore();
   // 회원가입
   const registerMutation = useMutation({
     mutationFn: register,
@@ -21,6 +22,7 @@ export const useAuth = () => {
     mutationFn: login,
     onSuccess: () => {
       setIsAuthModalOpen(false);
+      setIsAuthenticated(true);
       toast.success('Successfully logged in');
     },
     onError: (error) => {

@@ -32,6 +32,7 @@ export const ModifyMode = ({
         <RefreshCcw />
       </div>
       <input
+        placeholder="new category"
         className="bg-transparent border-solid border-b border-0"
         ref={inputRef}
         style={{

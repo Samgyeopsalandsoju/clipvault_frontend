@@ -21,6 +21,7 @@ export const RegisterForm = () => {
   const handleVerification = (data: { verified: boolean; encryptedEmail: string }) => {
     setIsVerified(data.verified);
     setValue('verifiedMail', data.encryptedEmail);
+    setValue('verifyCode', 'verified');
   };
 
   return (
@@ -42,6 +43,7 @@ export const RegisterForm = () => {
           </div>
           <div>
             <VerifyCodeCheck email={mail} onVerified={handleVerification} />
+            <input type="hidden" {...register('verifyCode', { required: 'Email verification is required.' })} />
             <span className="text-xs text-[#f44336] px-3 pb-1 min-h-[20px] block">
               {errors.verifyCode?.message || ' '}
             </span>

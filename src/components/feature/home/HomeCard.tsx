@@ -1,9 +1,9 @@
 'use client';
 
 import { IClipResponse } from '@/types/clip';
-import { Bookmark, Copy, ExternalLink } from 'lucide-react';
+import { Bookmark, ExternalLink } from 'lucide-react';
 import classNames from 'classnames';
-import { generateModernTagColors, handleCopy, openInNewTab } from '@/utils';
+import { generateModernTagColors, openInNewTab } from '@/utils';
 import { useState } from 'react';
 
 interface HomeCardProps extends IClipResponse {
@@ -13,7 +13,6 @@ interface HomeCardProps extends IClipResponse {
 
 export const HomeCard = ({ id, title, category, link, forkedCount, isForking, onFork }: HomeCardProps) => {
   const [isFlipped, setIsFlipped] = useState(false);
-  const [forkCount, setForkCount] = useState(forkedCount);
   const { background, text, border } = generateModernTagColors(Number(category.color));
 
   return (
@@ -107,7 +106,7 @@ export const HomeCard = ({ id, title, category, link, forkedCount, isForking, on
                       'dark:text-text-primary-dark select-none'
                     )}
                   >
-                    {forkCount}
+                    {forkedCount}
                   </p>
                 </div>
               </div>

@@ -19,7 +19,7 @@ export const useRegisterForm = () => {
   const validator = useRegisterValidation(watch);
   const { register: signUp } = useAuth();
 
-  const onSubmit = (data: RegisterFormValue) => {
+  const onSubmit = async (data: RegisterFormValue) => {
     signUp(data);
   };
 

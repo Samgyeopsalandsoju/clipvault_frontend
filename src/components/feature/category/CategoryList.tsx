@@ -3,11 +3,11 @@
 import { DndContext, DragEndEvent, useSensor, useSensors, MouseSensor, MeasuringStrategy } from '@dnd-kit/core';
 import { SortableContext, arrayMove, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { useCategoryQuery } from '@/hooks';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ICategoryResponse } from '@/types';
 import { Plus, Loader2 } from 'lucide-react';
 import classNames from 'classnames';
-import { generateModernTagColors } from '@/utils';
+import { generateModernTagColors, generateUniqueId } from '@/utils';
 import { CategoryCard } from './CategoryCard';
 import { ConfirmModal } from '@/components/modals/ConfirmModal';
 
@@ -16,15 +16,31 @@ export const CategoryList = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(null);
   const {
-    category: { categoryList, loading },
+    category: { categoryList, loading, post, remove },
   } = useCategoryQuery();
   const [categories, setCategories] = useState<ICategoryResponse[]>(categoryList || []);
+  const [initialCategories, setInitialCategories] = useState<string>(JSON.stringify(categoryList || []));
+  const latestCategoriesRef = useRef(categories);
 
   useEffect(() => {
     if (categoryList) {
       setCategories(categoryList);
+      setInitialCategories(JSON.stringify(categoryList));
     }
   }, [categoryList]);
+
+  useEffect(() => {
+    return () => {
+      console.log('initialCategories', initialCategories);
+      console.log('latestCategoriesRef', JSON.stringify(latestCategoriesRef.current));
+      console.log('isSame', initialCategories === JSON.stringify(latestCategoriesRef.current));
+
+      const currentCategoriesString = JSON.stringify(latestCategoriesRef.current);
+      if (currentCategoriesString !== initialCategories) {
+        post(latestCategoriesRef.current);
+      }
+    };
+  }, []);
 
   const sensors = useSensors(
     useSensor(MouseSensor, {
@@ -42,7 +58,9 @@ export const CategoryList = () => {
       setCategories((prevCategories) => {
         const oldIndex = prevCategories.findIndex((category) => category.id === active.id);
         const newIndex = prevCategories.findIndex((category) => category.id === over.id);
-        return arrayMove([...prevCategories], oldIndex, newIndex);
+        const newCategories = arrayMove([...prevCategories], oldIndex, newIndex);
+        latestCategoriesRef.current = newCategories;
+        return newCategories;
       });
     }
   };
@@ -50,8 +68,10 @@ export const CategoryList = () => {
   const handleAddCategory = () => {
     const { colorHue } = generateModernTagColors();
     setCategories((prev) => {
-      const newCategory = { name: 'new Category', color: String(colorHue), id: String(new Date().getMilliseconds()) };
-      return [...prev, newCategory];
+      const newCategory = { name: 'new category', color: String(colorHue), id: generateUniqueId() };
+      const newCategories = [...prev, newCategory];
+      latestCategoriesRef.current = newCategories;
+      return newCategories;
     });
   };
 
@@ -67,9 +87,11 @@ export const CategoryList = () => {
     setCategories((prev) => {
       return prev.filter((v) => v.id !== selectedCategoryId);
     });
+    remove({ categoryId: selectedCategoryId });
     setSelectedCategoryId(null);
     setIsOpen(false);
   };
+
   // 모달 취소
   const handleCancel = () => {
     setSelectedCategoryId(null);
@@ -81,13 +103,16 @@ export const CategoryList = () => {
     const updatedCategories = categories.map((category) =>
       category.id === id ? { ...category, color: newColor } : category
     );
+    latestCategoriesRef.current = updatedCategories;
     setCategories(updatedCategories);
   };
 
   // 카드 name 업데이트 함수
   const handleChangeName = (id: string, name: string) => {
     setCategories((prev) => {
-      return prev.map((category) => (category.id === id ? { ...category, name } : { ...category }));
+      const newCategories = prev.map((category) => (category.id === id ? { ...category, name } : { ...category }));
+      latestCategoriesRef.current = newCategories;
+      return newCategories;
     });
   };
 

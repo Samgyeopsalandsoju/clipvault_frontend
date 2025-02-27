@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { RefreshCw, X } from 'lucide-react';
 import { ICategoryRequest } from '@/types';
-import { generateModernTagColors } from '@/utils';
+import { generateModernTagColors, generateUniqueId } from '@/utils';
 import classNames from 'classnames';
 
 interface DropdownProps {
@@ -44,9 +44,10 @@ export const CategoryDropdown = ({ onSelect, onCreator, categories }: DropdownPr
 
   // 신규 카테고리에 등록
   const handleCreateCategory = useCallback(() => {
+    const uuid = generateUniqueId();
     const { colorHue, background, text } = generateModernTagColors();
     const category: ICategoryRequest = {
-      id: '',
+      id: uuid,
       color: String(colorHue),
       name: searchTerm,
     };
@@ -57,10 +58,11 @@ export const CategoryDropdown = ({ onSelect, onCreator, categories }: DropdownPr
 
   // 신규 카테고리 색 변경
   const handleChangeColor = useCallback(() => {
+    const uuid = generateUniqueId();
     const { colorHue, background, text } = generateModernTagColors();
     setColor({ background: background, text: text });
     const category: ICategoryRequest = {
-      id: '',
+      id: uuid,
       color: String(colorHue),
       name: searchTerm,
     };

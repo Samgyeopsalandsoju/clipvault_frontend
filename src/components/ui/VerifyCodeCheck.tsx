@@ -16,7 +16,7 @@ export const VerifyCodeCheck = ({
   const CODE_LENGTH = 6;
   const [value, setValue] = useState<string>('');
   const { checkCode, sendEmail } = useVerifyCode();
-  const [status, setStatus] = useState<'default' | 'processing' | 'verified'>('default');
+  const [status, setStatus] = useState<'default' | 'processing' | 'sent' | 'verified'>('default');
   const [authKey, setAuthKey] = useState<string>('');
 
   const onClickSend = async (): Promise<void> => {
@@ -28,6 +28,7 @@ export const VerifyCodeCheck = ({
       const { result } = await sendEmail(email);
       if (result) {
         setAuthKey(result);
+        setStatus('sent');
       } else {
         setStatus('default');
       }
@@ -66,11 +67,10 @@ export const VerifyCodeCheck = ({
     <div className="flex gap-2">
       <input
         className={classNames(
-          'dark:text-text-primary-dark border-[1px] border-solid  rounded-[5px]',
+          'dark:text-text-primary-dark border-[1px] border-solid rounded-[5px]',
           'dark:bg-background-primary-dark w-full h-[35px] px-3 tracking-widest',
           {
-            'border-[#f44336]': status === 'processing' || status === 'default',
-            'dark:border-border-focus-dark': status === 'verified',
+            'dark:border-border-focus-dark': status === 'verified' || status === 'default',
           }
         )}
         placeholder="Verify code"
@@ -95,13 +95,10 @@ export const VerifyCodeCheck = ({
         onClick={onClickSend}
         disabled={!(status === 'default')}
       >
-        {status === 'processing' ? (
-          <Loader className="animate-spin dark:text-text-primary-dark" />
-        ) : status === 'verified' ? (
-          'verified'
-        ) : (
-          'send'
-        )}
+        {status === 'processing' && <Loader className="animate-spin dark:text-text-primary-dark" />}
+        {status === 'verified' && 'verified'}
+        {status === 'sent' && 'sent'}
+        {status === 'default' && 'send'}
       </button>
     </div>
   );

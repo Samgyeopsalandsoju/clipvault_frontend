@@ -96,7 +96,7 @@ export const CategoryCard = ({ id, color, name, onChangeColor, onChangeName, onD
             newName={newName}
             onChangeName={(e: ChangeEvent<HTMLInputElement>) => {
               const { value } = e.currentTarget;
-              if (value.length > 10) return;
+              if (value.length > 15) return;
               setNewName(e.currentTarget.value);
             }}
             onChangeColor={handleChangeColor}

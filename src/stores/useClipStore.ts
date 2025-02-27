@@ -1,4 +1,4 @@
-import { ICategoryResponse, IClipResponse } from '@/types';
+import { IClipResponse } from '@/types';
 import { create } from 'zustand';
 
 interface ClipStore {

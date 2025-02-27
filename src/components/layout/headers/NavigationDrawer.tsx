@@ -76,53 +76,64 @@ const Navigation = ({ isOpen, onClose }: NavBarProps) => {
           height: 'calc(100vh - 60px)',
         }}
       >
-        {status === 'unauthenticated' && (
-          <div>
-            <div
-              className={classNames(
-                'py-[16px] px-[25px] border-b dark:border-border-divider-dark text-[24px] font-semibold cursor-pointer select-none',
-                'dark:text-text-primary-dark'
-              )}
-              onClick={() => handleOpenModal('login')}
-            >
-              Login
-            </div>
-            <div
-              className={classNames(
-                'py-[16px] px-[25px] border-b dark:border-border-divider-dark text-[24px] font-semibold cursor-pointer select-none',
-                'dark:text-text-primary-dark'
-              )}
-              onClick={() => handleOpenModal('register')}
-            >
-              Sign up
-            </div>
+        <div>
+          {status === 'unauthenticated' && (
+            <>
+              <div
+                className={classNames(
+                  'py-[16px] px-[25px] border-b dark:border-border-divider-dark text-[24px] font-semibold cursor-pointer select-none',
+                  'dark:text-text-primary-dark'
+                )}
+                onClick={() => handleOpenModal('login')}
+              >
+                Login
+              </div>
+              <div
+                className={classNames(
+                  'py-[16px] px-[25px] border-b dark:border-border-divider-dark text-[24px] font-semibold cursor-pointer select-none',
+                  'dark:text-text-primary-dark'
+                )}
+                onClick={() => handleOpenModal('register')}
+              >
+                Sign up
+              </div>
+            </>
+          )}
+          {status === 'authenticated' && (
+            <>
+              {/* <div
+                className={classNames(
+                  'py-[16px] px-[25px] border-b dark:border-border-divider-dark text-[24px] font-semibold cursor-pointer select-none',
+                  'dark:text-text-primary-dark'
+                )}
+              >
+                <Link href={'/mypage'} onClick={onClose}>
+                  My page
+                </Link>
+              </div> */}
+              <div
+                className={classNames(
+                  'py-[16px] px-[25px] border-b dark:border-border-divider-dark text-[24px] font-semibold cursor-pointer select-none text-[#f44336]'
+                )}
+                onClick={() => {
+                  signOut();
+                }}
+              >
+                Logout
+              </div>
+            </>
+          )}
+          <div
+            className={classNames(
+              'py-[16px] px-[25px] border-b dark:border-border-divider-dark text-[24px] font-semibold cursor-pointer select-none',
+              'dark:text-text-primary-dark'
+            )}
+          >
+            <Link href={'/landing'} onClick={onClose}>
+              How to use
+            </Link>
           </div>
-        )}
-        {status === 'authenticated' && (
-          <div>
-            <div
-              className={classNames(
-                'py-[16px] px-[25px] border-b dark:border-border-divider-dark text-[24px] font-semibold cursor-pointer select-none',
-                'dark:text-text-primary-dark'
-              )}
-            >
-              <Link href={'/mypage'} onClick={onClose}>
-                My page
-              </Link>
-            </div>
-            <div
-              className={classNames(
-                'py-[16px] px-[25px] border-b dark:border-border-divider-dark text-[24px] font-semibold cursor-pointer select-none text-[#f44336]'
-              )}
-              onClick={() => {
-                signOut();
-              }}
-            >
-              Logout
-            </div>
-          </div>
-        )}
-
+        </div>
         <ApplicationInfo />
       </nav>
     </>

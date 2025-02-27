@@ -1,7 +1,7 @@
 'use client';
 
-import { useForkQuery, useHomeClipQuery } from '@/hooks';
-import { memo, useCallback, useEffect, useRef, useState } from 'react';
+import { useAuthModal, useForkQuery, useHomeClipQuery } from '@/hooks';
+import { memo, useCallback, useRef, useState } from 'react';
 import { IClipResponse } from '@/types';
 import { StatCountSection } from './StatCountSection';
 import { ClipList } from '../clip/ClipList';
@@ -10,8 +10,8 @@ import { SkeletonUI } from '@/components/skeleton/SkeletonUI';
 import { HomeCard } from './HomeCard';
 import { ForkModal } from '@/components/modals/ForkModal';
 import { useRouter } from 'next/navigation';
-import { useSession } from 'next-auth/react';
 import { createToast } from '@/libs/toast';
+import { authRef } from '@/stores/useSessionStore';
 
 const MemoizedClipList = memo(ClipList);
 const MemoizedHomeCard = memo(HomeCard);
@@ -22,20 +22,28 @@ export const ClientHomeComponent = () => {
   } = useHomeClipQuery();
   const { doFork, isForking } = useForkQuery();
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const { setIsAuthModalOpen } = useAuthModal();
   const router = useRouter();
   const containerRef = useRef(null);
-  const { data, status } = useSession();
   const toast = createToast();
 
-  const handleFork = (clipId: string) => {
-    console.log('status', status);
-    if (!data?.accessToken) {
-      toast.success('This service requires login.');
-      return;
-    }
-    setIsOpen(true);
-    doFork({ clipId });
-  };
+  const checkIsAuthenticated = () => authRef.isAuthenticated;
+  // 포크 처리 핸들러
+  const handleFork = useCallback(
+    (clipId: string) => {
+      const isCurrentlyAuthenticated = checkIsAuthenticated();
+
+      console.log('isCurrentlyAuthenticated', isCurrentlyAuthenticated);
+      if (!isCurrentlyAuthenticated) {
+        toast.success('Please log in to fork this clip to your favorites.');
+        setIsAuthModalOpen(true);
+        return;
+      }
+      setIsOpen(true);
+      doFork({ clipId });
+    },
+    [doFork, setIsAuthModalOpen, toast]
+  );
 
   const renderItem = useCallback((clip: IClipResponse) => {
     return <MemoizedHomeCard {...clip} onFork={handleFork} isForking={isForking} />;
