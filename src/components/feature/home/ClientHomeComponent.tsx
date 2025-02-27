@@ -35,7 +35,7 @@ export const ClientHomeComponent = () => {
 
       console.log('isCurrentlyAuthenticated', isCurrentlyAuthenticated);
       if (!isCurrentlyAuthenticated) {
-        toast.success('Please log in to fork this clip to your favorites.');
+        toast.info('Please log in to fork this clip to your favorites.');
         setIsAuthModalOpen(true);
         return;
       }

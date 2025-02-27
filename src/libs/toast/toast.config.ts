@@ -22,7 +22,20 @@ export const createToast = () => ({
         color: '#D32F2F',
         border: '1px solid #D32F2F',
       },
-      icon: '❌',
+      icon: '🙅‍♀️',
+      duration: 3000,
+    });
+  },
+
+  info: (message: string) => {
+    toast.success(message, {
+      style: {
+        borderRadius: '12px',
+        backgroundColor: '#E3F2FD',
+        color: '#1976D2',
+        border: '1px solid #1976D2',
+      },
+      icon: 'ℹ️',
       duration: 3000,
     });
   },
