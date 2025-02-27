@@ -2,7 +2,7 @@ import { useMutation } from '@tanstack/react-query';
 import { useAuthModal } from '@/hooks';
 import { login, register } from '@/services';
 import { createToast } from '@/libs/toast';
-import { useSessionStore } from '@/stores/useSessionStore';
+import { useSessionStore } from '@/stores';
 
 export const useAuth = () => {
   const toast = createToast();

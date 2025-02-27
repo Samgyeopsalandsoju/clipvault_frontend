@@ -11,7 +11,7 @@ import { HomeCard } from './HomeCard';
 import { ForkModal } from '@/components/modals/ForkModal';
 import { useRouter } from 'next/navigation';
 import { createToast } from '@/libs/toast';
-import { authRef } from '@/stores/useSessionStore';
+import { authRef } from '@/stores';
 
 const MemoizedClipList = memo(ClipList);
 const MemoizedHomeCard = memo(HomeCard);
