@@ -8,8 +8,10 @@ export const getCategories = async () => {
 
 export const postCategories = async (data: ICategoryRequest[]) => {
   const response = await api.post<APIResponse<string>>('/category/post', data);
+  return response.data.body;
 };
 
 export const deleteCategory = async (data: { categoryId: string }) => {
   const response = await api.delete<APIResponse<string>>(`/category/delete/${data.categoryId}`);
+  return response.data.body;
 };

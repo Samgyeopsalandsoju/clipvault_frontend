@@ -2,20 +2,21 @@
 
 import { deleteCategory, getCategories, postCategories } from '@/services';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { usePathname } from 'next/navigation';
 
 export const useCategoryQuery = () => {
-  const pathname = usePathname();
   const queryClient = useQueryClient();
 
   const getCategoriesQuery = useQuery({
-    queryKey: ['categories', pathname],
+    queryKey: ['categories'],
     queryFn: getCategories,
   });
 
   const postCategoryMutation = useMutation({
     mutationFn: postCategories,
+    onMutate: () => {},
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['categories'] });
+      queryClient.invalidateQueries({ queryKey: ['clips'] });
       console.log('postCategoryMutation success');
     },
     onError: () => {

@@ -31,10 +31,6 @@ export const CategoryList = () => {
 
   useEffect(() => {
     return () => {
-      console.log('initialCategories', initialCategories);
-      console.log('latestCategoriesRef', JSON.stringify(latestCategoriesRef.current));
-      console.log('isSame', initialCategories === JSON.stringify(latestCategoriesRef.current));
-
       const currentCategoriesString = JSON.stringify(latestCategoriesRef.current);
       if (currentCategoriesString !== initialCategories) {
         post(latestCategoriesRef.current);

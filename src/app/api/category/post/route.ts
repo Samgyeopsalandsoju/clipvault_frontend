@@ -14,7 +14,7 @@ export async function POST(request: NextRequest) {
     }
     console.log('body', body);
     // api 요청
-    const { status, data } = await privateAPI.post('/v1/category/edit', body);
+    const { status, data } = await privateAPI.post('/v1/category/post', body);
 
     console.log('/v1/category/edit api response check ', status, data);
 

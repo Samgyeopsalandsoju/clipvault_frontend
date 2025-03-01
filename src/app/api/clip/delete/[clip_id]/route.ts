@@ -7,6 +7,7 @@ export async function DELETE(request: NextRequest, context: any) {
   const params = await context.params;
   const { clip_id } = params;
   if (!clip_id) return NextResponse.json({ status: 500, message: 'clip_id does not exist' }, { status: 500 });
+  console.log('clip delete called?? @@');
 
   try {
     // api 요청

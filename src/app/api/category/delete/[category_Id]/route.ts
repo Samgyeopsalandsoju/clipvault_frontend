@@ -7,6 +7,7 @@ export async function DELETE(request: NextRequest, context: any) {
   const params = await context.params;
   const { category_Id } = params;
   if (!category_Id) return NextResponse.json({ status: 500, message: 'category_Id does not exist' }, { status: 500 });
+  console.log('category delete called?? @@');
 
   try {
     // api 요청

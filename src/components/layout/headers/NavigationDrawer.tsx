@@ -116,7 +116,7 @@ const Navigation = ({ isOpen, onClose }: NavBarProps) => {
                   'py-[16px] px-[25px] border-b dark:border-border-divider-dark text-[24px] font-semibold cursor-pointer select-none text-[#f44336]'
                 )}
                 onClick={() => {
-                  signOut();
+                  signOut({ callbackUrl: '/' });
                 }}
               >
                 Logout
