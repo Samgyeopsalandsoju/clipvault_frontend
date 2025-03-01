@@ -27,16 +27,7 @@ export const useClipQuery = (rawId?: string | string[] | undefined) => {
     queryKey: ['clips'],
     queryFn: getClips,
     enabled: !isModalOpen && !category.isPosting, // isModalOpen 모달이 열려있으면 실행하지않는다.
-    staleTime: 0,
-    refetchOnMount: true,
   });
-
-  useEffect(() => {
-    if (!category.isPosting) {
-      console.log('✅ categoryList 변경 감지, clips 데이터 다시 불러오기');
-      queryClient.invalidateQueries({ queryKey: ['clips'] });
-    }
-  }, [category.categoryList]);
 
   // create clip
   const createClipMutation = useMutation({
