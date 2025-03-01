@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useCategoryQuery, useClipPageTransition } from '@/hooks';
 import { deleteClip, getClip, getClips, modifyClip, postClip } from '@/services';
@@ -30,6 +30,12 @@ export const useClipQuery = (rawId?: string | string[] | undefined) => {
     staleTime: 0,
     refetchOnMount: true,
   });
+
+  useEffect(() => {
+    if (category.categoryList) {
+      queryClient.invalidateQueries({ queryKey: ['clips'] });
+    }
+  }, [category.categoryList]);
 
   // create clip
   const createClipMutation = useMutation({
