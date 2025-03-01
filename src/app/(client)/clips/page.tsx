@@ -18,7 +18,7 @@ const ClipsPage = () => {
     clips: { clipList, isClipsLoading },
   } = useClipQuery();
   const {
-    category: { categoryList, loading },
+    category: { categoryList, loading, isPosting },
   } = useCategoryQuery();
   const { getFilteredClips, setSelectedCategoryId } = useClipStore();
   const { handleClipClick } = useEditClipForm();
@@ -33,6 +33,8 @@ const ClipsPage = () => {
       </div>
     );
   }, []);
+
+  if (isPosting) return null;
 
   return (
     <div className="flex flex-col flex-1 h-full">
