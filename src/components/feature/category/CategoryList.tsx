@@ -10,11 +10,13 @@ import classNames from 'classnames';
 import { generateModernTagColors, generateUniqueId } from '@/utils';
 import { CategoryCard } from './CategoryCard';
 import { ConfirmModal } from '@/components/modals/ConfirmModal';
+import { useQueryClient } from '@tanstack/react-query';
 
 export const CategoryList = () => {
   const MAX_CATEGORY_COUNT = 10;
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(null);
+  const queryClient = useQueryClient();
   const {
     category: { categoryList, loading, post, remove },
   } = useCategoryQuery();
@@ -33,7 +35,11 @@ export const CategoryList = () => {
     return () => {
       const currentCategoriesString = JSON.stringify(latestCategoriesRef.current);
       if (currentCategoriesString !== initialCategories) {
-        post(latestCategoriesRef.current);
+        post(latestCategoriesRef.current).then(() => {
+          // 이미 컴포넌트가 언마운트되었지만 쿼리 클라이언트는 여전히 유효
+          queryClient.invalidateQueries({ queryKey: ['categories'] });
+          queryClient.invalidateQueries({ queryKey: ['clips'] });
+        });
       }
     };
   }, []);
