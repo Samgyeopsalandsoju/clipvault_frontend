@@ -2,7 +2,7 @@
 
 import { useMemo } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { useClipPageTransition } from '@/hooks';
+import { useCategoryQuery, useClipPageTransition } from '@/hooks';
 import { deleteClip, getClip, getClips, modifyClip, postClip } from '@/services';
 import { usePathname } from 'next/navigation';
 import { isModalPath } from '@/utils';
@@ -13,6 +13,7 @@ export const useClipQuery = (rawId?: string | string[] | undefined) => {
   const toast = createToast();
   const pathname = usePathname();
   const isModalOpen = isModalPath(pathname);
+  const { category } = useCategoryQuery();
 
   // id 값 정제
   const id = useMemo(() => {
@@ -25,7 +26,7 @@ export const useClipQuery = (rawId?: string | string[] | undefined) => {
   const getClipsQuery = useQuery({
     queryKey: ['clips'],
     queryFn: getClips,
-    enabled: !isModalOpen, // isModalOpen 모달이 열려있으면 실행하지않는다.
+    enabled: !isModalOpen && !category.isPosting, // isModalOpen 모달이 열려있으면 실행하지않는다.
     staleTime: 0,
     refetchOnMount: true,
   });
