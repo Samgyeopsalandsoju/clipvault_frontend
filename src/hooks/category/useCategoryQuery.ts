@@ -22,9 +22,12 @@ export const useCategoryQuery = () => {
       queryClient.invalidateQueries({ queryKey: ['categories'] });
       queryClient.invalidateQueries({ queryKey: ['clips'] });
       console.log('postCategoryMutation success');
-      setIsPosting(false);
       await queryClient.refetchQueries({ queryKey: ['categories'] });
       await queryClient.refetchQueries({ queryKey: ['clips'] });
+
+      setTimeout(() => {
+        setIsPosting(false); // ✅ isPosting 변경을 살짝 늦춰서 `useEffect`가 순서대로 실행되게 만듦
+      }, 100);
     },
     onError: () => {
       console.log('postCategoryMutation error');
