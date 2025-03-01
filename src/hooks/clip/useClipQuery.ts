@@ -33,6 +33,7 @@ export const useClipQuery = (rawId?: string | string[] | undefined) => {
 
   useEffect(() => {
     if (category.categoryList) {
+      console.log('✅ categoryList 변경 감지, clips 데이터 다시 불러오기');
       queryClient.invalidateQueries({ queryKey: ['clips'] });
     }
   }, [category.categoryList]);
