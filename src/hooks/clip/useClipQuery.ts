@@ -26,7 +26,7 @@ export const useClipQuery = (rawId?: string | string[] | undefined) => {
   const getClipsQuery = useQuery({
     queryKey: ['clips'],
     queryFn: getClips,
-    enabled: !isModalOpen && !category.isPosting, // isModalOpen 모달이 열려있으면 실행하지않는다.
+    enabled: !isModalOpen && !category.isPosting && !category.isPending, // isModalOpen 모달이 열려있으면 실행하지않는다.
   });
 
   // create clip

@@ -14,8 +14,8 @@ export const useCategoryQuery = () => {
       setIsPosting(true); // ✅ post 시작할 때 상태 변경
     },
     onSuccess: async () => {
-      queryClient.invalidateQueries({ queryKey: ['categories'] });
-      queryClient.invalidateQueries({ queryKey: ['clips'] });
+      await queryClient.invalidateQueries({ queryKey: ['categories'] });
+      await queryClient.invalidateQueries({ queryKey: ['clips'] });
       await queryClient.refetchQueries({ queryKey: ['categories'] });
       await queryClient.refetchQueries({ queryKey: ['clips'] });
       console.log('postCategoryMutation success');
@@ -51,6 +51,7 @@ export const useCategoryQuery = () => {
       post: postCategoryMutation.mutate,
       remove: deleteCategoryMutation.mutate,
       isPosting,
+      isPending: postCategoryMutation.isPending,
     },
   };
 };
