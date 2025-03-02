@@ -22,12 +22,11 @@ export const CategoryList = () => {
   // const [initialCategories, setInitialCategories] = useState<string>(JSON.stringify(categoryList || []));
   // const latestCategoriesRef = useRef(categories);
 
-  // useEffect(() => {
-  //   if (categoryList) {
-  //     setCategories(categoryList);
-  //     setInitialCategories(JSON.stringify(categoryList));
-  //   }
-  // }, [categoryList]);
+  useEffect(() => {
+    if (categoryList) {
+      setCategories(categoryList);
+    }
+  }, [categoryList]);
 
   // useEffect(() => {
   //   return () => {
