@@ -1,8 +1,8 @@
 'use client';
 
-import { memo, useCallback, useRef } from 'react';
+import { memo, useCallback, useEffect, useRef, useState } from 'react';
 import { useCategoryQuery, useClipQuery, useEditClipForm } from '@/hooks';
-import { IClipResponse } from '@/types';
+import { ICategoryResponse, IClipResponse } from '@/types';
 import { useClipStore } from '@/stores';
 import { SkeletonUI } from '@/components/skeleton/SkeletonUI';
 import { ClipCard } from '@/components/feature/clip/ClipCard';
@@ -22,9 +22,16 @@ const ClipsPage = () => {
   } = useCategoryQuery();
   const { getFilteredClips, setSelectedCategoryId } = useClipStore();
   const { handleClipClick } = useEditClipForm();
+  const [categories, setCategories] = useState<ICategoryResponse[]>(categoryList || []);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const filteredClipsList = getFilteredClips(clipList);
+
+  useEffect(() => {
+    if (categoryList) {
+      setCategories(categoryList);
+    }
+  }, [categoryList]);
 
   const renderItem = useCallback((clip: IClipResponse) => {
     return (
@@ -33,14 +40,9 @@ const ClipsPage = () => {
       </div>
     );
   }, []);
-
   return (
     <div className="flex flex-col flex-1 h-full">
-      {loading ? (
-        <SkeletonUI.Tag />
-      ) : (
-        <CategoriesTags categories={categoryList || []} onSelect={setSelectedCategoryId} />
-      )}
+      {loading ? <SkeletonUI.Tag /> : <CategoriesTags categories={categories} onSelect={setSelectedCategoryId} />}
 
       <div
         ref={containerRef}

@@ -30,8 +30,6 @@ export const useCategoryQuery = () => {
   const getCategoriesQuery = useQuery({
     queryKey: ['categories'],
     queryFn: getCategories,
-    staleTime: 0, // 항상 최신 데이터를 요청
-    refetchOnMount: 'always', // 컴포넌트 마운트시 항상 리페치
   });
 
   const deleteCategoryMutation = useMutation({
