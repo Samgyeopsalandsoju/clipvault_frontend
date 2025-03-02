@@ -30,7 +30,6 @@ export const useCategoryQuery = () => {
   const getCategoriesQuery = useQuery({
     queryKey: ['categories'],
     queryFn: getCategories,
-    enabled: !postCategoryMutation.isPending,
   });
 
   const deleteCategoryMutation = useMutation({

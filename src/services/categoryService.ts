@@ -2,6 +2,7 @@ import { api } from '@/libs/api';
 import { APIResponse, ICategoryRequest, ICategoryResponse } from '@/types';
 
 export const getCategories = async () => {
+  console.log('getCategories....called');
   const response = await api.get<APIResponse<ICategoryResponse[]>>('/category/list');
   return response.data.body;
 };
