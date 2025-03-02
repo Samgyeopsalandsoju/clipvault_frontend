@@ -31,8 +31,9 @@ export const useClipQuery = (rawId?: string | string[] | undefined) => {
   // create clip
   const createClipMutation = useMutation({
     mutationFn: postClip,
-    onSuccess: () => {
+    onSuccess: async () => {
       queryClient.invalidateQueries({ queryKey: ['clips', 'categories'] });
+      await queryClient.refetchQueries({ queryKey: ['categories'] });
       toast.success('Clip saved successfully ✨');
       handleClose();
     },
