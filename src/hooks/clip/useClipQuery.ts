@@ -31,9 +31,9 @@ export const useClipQuery = (rawId?: string | string[] | undefined) => {
   // create clip
   const createClipMutation = useMutation({
     mutationFn: postClip,
-    onSuccess: async () => {
-      queryClient.invalidateQueries({ queryKey: ['clips', 'categories'] });
-      await queryClient.refetchQueries({ queryKey: ['categories'] });
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['clips'] });
+      queryClient.invalidateQueries({ queryKey: ['categories'] });
       toast.success('Clip saved successfully ✨');
       handleClose();
     },
@@ -54,7 +54,7 @@ export const useClipQuery = (rawId?: string | string[] | undefined) => {
     mutationFn: modifyClip,
     onSuccess: () => {
       toast.success('Clip updated successfully ✨');
-      queryClient.invalidateQueries({ queryKey: ['clips', 'clip', 'categories'] });
+      queryClient.invalidateQueries({ queryKey: ['clips', 'clip'] });
       handleClose();
     },
   });
@@ -64,7 +64,7 @@ export const useClipQuery = (rawId?: string | string[] | undefined) => {
     mutationFn: deleteClip,
     onSuccess: () => {
       toast.success('Clip deleted successfully 🗑️');
-      queryClient.invalidateQueries({ queryKey: ['clips', 'categories'] });
+      queryClient.invalidateQueries({ queryKey: ['clips'] });
       handleClose();
     },
   });
