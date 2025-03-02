@@ -1,18 +1,21 @@
 'use client';
 
-import { memo, useCallback, useRef } from 'react';
+import { memo, useCallback, useRef, useState } from 'react';
 import { IForkedClipResponse } from '@/types';
 import { useForkQuery } from '@/hooks';
 import { ForkedList } from './ForkedList';
 import { ScrollUpButton } from '@/components/ui/buttons/ScrollUpButton';
 import { SkeletonUI } from '@/components/skeleton/SkeletonUI';
 import { ForkedCard } from './ForkedCard';
+import { ConfirmModal } from '@/components/modals/ConfirmModal';
 
 const MemoizedClipList = memo(ForkedList);
 const MemoizedForkCard = memo(ForkedCard);
 
 export const ClientForkComponents = () => {
   const { list, isClipLoading, deleteFork } = useForkQuery();
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [ids, setIds] = useState({ clipId: '', forkId: '' });
   const containerRef = useRef(null);
 
   const renderItem = useCallback((clip: IForkedClipResponse) => {
@@ -20,7 +23,13 @@ export const ClientForkComponents = () => {
   }, []);
 
   const handleDeleteFork = (data: { clipId: string; forkId: string }) => {
-    deleteFork(data);
+    setIsOpen(true);
+    setIds(data);
+  };
+
+  const handleOpenModal = () => {
+    setIsOpen(false);
+    deleteFork(ids);
   };
   return (
     <div
@@ -47,6 +56,19 @@ export const ClientForkComponents = () => {
       )}
 
       <ScrollUpButton scrollContainerRef={containerRef} />
+      {isOpen && (
+        <ConfirmModal
+          setIsOpen={setIsOpen}
+          text="Delete this fork?"
+          onAgree={() => {
+            handleOpenModal();
+          }}
+          onCancel={() => {
+            setIds({ clipId: '', forkId: '' });
+            setIsOpen(false);
+          }}
+        />
+      )}
     </div>
   );
 };

@@ -17,30 +17,7 @@ export const CategoryDropdown = ({ onSelect, onCreator, categories }: DropdownPr
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [color, setColor] = useState<{ background: string; text: string }>();
   const dropdownRef = useRef<HTMLDivElement>(null);
-
-  // 외부 클릭 감지를 위한 useEffect
-  const handleClickOutside = useCallback((event: MouseEvent) => {
-    if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-      if (searchTerm) {
-        handleCreateCategory();
-      }
-      setIsOpen(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
-
-  // 카테고리 인풋 박스 클린
-  const handleClearSearchTerm = () => {
-    setColor({ background: '', text: '' });
-    setSearchTerm('');
-    setIsOpen(true);
-  };
+  const [isCategorySelected, setIsCategorySelected] = useState<boolean>(false);
 
   // 신규 카테고리에 등록
   const handleCreateCategory = useCallback(() => {
@@ -51,10 +28,41 @@ export const CategoryDropdown = ({ onSelect, onCreator, categories }: DropdownPr
       color: String(colorHue),
       name: searchTerm,
     };
+    setIsCategorySelected(true);
     setIsOpen(false);
     setColor({ background: background, text: text });
     onCreator(category);
-  }, [searchTerm]);
+  }, [searchTerm, onCreator]);
+
+  // 외부 클릭 감지를 위한 useEffect
+  const handleClickOutside = useCallback(
+    (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+
+        if (!isCategorySelected) {
+          setSearchTerm('');
+          setColor({ background: '', text: '' });
+        }
+      }
+    },
+    [isCategorySelected]
+  );
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [handleCreateCategory]);
+
+  // 카테고리 인풋 박스 클린
+  const handleClearSearchTerm = () => {
+    setIsCategorySelected(false);
+    setColor({ background: '', text: '' });
+    setSearchTerm('');
+    setIsOpen(true);
+  };
 
   // 신규 카테고리 색 변경
   const handleChangeColor = useCallback(() => {
@@ -70,9 +78,19 @@ export const CategoryDropdown = ({ onSelect, onCreator, categories }: DropdownPr
   }, [searchTerm]);
 
   // 기존 카테고리에 등록
-  const handleSelectCategory = useCallback((category: ICategoryRequest) => {
-    onSelect(category);
-  }, []);
+  const handleSelectCategory = useCallback(
+    (category: ICategoryRequest) => {
+      setIsCategorySelected(true);
+      onSelect(category);
+    },
+    [onSelect]
+  );
+
+  // input에 포커스되면 드롭다운 열기 및 선택 상태 리셋
+  const handleInputFocus = () => {
+    setIsOpen(true);
+    setIsCategorySelected(false); // 다시 입력 시작하면 선택 상태 해제
+  };
 
   const filteredCategories = useMemo(() => {
     if (!searchTerm.trim()) return categories;
@@ -99,7 +117,7 @@ export const CategoryDropdown = ({ onSelect, onCreator, categories }: DropdownPr
           type="text"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.currentTarget.value)}
-          onFocus={() => setIsOpen(true)}
+          onFocus={handleInputFocus}
           placeholder="Category"
         />
         {!isOpen && showCreateCategory && (
@@ -165,7 +183,7 @@ export const CategoryDropdown = ({ onSelect, onCreator, categories }: DropdownPr
               </div>
             );
           })}
-          {isOpen && showCreateCategory && (
+          {isOpen && showCreateCategory && categories.length < 10 && (
             <div
               className={classNames(
                 'py-2 px-4 rounded-lg cursor-pointer text-center',
