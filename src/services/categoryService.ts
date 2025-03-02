@@ -4,6 +4,7 @@ import { APIResponse, ICategoryRequest, ICategoryResponse } from '@/types';
 export const getCategories = async () => {
   console.log('getCategories....called');
   const response = await api.get<APIResponse<ICategoryResponse[]>>('/category/list');
+  console.log('response.data.body', response.data.body);
   return response.data.body;
 };
 
