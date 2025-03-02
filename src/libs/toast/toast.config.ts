@@ -39,4 +39,23 @@ export const createToast = () => ({
       duration: 3000,
     });
   },
+  promise: <T>(promise: Promise<T>, messages: { loading: string; success: string; error: string }) => {
+    return toast.promise(
+      promise,
+      {
+        loading: messages.loading,
+        success: messages.success,
+        error: messages.error,
+      },
+      {
+        style: {
+          borderRadius: '12px',
+          backgroundColor: '#E3F2FD',
+          color: '#1976D2',
+          border: '1px solid #1976D2',
+        },
+        duration: 3000,
+      }
+    );
+  },
 });

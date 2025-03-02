@@ -1,13 +1,22 @@
 'use client';
 
+import { createToast } from '@/libs/toast';
 import { deleteCategory, getCategories, postCategories } from '@/services';
+import { ICategoryRequest } from '@/types';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 export const useCategoryQuery = () => {
+  const toast = createToast();
   const queryClient = useQueryClient();
 
   const postCategoryMutation = useMutation({
-    mutationFn: postCategories,
+    mutationFn: async (data: ICategoryRequest[]): Promise<any> => {
+      return toast.promise(postCategories(data), {
+        loading: 'Adding category...',
+        success: 'Category added successfully',
+        error: 'Failed to add category. Please try again.',
+      });
+    },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['categories'] });
       queryClient.invalidateQueries({ queryKey: ['clips'] });
@@ -39,7 +48,7 @@ export const useCategoryQuery = () => {
     category: {
       categoryList: getCategoriesQuery.data,
       loading: getCategoriesQuery.isPending,
-      post: postCategoryMutation.mutateAsync,
+      post: postCategoryMutation.mutate,
       remove: deleteCategoryMutation.mutate,
     },
   };

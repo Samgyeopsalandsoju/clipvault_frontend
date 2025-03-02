@@ -5,44 +5,38 @@ import { SortableContext, arrayMove, verticalListSortingStrategy } from '@dnd-ki
 import { useCategoryQuery } from '@/hooks';
 import { useEffect, useRef, useState } from 'react';
 import { ICategoryResponse } from '@/types';
-import { Plus, Loader2 } from 'lucide-react';
+import { Plus, Loader2, Save } from 'lucide-react';
 import classNames from 'classnames';
 import { generateModernTagColors, generateUniqueId } from '@/utils';
 import { CategoryCard } from './CategoryCard';
 import { ConfirmModal } from '@/components/modals/ConfirmModal';
-import { useQueryClient } from '@tanstack/react-query';
 
 export const CategoryList = () => {
   const MAX_CATEGORY_COUNT = 10;
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(null);
-  const queryClient = useQueryClient();
   const {
     category: { categoryList, loading, post, remove },
   } = useCategoryQuery();
   const [categories, setCategories] = useState<ICategoryResponse[]>(categoryList || []);
-  const [initialCategories, setInitialCategories] = useState<string>(JSON.stringify(categoryList || []));
-  const latestCategoriesRef = useRef(categories);
+  // const [initialCategories, setInitialCategories] = useState<string>(JSON.stringify(categoryList || []));
+  // const latestCategoriesRef = useRef(categories);
 
-  useEffect(() => {
-    if (categoryList) {
-      setCategories(categoryList);
-      setInitialCategories(JSON.stringify(categoryList));
-    }
-  }, [categoryList]);
+  // useEffect(() => {
+  //   if (categoryList) {
+  //     setCategories(categoryList);
+  //     setInitialCategories(JSON.stringify(categoryList));
+  //   }
+  // }, [categoryList]);
 
-  useEffect(() => {
-    return () => {
-      const currentCategoriesString = JSON.stringify(latestCategoriesRef.current);
-      if (currentCategoriesString !== initialCategories) {
-        post(latestCategoriesRef.current).then(() => {
-          // 이미 컴포넌트가 언마운트되었지만 쿼리 클라이언트는 여전히 유효
-          queryClient.invalidateQueries({ queryKey: ['categories'] });
-          queryClient.invalidateQueries({ queryKey: ['clips'] });
-        });
-      }
-    };
-  }, []);
+  // useEffect(() => {
+  //   return () => {
+  //     const currentCategoriesString = JSON.stringify(latestCategoriesRef.current);
+  //     if (currentCategoriesString !== initialCategories) {
+  //       post(latestCategoriesRef.current);
+  //     }
+  //   };
+  // }, []);
 
   const sensors = useSensors(
     useSensor(MouseSensor, {
@@ -61,7 +55,7 @@ export const CategoryList = () => {
         const oldIndex = prevCategories.findIndex((category) => category.id === active.id);
         const newIndex = prevCategories.findIndex((category) => category.id === over.id);
         const newCategories = arrayMove([...prevCategories], oldIndex, newIndex);
-        latestCategoriesRef.current = newCategories;
+        // latestCategoriesRef.current = newCategories;
         return newCategories;
       });
     }
@@ -72,7 +66,7 @@ export const CategoryList = () => {
     setCategories((prev) => {
       const newCategory = { name: 'new category', color: String(colorHue), id: generateUniqueId() };
       const newCategories = [...prev, newCategory];
-      latestCategoriesRef.current = newCategories;
+      // latestCategoriesRef.current = newCategories;
       return newCategories;
     });
   };
@@ -105,7 +99,7 @@ export const CategoryList = () => {
     const updatedCategories = categories.map((category) =>
       category.id === id ? { ...category, color: newColor } : category
     );
-    latestCategoriesRef.current = updatedCategories;
+    // latestCategoriesRef.current = updatedCategories;
     setCategories(updatedCategories);
   };
 
@@ -113,9 +107,13 @@ export const CategoryList = () => {
   const handleChangeName = (id: string, name: string) => {
     setCategories((prev) => {
       const newCategories = prev.map((category) => (category.id === id ? { ...category, name } : { ...category }));
-      latestCategoriesRef.current = newCategories;
+      // latestCategoriesRef.current = newCategories;
       return newCategories;
     });
+  };
+
+  const handleSave = () => {
+    post(categories);
   };
 
   if (loading)
@@ -125,53 +123,67 @@ export const CategoryList = () => {
       </div>
     );
   return (
-    <DndContext
-      sensors={sensors}
-      onDragEnd={handleDragEnd}
-      measuring={{
-        droppable: {
-          strategy: MeasuringStrategy.Always,
-        },
-      }}
-    >
-      <SortableContext items={categories.map((category) => category.id)} strategy={verticalListSortingStrategy}>
-        <div className="flex flex-col gap-4">
-          {/* 기존 카테고리 카드들 */}
-          {categories &&
-            categories.map((category) => {
-              return (
-                <CategoryCard
-                  {...category}
-                  key={category.id}
-                  onChangeName={handleChangeName}
-                  onChangeColor={updateCardColor}
-                  onDelete={() => openDeleteModal(category.id)}
-                />
-              );
-            })}
-          {/* 새 카테고리 추가 버튼 */}
-          {categories.length < MAX_CATEGORY_COUNT && (
-            <div
-              className={classNames(
-                'border-2 border-dashed dark:border-border-focus-dark rounded-xl flex py-2 ml-7 justify-center gap-3',
-                'dark:text-text-placeholder-dark cursor-pointer active:scale-[0.97] select-none'
-              )}
-              onClick={handleAddCategory}
-            >
-              <Plus />
-              <div>Create category</div>
-            </div>
-          )}
-        </div>
-      </SortableContext>
-      {isOpen && (
-        <ConfirmModal
-          setIsOpen={setIsOpen}
-          text={'Deleting this category will remove all clips within it.'}
-          onAgree={handleDelete}
-          onCancel={handleCancel}
-        />
-      )}
-    </DndContext>
+    <>
+      <button
+        type="button"
+        className={classNames(
+          'dark:text-text-placeholder-dark absolute top-5 right-5',
+          'active:scale-[0.95]',
+          // 'hover:dark:text-text-primary-dark',
+          'hover:dark:text-[#A0A0A0]'
+        )}
+        onClick={handleSave}
+      >
+        <Save size={20} />
+      </button>
+      <DndContext
+        sensors={sensors}
+        onDragEnd={handleDragEnd}
+        measuring={{
+          droppable: {
+            strategy: MeasuringStrategy.Always,
+          },
+        }}
+      >
+        <SortableContext items={categories.map((category) => category.id)} strategy={verticalListSortingStrategy}>
+          <div className="flex flex-col gap-4">
+            {/* 기존 카테고리 카드들 */}
+            {categories &&
+              categories.map((category) => {
+                return (
+                  <CategoryCard
+                    {...category}
+                    key={category.id}
+                    onChangeName={handleChangeName}
+                    onChangeColor={updateCardColor}
+                    onDelete={() => openDeleteModal(category.id)}
+                  />
+                );
+              })}
+            {/* 새 카테고리 추가 버튼 */}
+            {categories.length < MAX_CATEGORY_COUNT && (
+              <div
+                className={classNames(
+                  'border-2 border-dashed dark:border-border-focus-dark rounded-xl flex py-2 ml-7 justify-center gap-3',
+                  'dark:text-text-placeholder-dark cursor-pointer active:scale-[0.97] select-none'
+                )}
+                onClick={handleAddCategory}
+              >
+                <Plus />
+                <div>Create category</div>
+              </div>
+            )}
+          </div>
+        </SortableContext>
+        {isOpen && (
+          <ConfirmModal
+            setIsOpen={setIsOpen}
+            text={'Deleting this category will remove all clips within it.'}
+            onAgree={handleDelete}
+            onCancel={handleCancel}
+          />
+        )}
+      </DndContext>
+    </>
   );
 };

@@ -3,7 +3,7 @@ import { CategoryList } from '@/components/feature/category/CategoryList';
 export default function CategoryPage() {
   return (
     <>
-      <div className="px-4">
+      <div className="px-4 relative">
         <div className="py-4 px-4 flex flex-col gap-1">
           <h1 className="dark:text-text-primary-dark text-xl font-bold select-none">Category management</h1>
           <p className="dark:text-text-placeholder-dark text-sm select-none">
