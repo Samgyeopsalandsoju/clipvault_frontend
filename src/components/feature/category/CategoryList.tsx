@@ -36,8 +36,6 @@ export const CategoryList = () => {
   //     }
   //   };
   // }, []);
-  console.log('categoryList form server : ', categoryList);
-  console.log('categories form state : ', categories);
   const sensors = useSensors(
     useSensor(MouseSensor, {
       activationConstraint: {
