@@ -31,6 +31,7 @@ export const useCategoryQuery = () => {
     queryKey: ['categories'],
     queryFn: getCategories,
     staleTime: 0,
+    refetchOnMount: 'always',
   });
 
   const deleteCategoryMutation = useMutation({
