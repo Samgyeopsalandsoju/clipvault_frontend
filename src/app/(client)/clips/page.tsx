@@ -22,7 +22,6 @@ const ClipsPage = () => {
   } = useCategoryQuery();
   const { getFilteredClips, setSelectedCategoryId } = useClipStore();
   const { handleClipClick } = useEditClipForm();
-  // const [categories, setCategories] = useState<ICategoryResponse[]>(categoryList || []);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const filteredClipsList = getFilteredClips(clipList);

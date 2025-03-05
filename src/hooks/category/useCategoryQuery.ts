@@ -4,11 +4,12 @@ import { createToast } from '@/libs/toast';
 import { deleteCategory, getCategories, postCategories } from '@/services';
 import { ICategoryRequest } from '@/types';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 
 export const useCategoryQuery = () => {
   const toast = createToast();
   const queryClient = useQueryClient();
+  const pathname = usePathname();
 
   const postCategoryMutation = useMutation({
     mutationFn: async (data: ICategoryRequest[]): Promise<any> => {
@@ -29,7 +30,7 @@ export const useCategoryQuery = () => {
   });
 
   const getCategoriesQuery = useQuery({
-    queryKey: ['categories'],
+    queryKey: ['categories', pathname],
     queryFn: getCategories,
     staleTime: 0,
     refetchOnMount: 'always',
