@@ -30,6 +30,7 @@ export const useCategoryQuery = () => {
   const getCategoriesQuery = useQuery({
     queryKey: ['categories'],
     queryFn: getCategories,
+    staleTime: 0,
   });
 
   const deleteCategoryMutation = useMutation({
