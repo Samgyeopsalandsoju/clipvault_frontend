@@ -19,6 +19,7 @@ const ClipsPage = () => {
   } = useClipQuery();
   const {
     category: { categoryList, loading },
+    refetch,
   } = useCategoryQuery();
   const { getFilteredClips, setSelectedCategoryId } = useClipStore();
   const { handleClipClick } = useEditClipForm();
@@ -27,11 +28,12 @@ const ClipsPage = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const filteredClipsList = getFilteredClips(clipList);
   console.log('clip page categories data : ', categoryList);
+
   useEffect(() => {
-    if (categoryList) {
-      setCategories(categoryList);
+    if (refetch) {
+      refetch();
     }
-  }, [categoryList]);
+  }, []);
 
   const renderItem = useCallback((clip: IClipResponse) => {
     return (

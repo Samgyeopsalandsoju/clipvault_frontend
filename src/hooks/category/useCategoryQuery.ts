@@ -4,6 +4,7 @@ import { createToast } from '@/libs/toast';
 import { deleteCategory, getCategories, postCategories } from '@/services';
 import { ICategoryRequest } from '@/types';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useEffect } from 'react';
 
 export const useCategoryQuery = () => {
   const toast = createToast();
@@ -45,6 +46,11 @@ export const useCategoryQuery = () => {
     },
   });
 
+  useEffect(() => {
+    console.log('getCategoriesQuery data:', getCategoriesQuery.data);
+    console.log('getCategoriesQuery isPending:', getCategoriesQuery.isPending);
+  }, [getCategoriesQuery.data, getCategoriesQuery.isPending]);
+
   return {
     category: {
       categoryList: getCategoriesQuery.data,
@@ -52,5 +58,6 @@ export const useCategoryQuery = () => {
       post: postCategoryMutation.mutate,
       remove: deleteCategoryMutation.mutate,
     },
+    refetch: getCategoriesQuery.refetch,
   };
 };
