@@ -46,11 +46,6 @@ export const useCategoryQuery = () => {
     },
   });
 
-  useEffect(() => {
-    console.log('getCategoriesQuery data:', getCategoriesQuery.data);
-    console.log('getCategoriesQuery isPending:', getCategoriesQuery.isPending);
-  }, [getCategoriesQuery.data, getCategoriesQuery.isPending]);
-
   return {
     category: {
       categoryList: getCategoriesQuery.data,

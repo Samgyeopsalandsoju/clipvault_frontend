@@ -19,27 +19,13 @@ const ClipsPage = () => {
   } = useClipQuery();
   const {
     category: { categoryList, loading },
-    refetch,
   } = useCategoryQuery();
   const { getFilteredClips, setSelectedCategoryId } = useClipStore();
   const { handleClipClick } = useEditClipForm();
-  const [categories, setCategories] = useState<ICategoryResponse[]>(categoryList || []);
+  // const [categories, setCategories] = useState<ICategoryResponse[]>(categoryList || []);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const filteredClipsList = getFilteredClips(clipList);
-  console.log('clip page categories data : ', categoryList);
-
-  useEffect(() => {
-    if (refetch) {
-      refetch();
-    }
-  }, []);
-
-  useEffect(() => {
-    if (categoryList) {
-      setCategories(categoryList);
-    }
-  }, [categoryList]);
 
   const renderItem = useCallback((clip: IClipResponse) => {
     return (
@@ -50,7 +36,11 @@ const ClipsPage = () => {
   }, []);
   return (
     <div className="flex flex-col flex-1 h-full">
-      {loading ? <SkeletonUI.Tag /> : <CategoriesTags categories={categories} onSelect={setSelectedCategoryId} />}
+      {loading ? (
+        <SkeletonUI.Tag />
+      ) : (
+        <CategoriesTags categories={categoryList || []} onSelect={setSelectedCategoryId} />
+      )}
 
       <div
         ref={containerRef}
