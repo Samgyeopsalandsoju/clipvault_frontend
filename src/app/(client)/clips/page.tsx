@@ -26,7 +26,7 @@ const ClipsPage = () => {
 
   const containerRef = useRef<HTMLDivElement>(null);
   const filteredClipsList = getFilteredClips(clipList);
-
+  console.log('clip page categories data : ', categoryList);
   useEffect(() => {
     if (categoryList) {
       setCategories(categoryList);
