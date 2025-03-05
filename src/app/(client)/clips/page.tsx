@@ -35,6 +35,12 @@ const ClipsPage = () => {
     }
   }, []);
 
+  useEffect(() => {
+    if (categoryList) {
+      setCategories(categoryList);
+    }
+  }, [categoryList]);
+
   const renderItem = useCallback((clip: IClipResponse) => {
     return (
       <div onClick={() => handleClipClick(clip.id)}>
