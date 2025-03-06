@@ -63,6 +63,7 @@ export const Form = styled.form`
 export const Input = styled.input<{ $error: boolean }>`
   width: 100%;
   padding: 0.75rem 1rem;
+  height: 50px;
   background-color: ${(props) => props.theme.background.secondary};
   border: 1px solid ${(props) => props.theme.border.secondary};
   border-radius: 0.5rem;

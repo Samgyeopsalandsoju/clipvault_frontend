@@ -2,11 +2,9 @@
 
 import { useParams } from 'next/navigation';
 import { useCategoryQuery, useClipQuery, useEditClipForm } from '@/hooks';
-import { VisibilityType } from '@/types';
 import classNames from 'classnames';
 import { useEffect } from 'react';
 import { SkeletonUI } from '@/components/skeleton/SkeletonUI';
-import { VisibilityDropdown } from '@/components/feature/dropdowns/VisibilityDropdown';
 import { ModifyDropdown } from '@/components/feature/dropdowns/ModifyDropdown';
 import { generateModernTagColors } from '@/utils';
 
@@ -16,7 +14,6 @@ export default function Page() {
     handleCategorySelect,
     handleOutsideClick,
     handleSubmit,
-    handleVisibilitySelect,
     onSubmit,
     register,
     trigger,
@@ -73,18 +70,18 @@ export default function Page() {
           </>
         ) : (
           <>
-            <div>
-              <div
-                className={classNames(
-                  'w-full px-4 py-3 rounded-[0.5rem] border-solid border-[1px] focus:outline-none focus:dark:border-border-focus-dark',
-                  'dark:placeholder-text-placeholder-dark dark:border-border-secondary-dark dark:bg-background-primary-dark',
-                  'dark:text-text-primary-dark'
-                )}
-              >
-                {visible}
-              </div>
-              <span className="text-yellow-500 text-sm py-1 pl-2 select-none">Visibility cannot be edited.</span>
+            <div
+              className={classNames(
+                'w-full px-4 py-[12px] rounded-[0.5rem] border-solid border-[1px] focus:outline-none focus:dark:border-border-focus-dark',
+                'dark:placeholder-text-placeholder-dark dark:border-border-secondary-dark dark:bg-background-primary-dark',
+                'dark:text-text-primary-dark'
+              )}
+            >
+              {visible}
             </div>
+            <span className="text-yellow-500 text-sm h-[20px] pl-2 select-none">
+              {visible !== 'public' ? 'Visibility cannot be edited' : ' '}
+            </span>
             {isPublic ? (
               <>
                 <div
@@ -111,7 +108,7 @@ export default function Page() {
 
             <input
               className={classNames(
-                'w-full py-3 px-4 rounded-[0.5rem] border-solid border-[1px] dark:border-border-secondary-dark',
+                'w-full py-[12px] h-[50px] px-4 rounded-[0.5rem] border-solid border-[1px] dark:border-border-secondary-dark',
                 'dark:bg-background-secondary-dark dark:text-text-primary-dark dark:placeholder-text-placeholder-dark',
                 'focus:outline-none focus:dark:border-border-focus-dark mb-[20px]'
               )}
@@ -142,8 +139,11 @@ export default function Page() {
             />
           </>
         )}
+        {visible === 'public' && (
+          <span className="text-yellow-500 text-sm text-center select-none">Public clip cannot be edited.</span>
+        )}
 
-        <button type="button" className="text-[15px] text-[#f44336] font-semibold" onClick={() => onDelete(id)}>
+        <button type="button" className="text-[15px] text-[#f44336] font-semibold pt-2" onClick={() => onDelete(id)}>
           Delete Clip
         </button>
         <button ref={hiddenButtonRef} type="submit" style={{ display: 'none' }} />

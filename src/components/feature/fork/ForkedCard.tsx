@@ -21,7 +21,7 @@ export const ForkedCard = ({
   const { background, text, border } = generateModernTagColors(Number(categoryColor));
 
   return (
-    <div className="relative w-full h-[93px] max-w-md mx-auto p-0 hover:scale-[1.03]">
+    <div className="relative w-full h-[93px] max-w-md mx-auto p-0 hover:scale-[1.01]">
       <div
         className={classNames(
           ' w-full h-full',

@@ -41,7 +41,7 @@ export const VisibilityDropdown = ({ onSelect, visible }: DropdownProps) => {
           className={classNames(
             'w-full px-4 py-3 rounded-[0.5rem] border-solid border-[1px] focus:outline-none focus:dark:border-border-focus-dark',
             'dark:placeholder-text-placeholder-dark dark:border-border-secondary-dark dark:bg-background-secondary-dark',
-            'dark:text-text-primary-dark cursor-pointer'
+            'dark:text-text-primary-dark cursor-pointer h-[50px]'
           )}
           type="text"
           onFocus={() => setIsOpen(true)}

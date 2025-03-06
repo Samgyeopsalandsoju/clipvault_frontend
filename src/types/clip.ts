@@ -28,3 +28,7 @@ export interface IClipResponse extends IBaseClip {
   forkedCount: string;
   category: ICategoryResponse;
 }
+
+export interface ClipWithForked extends IClipResponse {
+  isForked: boolean;
+}

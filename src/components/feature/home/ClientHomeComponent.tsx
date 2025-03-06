@@ -2,9 +2,8 @@
 
 import { useAuthModal, useForkQuery, useHomeClipQuery } from '@/hooks';
 import { memo, useCallback, useRef, useState } from 'react';
-import { IClipResponse } from '@/types';
+import { ClipWithForked } from '@/types';
 import { StatCountSection } from './StatCountSection';
-import { ClipList } from '../clip/ClipList';
 import { ScrollUpButton } from '@/components/ui/buttons/ScrollUpButton';
 import { SkeletonUI } from '@/components/skeleton/SkeletonUI';
 import { HomeCard } from './HomeCard';
@@ -12,15 +11,17 @@ import { ForkModal } from '@/components/modals/ForkModal';
 import { useRouter } from 'next/navigation';
 import { createToast } from '@/libs/toast';
 import { authRef } from '@/stores';
+import { markIntersectingElementsAsForked } from '@/utils';
+import { HomeClipList } from './HomeClipList';
 
-const MemoizedClipList = memo(ClipList);
+const MemoizedClipList = memo(HomeClipList);
 const MemoizedHomeCard = memo(HomeCard);
 
 export const ClientHomeComponent = () => {
   const {
-    home: { list, isClipLoading },
+    home: { list, isClipLoading, forked },
   } = useHomeClipQuery();
-  const { doFork, isForking } = useForkQuery();
+  const { doFork } = useForkQuery();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const { setIsAuthModalOpen } = useAuthModal();
   const router = useRouter();
@@ -28,25 +29,30 @@ export const ClientHomeComponent = () => {
   const toast = createToast();
 
   const checkIsAuthenticated = () => authRef.isAuthenticated;
+
   // 포크 처리 핸들러
   const handleFork = useCallback(
-    (clipId: string) => {
+    async (clipId: string) => {
       const isCurrentlyAuthenticated = checkIsAuthenticated();
 
-      console.log('isCurrentlyAuthenticated', isCurrentlyAuthenticated);
       if (!isCurrentlyAuthenticated) {
         toast.info('Please log in to fork this clip to your favorites.');
         setIsAuthModalOpen(true);
         return;
       }
-      setIsOpen(true);
-      doFork({ clipId });
+      const result = await doFork({ clipId });
+
+      if (result === '5000') {
+        setIsOpen(true);
+      }
     },
     [doFork, setIsAuthModalOpen, toast]
   );
 
-  const renderItem = useCallback((clip: IClipResponse) => {
-    return <MemoizedHomeCard {...clip} onFork={handleFork} isForking={isForking} />;
+  const markedList = markIntersectingElementsAsForked(list, forked);
+
+  const renderItem = useCallback((clip: ClipWithForked) => {
+    return <MemoizedHomeCard {...clip} onFork={handleFork} />;
   }, []);
 
   return (
@@ -60,7 +66,7 @@ export const ClientHomeComponent = () => {
           <SkeletonUI.ClipList numCards={5} />
         </div>
       ) : (
-        <MemoizedClipList list={list} renderItem={renderItem} />
+        <MemoizedClipList list={markedList || []} renderItem={renderItem} />
       )}
 
       <ScrollUpButton scrollContainerRef={containerRef} />

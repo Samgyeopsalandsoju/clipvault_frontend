@@ -1,22 +1,27 @@
 'use client';
 
-import { IClipResponse } from '@/types/clip';
+import { ClipWithForked } from '@/types/clip';
 import { Bookmark, ExternalLink } from 'lucide-react';
 import classNames from 'classnames';
 import { generateModernTagColors, openInNewTab } from '@/utils';
 import { useState } from 'react';
+import { createToast } from '@/libs/toast';
 
-interface HomeCardProps extends IClipResponse {
+interface HomeCardProps extends ClipWithForked {
   onFork: (clipId: string) => void;
-  isForking: boolean;
 }
 
-export const HomeCard = ({ id, title, category, link, forkedCount, isForking, onFork }: HomeCardProps) => {
+export const HomeCard = ({ id, title, category, link, forkedCount, isForked, onFork }: HomeCardProps) => {
+  const toast = createToast();
   const [isFlipped, setIsFlipped] = useState(false);
   const { background, text, border } = generateModernTagColors(Number(category.color));
 
+  console.log('title', title);
+  console.log('forkedCount', forkedCount);
+  console.log('isForked', isForked);
+
   return (
-    <div className="relative w-full h-[93px] max-w-md mx-auto p-0 hover:scale-[1.03]">
+    <div className="relative w-full h-[93px] max-w-md mx-auto p-0 hover:scale-[1.01]">
       <div
         className="relative  w-full h-full cursor-pointer"
         style={{ perspective: '1000px' }}
@@ -91,14 +96,21 @@ export const HomeCard = ({ id, title, category, link, forkedCount, isForking, on
                   </button>
                 </div>
                 <div
-                  className="flex flex-row opacity-50 hover:opacity-100 w-full justify-end"
+                  className={classNames('flex flex-row  hover:opacity-100 w-full justify-end', {
+                    'opacity-100': isForked,
+                    'opacity-50': !isForked,
+                  })}
                   onClick={(e) => {
                     e.stopPropagation();
-                    onFork(id);
+                    if (!isForked) {
+                      onFork(id);
+                      return;
+                    }
+                    toast.error("You've already forked this clip.");
                   }}
                 >
                   <div className={classNames('dark:text-text-primary-dark p-2 pb-0')}>
-                    <Bookmark size={16} />
+                    <Bookmark size={16} fill={isForked ? 'currentColor' : 'none'} />
                   </div>
                   <p
                     className={classNames(

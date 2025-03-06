@@ -25,9 +25,7 @@ privateAPI.interceptors.request.use(
       if (!token) {
         throw new Error('No token found');
       }
-
       config.headers.Authorization = `Bearer ${token}`;
-
       return config;
     } catch (error) {
       return Promise.reject(error);

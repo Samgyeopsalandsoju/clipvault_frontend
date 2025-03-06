@@ -9,7 +9,7 @@ export const ClipCard = ({ title, category, link, visible, forkedCount }: IClipR
   const { background, text, border } = generateModernTagColors(Number(category.color));
 
   return (
-    <div className="relative w-full h-[93px] max-w-md mx-auto p-0 hover:scale-[1.03]">
+    <div className="relative w-full h-[93px] max-w-md mx-auto p-0 hover:scale-[1.01]">
       <div
         className={classNames(
           ' w-full h-full',
@@ -98,7 +98,7 @@ export const ClipCard = ({ title, category, link, visible, forkedCount }: IClipR
               </button>
             </div>
             {visible === 'public' && (
-              <div className="flex flex-row opacity-50 hover:opacity-100 w-full justify-end">
+              <div className="flex flex-row opacity-100 w-full justify-end">
                 <div className={classNames('dark:text-text-primary-dark p-2 pb-0')}>
                   <Bookmark size={16} fill="currentColor" />
                 </div>
