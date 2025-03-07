@@ -1,6 +1,6 @@
 import { LAST_UPDATE, VERSION } from '@/constants';
 import { FaGithub, FaEnvelope, FaBook } from 'react-icons/fa';
-import { SiTypescript, SiNextdotjs, SiReactquery, SiStyledcomponents, SiTailwindcss } from 'react-icons/si';
+import { SiTypescript, SiNextdotjs, SiReactquery, SiTailwindcss } from 'react-icons/si';
 
 export const ApplicationInfo = () => {
   const techStack = [

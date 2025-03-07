@@ -3,7 +3,7 @@
 import { DndContext, DragEndEvent, useSensor, useSensors, MouseSensor, MeasuringStrategy } from '@dnd-kit/core';
 import { SortableContext, arrayMove, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { useCategoryQuery } from '@/hooks';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ICategoryResponse } from '@/types';
 import { Plus, Loader2, Save } from 'lucide-react';
 import classNames from 'classnames';
@@ -19,8 +19,6 @@ export const CategoryList = () => {
     category: { categoryList, loading, post, remove },
   } = useCategoryQuery();
   const [categories, setCategories] = useState<ICategoryResponse[]>(categoryList || []);
-  // const [initialCategories, setInitialCategories] = useState<string>(JSON.stringify(categoryList || []));
-  // const latestCategoriesRef = useRef(categories);
 
   useEffect(() => {
     if (categoryList) {
@@ -28,14 +26,6 @@ export const CategoryList = () => {
     }
   }, [categoryList]);
 
-  // useEffect(() => {
-  //   return () => {
-  //     const currentCategoriesString = JSON.stringify(latestCategoriesRef.current);
-  //     if (currentCategoriesString !== initialCategories) {
-  //       post(latestCategoriesRef.current);
-  //     }
-  //   };
-  // }, []);
   const sensors = useSensors(
     useSensor(MouseSensor, {
       activationConstraint: {
@@ -53,7 +43,6 @@ export const CategoryList = () => {
         const oldIndex = prevCategories.findIndex((category) => category.id === active.id);
         const newIndex = prevCategories.findIndex((category) => category.id === over.id);
         const newCategories = arrayMove([...prevCategories], oldIndex, newIndex);
-        // latestCategoriesRef.current = newCategories;
         return newCategories;
       });
     }
@@ -64,7 +53,6 @@ export const CategoryList = () => {
     setCategories((prev) => {
       const newCategory = { name: 'new category', color: String(colorHue), id: generateUniqueId() };
       const newCategories = [...prev, newCategory];
-      // latestCategoriesRef.current = newCategories;
       return newCategories;
     });
   };
@@ -97,7 +85,6 @@ export const CategoryList = () => {
     const updatedCategories = categories.map((category) =>
       category.id === id ? { ...category, color: newColor } : category
     );
-    // latestCategoriesRef.current = updatedCategories;
     setCategories(updatedCategories);
   };
 
@@ -105,7 +92,6 @@ export const CategoryList = () => {
   const handleChangeName = (id: string, name: string) => {
     setCategories((prev) => {
       const newCategories = prev.map((category) => (category.id === id ? { ...category, name } : { ...category }));
-      // latestCategoriesRef.current = newCategories;
       return newCategories;
     });
   };
@@ -127,7 +113,6 @@ export const CategoryList = () => {
         className={classNames(
           'dark:text-text-placeholder-dark absolute top-5 right-5',
           'active:scale-[0.95]',
-          // 'hover:dark:text-text-primary-dark',
           'hover:dark:text-[#A0A0A0]'
         )}
         onClick={handleSave}
