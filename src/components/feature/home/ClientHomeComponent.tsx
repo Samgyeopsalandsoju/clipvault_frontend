@@ -66,7 +66,7 @@ export const ClientHomeComponent = () => {
           <SkeletonUI.ClipList numCards={5} />
         </div>
       ) : (
-        <MemoizedClipList list={markedList || []} renderItem={renderItem} />
+        <MemoizedClipList list={markedList || []} renderItem={renderItem} scrollAreaRef={containerRef} />
       )}
 
       <ScrollUpButton scrollContainerRef={containerRef} />

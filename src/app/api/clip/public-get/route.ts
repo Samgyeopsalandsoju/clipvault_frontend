@@ -8,7 +8,7 @@ export async function GET(request: NextRequest) {
   try {
     console.log('public clip list GET called..');
     // api 요청
-    const { status, data } = await publicAPI.get<APIResponse<IClipResponse[]>>('/v1/clip/public/20');
+    const { status, data } = await publicAPI.get<APIResponse<IClipResponse[]>>('/v1/clip/public/30');
 
     // 통신 체크
     if (status !== 200 || !data) {

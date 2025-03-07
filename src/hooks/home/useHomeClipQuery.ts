@@ -20,6 +20,7 @@ export const useHomeClipQuery = () => {
   return {
     home: {
       list: homeClipQuery.data ?? [],
+      refresh: homeClipQuery.refetch,
       isClipLoading: homeClipQuery.isPending,
       forked: getAlreadyForkedList.data ?? [],
     },

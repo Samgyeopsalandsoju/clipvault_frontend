@@ -16,10 +16,6 @@ export const HomeCard = ({ id, title, category, link, forkedCount, isForked, onF
   const [isFlipped, setIsFlipped] = useState(false);
   const { background, text, border } = generateModernTagColors(Number(category.color));
 
-  console.log('title', title);
-  console.log('forkedCount', forkedCount);
-  console.log('isForked', isForked);
-
   return (
     <div className="relative w-full h-[93px] max-w-md mx-auto p-0 hover:scale-[1.01]">
       <div

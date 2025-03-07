@@ -1,13 +1,22 @@
 'use client';
 
+import { useClipQuery } from '@/hooks';
 import classNames from 'classnames';
 import { useRouter } from 'next/navigation';
 
 export const CreateClipButton = () => {
+  const {
+    clips: { clipList },
+  } = useClipQuery();
+  const isOver = clipList.length >= 11;
   const router = useRouter();
 
   const handleNewClick = () => {
-    router.push('/clips/new');
+    if (isOver) {
+      return;
+    } else {
+      router.push('/clips/new');
+    }
   };
 
   return (
@@ -20,7 +29,7 @@ export const CreateClipButton = () => {
       )}
       onClick={handleNewClick}
     >
-      Create Clip!
+      {isOver ? 'Maximum Clips Reached (100/100)' : 'Create Clip!'}
     </button>
   );
 };
