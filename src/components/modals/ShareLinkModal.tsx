@@ -33,6 +33,7 @@ export const ShareLinkModal = ({ isOpen, setIsOpen, list }: ShareLinkModalProps)
   const { generatePutUrl } = usePresignedUrl();
   const [shareLink, setShareLink] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [showingDue, setShowingDue] = useState<string>('7');
   const router = useRouter();
 
   const prepareAndUpload = async () => {
@@ -59,7 +60,8 @@ export const ShareLinkModal = ({ isOpen, setIsOpen, list }: ShareLinkModalProps)
     }
   };
 
-  const handleSelect = (days: string): void => {
+  const handleSelect = ({ days, showingDue }: { days: string; showingDue: string }): void => {
+    setShowingDue(showingDue);
     setValue('due', days);
   };
 
@@ -81,9 +83,13 @@ export const ShareLinkModal = ({ isOpen, setIsOpen, list }: ShareLinkModalProps)
       open={isOpen}
       onClose={() => {
         setIsOpen(false);
-        setShareLink('');
-        setIsLoading(false);
-        reset();
+
+        setTimeout(() => {
+          setIsLoading(false);
+          reset();
+          setShareLink('');
+          setShowingDue('7');
+        }, 100);
       }}
       fullWidth
     >
@@ -95,7 +101,8 @@ export const ShareLinkModal = ({ isOpen, setIsOpen, list }: ShareLinkModalProps)
 
       <form className="flex flex-col py-[26px] px-4 gap-5" onSubmit={handleSubmit(onSubmit)}>
         <p className="select-none dark:text-text-primary-dark">
-          The shared link will expire in 30 days. <br />
+          {`The shared link will expire in ${showingDue} day${showingDue === '1' ? '' : 's'}. `}
+          <br />
           Once expired, it will no longer be accessible.
         </p>
 

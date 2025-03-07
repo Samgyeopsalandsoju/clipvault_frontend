@@ -14,7 +14,7 @@ const EXPIRY_OPTIONS = [
 ];
 
 interface ExpiryDateSelectorProps {
-  onSelect: (value: string) => void;
+  onSelect: ({ days, showingDue }: { days: string; showingDue: string }) => void;
   defaultValue?: string;
 }
 
@@ -40,7 +40,7 @@ export const ExpiryDateSelector = ({ onSelect, defaultValue = '7' }: ExpiryDateS
   // expiryDate가 업데이트 될 때마다 onSelect 호출 (마운트 시에도 적용됨)
   useEffect(() => {
     if (expiryDate) {
-      onSelect(rawDate);
+      onSelect({ days: rawDate, showingDue: selectedDays });
     }
   }, [expiryDate]);
 
