@@ -32,7 +32,7 @@ export function AllProvider({ children }: { children: React.ReactNode }) {
   return (
     <NextThemesProvider
       attribute="class" // HTML에 적용될 속성
-      defaultTheme="system" // 기본 테마 설정
+      defaultTheme="dark" // 기본 테마 설정
       enableSystem={true} // 시스템 테마 감지 활성화
       value={{
         light: 'light',
