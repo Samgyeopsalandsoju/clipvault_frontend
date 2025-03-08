@@ -5,10 +5,11 @@ import classNames from 'classnames';
 import { useRouter } from 'next/navigation';
 
 export const CreateClipButton = () => {
+  const LIMIT_LIST = 100;
   const {
     clips: { clipList },
   } = useClipQuery();
-  const isOver = clipList.length >= 11;
+  const isOver = clipList.length >= LIMIT_LIST;
   const router = useRouter();
 
   const handleNewClick = () => {

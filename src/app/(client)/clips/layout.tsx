@@ -48,9 +48,10 @@ export default function ClipLayout({ children }: { children: React.ReactNode }) 
           <Slide direction="up" in={isOpen && mounted}>
             <div
               className={classNames(
-                'max-w-[480px] m-auto absolute bottom-0 left-0 right-0 h-[60vh] pointer-events-auto',
-                'z-1000 rounded-tl-[16px] rounded-tr-[16px] isolate transform translate-z-0 lg:h-[65vh]',
-                'dark:bg-background-primary-dark dark:border-border-primary-dark z-[3]'
+                'max-w-[480px] m-auto absolute bottom-0 left-0 right-0 pointer-events-auto',
+                'z-1000 rounded-tl-[16px] rounded-tr-[16px] isolate transform translate-z-0',
+                'dark:bg-background-primary-dark dark:border-border-primary-dark z-[3]',
+                'max-h-[calc(100vh-120px)]'
               )}
             >
               {children}
