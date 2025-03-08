@@ -1,13 +1,11 @@
 import { AllProvider } from '@/providers/AllProvider';
 import type { Metadata } from 'next';
 import MUIRegistry from '@/providers/registries/mui-registry';
-import StyledComponentsRegistry from '@/providers/registries/styled-registry';
-import GlobalStyles from '@/styles/GlobalStyles';
 import '@/styles/TailwindStyle.css';
 import { SessionManager } from '@/components/SessionManager';
 
 export const metadata: Metadata = {
-  title: 'ClipVault',
+  title: 'clipVault',
   description: "Explore the community's curated links",
   metadataBase: new URL('https://clipvault.info'),
   openGraph: {
@@ -42,15 +40,12 @@ export default function RootLayout({
 }>) {
   return (
     <html>
-      <body suppressHydrationWarning={true} className="dark">
+      <body className="dark dark:bg-background-primary-dark" suppressHydrationWarning={true}>
         <MUIRegistry>
-          <StyledComponentsRegistry>
-            <AllProvider>
-              <GlobalStyles />
-              {children}
-              <SessionManager />
-            </AllProvider>
-          </StyledComponentsRegistry>
+          <AllProvider>
+            {children}
+            <SessionManager />
+          </AllProvider>
         </MUIRegistry>
       </body>
     </html>

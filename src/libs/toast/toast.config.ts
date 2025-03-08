@@ -21,6 +21,7 @@ export const createToast = () => ({
         backgroundColor: '#FFEBEE',
         color: '#D32F2F',
         border: '1px solid #D32F2F',
+        zIndex: 999999,
       },
       icon: '🙅‍♀️',
       duration: 3000,
@@ -34,6 +35,7 @@ export const createToast = () => ({
         backgroundColor: '#E3F2FD',
         color: '#1976D2',
         border: '1px solid #1976D2',
+        zIndex: 999999,
       },
       icon: 'ℹ️',
       duration: 3000,
@@ -53,6 +55,7 @@ export const createToast = () => ({
           backgroundColor: '#E3F2FD',
           color: '#1976D2',
           border: '1px solid #1976D2',
+          zIndex: 9999,
         },
         duration: 3000,
       }

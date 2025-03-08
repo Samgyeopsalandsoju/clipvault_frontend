@@ -1,20 +1,20 @@
 'use client';
 
 import { ThemeProvider as NextThemesProvider, useTheme } from 'next-themes';
-import { ThemeProvider as StyledThemeProvider } from 'styled-components';
+// import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 import { useEffect, useState } from 'react';
 import { darkTheme, lightTheme } from '@/styles/theme';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Toaster } from 'react-hot-toast';
 import { SessionProvider } from 'next-auth/react';
 
-function ThemeComponent({ children }: { children: React.ReactNode }) {
-  const { theme, systemTheme } = useTheme();
+// function ThemeComponent({ children }: { children: React.ReactNode }) {
+//   const { theme, systemTheme } = useTheme();
 
-  // console.log('System theme:', systemTheme);
-  // const currentTheme = systemTheme === 'dark' ? darkTheme : lightTheme;
-  return <StyledThemeProvider theme={darkTheme}>{children}</StyledThemeProvider>;
-}
+//   // console.log('System theme:', systemTheme);
+//   // const currentTheme = systemTheme === 'dark' ? darkTheme : lightTheme;
+//   return <StyledThemeProvider theme={darkTheme}>{children}</StyledThemeProvider>;
+// }
 
 function ReactQueryProviders({ children }: { children: React.ReactNode }) {
   const queryClient = new QueryClient();
@@ -44,10 +44,8 @@ export function AllProvider({ children }: { children: React.ReactNode }) {
     >
       <SessionProvider>
         <ReactQueryProviders>
-          <ThemeComponent>
-            <Toaster />
-            {children}
-          </ThemeComponent>
+          <Toaster />
+          {children}
         </ReactQueryProviders>
       </SessionProvider>
     </NextThemesProvider>

@@ -28,7 +28,7 @@ export const ShareListButton = ({ list }: ShareButtonProps) => {
       >
         <Share size={18} />
       </div>
-      <ShareLinkModal isOpen={isOpen} setIsOpen={setIsOpen} list={list} />
+      {isOpen && <ShareLinkModal isOpen={isOpen} setIsOpen={setIsOpen} list={list} />}
     </>
   );
 };

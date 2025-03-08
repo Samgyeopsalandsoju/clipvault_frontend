@@ -1,8 +1,8 @@
 'use client';
 
-import { memo, useCallback, useEffect, useRef, useState } from 'react';
+import { memo, useCallback, useRef } from 'react';
 import { useCategoryQuery, useClipQuery, useEditClipForm } from '@/hooks';
-import { ICategoryResponse, IClipResponse } from '@/types';
+import { IClipResponse } from '@/types';
 import { useClipStore } from '@/stores';
 import { SkeletonUI } from '@/components/skeleton/SkeletonUI';
 import { ClipCard } from '@/components/feature/clip/ClipCard';
