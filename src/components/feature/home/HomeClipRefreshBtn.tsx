@@ -72,13 +72,14 @@ export const HomeClipRefreshBtn = ({ scrollAreaRef }: ScrollToTopProps) => {
   return (
     <div
       className={classNames(
-        'group border-2 border-dashed dark:border-border-focus-dark rounded-xl flex py-2 justify-center gap-3',
-        'dark:text-text-placeholder-dark cursor-pointer active:scale-[0.97] select-none items-center'
+        'group border-2 border-dashed dark:border-border-focus-dark rounded-xl flex py-2 mt-5 justify-center gap-3',
+        'dark:text-text-placeholder-dark !cursor-pointer active:scale-[0.97] select-none items-center',
+        'hover:dark:text-text-primary-dark hover:dark:border-border-divider-dark'
       )}
       onClick={handleRefresh}
     >
       <RefreshCw size={20} className="group-active:rotate-180 transition-transform duration-300" />
-      <div>
+      <div className="">
         {isDisabled
           ? `Try again in ${timeLeft} seconds`
           : `refresh list! ( ${MAX_REFRESH_COUNT - clickCount} times left )`}

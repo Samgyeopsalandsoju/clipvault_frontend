@@ -106,10 +106,10 @@ export const ShareLinkModal = ({ setIsOpen, list }: ShareLinkModalProps) => {
           </p>
 
           {!!shareLink && (
-            <div className="flex gap-[10px]">
+            <div className="flex w-full gap-[10px]">
               <input
                 className={classNames(
-                  'flex flex-1 h-[40px] rounded-[8px] p-[10px] dark:text-text-primary-dark',
+                  'flex w-full h-[40px] rounded-[8px] p-[10px] dark:text-text-primary-dark',
                   'dark:bg-background-secondary-dark border-solid border-[1px] dark:border-border-focus-dark'
                 )}
                 value={shareLink}
@@ -175,7 +175,7 @@ export const ShareLinkModal = ({ setIsOpen, list }: ShareLinkModalProps) => {
               className={classNames(
                 'dark:text-text-placeholder-dark border-solid border-[1px] dark:border-border-secondary-dark',
                 'p-[0.7rem] rounded-[8px] h-[40px] text-[0.9rem] flex flex-1 hover:text-text-primary-dark',
-                'hover:dark:border-border-divider-dark active:scale-[0.97] justify-center'
+                'hover:dark:border-border-divider-dark active:scale-[0.97] justify-center items-center'
               )}
               type="button"
               onClick={redirectToShareLinkPage}
