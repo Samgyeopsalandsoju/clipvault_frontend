@@ -1,6 +1,6 @@
 'use client';
 
-import { useAuthModal, useForkQuery, useHomeClipQuery } from '@/hooks';
+import { useForkQuery, useHomeClipQuery } from '@/hooks';
 import { memo, useCallback, useRef, useState } from 'react';
 import { ClipWithForked } from '@/types';
 import { StatCountSection } from './StatCountSection';
@@ -10,8 +10,7 @@ import { HomeCard } from './HomeCard';
 import { ForkModal } from '@/components/modals/ForkModal';
 import { useRouter } from 'next/navigation';
 import { createToast } from '@/libs/toast';
-import { authRef } from '@/stores';
-import { addItemWithLimit, markIntersectingElementsAsForked } from '@/utils';
+import { markIntersectingElementsAsForked } from '@/utils';
 import { HomeClipList } from './HomeClipList';
 
 const MemoizedClipList = memo(HomeClipList);
@@ -23,29 +22,19 @@ export const ClientHomeComponent = () => {
   } = useHomeClipQuery();
   const { doFork } = useForkQuery();
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const { setIsAuthModalOpen } = useAuthModal();
   const router = useRouter();
   const containerRef = useRef(null);
   const toast = createToast();
 
-  const checkIsAuthenticated = () => authRef.isAuthenticated;
-
   // 포크 처리 핸들러
   const handleFork = useCallback(
     async (clipId: string) => {
-      const isCurrentlyAuthenticated = checkIsAuthenticated();
-
-      if (!isCurrentlyAuthenticated) {
-        toast.info('Please log in to fork this clip to your favorites.');
-        setIsAuthModalOpen(true);
-        return;
-      }
       const code = await doFork({ clipId });
       if (code === '5000') {
         setIsOpen(true);
       }
     },
-    [doFork, setIsAuthModalOpen, toast]
+    [doFork, toast]
   );
 
   const markedList = markIntersectingElementsAsForked(list, forked);

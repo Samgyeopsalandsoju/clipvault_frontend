@@ -50,7 +50,7 @@ export const ShareLinkModal = ({ setIsOpen, list }: ShareLinkModalProps) => {
 
     try {
       const { blob, fileName, url } = prepareFileData({ list, title: getValues('title'), due: getValues('due') });
-      const { body } = await postShareLink({ ...data, link: url });
+      const { body, status } = await postShareLink({ ...data, link: url });
 
       if (body === '4001') {
         const postToS3Url = await generatePutUrl({ fileName, fileType: blob.type });

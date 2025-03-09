@@ -1,5 +1,5 @@
 import { privateAPI } from '@/libs/api';
-import { APIResponse, IShareLinkRequest } from '@/types';
+import { APIResult, IShareLinkRequest } from '@/types';
 import { AxiosError } from 'axios';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
@@ -22,10 +22,9 @@ export async function POST(request: NextRequest) {
     console.info('@ /api/share-link/post 요청 데이터:', body);
 
     // api 요청
-    const { status, data } = await privateAPI.post('/v1/share/create', body);
+    const { status, data } = await privateAPI.post<APIResult<string>>('/v1/share/create', body);
 
     console.log('/v1/share/create api response check ', status, data);
-
     // 통신 체크
     if (status !== 200 || !data) {
       return NextResponse.json({ status: 500, message: 'Failed to create Share Link' }, { status: 500 });

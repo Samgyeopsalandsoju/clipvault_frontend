@@ -1,9 +1,9 @@
 import { api } from '@/libs/api';
-import { APIResponse, IDoForkRequest, IForkedClipResponse } from '@/types';
+import { APIResponse, APIResult, IDoForkRequest, IForkedClipResponse } from '@/types';
 
 export const postFork = async (data: IDoForkRequest) => {
-  const response = await api.post('/fork/post', data);
-  return response.data.body;
+  const response = await api.post<APIResult<string>>('/fork/post', data);
+  return response.data;
 };
 
 export const getForkedList = async () => {
