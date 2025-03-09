@@ -29,7 +29,7 @@ export const ClientHomeComponent = () => {
   // 포크 처리 핸들러
   const handleFork = useCallback(
     async (clipId: string) => {
-      const code = await doFork({ clipId });
+      const { body: code } = await doFork({ clipId });
       if (code === '5000') {
         setIsOpen(true);
       }
