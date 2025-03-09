@@ -4,6 +4,7 @@ import { deleteFile, deleteShareLink, fetchSharedLinkList, uploadShareLink } fro
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { usePresignedUrl } from '../usePresignedUrl';
 import { createToast } from '@/libs/toast';
+import { addItemWithLimit } from '@/utils';
 
 export const useShareLink = () => {
   const toast = createToast();
@@ -12,8 +13,12 @@ export const useShareLink = () => {
 
   const uploadShareLinkMutation = useMutation({
     mutationFn: uploadShareLink,
-    onSuccess: () => {
-      toast.success('Successfully create share link!');
+    onSuccess: ({ body, status }) => {
+      if (status) {
+        toast.success('Successfully create share link!');
+      } else {
+        addItemWithLimit(body);
+      }
     },
   });
 

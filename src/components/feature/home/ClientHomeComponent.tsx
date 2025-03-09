@@ -11,7 +11,7 @@ import { ForkModal } from '@/components/modals/ForkModal';
 import { useRouter } from 'next/navigation';
 import { createToast } from '@/libs/toast';
 import { authRef } from '@/stores';
-import { markIntersectingElementsAsForked } from '@/utils';
+import { addItemWithLimit, markIntersectingElementsAsForked } from '@/utils';
 import { HomeClipList } from './HomeClipList';
 
 const MemoizedClipList = memo(HomeClipList);
@@ -40,9 +40,8 @@ export const ClientHomeComponent = () => {
         setIsAuthModalOpen(true);
         return;
       }
-      const result = await doFork({ clipId });
-
-      if (result === '5000') {
+      const code = await doFork({ clipId });
+      if (code === '5000') {
         setIsOpen(true);
       }
     },

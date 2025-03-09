@@ -5,7 +5,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useClipPageTransition } from '@/hooks';
 import { deleteClip, getClip, getClips, modifyClip, postClip } from '@/services';
 import { usePathname } from 'next/navigation';
-import { isModalPath } from '@/utils';
+import { addItemWithLimit, isModalPath } from '@/utils';
 import { createToast } from '@/libs/toast';
 
 export const useClipQuery = (rawId?: string | string[] | undefined) => {
@@ -31,11 +31,15 @@ export const useClipQuery = (rawId?: string | string[] | undefined) => {
   // create clip
   const createClipMutation = useMutation({
     mutationFn: postClip,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['clips'] });
-      queryClient.invalidateQueries({ queryKey: ['categories'] });
-      toast.success('Clip saved successfully ✨');
-      handleClose();
+    onSuccess: ({ body }) => {
+      const isSuccess = addItemWithLimit(body.code);
+
+      if (isSuccess) {
+        queryClient.invalidateQueries({ queryKey: ['clips'] });
+        queryClient.invalidateQueries({ queryKey: ['categories'] });
+        toast.success('Clip saved successfully ✨');
+        handleClose();
+      }
     },
   });
 

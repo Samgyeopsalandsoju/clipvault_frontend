@@ -1,18 +1,8 @@
 import axios from 'axios';
 
-export const uploadFile = async ({
-  id,
-  url,
-  file,
-  fileType,
-}: {
-  id: string;
-  url: string;
-  fileType: string;
-  file: Blob;
-}) => {
-  await axios.put(url, file, { headers: { 'Content-Type': fileType } });
-  return `https://clipvault.info/share/${id}`;
+export const uploadFile = async ({ url, file, fileType }: { url: string; fileType: string; file: Blob }) => {
+  const response = await axios.put(url, file, { headers: { 'Content-Type': fileType } });
+  return response.status;
 };
 
 export const deleteFile = async (url: string) => {

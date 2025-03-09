@@ -1,6 +1,6 @@
 import { api } from '@/libs/api';
 import { APIResponse, IShareLinkRequest, IShareLinkResponse } from '@/types';
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
 
 export const fetchShareFileData = async ({ url }: { url: string }) => {
   try {
@@ -16,7 +16,7 @@ export const fetchShareFileData = async ({ url }: { url: string }) => {
 
 export const uploadShareLink = async (data: IShareLinkRequest) => {
   const response = await api.post('/share-link/post', data);
-  return response.data.body;
+  return response.data;
 };
 
 export const fetchSharedLinkList = async () => {

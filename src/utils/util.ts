@@ -1,3 +1,5 @@
+import { createToast } from '@/libs/toast';
+
 export const generateModernTagColors = (hue?: number) => {
   // 색상(Hue): 지정된 값이 없으면 랜덤 생성
   const colorHue = hue ?? Math.floor(Math.random() * 360);
@@ -33,4 +35,23 @@ export const markIntersectingElementsAsForked = <T extends { id: string | number
     ...v,
     isForked: set.has(v.id),
   }));
+};
+
+export const addItemWithLimit = (code: any): boolean => {
+  let param;
+
+  console.log(' text ', typeof code);
+  if (typeof code === 'object') {
+    param = code.code;
+  } else {
+    param = code;
+  }
+
+  const toast = createToast();
+  const CODE_EXCEEDED = '99999';
+  if (param === CODE_EXCEEDED) {
+    toast.error('Generation limit exceeded.');
+    return false;
+  }
+  return true;
 };

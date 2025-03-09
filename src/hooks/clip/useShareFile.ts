@@ -7,23 +7,26 @@ import { v4 as uuidv4 } from 'uuid';
 export const useShareFile = (url?: string) => {
   const toast = createToast();
   // 파일 생성에 필요한 데이터 생성
-  const createUploadFileInfo = (clips: IClipResponse[], title: string, due: string) => ({
-    id: uuidv4(),
-    clips: clips,
-    title: title,
-    expiresAt: due,
-  });
+  const createUploadFileInfo = (clips: IClipResponse[], title: string, due: string) => {
+    const id = uuidv4();
+    return {
+      url: `https://clipvault.info/share/${id}`,
+      clips: clips,
+      title: title,
+      expiresAt: due,
+      fileName: `links/${id}.json`,
+    };
+  };
 
   const prepareFileData = ({ list, title, due }: { list: IClipResponse[]; title: string; due: string }) => {
     const fileInfo = createUploadFileInfo(list, title, due);
     const fileContent = JSON.stringify(fileInfo, null, 2);
     const blob = new Blob([fileContent], { type: 'application/json' });
-    const fileName = `links/${fileInfo.id}.json`;
 
     return {
-      id: fileInfo.id,
+      url: fileInfo.url,
       blob,
-      fileName,
+      fileName: fileInfo.fileName,
     };
   };
 

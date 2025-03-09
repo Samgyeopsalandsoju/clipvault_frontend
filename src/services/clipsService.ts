@@ -7,7 +7,7 @@ export const getClips = async () => {
 };
 
 export const postClip = async (data: ICreateClip) => {
-  const response = await api.post<APIResponse<string>>('/clip/post', data);
+  const response = await api.post<APIResponse<{ code: string }>>('/clip/post', data);
   return response.data;
 };
 

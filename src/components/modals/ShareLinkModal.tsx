@@ -34,30 +34,6 @@ export const ShareLinkModal = ({ setIsOpen, list }: ShareLinkModalProps) => {
   const [showingDue, setShowingDue] = useState<string>('7');
   const router = useRouter();
 
-  const prepareAndUpload = async () => {
-    if (isLoading) return;
-
-    const { blob, fileName, id } = prepareFileData({ list, title: getValues('title'), due: getValues('due') });
-    const url = await generatePutUrl({ fileName, fileType: blob.type });
-    const shareUrl = await upload({ id, file: blob, fileType: blob.type, url });
-    setShareLink(shareUrl);
-
-    return shareUrl;
-  };
-
-  const handleShareLink = async () => {
-    if (shareLink || isLoading) return;
-    try {
-      setIsLoading(true);
-      const url = await prepareAndUpload();
-      return url;
-    } catch (error) {
-      console.error('Error sharing link:', error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   const handleSelect = ({ days, showingDue }: { days: string; showingDue: string }): void => {
     setShowingDue(showingDue);
     setValue('due', days);
@@ -68,17 +44,31 @@ export const ShareLinkModal = ({ setIsOpen, list }: ShareLinkModalProps) => {
   };
 
   const onSubmit = async (data: IShareLinkRequest) => {
-    const url = await handleShareLink();
-    if (!url) {
-      console.error('쉐어링크 생성 실패');
-      return;
+    if (isLoading) return;
+
+    setIsLoading(true);
+
+    try {
+      const { blob, fileName, url } = prepareFileData({ list, title: getValues('title'), due: getValues('due') });
+      const { body } = await postShareLink({ ...data, link: url });
+
+      if (body === '4001') {
+        const postToS3Url = await generatePutUrl({ fileName, fileType: blob.type });
+        const result = await upload({ file: blob, fileType: blob.type, url: postToS3Url });
+        setShareLink(url);
+      }
+      setIsLoading(false);
+    } catch (error) {
+      console.error('Error sharing link:', error);
+      setIsLoading(false);
+    } finally {
+      setIsLoading(false);
     }
-    await postShareLink({ ...data, link: url });
   };
 
   return (
     <div
-      className={classNames('fixed inset-0 bg-black bg-opacity-50', 'flex items-center justify-center z-[9999]')}
+      className={classNames('fixed inset-0 bg-black bg-opacity-50', 'flex items-center justify-center z-[99]')}
       onClick={(e) => {
         if (e.target === e.currentTarget) {
           setIsOpen(false);

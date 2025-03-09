@@ -52,6 +52,23 @@ export const useForkQuery = () => {
           });
         });
         toast.error('This is your clip.');
+      } else if (code === '99999') {
+        const previousForkedIds = (queryClient.getQueryData(['homeForked']) as number[]) || [];
+        const newForkedList = previousForkedIds.filter((id) => id !== Number(clipId));
+        queryClient.setQueryData(['homeForked'], newForkedList);
+        queryClient.setQueryData(['homeClip'], (oldList: IClipResponse[] = []) => {
+          return oldList.map((clip) => {
+            if (clip.id === clipId) {
+              return {
+                ...clip,
+                forkedCount: Number(clip.forkedCount) - 1,
+                isForked: false,
+              };
+            }
+            return clip;
+          });
+        });
+        toast.error('Generation limit exceeded.');
       }
       queryClient.invalidateQueries({ queryKey: ['clip'] });
       console.log('Success doForkMutation');
