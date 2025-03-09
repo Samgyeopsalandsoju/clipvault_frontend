@@ -39,8 +39,6 @@ export const markIntersectingElementsAsForked = <T extends { id: string | number
 
 export const addItemWithLimit = (code: any): boolean => {
   let param;
-
-  console.log(' text ', typeof code);
   if (typeof code === 'object') {
     param = code.code;
   } else {
