@@ -8,7 +8,8 @@ export async function middleware(req: NextRequest) {
   const token = await getToken({ req, secret });
 
   if (!token) {
-    const loginUrl = new URL('/home', req.url);
+    const origin = req.nextUrl.origin;
+    const loginUrl = `${origin}/home`;
     return NextResponse.redirect(loginUrl);
   }
 
