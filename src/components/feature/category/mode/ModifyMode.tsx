@@ -33,7 +33,7 @@ export const ModifyMode = ({
       </div>
       <input
         placeholder="new category"
-        className="bg-transparent border-solid border-b border-0"
+        className="bg-transparent border-solid border-b border-0 w-[50%]"
         ref={inputRef}
         style={{
           color: text,

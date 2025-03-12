@@ -23,9 +23,13 @@ export const NormalMode = ({ name, text, onDelete, onEdit }: NormalModeProps) =>
       >
         <Trash2 />
       </div>
-      <div className="dark:text-text-primary-dark select-none" style={{ color: text }}>
-        {name}
-      </div>
+      <input
+        className="dark:text-text-primary-dark select-none bg-transparent"
+        style={{ color: text }}
+        value={name}
+        placeholder="new category"
+        disabled
+      />
       <div
         className={classNames(
           'dark:text-text-placeholder-dark cursor-pointer hover:dark:text-text-primary-dark select-none',

@@ -10,9 +10,11 @@ import classNames from 'classnames';
 import { generateModernTagColors, generateUniqueId } from '@/utils';
 import { CategoryCard } from './CategoryCard';
 import { ConfirmModal } from '@/components/modals/ConfirmModal';
+import { createToast } from '@/libs/toast';
 
 export const CategoryList = () => {
   const MAX_CATEGORY_COUNT = 10;
+  const toast = createToast();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(null);
   const {
@@ -51,7 +53,7 @@ export const CategoryList = () => {
   const handleAddCategory = () => {
     const { colorHue } = generateModernTagColors();
     setCategories((prev) => {
-      const newCategory = { name: 'new category', color: String(colorHue), id: generateUniqueId() };
+      const newCategory = { name: '', color: String(colorHue), id: generateUniqueId() };
       const newCategories = [...prev, newCategory];
       return newCategories;
     });
@@ -97,7 +99,13 @@ export const CategoryList = () => {
   };
 
   const handleSave = () => {
-    post(categories);
+    const isEmpty = categories.some((category) => category.name === '');
+
+    if (isEmpty) {
+      toast.error('category name is empty');
+    } else {
+      post(categories);
+    }
   };
 
   if (loading)
