@@ -43,6 +43,11 @@ Clip Vault는 사용자가 웹 상의 다양한 클립(맛집 지도 링크, 유
 - **Server Environment:** AWS EC2
 - **Process Manager:** [PM2](https://pm2.keymetrics.io/)
 
+### 공유 링크 기능 설명
+
+- 공유 링크 생성 기능은 사용자가 공유 링크 생성을 시도 하면 s3에 json 파일이 생성되며 해당 링크로 접속하게 되면 clipvault는 s3에 파일을 읽어 데이터를 가져옵니다.
+  s3에 접근할떄는 항상 presignedURL api를 사용하며 먼저 사용자가 권한이있는지 확인 후 파일을 읽어 옵니다.
+
 ## 3. 아키텍처 및 주요 특징
 
 ### Next.js App Router 활용
