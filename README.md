@@ -2,41 +2,34 @@
 
 ## 1. 프로젝트 개요
 
-Clip Vault는 사용자가 웹 상의 다양한 영상 클립(유튜브, 비메오 등)의 링크를 저장하고, 카테고리별로 분류하며, 필요시 다시 찾아볼 수 있도록 돕는 웹 애플리케이션입니다. 사용자 편의성을 높이기 위해 직관적인 UI와 반응형 디자인을 적용했으며, Next.js의 최신 기능을 활용하여 빠른 성능과 안정적인 서비스를 제공하는 것을 목표로 합니다.
+Clip Vault는 사용자가 웹 상의 다양한 클립(맛집 지도 링크, 유용한 정보 사이트)의 링크를 저장하고, 카테고리별로 분류하며, 필요시 쉽게 찾아볼수 있는 웹 애플리케이션입니다. 사용자 편의성을 높이기 위해 직관적인 UI와 반응형 디자인을 적용했으며, Next.js의 최신 기능을 활용하여 빠른 성능과 안정적인 서비스를 제공합니다. 또한 악성 링크 저장및 공유를 _google safe browsing_ api와 URL 필터 로직을 구현하여 방지하고 있습니다! **clipvault**[www.clipvault.com]을 들어가시고 로그인을 하면 해당 기능들을 사용해볼수 있습니다.
 
 **주요 기능:**
 
-- 영상 클립 URL 저장 및 미리보기 정보 표시
+- URL 저장 및 미리보기
 - 클립 제목, 설명, 카테고리 편집
 - 카테고리별 클립 분류 및 조회
-- 클립 '포크(Fork)' 기능 (다른 사용자의 유용한 클립을 내 보관함으로 가져오기 - 구현 예정 또는 현재 기능)
-- 다크 모드 지원
+- 클립 '포크(Fork)' 기능 (다른 사용자의 유용한 클립을 내 보관함으로 가져오기)
+- 원하는 카테고리 공유 링크 생성 기능
 
 ## 2. 기술 스택
 
-이 프로젝트는 다음과 같은 기술 스택을 기반으로 개발되었습니다.
+이 프로젝트는 다음과 같은 스택을 사용하였습니다!
 
 ### 💻 Frontend
 
 - **Framework:** [Next.js](https://nextjs.org/) (v15+, App Router)
 - **Language:** [TypeScript](https://www.typescriptlang.org/)
-- **UI Library:** [React](https://reactjs.org/) (v19+)
 - **Data Fetching:** [TanStack Query (React Query)](https://tanstack.com/query/latest), [Axios](https://axios-http.com/)
 - **Forms:** [React Hook Form](https://react-hook-form.com/)
 - **Drag & Drop:** [@dnd-kit](https://dndkit.com/)
+- **Auth:** [next-auth](https://next-auth.js.org/)
+- **State Management:** [Zustand](https://zustand-demo.pmnd.rs/)
 
 ### 🎨 Styling
 
 - **CSS Framework:** [Tailwind CSS](https://tailwindcss.com/) (with PostCSS)
 - **UI Components:** 일부 [Material UI (MUI)](https://mui.com/) 컴포넌트 사용 (@emotion/react, @mui/material)
-- **Icons:** [Lucide React](https://lucide.dev/), [React Icons](https://react-icons.github.io/react-icons/)
-- **Theme:** 다크 모드 지원 (next-themes)
-
-### ⚙️ State Management
-
-- **Atomic State:** [Jotai](https://jotai.org/)
-- **Global State:** [Zustand](https://zustand-demo.pmnd.rs/)
-- **Local Component State:** React Hooks (`useState`, `useCallback`, etc.)
 
 ### 🚀 CI/CD & Deployment
 
@@ -45,13 +38,6 @@ Clip Vault는 사용자가 웹 상의 다양한 영상 클립(유튜브, 비메�
 - **Hosting/Storage:** [AWS S3](https://aws.amazon.com/s3/) (배포 패키지 저장)
 - **Server Environment:** AWS EC2 (추정)
 - **Process Manager:** [PM2](https://pm2.keymetrics.io/) (`ecosystem.config.js`)
-
-### 🛠️ 기타 도구
-
-- **Package Manager:** [pnpm](https://pnpm.io/)
-- **Linting/Formatting:** [ESLint](https://eslint.org/) (Next.js ESlint config)
-- **Authentication:** [NextAuth.js](https://next-auth.js.org/) (v4)
-- **Utilities:** `classnames`, `uuid`, `bcryptjs`, `jsonwebtoken`, `react-hot-toast`
 
 ## 3. 아키텍처 및 주요 특징
 
@@ -107,16 +93,16 @@ Clip Vault는 사용자가 웹 상의 다양한 영상 클립(유튜브, 비메�
 
 - **라우트 핸들러 (API Routes):** `src/app/api/` 경로에 API 라우트를 정의하여 클라이언트 측에서 필요한 데이터 요청(CRUD)을 처리하거나 서버리스 함수와 유사한 백엔드 로직을 수행합니다.
 
-### 데이터 Fetching 전략
+### 데이터 Fetching
 
 - **초기 데이터:** 서버 컴포넌트에서 직접 서비스 함수를 호출하여 로드 (SSR 이점 극대화)
-- **동적 데이터/변경:** 클라이언트 컴포넌트에서 TanStack Query, Axios 클라이언트를 사용하여 API 라우트 또는 외부 API 호출 (사용자 인터랙션 기반)
-- **API Client:** Axios 인스턴스를 사용하여 API 요청을 관리하며, 서버 환경과 클라이언트 환경을 구분하여 적절한 Base URL을 사용하도록 설정되어 있습니다 (환경 변수 활용).
+- **동적 데이터/변경:** 클라이언트 컴포넌트에서 TanStack Query, Axios 클라이언트를 사용하여 API 라우트 또는 외부 API 호출
+- **API Client:** Axios 인스턴스를 사용하여 API 요청을 관리하며, 서버 환경과 클라이언트 환경을 구분하여 적절한 Base URL을 사용하도록 설정하였습니다
 
 ### 상태 관리
 
-- **Jotai & Zustand:** 애플리케이션의 복잡성과 요구사항에 맞춰 원자적 상태(Jotai)와 전역 스토어(Zustand)를 조합하여 사용합니다. 이를 통해 상태 로직을 효과적으로 분리하고 컴포넌트 리렌더링을 최적화합니다.
-- **React Query:** 서버 상태 관리 및 캐싱, 비동기 데이터 동기화에 React Query를 활용하여 데이터 무결성을 유지하고 불필요한 API 호출을 줄입니다.
+- **Zustand:** 애플리케이션의 복잡성과 요구사항에 맞춰 스토어(Zustand)를 사용합니다. 이를 통해 상태 로직을 효과적으로 분리하고 컴포넌트 리렌더링을 최적화합니다.
+- **React Query:** 서버 상태 관리 및 캐싱, 비동기 데이터 동기화에 React Query를 활용하여 데이터 무결성을 유지하고 불필요한 API 호출을 줄였습니다
 
 ### 자동화된 CI/CD 파이프라인
 
@@ -135,7 +121,6 @@ Clip Vault는 사용자가 웹 상의 다양한 영상 클립(유튜브, 비메�
 ### 스타일링 및 UI
 
 - **Tailwind CSS:** 유틸리티 우선 접근 방식을 통해 빠르고 일관된 UI 개발을 지원합니다. `tailwind.config.js`에 커스텀 색상, 폰트 등을 정의하여 프로젝트 디자인 시스템을 구축했습니다.
-- **다크 모드:** `next-themes` 라이브러리와 Tailwind CSS의 `darkMode: 'class'` 설정을 이용하여 라이트/다크 모드를 지원합니다.
 
 ## 4. 프로젝트 구조
 
@@ -176,49 +161,4 @@ Clip Vault는 사용자가 웹 상의 다양한 영상 클립(유튜브, 비메�
 └── tsconfig.json           # TypeScript 설정
 ```
 
-## 5. 시작하기
-
-### 요구사항
-
-- Node.js (v20 이상 권장 - `volta` 설정 참고)
-- pnpm (v9 권장)
-
-### 로컬 환경 설정
-
-1.  **저장소 복제:**
-
-    ```bash
-    git clone <repository-url>
-    cd clip-vault
-    ```
-
-2.  **의존성 설치:**
-
-    ```bash
-    pnpm install
-    ```
-
-3.  **환경 변수 설정:**
-
-    - 루트 디렉토리에 `.env` 파일을 생성합니다.
-    - `.env.example` 파일이 있다면 해당 내용을 복사하여 필요한 값(API URL, NextAuth Secret 등)을 입력합니다. GitHub Actions 워크플로우의 `.env.production` 생성 부분을 참고하여 필요한 변수를 확인하세요.
-
-4.  **개발 서버 실행:**
-    ```bash
-    pnpm dev
-    ```
-    브라우저에서 `http://localhost:3000` (또는 설정된 포트)으로 접속합니다.
-
-### 빌드 및 프로덕션 실행
-
-```bash
-# 프로덕션 빌드
-pnpm build
-
-# 프로덕션 서버 시작
-pnpm start
-```
-
-## 6. 배포
-
-이 프로젝트는 GitHub Actions와 AWS CodeDeploy를 통해 자동 배포됩니다. `main` 브랜치에 변경 사항이 푸시되면 자동으로 빌드 및 배포 프로세스가 진행됩니다. 자세한 내용은 `.github/workflows/deploy.yml` 및 `appspec.yml` 파일을 참고하세요.
+[clipvault](www.clipvault.info)에 접속하여 회원가입을 진행하면 해당 기능들을 전부 사용할수 있습니다.
