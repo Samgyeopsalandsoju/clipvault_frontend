@@ -2,7 +2,9 @@
 
 ## 1. 프로젝트 개요
 
-Clip Vault는 사용자가 웹 상의 다양한 클립(맛집 지도 링크, 유용한 정보 사이트)의 링크를 저장하고, 카테고리별로 분류하며, 필요시 쉽게 찾아볼수 있는 웹 애플리케이션입니다. 사용자 편의성을 높이기 위해 직관적인 UI와 반응형 디자인을 적용했으며, Next.js의 최신 기능을 활용하여 빠른 성능과 안정적인 서비스를 제공합니다. 또한 악성 링크 저장및 공유를 _google safe browsing_ api와 URL 필터 로직을 구현하여 방지하고 있습니다! **clipvault**[www.clipvault.com]을 들어가시고 로그인을 하면 해당 기능들을 사용해볼수 있습니다.
+Clip Vault는 사용자가 웹 상의 다양한 클립(맛집 지도 링크, 유용한 정보 사이트)의 링크를 저장하고, 카테고리별로 분류하며, 필요시 쉽게 찾아볼수 있는 웹 애플리케이션입니다. 사용자 편의성을 높이기 위해 직관적인 UI와 반응형 디자인을 적용했으며, Next.js의 최신 기능을 활용하여 빠른 성능과 안정적인 서비스를 제공합니다.
+
+또한 악성 링크 저장및 공유를 _google safe browsing_ api와 URL 필터 로직을 구현하여 방지하고 있습니다! **clipvault**(www.clipvault.com)을 들어가시고 로그인을 하면 해당 기능들을 사용해볼수 있습니다.
 
 **주요 기능:**
 
@@ -35,15 +37,15 @@ Clip Vault는 사용자가 웹 상의 다양한 클립(맛집 지도 링크, 유
 
 - **CI/CD Platform:** [GitHub Actions](https://github.com/features/actions)
 - **Deployment Service:** [AWS CodeDeploy](https://aws.amazon.com/codedeploy/)
-- **Hosting/Storage:** [AWS S3](https://aws.amazon.com/s3/) (배포 패키지 저장)
-- **Server Environment:** AWS EC2 (추정)
-- **Process Manager:** [PM2](https://pm2.keymetrics.io/) (`ecosystem.config.js`)
+- **Hosting/Storage:** [AWS S3](https://aws.amazon.com/s3/)
+- **Server Environment:** AWS EC2
+- **Process Manager:** [PM2](https://pm2.keymetrics.io/)
 
 ## 3. 아키텍처 및 주요 특징
 
 ### Next.js App Router 활용
 
-- **서버 컴포넌트 (Server Components):** 초기 페이지 로딩 성능 최적화를 위해 App Router의 서버 컴포넌트를 적극 활용합니다. 페이지 레벨(`page.tsx`)에서 필요한 초기 데이터를 `async/await`를 사용하여 서버에서 직접 가져오고, 이를 클라이언트 컴포넌트에 props로 전달합니다.
+- **서버 컴포넌트 (Server Components):** 초기 페이지 로딩 성능 최적화를 위해 App Router의 서버 컴포넌트를 적극 활용하였습니다. 페이지 레벨(`page.tsx`)에서 필요한 초기 데이터를 `async/await`를 사용하여 서버에서 직접 가져오고, 이를 클라이언트 컴포넌트에 props로 전달합니다.
 
   ```tsx
   // 예시: src/app/(client)/home/page.tsx
@@ -93,16 +95,120 @@ Clip Vault는 사용자가 웹 상의 다양한 클립(맛집 지도 링크, 유
 
 - **라우트 핸들러 (API Routes):** `src/app/api/` 경로에 API 라우트를 정의하여 클라이언트 측에서 필요한 데이터 요청(CRUD)을 처리하거나 서버리스 함수와 유사한 백엔드 로직을 수행합니다.
 
-### 데이터 Fetching
+### 데이터 Fetching 및 상태 관리 전략
 
-- **초기 데이터:** 서버 컴포넌트에서 직접 서비스 함수를 호출하여 로드 (SSR 이점 극대화)
-- **동적 데이터/변경:** 클라이언트 컴포넌트에서 TanStack Query, Axios 클라이언트를 사용하여 API 라우트 또는 외부 API 호출
-- **API Client:** Axios 인스턴스를 사용하여 API 요청을 관리하며, 서버 환경과 클라이언트 환경을 구분하여 적절한 Base URL을 사용하도록 설정하였습니다
+- **초기 데이터 로딩 (Server Components):**
 
-### 상태 관리
+  - 페이지 최초 접근 시 필요한 핵심 데이터는 서버 컴포넌트(`async page.tsx`)에서 직접 서비스 계층(`@/services`) 함수를 호출하여 가져옵니다.
+  - 이 방식은 서버에서 렌더링을 완료한 후 HTML을 클라이언트에 전달하므로, SSR의 최대한 장점을 살리려고 노력해보았습니다.
 
-- **Zustand:** 애플리케이션의 복잡성과 요구사항에 맞춰 스토어(Zustand)를 사용합니다. 이를 통해 상태 로직을 효과적으로 분리하고 컴포넌트 리렌더링을 최적화합니다.
-- **React Query:** 서버 상태 관리 및 캐싱, 비동기 데이터 동기화에 React Query를 활용하여 데이터 무결성을 유지하고 불필요한 API 호출을 줄였습니다
+- **클라이언트 상호작용 기반 데이터 관리 (Client Components):**
+
+  - 사용자의 액션(버튼 클릭, 폼 제출, 스크롤 등)에 따른 데이터 요청 및 변경은 클라이언트 컴포넌트 내에서 처리합니다.
+  - **`Hook -> Service -> API Route` 흐름 예시 (클립 포크 기능):**
+
+    - **1. Hook (`src/hooks/fork/useForkQuery.ts`):** 컴포넌트는 이 Hook을 호출하여 `doFork` 함수를 얻습니다. `useMutation`은 API 호출(포크 생성)을 처리하고, 특히 `onMutate` 옵션에서 낙관적 업데이트 로직을 실행합니다.
+
+      ```typescript
+      // src/hooks/fork/useForkQuery.ts
+      import { useMutation, useQueryClient } from '@tanstack/react-query';
+      import { postFork } from '@/services';
+      import { IDoForkRequest, IClipResponse } from '@/types';
+
+      export const useForkQuery = () => {
+        const queryClient = useQueryClient();
+        // ... (다른 로직 생략)
+
+        const doForkMutation = useMutation({
+          mutationFn: (data: IDoForkRequest) => {
+            // ... (인증 확인 등 생략)
+            return postFork(data); // 2. Service 함수 호출
+          },
+          // --- 낙관적 업데이트 시작 ---
+          onMutate: async ({ clipId }) => {
+            // 현재 쿼리 캐시를 즉시 업데이트 (서버 응답 전)
+            await queryClient.cancelQueries({ queryKey: ['homeClip'] }); // 진행중인 refetch 취소
+            const previousHomeClip = queryClient.getQueryData(['homeClip']); // 이전 상태 저장
+
+            queryClient.setQueryData(['homeClip'], (oldList: IClipResponse[] = []) =>
+              oldList.map((clip) =>
+                clip.id === clipId
+                  ? { ...clip, forkedCount: clip.forkedCount + 1, isForked: true } // UI 즉시 업데이트
+                  : clip
+              )
+            );
+            // (다른 관련 쿼리 캐시 업데이트 로직...)
+            return { previousHomeClip }; // 롤백을 위한 컨텍스트 반환
+          },
+          onError: (err, variables, context) => {
+            // 에러 발생 시 onMutate에서 저장한 이전 상태로 롤백
+            if (context?.previousHomeClip) {
+              queryClient.setQueryData(['homeClip'], context.previousHomeClip);
+            }
+            // (에러 처리 로직...)
+          },
+          onSettled: () => {
+            // 성공/실패 여부와 관계없이 최신 상태 동기화를 위해 쿼리 무효화
+            queryClient.invalidateQueries({ queryKey: ['homeClip'] });
+            // (다른 관련 쿼리 무효화...)
+          },
+          // --- 낙관적 업데이트 끝 ---
+        });
+
+        return {
+          doFork: doForkMutation.mutateAsync,
+          // ... (다른 반환값 생략)
+        };
+      };
+      ```
+
+    - **2. Service (`src/services/forkService.ts`):** Hook 내부에서 호출되며, 실제 API 엔드포인트(`/api/fork/post`)로 요청을 보냅니다.
+
+      ```typescript
+      // src/services/forkService.ts
+      import { api } from '@/libs/api';
+      import { APIResult, IDoForkRequest } from '@/types';
+
+      export const postFork = async (data: IDoForkRequest) => {
+        // 3. API Route 호출
+        const response = await api.post<APIResult<string>>('/fork/post', data);
+        return response.data;
+      };
+      ```
+
+    - **3. API Route (`src/app/api/fork/post/route.ts`):** 클라이언트의 요청을 받아 실제 백엔드 API(`/v1/fork/create`)와 통신하고 결과를 반환합니다.
+
+      ```typescript
+      // src/app/api/fork/post/route.ts
+      import { privateAPI } from '@/libs/api';
+      import { APIResult, IDoForkRequest } from '@/types';
+      import { NextResponse } from 'next/server';
+      import type { NextRequest } from 'next/server';
+
+      export async function POST(request: NextRequest) {
+        try {
+          const body: IDoForkRequest = await request.json();
+          // (입력값 검증 로직 생략)
+
+          // 실제 백엔드 API와 통신
+          const { status, data } = await privateAPI.post<APIResult<string>>('/v1/fork/create', body);
+
+          // (결과 처리 로직 생략)
+          return NextResponse.json({ status: data.status, body: data.body });
+        } catch (error) {
+          // (에러 처리 로직 생략)
+          return NextResponse.json({ status: false, body: '' }, { status: 500 });
+        }
+      }
+      ```
+
+  - **서버 상태 관리 (TanStack Query):**
+    - 클라이언트 측의 서버 데이터 상태는 TanStack Query를 통해 관리합니다.
+  - **낙관적 업데이트 (Optimistic Updates):**
+    - 위의 `useForkQuery` Hook 예시의 `onMutate`, `onError`, `onSettled` 부분을 통해 낙관적 업데이트 구현 방식을 확인할 수 있습니다. 사용자가 '포크' 버튼을 클릭하는 즉시 UI가 변경되어 빠른 피드백을 제공하며, 네트워크 지연이나 서버 처리 시간으로 인한 대기 시간을 최소화해보았습니다.
+
+- **클라이언트 상태 관리 (Zustand):**
+  - 서버 데이터와 무관한 순수 클라이언트 상태(예: UI 모드, 모달 열림/닫힘 등 전역적으로 필요한 상태)는 Zustand를 사용하여 간결하고 효율적으로 관리합니다.
 
 ### 자동화된 CI/CD 파이프라인
 
