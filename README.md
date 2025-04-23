@@ -31,6 +31,8 @@ Clip Vault는 사용자가 웹 상의 다양한 클립(맛집 지도 링크, 유
 ### 🎨 Styling
 
 - **CSS Framework:** [Tailwind CSS](https://tailwindcss.com/) (with PostCSS)
+- **Styled-components**[Styled-Components](https://styled-components.com/) 처음에는 styled components로 구현하였으나
+  SSR의 장점을 최대한 살리고 싶어 TailwindCss로 마이그레이션 하였습니다.
 - **UI Components:** 일부 [Material UI (MUI)](https://mui.com/) 컴포넌트 사용 (@emotion/react, @mui/material)
 
 ### 🚀 CI/CD & Deployment
@@ -226,7 +228,7 @@ Clip Vault는 사용자가 웹 상의 다양한 클립(맛집 지도 링크, 유
 
 ### 스타일링 및 UI
 
-- **Tailwind CSS:** 유틸리티 우선 접근 방식을 통해 빠르고 일관된 UI 개발을 지원합니다. `tailwind.config.js`에 커스텀 색상, 폰트 등을 정의하여 프로젝트 디자인 시스템을 구축했습니다.
+- **Tailwind CSS:** 처음에는 styled-components로 구현했으나 SSR의 장점을 최대한 살리고자 TailwindCSs로 마이그레이션을 진행하였습니다.. `tailwind.config.js`에 커스텀 색상, 폰트 등을 정의하여 프로젝트 디자인 시스템을 구축했습니다.
 
 ## 4. 프로젝트 구조
 
