@@ -1,8 +1,9 @@
-import { AllProvider } from '@/providers/AllProvider';
 import type { Metadata } from 'next';
-import MUIRegistry from '@/providers/registries/mui-registry';
-import '@/styles/TailwindStyle.css';
-import { SessionManager } from '@/components/SessionManager';
+
+import '@/shared/styles/globals.css';
+import { Header } from '@/widgets/header';
+import { Footer } from '@/widgets/footer';
+import { Providers } from './_providers';
 
 export const metadata: Metadata = {
   title: 'clipVault',
@@ -33,21 +34,16 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html>
-      <body className="dark dark:bg-background-primary-dark" suppressHydrationWarning={true}>
-        <MUIRegistry>
-          <AllProvider>
-            {children}
-            <SessionManager />
-          </AllProvider>
-        </MUIRegistry>
-      </body>
+      <Providers>
+        <body>
+          <Header />
+          {children}
+          <Footer />
+        </body>
+      </Providers>
     </html>
   );
 }

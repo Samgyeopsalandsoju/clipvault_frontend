@@ -1,18 +1,23 @@
-import { publicAPI } from '@/libs/api';
-import { APIResponse, IClipResponse } from '@/types';
+import { publicApiClient } from '@/app/lib';
+import { APIResponse } from '@/shared/types/api';
 import { AxiosError } from 'axios';
 import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
+import { IPublicClip } from '@/shared/types/clip';
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
     console.log('public clip list GET called..');
     // api 요청
-    const { status, data } = await publicAPI.get<APIResponse<IClipResponse[]>>('/v1/clip/public/30');
+    const { status, data } = await publicApiClient.get<APIResponse<IPublicClip[]>>(
+      '/v1/clip/public/30'
+    );
 
     // 통신 체크
     if (status !== 200 || !data) {
-      return NextResponse.json({ status: 500, message: 'Failed to get public clip' }, { status: 500 });
+      return NextResponse.json(
+        { status: 500, message: 'Failed to get public clip' },
+        { status: 500 }
+      );
     }
 
     // 결과 값 리턴
