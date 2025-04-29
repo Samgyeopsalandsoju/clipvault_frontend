@@ -9,10 +9,12 @@ import { registerValidation } from '../model/validation';
 import { useRegisterForm } from '../hooks/useRegisterForm';
 import { useState } from 'react';
 
+// 회원가입 폼
 const RegisterForm = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const { register, handleSubmit, mail, watch, errors } = useRegisterForm();
+  const { register, handleSubmit, mail, watch, errors, isLoading, isVerified } = useRegisterForm();
 
+  // 인증 모달 토글
   const handleVerify = () => {
     setIsOpen(true);
   };
@@ -38,11 +40,11 @@ const RegisterForm = () => {
               />
               {/** 이메일 인증 코드 발송 버튼 */}
               <VerifyButton
-                disabled={!mail}
+                disabled={isVerified === !!mail}
                 mail={mail}
                 isOpen={isOpen}
                 onClose={() => setIsOpen(false)}
-                onClick={handleVerify}
+                onOpenModal={handleVerify}
               />
             </div>
             <div className="grid gap-2">
@@ -59,6 +61,7 @@ const RegisterForm = () => {
                     minLength: registerValidation.password.minLength,
                   })}
                 />
+                <span className="text-sm text-red-500 h-3">{errors?.password?.message || ' '}</span>
               </div>
               <div className="grid gap-2 mt-4">
                 <div className="flex items-center">
@@ -79,7 +82,7 @@ const RegisterForm = () => {
                 </span>
               </div>
             </div>
-            <Button type="submit" className="w-full">
+            <Button type="submit" className="w-full" disabled={isLoading}>
               회원가입
             </Button>
           </div>

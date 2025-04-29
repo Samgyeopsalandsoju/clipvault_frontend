@@ -6,6 +6,7 @@ import { ErrorAuth } from '../model/type';
 import { loginWithNextAuth } from '../service';
 import { setErrorType } from '../helper/auth';
 
+// 로그인 훅
 export const useLogin = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);

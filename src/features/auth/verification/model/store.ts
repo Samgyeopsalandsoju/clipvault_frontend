@@ -13,8 +13,8 @@ export const useVerifyStore = create<VerifyStore>((set) => ({
 interface VerificationStore {
   authKey: string | null;
   mail: string | null;
-  setMail: (mail: string) => void;
-  setAuthKey: (authKey: string) => void;
+  setMail: (mail: string | null) => void;
+  setAuthKey: (authKey: string | null) => void;
   reset: () => void;
 }
 
@@ -22,7 +22,7 @@ interface VerificationStore {
 export const useVerificationStore = create<VerificationStore>((set) => ({
   authKey: null,
   mail: null,
-  setMail: (mail: string) => set({ mail }),
-  setAuthKey: (authKey: string) => set({ authKey }),
-  reset: () => set({ authKey: '', mail: '' }),
+  setMail: (mail) => set({ mail }),
+  setAuthKey: (authKey) => set({ authKey }),
+  reset: () => set({ authKey: null, mail: null }),
 }));

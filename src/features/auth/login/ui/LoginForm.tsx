@@ -7,9 +7,10 @@ import { Label } from '@/shared/ui/label';
 import Link from 'next/link';
 import { useState } from 'react';
 import { useLoginForm } from '../hooks/useLoginForm';
-import { loginValidation } from '../model/validation';
 import { Modal } from '@/shared/ui/Modal';
+import { loginValidation } from '../model/validation';
 
+// 로그인 폼
 function LoginForm() {
   const [isOpen, setIsOpen] = useState(true);
   const { register, handleSubmit } = useLoginForm();

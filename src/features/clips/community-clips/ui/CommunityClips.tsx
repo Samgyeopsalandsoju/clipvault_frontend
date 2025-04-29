@@ -1,8 +1,9 @@
 'use client';
 
-import { useCommunityClips } from '../hook';
 import PublicLinkEntry from '@/entities/link/ui/PublicLinkEntry';
+import { useCommunityClips } from '../hook';
 
+// 홈 클립 리스트
 function CommunityClips() {
   const { data, isLoading } = useCommunityClips();
 

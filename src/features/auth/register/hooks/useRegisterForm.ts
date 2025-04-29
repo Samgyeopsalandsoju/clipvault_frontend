@@ -3,7 +3,9 @@ import { useRegister } from './useRegister';
 import { useToast } from '@/shared/hooks/useToast';
 import { RegisterFormData } from '../model/type';
 import { useVerifyStore } from '../../verification/model/store';
+import { useEffect } from 'react';
 
+// 회원가입 폼 훅
 export const useRegisterForm = () => {
   const {
     register,
@@ -14,6 +16,7 @@ export const useRegisterForm = () => {
   const { registerUser, isLoading } = useRegister();
   // 인증 여부 확인
   const isVerified = useVerifyStore((state) => state.isVerified);
+  const setIsVerified = useVerifyStore((state) => state.setIsVerified);
   const toast = useToast();
 
   // 이메일 실시간 값
@@ -30,5 +33,18 @@ export const useRegisterForm = () => {
     registerUser(data);
   };
 
-  return { register, handleSubmit: handleSubmit(onSubmit), mail, watch, errors, isLoading };
+  // 이메일 변경됨을 감지하면 인증 초기화
+  useEffect(() => {
+    setIsVerified(false);
+  }, [mail]);
+
+  return {
+    register,
+    handleSubmit: handleSubmit(onSubmit),
+    mail,
+    watch,
+    errors,
+    isLoading,
+    isVerified,
+  };
 };

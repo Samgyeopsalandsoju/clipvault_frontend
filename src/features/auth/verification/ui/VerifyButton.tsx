@@ -7,9 +7,9 @@ import { useSendVerifyCode } from '../hooks/useSendVerifyCode';
 import { verifyCodeValidation } from '../model/validation';
 import { useToast } from '@/shared/hooks/useToast';
 
-const VerifyButton = ({ mail, isOpen, onClose, onClick, disabled }: VerifyButtonProps) => {
+const VerifyButton = ({ mail, isOpen, onClose, onOpenModal, disabled }: VerifyButtonProps) => {
   const toast = useToast();
-  const { sendCode, isLoading } = useSendVerifyCode();
+  const { sendCode, isLoading: isSendCodeLoading } = useSendVerifyCode();
 
   // 이메일 인증 코드 발송 버튼 클릭 시 실행 및 팝업창 오픈
   const handleSendCode = () => {
@@ -18,7 +18,8 @@ const VerifyButton = ({ mail, isOpen, onClose, onClick, disabled }: VerifyButton
       toast.error(verifyCodeValidation.mail.message);
       return;
     }
-    onClick();
+    // 모달 오픈
+    onOpenModal();
     // 인증 메일 전송
     sendCode(mail);
   };
@@ -34,7 +35,8 @@ const VerifyButton = ({ mail, isOpen, onClose, onClick, disabled }: VerifyButton
       >
         이메일 인증 코드 발송
       </Button>
-      <VerifyModal isOpen={isOpen} onClose={onClose} isLoading={isLoading} />
+      {/** 인증 모달 */}
+      <VerifyModal isOpen={isOpen} onClose={onClose} isLoading={isSendCodeLoading} />
     </>
   );
 };

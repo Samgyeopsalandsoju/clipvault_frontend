@@ -1,6 +1,7 @@
 import { signIn } from 'next-auth/react';
 import { LoginFormData } from './model/type';
 
+//
 export const loginWithNextAuth = async (data: LoginFormData) => {
   try {
     const res = await signIn('credentials', {

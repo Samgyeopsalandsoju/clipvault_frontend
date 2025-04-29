@@ -1,6 +1,6 @@
-import { SignInResponse } from 'next-auth/react';
 import { ErrorAuth } from '../model/type';
 
+// next-auth 로그인 에러 타입 설정
 export const setErrorType = (error: string | null): ErrorAuth => {
   let errorObj: ErrorAuth;
 

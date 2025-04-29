@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 
 type Breakpoint = 'mobile' | 'tablet' | 'desktop';
 
+// 모바일 | 테블릿 | 데스크탑 브레이크 포인트 훅
 export function useBreakpoint() {
   const [breakpoint, setBreakpoint] = useState<Breakpoint>('desktop');
 

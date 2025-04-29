@@ -5,6 +5,7 @@ import { generateModernTagColors, openInNewTab } from '@/shared/utils';
 import { motion } from 'framer-motion';
 import { useBreakpoint } from '@/shared/hooks/useBreakPoint';
 
+// 퍼블릭 링크 엔트리
 function PublicLinkEntry({ category, title, link }: IPublicLinkEntry) {
   const breakpoint = useBreakpoint();
 

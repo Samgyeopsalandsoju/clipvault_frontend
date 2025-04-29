@@ -1,3 +1,4 @@
+// 회원가입 유효성 검사
 export const registerValidation = {
   mail: {
     required: '이메일을 입력해주세요.',

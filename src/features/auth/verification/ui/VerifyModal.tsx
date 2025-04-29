@@ -3,7 +3,7 @@ import {
   InputOTPGroup,
   InputOTPSeparator,
   InputOTPSlot,
-  REGEXP_ONLY_DIGITS_AND_CHARS,
+  REGEXP_ONLY_DIGITS,
 } from '@/shared/ui/input-otp';
 import { Modal } from '@/shared/ui/Modal';
 import { Loader2 } from 'lucide-react';
@@ -12,11 +12,12 @@ import { useEffect, useState } from 'react';
 import { useVerificationStore, useVerifyStore } from '../model/store';
 import { useCheckVerifyCode } from '../hooks/useCheckVerifyCode';
 
-const VerifyModal = ({ isOpen, onClose, isLoading: sendingEmailLoading }: VerifyModalProps) => {
+const VerifyModal = ({ isOpen, onClose, isLoading: isSendCodeLoading }: VerifyModalProps) => {
   const [authCode, setAuthCode] = useState<string>('');
   // 인증 코드 저장 스토어
   const { mail, authKey, reset } = useVerificationStore.getState();
-  const { verifyCode } = useCheckVerifyCode();
+  const { verifyCode, isLoading } = useCheckVerifyCode();
+  // 인증 여부 설정 스토어
   const setIsVerified = useVerifyStore((state) => state.setIsVerified);
 
   // 인증하기
@@ -37,7 +38,7 @@ const VerifyModal = ({ isOpen, onClose, isLoading: sendingEmailLoading }: Verify
     }
   };
 
-  // opt 값이 전부 작성되면 checkVerifyCode 함수 호출
+  // authCode 값이 전부 작성되면 checkVerifyCode 함수 호출
   useEffect(() => {
     if (authCode.length === 6) {
       checkVerifyCode();
@@ -48,7 +49,7 @@ const VerifyModal = ({ isOpen, onClose, isLoading: sendingEmailLoading }: Verify
     <Modal isOpen={isOpen} onClose={onClose}>
       <div className="flex items-center justify-center bg-white rounded-lg w-[350px] h-[250px] shadow-md">
         {/** 이메일 발송 중 */}
-        {sendingEmailLoading ? (
+        {isSendCodeLoading ? (
           <div className="flex items-center justify-center flex-col gap-2">
             <Loader2 size={40} className="animate-spin" />
             <p className="text-lg font-semibold">인증 이메일 발송중....</p>
@@ -59,9 +60,11 @@ const VerifyModal = ({ isOpen, onClose, isLoading: sendingEmailLoading }: Verify
             <div>
               <InputOTP
                 maxLength={6}
-                pattern={REGEXP_ONLY_DIGITS_AND_CHARS}
+                pattern={REGEXP_ONLY_DIGITS}
                 onChange={setAuthCode}
                 value={authCode}
+                // 인증 코드 확인 중 버튼 비활성화
+                disabled={isLoading}
               >
                 <InputOTPGroup>
                   <InputOTPSlot index={0} />

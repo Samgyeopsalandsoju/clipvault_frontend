@@ -3,6 +3,7 @@ import { register } from '../service';
 import { useToast } from '@/shared/hooks/useToast';
 import { useRouter } from 'next/navigation';
 
+// 회원가입 훅
 export const useRegister = () => {
   const toast = useToast();
   const router = useRouter();

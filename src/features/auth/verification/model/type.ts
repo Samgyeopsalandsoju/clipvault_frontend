@@ -9,7 +9,7 @@ export type VerifyButtonProps = {
   onClose: () => void;
   isOpen: boolean;
   mail: string;
-  onClick: () => void;
+  onOpenModal: () => void;
   disabled: boolean;
 };
 

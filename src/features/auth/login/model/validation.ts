@@ -1,3 +1,4 @@
+// 로그인 유효성 검사
 export const loginValidation = {
   mail: {
     required: '이메일을 입력해주세요.',

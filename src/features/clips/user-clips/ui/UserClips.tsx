@@ -2,6 +2,7 @@
 
 import { useUserClips } from '../hook';
 
+// 유저 클립 리스트
 const UserClips = () => {
   const { data, isLoading } = useUserClips();
 

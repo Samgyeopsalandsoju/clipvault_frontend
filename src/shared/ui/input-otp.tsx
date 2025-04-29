@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { OTPInput, OTPInputContext, REGEXP_ONLY_DIGITS_AND_CHARS } from 'input-otp';
+import { OTPInput, OTPInputContext, REGEXP_ONLY_DIGITS } from 'input-otp';
 import { Minus } from 'lucide-react';
 
 import { cn } from '@/shared/lib/utils';
@@ -68,4 +68,4 @@ const InputOTPSeparator = React.forwardRef<
 ));
 InputOTPSeparator.displayName = 'InputOTPSeparator';
 
-export { InputOTP, InputOTPGroup, InputOTPSlot, InputOTPSeparator, REGEXP_ONLY_DIGITS_AND_CHARS };
+export { InputOTP, InputOTPGroup, InputOTPSlot, InputOTPSeparator, REGEXP_ONLY_DIGITS };
