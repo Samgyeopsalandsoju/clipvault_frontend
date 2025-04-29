@@ -4,6 +4,7 @@ import '@/shared/styles/globals.css';
 import { Header } from '@/widgets/header';
 import { Footer } from '@/widgets/footer';
 import { Providers } from './_providers';
+import { LoginForm } from '@/features/auth/login/ui/LoginForm';
 
 export const metadata: Metadata = {
   title: 'clipVault',
@@ -42,6 +43,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Header />
           {children}
           <Footer />
+          <LoginForm />
         </Providers>
       </body>
     </html>

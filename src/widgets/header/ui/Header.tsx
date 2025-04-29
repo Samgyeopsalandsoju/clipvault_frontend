@@ -6,7 +6,10 @@ import { Button } from '@/shared/ui/button';
 import { NavSheet } from './Nav';
 import { NAV_ITEMS } from '../constants';
 import clsx from 'clsx';
-function Header() {
+import AuthNav from './AuthNav';
+
+// 헤더
+async function Header() {
   return (
     <header
       className={clsx('sticky top-0 w-full bg-white z-20', 'lg:px-[80px] border-b border-dotted')}
@@ -23,9 +26,14 @@ function Header() {
             </Link>
           ))}
         </nav>
+        {/* 데스크톱에서만 보이는 AuthNav */}
+        <div className="hidden md:block">
+          <AuthNav />
+        </div>
+        {/* 모바일에서만 보이는 메뉴 버튼 */}
         <Sheet>
           <SheetTrigger asChild>
-            <Button variant="ghost" size="icon">
+            <Button variant="ghost" size="icon" className="md:hidden">
               <Menu />
             </Button>
           </SheetTrigger>

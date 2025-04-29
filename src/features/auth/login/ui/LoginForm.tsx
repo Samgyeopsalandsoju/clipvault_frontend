@@ -5,17 +5,19 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/card';
 import { Input } from '@/shared/ui/input';
 import { Label } from '@/shared/ui/label';
 import Link from 'next/link';
-import { useState } from 'react';
 import { useLoginForm } from '../hooks/useLoginForm';
 import { Modal } from '@/shared/ui/Modal';
 import { loginValidation } from '../model/validation';
+import { useAuthModalStore } from '../model/store';
 
 // 로그인 폼
 function LoginForm() {
-  const [isOpen, setIsOpen] = useState(true);
+  const isLoginModalOpen = useAuthModalStore((state) => state.isLoginModalOpen);
+  const onLoginModalClose = useAuthModalStore((state) => state.onLoginModalClose);
   const { register, handleSubmit } = useLoginForm();
+
   return (
-    <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+    <Modal isOpen={isLoginModalOpen} onClose={() => onLoginModalClose()}>
       <Card className="border-[1px] border-dotted w-[320px] md:w-[400px]">
         <CardHeader>
           <CardTitle className="text-2xl text-center">Login</CardTitle>

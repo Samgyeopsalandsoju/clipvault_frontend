@@ -1,4 +1,3 @@
-import { LoginForm } from '@/features/auth/login/ui/LoginForm';
 import clsx from 'clsx';
 
 function ClipsPage() {
@@ -11,7 +10,6 @@ function ClipsPage() {
         <section className="flex flex-col">
           {/** 내 링크 목록 */}
           {/* <UserClips /> */}
-          <LoginForm />
         </section>
       </section>
     </main>
