@@ -4,9 +4,9 @@ function Tag({ name, background, text }: { name: string; background: string; tex
   return (
     <p
       className={clsx(
-        'py-1 px-3 rounded-lg curser-point w-[8rem] truncate text-center font-semibold md',
-        'sm:px-2.5 sm:text-sm sm:max-w-[6rem]',
-        'md:max-w-[8rem]'
+        'py-1 px-1.5 text-xs rounded-lg curser-point w-[4rem] truncate text-center font-semibold',
+        'md:px-5 md:text-sm md:w-[8rem]',
+        'lg:text-base lg:w-[8rem]'
       )}
       style={{ background, color: text }}
     >

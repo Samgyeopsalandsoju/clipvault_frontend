@@ -11,3 +11,9 @@ export interface IHomeClip extends IBaseClip {
   forkedCount: string;
   category: ICategoryResponse;
 }
+
+export interface IPersonalClip extends IBaseClip {
+  id: string;
+  forkedCount: string;
+  category: ICategoryResponse;
+}

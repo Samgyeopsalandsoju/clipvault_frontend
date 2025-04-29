@@ -6,6 +6,7 @@ export const useNewestList = () => {
   const { data, isLoading, error } = useQuery({
     queryKey: ['public-links'],
     queryFn: getNewestList,
+    refetchOnWindowFocus: false,
   });
 
   return { data, isLoading, error };

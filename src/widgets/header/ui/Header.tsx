@@ -4,6 +4,7 @@ import { Sheet, SheetTrigger } from '@/shared/ui/sheet';
 import { Menu } from 'lucide-react';
 import { Button } from '@/shared/ui/button';
 import { NavSheet } from './Nav';
+import { NAV_ITEMS } from '../constants';
 import clsx from 'clsx';
 function Header() {
   return (
@@ -16,12 +17,11 @@ function Header() {
           <h1 className="text-xl text-primary tracking-tighter font-bold">clipValut</h1>
         </Link>
         <nav className="flex flex-1 items-center gap-6">
-          <Link className="cursor-pointer font-extralight" href="/">
-            Home
-          </Link>
-          <Link className="cursor-pointer font-extralight" href="/about">
-            about
-          </Link>
+          {NAV_ITEMS.map((item, index) => (
+            <Link className="cursor-pointer font-extralight" href={item.href} key={index}>
+              {item.label}
+            </Link>
+          ))}
         </nav>
         <Sheet>
           <SheetTrigger asChild>

@@ -10,7 +10,6 @@ function NewestList() {
   const { data, isLoading } = useNewestList();
   const breakpoint = useBreakpoint();
   const containerRef = useRef<HTMLDivElement | null>(null);
-
   const getShownCount = () => {
     if (breakpoint === 'mobile') {
       return 2;
@@ -21,20 +20,30 @@ function NewestList() {
     }
   };
 
-  const GAP = 5;
-  const PADDING = 60;
+  const getPadding = () => {
+    if (breakpoint === 'desktop') {
+      return 60;
+    } else {
+      return 16;
+    }
+  };
 
+  const GAP = 5;
+  const PADDING = getPadding();
+  const SHOWN_COUNT = getShownCount();
   return (
     <div className="w-full">
-      <h1 className="text-2xl font-semibold px-[60px]">최근 등록된 링크</h1>
-      <div className="flex w-full overflow-hidden relative h-[250px]" ref={containerRef}>
+      <h1 className="text-lg md:text-xl lg:text-2xl font-semibold px-[16px] lg:px-[60px]">
+        최근 등록된 링크
+      </h1>
+      <div className="flex w-full overflow-hidden relative h-[270px]" ref={containerRef}>
         {isLoading ? (
           <>Loading..</>
         ) : (
           <Slider
             current={containerRef.current}
             GAP={GAP}
-            SHOWN_COUNT={getShownCount()}
+            SHOWN_COUNT={SHOWN_COUNT}
             PADDING={PADDING}
             renderItem={(data, width, height) => {
               return <Slide key={data.id} {...data} cardWidth={width} cardHeight={height} />;

@@ -1,10 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
-import { getPublicLinkList } from './service';
+import { getCommunityClips } from './service';
 
-export const usePublicLinkList = () => {
+export const useCommunityClips = () => {
   const { data, isLoading, error } = useQuery({
     queryKey: ['public-links'],
-    queryFn: getPublicLinkList,
+    queryFn: getCommunityClips,
+    refetchOnWindowFocus: false,
   });
 
   return { data, isLoading, error };
