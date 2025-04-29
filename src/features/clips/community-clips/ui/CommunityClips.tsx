@@ -8,7 +8,7 @@ function CommunityClips() {
 
   return (
     <section className="px-[16px] md:px-[16px] lg:px-[60px] py-[50px]">
-      <h1 className="text-lg md:text-xl lg:text-2xl font-semibold mb-5">퍼블릭 링크 리스트</h1>
+      <h3 className="text-lg md:text-xl lg:text-2xl font-semibold mb-5">퍼블릭 링크 리스트</h3>
       {isLoading ? (
         <div>Loading...</div>
       ) : (

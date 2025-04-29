@@ -1,5 +1,5 @@
-import { LoginFormData } from './model/type';
 import { signIn } from 'next-auth/react';
+import { LoginFormData } from './model/type';
 
 export const loginWithNextAuth = async (data: LoginFormData) => {
   try {

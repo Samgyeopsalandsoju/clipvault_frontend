@@ -28,6 +28,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "framer-motion": "^12.9.2",
+    "input-otp": "^1.4.2",
     "jotai-devtools": "^0.10.1",
     "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.474.0",

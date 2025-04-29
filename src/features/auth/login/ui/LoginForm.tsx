@@ -4,18 +4,18 @@ import { Button } from '@/shared/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/card';
 import { Input } from '@/shared/ui/input';
 import { Label } from '@/shared/ui/label';
-import { Modal } from '@/shared/ui/Modal';
 import Link from 'next/link';
 import { useState } from 'react';
-import { loginValidation } from '../model/vaidation';
 import { useLoginForm } from '../hooks/useLoginForm';
+import { loginValidation } from '../model/validation';
+import { Modal } from '@/shared/ui/Modal';
 
 function LoginForm() {
   const [isOpen, setIsOpen] = useState(true);
   const { register, handleSubmit } = useLoginForm();
   return (
     <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
-      <Card className="border-[2px] border-dotted w-[320px] md:w-[400px]">
+      <Card className="border-[1px] border-dotted w-[320px] md:w-[400px]">
         <CardHeader>
           <CardTitle className="text-2xl text-center">Login</CardTitle>
         </CardHeader>

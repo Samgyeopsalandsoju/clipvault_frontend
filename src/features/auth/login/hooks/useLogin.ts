@@ -1,13 +1,12 @@
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
-import { loginWithNextAuth } from '../service';
 import { useState } from 'react';
-import { ErrorAuth } from '../model/type';
-import { toast } from 'react-hot-toast';
-import { setErrorType } from '../utils/auth';
 import { useToast } from '@/shared/hooks/useToast';
+import { ErrorAuth } from '../model/type';
+import { loginWithNextAuth } from '../service';
+import { setErrorType } from '../helper/auth';
 
-export const useAuth = () => {
+export const useLogin = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<ErrorAuth | null>(null);

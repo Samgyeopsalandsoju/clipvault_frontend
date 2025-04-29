@@ -1,4 +1,4 @@
-export const loginValidation = {
+export const registerValidation = {
   mail: {
     required: '이메일을 입력해주세요.',
     pattern: {
@@ -7,6 +7,13 @@ export const loginValidation = {
     },
   },
   password: {
+    required: '비밀번호를 입력해주세요.',
+    minLength: {
+      value: 8,
+      message: '비밀번호는 8자 이상이어야 합니다.',
+    },
+  },
+  confirmPassword: {
     required: '비밀번호를 입력해주세요.',
   },
 };

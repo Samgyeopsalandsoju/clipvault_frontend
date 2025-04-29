@@ -36,15 +36,14 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html>
-      <Providers>
-        <body>
+    <html lang="ko">
+      <body>
+        <Providers>
           <Header />
           {children}
           <Footer />
-          <div id="modal-root" />
-        </body>
-      </Providers>
+        </Providers>
+      </body>
     </html>
   );
 }

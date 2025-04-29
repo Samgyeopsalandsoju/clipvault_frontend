@@ -1,10 +1,9 @@
 import { useForm } from 'react-hook-form';
+import { useLogin } from './useLogin';
 import { LoginFormData } from '../model/type';
-import { useAuth } from './useAuth';
-
 export const useLoginForm = () => {
   const { register, handleSubmit } = useForm<LoginFormData>();
-  const { login } = useAuth();
+  const { login } = useLogin();
 
   const onSubmit = (data: LoginFormData) => {
     login(data);

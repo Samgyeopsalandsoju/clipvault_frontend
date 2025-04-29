@@ -16,6 +16,9 @@ function Modal({
 
   useEffect(() => {
     setMounted(true);
+    return () => {
+      setMounted(false);
+    };
   }, []);
 
   if (!isOpen || !mounted) return null;
@@ -27,7 +30,7 @@ function Modal({
     >
       <div onClick={(e) => e.stopPropagation()}>{children}</div>
     </div>,
-    document.getElementById('modal-root')!
+    document.body!
   );
 }
 
