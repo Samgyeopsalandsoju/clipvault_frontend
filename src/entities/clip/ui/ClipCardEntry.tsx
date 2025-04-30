@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { useState } from 'react';
 
 // 퍼블릭 링크 엔트리
-function CommunityClipEntry({ category, title, link, forkedCount }: IPublicLinkEntry) {
+function ClipCardEntry({ category, title, link, forkedCount }: IPublicLinkEntry) {
   const [isSwipedOut, setIsSwipedOut] = useState(false);
   const { background, text } = generateModernTagColors(+category.color);
   return (
@@ -79,4 +79,4 @@ function CommunityClipEntry({ category, title, link, forkedCount }: IPublicLinkE
   );
 }
 
-export default CommunityClipEntry;
+export default ClipCardEntry;

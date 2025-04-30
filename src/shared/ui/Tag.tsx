@@ -1,14 +1,22 @@
 import clsx from 'clsx';
+import { ICategoryResponse } from '../types/category';
+import { generateModernTagColors } from '../utils';
 
-function Tag({ name, background, text }: { name: string; background: string; text: string }) {
+interface ITagProps extends Omit<ICategoryResponse, 'color'> {
+  onClick: () => void;
+  color?: string;
+}
+
+function Tag({ color = '999', name, onClick }: ITagProps) {
+  const { background, text, border } = generateModernTagColors(+color);
   return (
     <p
       className={clsx(
-        'py-1 px-1.5 text-xs rounded-lg curser-point w-[4rem] truncate text-center font-semibold',
-        'md:px-5 md:text-sm md:w-[8rem]',
-        'lg:text-base lg:w-[8rem]'
+        'py-1 px-1.5 text-xs rounded-lg curser-point w-full truncate text-center font-semibold shadow-md cursor-pointer',
+        'md:text-sm border lg:text-lg active:scale-[0.97] hover:scale-[1.03]'
       )}
-      style={{ background, color: text }}
+      style={{ background, color: text, borderColor: border }}
+      onClick={onClick}
     >
       {name}
     </p>

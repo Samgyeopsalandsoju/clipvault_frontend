@@ -1,6 +1,6 @@
 'use client';
 
-import CommunityClipEntry from '@/entities/clip/ui/CommunityClipEntry';
+import ClipCardEntry from '@/entities/clip/ui/ClipCardEntry';
 import { useCommunityClips } from '../hook';
 
 // 홈 클립 리스트
@@ -15,7 +15,7 @@ function CommunityClips() {
       ) : (
         <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:grid-cols-3">
           {data?.map((item) => {
-            return <CommunityClipEntry key={item.id} {...item} />;
+            return <ClipCardEntry key={item.id} {...item} />;
           })}
         </ul>
       )}

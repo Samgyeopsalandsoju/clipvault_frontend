@@ -22,6 +22,15 @@
 //   };
 // };
 export const generateModernTagColors = (hue?: number) => {
+  // 화이트
+  if (hue === 999) {
+    return {
+      colorHue: 0,
+      background: 'hsl(0, 0%, 100%)', // 완전한 화이트 배경
+      text: 'hsl(0, 0%, 30%)', // 회색 텍스트 (가독성 위해)
+      border: 'hsl(0, 0%, 90%)', // 연한 회색 테두리
+    };
+  }
   // 색상(Hue): 지정된 값이 없으면 랜덤 생성
   const colorHue = hue ?? Math.floor(Math.random() * 360);
 

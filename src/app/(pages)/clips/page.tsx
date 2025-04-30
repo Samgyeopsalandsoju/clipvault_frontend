@@ -1,16 +1,23 @@
-import clsx from 'clsx';
+import { CategoryList } from '@/features/category/ui/CategoryList';
+import VisibleCategory from '@/features/category/ui/VisibleCategory';
+import { UserClips } from '@/features/clips/user-clips';
+import { ClipPanel } from '@/widgets/clip-management-panel/ui/ClipPanel';
 
 function ClipsPage() {
   return (
-    <main className={clsx('border-l border-r border-dotted ', 'lg:mx-[80px]')}>
-      <section className="py-10 p-[50px] pt-[100px]">
-        <h3 className="lg:text-3xl md:text-2xl text-xl font-semibold">내가 등록한 링크</h3>
-      </section>
-      <section className="flex flex-col">
-        <section className="flex flex-col">
-          {/** 내 링크 목록 */}
-          {/* <UserClips /> */}
-        </section>
+    <main className="border-l border-r border-dotted lg:mx-[200px]">
+      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-10">
+        {/** 공개 비공개 카테고리 선택 */}
+        <div className="flex flex-col gap-4">
+          <VisibleCategory />
+          {/** 카테고리 section */}
+          <CategoryList />
+        </div>
+        {/** 클립 리스트 */}
+        <div className="flex flex-col gap-4 lg:col-span-2 ">
+          <ClipPanel />
+          <UserClips />
+        </div>
       </section>
     </main>
   );

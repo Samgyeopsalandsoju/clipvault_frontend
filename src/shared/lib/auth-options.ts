@@ -33,14 +33,10 @@ export const authOptions: NextAuthOptions = {
       },
       async authorize(credentials) {
         try {
-          console.log('Attempting login with:', credentials?.mail);
-          console.log('Attempting login with:', credentials?.password);
           const { status, data } = await publicApiClient.post('/v1/member/login', {
             mail: credentials?.mail,
             password: credentials?.password,
           });
-          console.log('status:', status);
-          console.log('data:', data);
           if (status !== 200) {
             return null;
           }

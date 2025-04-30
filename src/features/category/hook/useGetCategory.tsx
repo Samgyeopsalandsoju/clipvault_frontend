@@ -1,0 +1,13 @@
+'use client';
+
+import { useQuery } from '@tanstack/react-query';
+import { getCategory } from '../service';
+
+export const useGetCategory = () => {
+  const getCategoryQuery = useQuery({
+    queryKey: ['category'],
+    queryFn: getCategory,
+  });
+
+  return { categories: getCategoryQuery.data, isLoading: getCategoryQuery.isPending };
+};

@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { getUserClips } from './service';
+import { getUserClips } from '../service';
 
 // 유저 클립 리스트 훅
 export const useUserClips = () => {
