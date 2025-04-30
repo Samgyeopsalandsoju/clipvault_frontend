@@ -1,1 +1,1 @@
-export { default as CommunityClips } from './ui/CommunityClips';
+export { CommunityClips } from './ui/CommunityClips';

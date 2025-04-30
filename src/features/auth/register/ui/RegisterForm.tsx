@@ -1,6 +1,5 @@
 'use client';
 
-import VerifyButton from '@/features/auth/verification/ui/VerifyButton';
 import { Button } from '@/shared/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/card';
 import { Input } from '@/shared/ui/input';
@@ -8,6 +7,7 @@ import { Label } from '@/shared/ui/label';
 import { registerValidation } from '../model/validation';
 import { useRegisterForm } from '../hooks/useRegisterForm';
 import { useState } from 'react';
+import { VerifyButton } from '../../verification';
 
 // 회원가입 폼
 export const RegisterForm = () => {

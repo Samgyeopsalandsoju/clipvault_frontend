@@ -1,4 +1,4 @@
-import { publicApiClient } from '@/app/lib';
+import { publicApiClient } from '@/shared/lib/axios';
 import { NextResponse, type NextRequest } from 'next/server';
 
 export async function POST(request: NextRequest) {

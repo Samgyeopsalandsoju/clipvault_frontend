@@ -35,6 +35,14 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport = {
+  // viewport 관련 설정을 여기에 작성
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  // 기타 필요한 viewport 설정
+};
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ko">

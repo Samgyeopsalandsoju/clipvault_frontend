@@ -1,4 +1,4 @@
-import { privateApiClient } from '@/app/lib/axios';
+import { privateApiClient } from '@/shared/lib/axios';
 import { APIResponse } from '@/shared/types';
 import { IUserClip } from '@/shared/types/clip';
 import { AxiosError } from 'axios';

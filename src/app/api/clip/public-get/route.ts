@@ -1,14 +1,14 @@
-import { publicApiClient } from '@/app/lib';
+import { publicApiClient } from '@/shared/lib/axios';
+import { IHomeClip } from '@/shared/types';
 import { APIResponse } from '@/shared/types/api';
 import { AxiosError } from 'axios';
 import { NextResponse } from 'next/server';
-import { IPublicClip } from '@/shared/types/clip';
 
 export async function GET() {
   try {
     console.log('public clip list GET called..');
     // api 요청
-    const { status, data } = await publicApiClient.get<APIResponse<IPublicClip[]>>(
+    const { status, data } = await publicApiClient.get<APIResponse<IHomeClip[]>>(
       '/v1/clip/public/30'
     );
 

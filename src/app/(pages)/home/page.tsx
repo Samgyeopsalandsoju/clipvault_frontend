@@ -1,5 +1,5 @@
 import { CommunityClips } from '@/features/clips/community-clips';
-import Hero from '@/widgets/hero/ui/Hero';
+import { Hero } from '@/widgets/hero';
 import clsx from 'clsx';
 
 const HomePage = () => {

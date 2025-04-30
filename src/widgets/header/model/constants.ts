@@ -13,3 +13,5 @@ export const NAV_ITEMS = [
     href: '/about',
   },
 ];
+
+export const PROTECTED_NAV_PATH = ['/clips'];

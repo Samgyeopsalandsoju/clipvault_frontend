@@ -5,12 +5,15 @@ import { useToast } from '@/shared/hooks/useToast';
 import { ErrorAuth } from '../model/type';
 import { loginWithNextAuth } from '../service';
 import { setErrorType } from '../helper/auth';
+import { useAuthModalStore } from '../model/store';
 
 // 로그인 훅
 export const useLogin = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<ErrorAuth | null>(null);
+  // 로그인 모달 닫기
+  const onLoginModalClose = useAuthModalStore((state) => state.onLoginModalClose);
   const toast = useToast();
 
   const { mutate: login } = useMutation({
@@ -32,6 +35,7 @@ export const useLogin = () => {
       // 로그인 성공시
       toast.success('로그인 성공');
       router.push('/');
+      onLoginModalClose();
     },
     // 네크워트 통신 실패 시 로직
     onError: (error) => {

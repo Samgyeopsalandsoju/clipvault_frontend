@@ -1,5 +1,4 @@
-import { apiClient } from '@/app/lib';
-import { useVerificationStore } from './model/store';
+import { apiClient } from '@/shared/lib/axios';
 
 export const sendVerifyCode = async (mail: string) => {
   const res = await apiClient.post('/auth/send-verify', {

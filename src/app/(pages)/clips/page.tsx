@@ -1,5 +1,5 @@
 import { CategoryList } from '@/features/category/ui/CategoryList';
-import VisibleCategory from '@/features/category/ui/VisibleCategory';
+import { VisibleCategory } from '@/features/category/ui/VisibleCategory';
 import { UserClips } from '@/features/clips/user-clips';
 import { ClipPanel } from '@/widgets/clip-management-panel/ui/ClipPanel';
 

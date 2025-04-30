@@ -1,4 +1,4 @@
-import { privateApiClient } from '@/app/lib/axios';
+import { privateApiClient } from '@/shared/lib/axios';
 import { APIResponse } from '@/shared/types';
 import { ICategoryResponse } from '@/shared/types/category';
 import { AxiosError } from 'axios';
