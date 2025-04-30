@@ -15,7 +15,7 @@ function AuthNav() {
   // 회원가입 페이지에서는 로그인 버튼을 보여주지 않음
   if (isRegisterPage) return null;
   return (
-    <nav className="flex items-center gap-4">
+    <nav className="items-center gap-4 hidden md:flex">
       <motion.div className="cursor-pointer text-sm" onClick={() => handleLoginModalOpen()}>
         login
       </motion.div>

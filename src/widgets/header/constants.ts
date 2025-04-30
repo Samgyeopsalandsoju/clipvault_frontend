@@ -2,7 +2,7 @@
 export const NAV_ITEMS = [
   {
     label: 'Home',
-    href: '/',
+    href: '/home',
   },
   {
     label: 'Clips',

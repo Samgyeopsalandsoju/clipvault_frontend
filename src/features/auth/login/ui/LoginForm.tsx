@@ -18,7 +18,7 @@ function LoginForm() {
 
   return (
     <Modal isOpen={isLoginModalOpen} onClose={() => onLoginModalClose()}>
-      <Card className="border-[1px] border-dotted w-[320px] md:w-[400px]">
+      <Card className="w-[320px] md:w-[400px] shadow-[0_10px_40px_rgba(0,0,0,0.4)] hover:shadow-[0_15px_50px_rgba(0,0,0,0.5)] transition-all duration-300">
         <CardHeader>
           <CardTitle className="text-2xl text-center">Login</CardTitle>
         </CardHeader>
@@ -63,9 +63,13 @@ function LoginForm() {
                 Login with Google
               </Button>
             </div>
-            <div className="mt-4 text-center text-sm">
+            <div className="mt-4 text-center text-sm ">
               Don&apos;t have an account?
-              <Link href="/register" className="underline underline-offset-4">
+              <Link
+                href="/register"
+                className="underline underline-offset-4 ml-3"
+                onClick={onLoginModalClose}
+              >
                 Sign up
               </Link>
             </div>
