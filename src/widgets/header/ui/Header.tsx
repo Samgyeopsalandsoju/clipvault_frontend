@@ -4,18 +4,17 @@ import { Sheet, SheetTrigger } from '@/shared/ui/sheet';
 import { Menu } from 'lucide-react';
 import { Button } from '@/shared/ui/button';
 import { NavSheet } from './Nav';
-import { NAV_ITEMS } from '../constants';
 import clsx from 'clsx';
-import AuthNav from './AuthNav';
-import MainNav from './MainNav';
+import { AuthNav } from './AuthNav';
+import { MainNav } from './MainNav';
 
 // 헤더
-async function Header() {
+export const Header = () => {
   return (
     <header
       className={clsx('sticky top-0 w-full bg-white z-20', 'lg:px-[200px] border-b border-dotted')}
     >
-      <section className="flex items-center gap-10 border-l border-r border-dotted px-5 py-4">
+      <section className="flex items-center gap-10 border-l border-r border-dotted px-5 py-4 justify-between">
         <Link className="flex items-center gap-1 cursor-pointer" href="/">
           <Paperclip strokeWidth={2.4} className="w-5 h-5 text-primary" />
           <h1 className="text-xl text-primary tracking-tighter font-bold">clipValut</h1>
@@ -36,6 +35,4 @@ async function Header() {
       </section>
     </header>
   );
-}
-
-export { Header };
+};

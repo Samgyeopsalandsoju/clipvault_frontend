@@ -6,11 +6,11 @@ export interface ClipListStoreProps {
   filteredClips: IUserClip[]; // 현재 필터링된 리스트
 
   visibility: VisibilityType; // 현재 선택된 visibility
-  category: ICategory;
+  category: string;
 
   setClips: (clips: IUserClip[]) => void;
   setVisibility: (visibility: VisibilityType) => void;
-  setCategory: (category: ICategory) => void;
+  setCategory: (category: string) => void;
   applyFilters: () => void;
 }
 

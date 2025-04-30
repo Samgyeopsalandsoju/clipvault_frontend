@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 
-function AuthNav() {
+export const AuthNav = () => {
   const pathname = usePathname();
   // 로그인 모달 오픈
   const handleLoginModalOpen = useAuthModalStore((state) => state.onLoginModalOpen);
@@ -24,6 +24,4 @@ function AuthNav() {
       </Link>
     </nav>
   );
-}
-
-export default AuthNav;
+};

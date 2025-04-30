@@ -1,9 +1,9 @@
-import { IUserClip } from '@/shared/types/clip';
 import { generateModernTagColors } from '@/shared/utils';
 import { Bookmark, ExternalLink, Copy } from 'lucide-react';
+import { IClipEntry } from '../model/type';
 
-export const ClipRowEntry = ({ category, forkedCount, link, title }: IUserClip) => {
-  const { background, border } = generateModernTagColors(+category.color);
+export const ClipRowEntry = ({ category, forkedCount, link, title }: IClipEntry) => {
+  const { border } = generateModernTagColors(+category.color);
   return (
     <div
       className="flex items-center bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-200 p-3 border"

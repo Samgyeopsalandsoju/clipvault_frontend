@@ -1,10 +1,10 @@
 'use client';
 
-import ClipCardEntry from '@/entities/clip/ui/ClipCardEntry';
-import { useCommunityClips } from '../hook';
+import { ClipCardEntry } from '@/entities/clip';
+import { useCommunityClips } from '../hook/useCommunityClips';
 
 // 홈 클립 리스트
-function CommunityClips() {
+export const CommunityClips = () => {
   const { data, isLoading } = useCommunityClips();
 
   return (
@@ -21,6 +21,4 @@ function CommunityClips() {
       )}
     </section>
   );
-}
-
-export default CommunityClips;
+};

@@ -1,6 +1,6 @@
 import { SheetContent, SheetHeader, SheetTitle } from '@/shared/ui/sheet';
 
-function NavSheet() {
+export const NavSheet = () => {
   return (
     <SheetContent>
       <SheetHeader>
@@ -8,6 +8,4 @@ function NavSheet() {
       </SheetHeader>
     </SheetContent>
   );
-}
-
-export { NavSheet };
+};

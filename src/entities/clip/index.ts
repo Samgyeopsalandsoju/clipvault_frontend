@@ -1,1 +1,2 @@
-export * from './ui/CommunityClipEntry';
+export * from './ui/ClipCardEntry';
+export * from './ui/ClipRowEntry';

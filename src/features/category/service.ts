@@ -1,4 +1,4 @@
-import { apiClient } from '@/app/lib';
+import { apiClient } from '@/shared/lib/axios';
 import { APIResponse } from '@/shared/types';
 import { ICategoryResponse } from '@/shared/types/category';
 

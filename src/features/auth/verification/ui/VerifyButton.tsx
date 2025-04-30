@@ -1,13 +1,19 @@
 'use client';
 
 import { Button } from '@/shared/ui/button';
-import VerifyModal from './VerifyModal';
 import { VerifyButtonProps } from '../model/type';
 import { useSendVerifyCode } from '../hooks/useSendVerifyCode';
 import { verifyCodeValidation } from '../model/validation';
 import { useToast } from '@/shared/hooks/useToast';
+import { VerifyModal } from './VerifyModal';
 
-const VerifyButton = ({ mail, isOpen, onClose, onOpenModal, disabled }: VerifyButtonProps) => {
+export const VerifyButton = ({
+  mail,
+  isOpen,
+  onClose,
+  onOpenModal,
+  disabled,
+}: VerifyButtonProps) => {
   const toast = useToast();
   const { sendCode, isLoading: isSendCodeLoading } = useSendVerifyCode();
 
@@ -40,5 +46,3 @@ const VerifyButton = ({ mail, isOpen, onClose, onOpenModal, disabled }: VerifyBu
     </>
   );
 };
-
-export default VerifyButton;

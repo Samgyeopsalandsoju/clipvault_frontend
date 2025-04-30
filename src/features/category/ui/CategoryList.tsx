@@ -5,8 +5,7 @@ import Tag from '@/shared/ui/Tag';
 import { AddCategoryButton } from './AddCategoryButton';
 import { Loader } from 'lucide-react';
 import { useGetCategory } from '../hook/useGetCategory';
-import { useClipListStore } from '@/features/clips/user-clips/model/store';
-import { ICategory } from '@/shared/types/category';
+import { useClipListStore } from '@/shared/model/clips.store';
 
 export const CategoryList = () => {
   const { categories, isLoading } = useGetCategory();
@@ -14,7 +13,7 @@ export const CategoryList = () => {
   const MAX_CATEGORY_COUNT = 10;
 
   // 카테고리 선택
-  const handleClickCategory = (category: ICategory) => {
+  const handleClickCategory = (category: string) => {
     setCategory(category);
   };
 
@@ -35,18 +34,14 @@ export const CategoryList = () => {
           </div>
         ) : (
           <div className="flex flex-wrap gap-5">
-            <Tag
-              name="All"
-              onClick={() => handleClickCategory({ color: '999', name: 'all', id: 'id' })}
-              id="all"
-            />
+            <Tag name="All" onClick={() => handleClickCategory('all')} id="all" />
             {categories &&
               categories.map((category) => {
                 return (
                   <Tag
                     key={category.id}
                     {...category}
-                    onClick={() => handleClickCategory(category)}
+                    onClick={() => handleClickCategory(category.name)}
                   />
                 );
               })}

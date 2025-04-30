@@ -1,4 +1,4 @@
-function Footer() {
+export const Footer = () => {
   const version = '2.0.1';
   return (
     <footer className="w-full border-t border-dotted bg-white lg:px-[200px]">
@@ -10,6 +10,4 @@ function Footer() {
       </section>
     </footer>
   );
-}
-
-export { Footer };
+};

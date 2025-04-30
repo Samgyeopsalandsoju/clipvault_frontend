@@ -4,11 +4,11 @@ import { Card } from '@/shared/ui/card';
 import { ClipRowEntry } from '@/entities/clip/ui/ClipRowEntry';
 import { useEffect } from 'react';
 import { Loader } from 'lucide-react';
-import { useClipListStore } from '../model/store';
+import { useClipListStore } from '@/shared/model/clips.store';
 import { useUserClips } from '../hook/useUserClips';
 
 // 유저 클립 리스트
-const UserClips = () => {
+export const UserClips = () => {
   const { data, isLoading } = useUserClips();
   // 클립 스토어 state set 호출
   const clips = useClipListStore((state) => state.filteredClips);
@@ -50,5 +50,3 @@ const UserClips = () => {
     </div>
   );
 };
-
-export { UserClips };

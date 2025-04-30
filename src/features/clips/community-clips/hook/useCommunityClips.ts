@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { getCommunityClips } from './service';
+import { getCommunityClips } from '../service';
 
 // 홈 클립 리스트 훅
 export const useCommunityClips = () => {

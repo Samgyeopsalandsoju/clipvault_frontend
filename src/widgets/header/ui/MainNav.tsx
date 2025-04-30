@@ -5,12 +5,12 @@ import { NAV_ITEMS } from '../constants';
 import { usePathname, useSelectedLayoutSegment } from 'next/navigation';
 import { motion } from 'framer-motion';
 
-const MainNav = () => {
+export const MainNav = () => {
   const pathname = usePathname();
   const isActive = (path: string) => pathname === path;
 
   return (
-    <nav className="flex flex-1 items-center gap-6">
+    <nav className="items-center gap-6 hidden md:flex md-flex-1">
       {NAV_ITEMS.map((item, index) => (
         <Link
           className="cursor-pointer font-extralight px-2 py-1 relative"
@@ -30,5 +30,3 @@ const MainNav = () => {
     </nav>
   );
 };
-
-export default MainNav;

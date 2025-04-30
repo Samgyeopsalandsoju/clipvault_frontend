@@ -10,7 +10,7 @@ import { useRegisterForm } from '../hooks/useRegisterForm';
 import { useState } from 'react';
 
 // 회원가입 폼
-const RegisterForm = () => {
+export const RegisterForm = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const { register, handleSubmit, mail, watch, errors, isLoading, isVerified } = useRegisterForm();
 
@@ -91,5 +91,3 @@ const RegisterForm = () => {
     </Card>
   );
 };
-
-export default RegisterForm;

@@ -11,7 +11,7 @@ import { loginValidation } from '../model/validation';
 import { useAuthModalStore } from '../model/store';
 
 // 로그인 폼
-function LoginForm() {
+export const LoginForm = () => {
   const isLoginModalOpen = useAuthModalStore((state) => state.isLoginModalOpen);
   const onLoginModalClose = useAuthModalStore((state) => state.onLoginModalClose);
   const { register, handleSubmit } = useLoginForm();
@@ -78,6 +78,4 @@ function LoginForm() {
       </Card>
     </Modal>
   );
-}
-
-export { LoginForm };
+};

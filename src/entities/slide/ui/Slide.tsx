@@ -1,8 +1,8 @@
 import { generateModernTagColors } from '@/shared/utils';
 import { motion } from 'framer-motion';
-import { ISlideProps } from '../type';
+import { ISlideProps } from '../model/type';
 
-function Slide({ category, forkedCount, id, title, cardWidth, cardHeight }: ISlideProps) {
+export const Slide = ({ category, forkedCount, id, title, cardWidth, cardHeight }: ISlideProps) => {
   const { background, text, border } = generateModernTagColors(+category.color);
   return (
     <motion.div
@@ -18,6 +18,4 @@ function Slide({ category, forkedCount, id, title, cardWidth, cardHeight }: ISli
       <span>{forkedCount}</span>
     </motion.div>
   );
-}
-
-export default Slide;
+};

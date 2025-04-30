@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-const Hero = () => {
+export const Hero = () => {
   const imageURL = 'https://s3-clipvault.s3.ap-northeast-2.amazonaws.com/background.jpg';
 
   return (
@@ -21,5 +21,3 @@ const Hero = () => {
     </section>
   );
 };
-
-export default Hero;

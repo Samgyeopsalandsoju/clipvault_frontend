@@ -12,7 +12,11 @@ import { useEffect, useState } from 'react';
 import { useVerificationStore, useVerifyStore } from '../model/store';
 import { useCheckVerifyCode } from '../hooks/useCheckVerifyCode';
 
-const VerifyModal = ({ isOpen, onClose, isLoading: isSendCodeLoading }: VerifyModalProps) => {
+export const VerifyModal = ({
+  isOpen,
+  onClose,
+  isLoading: isSendCodeLoading,
+}: VerifyModalProps) => {
   const [authCode, setAuthCode] = useState<string>('');
   // 인증 코드 저장 스토어
   const { mail, authKey, reset } = useVerificationStore.getState();
@@ -85,5 +89,3 @@ const VerifyModal = ({ isOpen, onClose, isLoading: isSendCodeLoading }: VerifyMo
     </Modal>
   );
 };
-
-export default VerifyModal;

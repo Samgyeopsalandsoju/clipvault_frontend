@@ -1,11 +1,11 @@
 import { Bookmark, ExternalLink } from 'lucide-react';
-import { IPublicLinkEntry } from '../type';
 import { generateModernTagColors, openInNewTab } from '@/shared/utils';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import { IClipEntry } from '../model/type';
 
 // 퍼블릭 링크 엔트리
-function ClipCardEntry({ category, title, link, forkedCount }: IPublicLinkEntry) {
+export const ClipCardEntry = ({ category, title, link, forkedCount }: IClipEntry) => {
   const [isSwipedOut, setIsSwipedOut] = useState(false);
   const { background, text } = generateModernTagColors(+category.color);
   return (
@@ -77,6 +77,4 @@ function ClipCardEntry({ category, title, link, forkedCount }: IPublicLinkEntry)
       </motion.div>
     </div>
   );
-}
-
-export default ClipCardEntry;
+};

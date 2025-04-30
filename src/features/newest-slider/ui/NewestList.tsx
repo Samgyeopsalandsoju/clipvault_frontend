@@ -1,12 +1,12 @@
 'use client';
 
 import { useRef } from 'react';
-import Slide from '@/entities/slide/ui/Slide';
 import Slider from '@/shared/ui/Slider';
-import { useNewestList } from '../hook';
 import { useBreakpoint } from '@/shared/hooks/useBreakPoint';
+import { useNewestList } from '../hook/useNewestList';
+import { Slide } from '@/entities/slide';
 
-function NewestList() {
+export const NewestList = () => {
   const { data, isLoading } = useNewestList();
   const breakpoint = useBreakpoint();
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -54,6 +54,4 @@ function NewestList() {
       </div>
     </div>
   );
-}
-
-export default NewestList;
+};

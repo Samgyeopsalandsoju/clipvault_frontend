@@ -1,6 +1,5 @@
 import { getSessionToken } from '@/shared/utils/session';
 import axios, { InternalAxiosRequestConfig } from 'axios';
-import { useSession } from 'next-auth/react';
 
 export const apiClient = axios.create({
   baseURL: '/api',

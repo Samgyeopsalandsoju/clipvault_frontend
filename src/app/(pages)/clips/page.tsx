@@ -5,8 +5,8 @@ import { ClipPanel } from '@/widgets/clip-management-panel/ui/ClipPanel';
 
 function ClipsPage() {
   return (
-    <main className="border-l border-r border-dotted lg:mx-[200px]">
-      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-10">
+    <main className="border-l border-r border-dotted lg:mx-[200px] p-1 pt-4 md:p-10">
+      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {/** 공개 비공개 카테고리 선택 */}
         <div className="flex flex-col gap-4">
           <VisibleCategory />
