@@ -6,4 +6,5 @@ export interface IPublicLinkEntry {
   title: string;
   link: string;
   category: ICategory;
+  forkedCount: string;
 }

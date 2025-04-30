@@ -1,6 +1,6 @@
 'use client';
 
-import PublicLinkEntry from '@/entities/link/ui/PublicLinkEntry';
+import CommunityClipEntry from '@/entities/clip/ui/CommunityClipEntry';
 import { useCommunityClips } from '../hook';
 
 // 홈 클립 리스트
@@ -13,9 +13,9 @@ function CommunityClips() {
       {isLoading ? (
         <div>Loading...</div>
       ) : (
-        <ul>
+        <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:grid-cols-3">
           {data?.map((item) => {
-            return <PublicLinkEntry key={item.id} {...item} />;
+            return <CommunityClipEntry key={item.id} {...item} />;
           })}
         </ul>
       )}

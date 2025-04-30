@@ -13,7 +13,7 @@ import MainNav from './MainNav';
 async function Header() {
   return (
     <header
-      className={clsx('sticky top-0 w-full bg-white z-20', 'lg:px-[80px] border-b border-dotted')}
+      className={clsx('sticky top-0 w-full bg-white z-20', 'lg:px-[200px] border-b border-dotted')}
     >
       <section className="flex items-center gap-10 border-l border-r border-dotted px-5 py-4">
         <Link className="flex items-center gap-1 cursor-pointer" href="/">
