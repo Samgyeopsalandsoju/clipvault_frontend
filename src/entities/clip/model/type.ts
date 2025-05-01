@@ -8,3 +8,10 @@ export interface IClipEntry {
   category: ICategory;
   forkedCount: string;
 }
+
+// 공개범위 셀렉터
+export interface IVisibilitySelector {
+  value: string;
+  onChange: (value: string) => void;
+  disabled?: boolean;
+}

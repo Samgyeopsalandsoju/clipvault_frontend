@@ -4,7 +4,7 @@ import { getUserClips } from '../service';
 // 유저 클립 리스트 훅
 export const useUserClips = () => {
   const getUserClipsQuery = useQuery({
-    queryKey: ['personal-link-list'],
+    queryKey: ['user-clips'],
     queryFn: getUserClips,
   });
 
