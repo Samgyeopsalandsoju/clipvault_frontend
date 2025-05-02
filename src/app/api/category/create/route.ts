@@ -14,16 +14,13 @@ export async function POST(request: NextRequest) {
     }
     console.log('body', body);
     // api 요청
-    const { status, data } = await privateApiClient.post('/v1/category/post', body);
+    const { status, data } = await privateApiClient.post('/v1/category/create', body);
 
     console.log('/v1/category/edit api response check ', status, data);
 
     // 통신 체크
     if (status !== 200 || !data) {
-      return NextResponse.json(
-        { status: 500, message: 'Failed to post category list' },
-        { status: 500 }
-      );
+      return NextResponse.json({ status: 500, message: 'Failed to post category list' }, { status: 500 });
     }
 
     // 결과 값 리턴
