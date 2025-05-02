@@ -1,0 +1,31 @@
+'use client';
+
+import { Card } from '@/shared/ui/card';
+import clsx from 'clsx';
+import { useClipListStore } from '@/shared/model/clips.store';
+import { VisibilityType } from '@/shared/model/clips.type';
+import { VISIBILITY_LIST } from '../model/constant';
+
+export const VisibleCategory = () => {
+  const { setVisibility, visibility } = useClipListStore();
+  const handleClick = (value: VisibilityType) => {
+    setVisibility(value);
+  };
+
+  return (
+    <Card className="flex gap-2 p-2 px-3">
+      {VISIBILITY_LIST.map((item, idx) => (
+        <div
+          key={idx}
+          className={clsx(
+            'py-1 px-4 md:text-sm rounded-[4px] shadow-md cursor-pointer',
+            visibility === item && 'bg-[#000] text-white'
+          )}
+          onClick={() => handleClick(item)}
+        >
+          {item.charAt(0).toUpperCase() + item.slice(1)}
+        </div>
+      ))}
+    </Card>
+  );
+};

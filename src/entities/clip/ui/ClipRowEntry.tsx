@@ -1,18 +1,19 @@
-import { generateModernTagColors } from '@/shared/utils';
 import { Bookmark, ExternalLink, Copy } from 'lucide-react';
 import { IClipEntry } from '../model/type';
+import { copyLink, openInNewTab } from '@/shared/utils/link';
+import { useToast } from '@/shared/hooks';
 
-export const ClipRowEntry = ({ category, forkedCount, link, title }: IClipEntry) => {
-  const { border } = generateModernTagColors(+category.color);
+export const ClipRowEntry = ({ forkedCount, link, title, onClick }: IClipEntry) => {
+  const toast = useToast();
   return (
     <div
-      className="flex items-center bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-200 p-3 border"
-      style={{ borderColor: border }}
+      className="flex items-center bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-200 py-2 px-3 border cursor-pointer"
+      onClick={onClick}
     >
       {/* 북마크 아이콘과 숫자 */}
       <div className="flex items-center space-x-1 w-14">
         <button className="flex items-center space-x-2">
-          <Bookmark size={16} fill={'currentColor'} />
+          <Bookmark size={18} fill={'currentColor'} />
           <span className="text-sm text-gray-500">{forkedCount}</span>
         </button>
       </div>
@@ -50,11 +51,24 @@ export const ClipRowEntry = ({ category, forkedCount, link, title }: IClipEntry)
       {/* 버튼 섹션 */}
       <div className="flex items-center gap-2">
         {/* 복사 버튼 */}
-        <div className="flex items-center justify-center p-1.5 text-gray-600 hover:text-blue-600 transition-colors rounded-lg hover:bg-blue-50">
+        <div
+          className="flex items-center justify-center p-1.5 text-gray-600 hover:text-blue-600 transition-colors rounded-lg hover:bg-blue-50"
+          onClick={(e) =>
+            copyLink(
+              e,
+              link,
+              () => toast.success('링크가 복사되었습니다.'),
+              () => toast.error('링크 복사에 실패하였습니다. 잠시후 시도해주세요.')
+            )
+          }
+        >
           <Copy size={16} />
         </div>
         {/* 바로가기 버튼 */}
-        <div className="flex items-center justify-center p-1.5 text-gray-600 hover:text-blue-600 transition-colors rounded-lg hover:bg-blue-50">
+        <div
+          className="flex items-center justify-center p-1.5 text-gray-600 hover:text-blue-600 transition-colors rounded-lg hover:bg-blue-50"
+          onClick={(e) => openInNewTab(e, link)}
+        >
           <ExternalLink size={16} />
         </div>
       </div>

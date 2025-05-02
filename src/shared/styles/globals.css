@@ -1,3 +1,6 @@
+/* 커스텀 CSS 파일 임포트 */
+@import './typography.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

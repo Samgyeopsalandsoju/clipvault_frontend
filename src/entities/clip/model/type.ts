@@ -7,6 +7,7 @@ export interface IClipEntry {
   link: string;
   category: ICategory;
   forkedCount: string;
+  onClick: () => void;
 }
 
 // 공개범위 셀렉터

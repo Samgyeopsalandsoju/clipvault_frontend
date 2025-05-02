@@ -1,4 +1,3 @@
-import { ICategory } from '@/shared/types/category';
 import { IUserClip } from '@/shared/types/clip';
 
 export interface ClipListStoreProps {

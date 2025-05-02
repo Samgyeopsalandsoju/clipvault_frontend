@@ -12,8 +12,9 @@ function Tag({ color = '999', name, onClick }: ITagProps) {
   return (
     <p
       className={clsx(
-        'py-1 px-1.5 text-xs rounded-lg curser-point w-full truncate text-center font-semibold shadow-md cursor-pointer',
-        'md:text-sm border lg:text-lg active:scale-[0.97] hover:scale-[1.03]'
+        'py-1 px-1.5 text-sm rounded-lg curser-point w-full text-center font-semibold shadow-md',
+        'md:text-sm',
+        'border active:scale-[0.97] hover:scale-[1.03]'
       )}
       style={{ background, color: text, borderColor: border }}
       onClick={onClick}

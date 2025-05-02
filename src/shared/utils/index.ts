@@ -1,3 +1,3 @@
 export * from './card';
-export * from './string';
+export * from './link';
 export * from './session';
