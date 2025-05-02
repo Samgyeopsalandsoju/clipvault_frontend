@@ -72,6 +72,7 @@ export const CreateClip = ({ isOpen, onClose }: { isOpen: boolean; onClose: () =
               placeholder="Clip 이름"
               {...register('title', { required: createClipValidation.title.required })}
             />
+            <span className="text-sm text-red-500 h-3">{errors?.title?.message || ' '}</span>
           </div>
 
           {/** 클립 링크*/}
@@ -84,6 +85,7 @@ export const CreateClip = ({ isOpen, onClose }: { isOpen: boolean; onClose: () =
               rows={3}
               {...register('link', { required: createClipValidation.link.required })}
             />
+            <span className="text-sm text-red-500 h-3">{errors?.link?.message || ' '}</span>
           </div>
 
           <Button type="submit">클립 생성</Button>
