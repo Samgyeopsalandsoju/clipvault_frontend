@@ -13,7 +13,7 @@ export const useCreateCategory = () => {
       queryClient.invalidateQueries({ queryKey: ['category'] });
       toast.success('카테고리 생성 완료');
     },
-    onError: (error) => {
+    onError: () => {
       toast.error('카테고리 생성 실패');
     },
   });
