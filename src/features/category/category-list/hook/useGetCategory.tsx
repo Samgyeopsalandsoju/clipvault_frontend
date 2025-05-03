@@ -5,7 +5,7 @@ import { getCategories } from '../service';
 
 export const useGetCategory = () => {
   const getCategoryQuery = useQuery({
-    queryKey: ['category'],
+    queryKey: ['categories'],
     queryFn: getCategories,
   });
 

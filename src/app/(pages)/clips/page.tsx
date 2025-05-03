@@ -1,4 +1,5 @@
 import { CategoryList } from '@/features/category';
+import { ModifyCategory } from '@/features/category/modify-category/ui/ModifyCategory';
 import { VisibleCategory } from '@/features/category/visible-selector/ui/VisibleCategory';
 import { ModifyClip } from '@/features/clips/modify-clip/ui/ModifyClip';
 import { UserClips } from '@/features/clips/user-clips';
@@ -24,6 +25,7 @@ function ClipsPage() {
       <MobileCreateButton />
       {/** 클립 & 카테고리 수정 모달 */}
       <ModifyClip />
+      <ModifyCategory />
     </main>
   );
 }

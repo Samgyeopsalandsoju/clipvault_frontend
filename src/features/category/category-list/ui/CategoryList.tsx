@@ -1,11 +1,11 @@
 'use client';
 
 import { Card } from '@/shared/ui/card';
-import Tag from '@/shared/ui/Tag';
 import { Loader } from 'lucide-react';
 import { useClipListStore } from '@/shared/model/clips.store';
 import { MAX_CATEGORY_COUNT } from '../model/constant';
 import { useGetCategory } from '../hook/useGetCategory';
+import Tag from '@/entities/category-tag/ui/Tag';
 
 export const CategoryList = () => {
   const { categories, isLoading } = useGetCategory();
