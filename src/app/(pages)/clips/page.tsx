@@ -8,7 +8,7 @@ import { MobileCreateButton } from '@/widgets/clip/create-button/ui/MobileCreate
 
 function ClipsPage() {
   return (
-    <main className="border-l border-r border-dotted lg:mx-[200px] p-1 pt-4 md:p-10 relative">
+    <main className="border-l border-r border-dotted lg:mx-[200px] p-1 pt-4 md:p-10 relative flex-grow">
       <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pb-10">
         {/** 공개 비공개 카테고리 선택 */}
         <div className="md:sticky md:top-20  self-start flex flex-col gap-4">

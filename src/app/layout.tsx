@@ -46,7 +46,7 @@ export const viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ko">
-      <body>
+      <body className="flex flex-col  min-h-screen">
         <Providers>
           <Header />
           {children}

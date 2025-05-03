@@ -4,7 +4,7 @@ import clsx from 'clsx';
 
 const HomePage = () => {
   return (
-    <main className={clsx('border-l border-r border-dotted ', 'lg:mx-[200px]')}>
+    <main className={clsx('flex-grow border-l border-r border-dotted ', 'lg:mx-[200px]')}>
       {/** 헤로 컴포넌트 */}
       <Hero />
       {/** 랜덤 링크 목록 */}
