@@ -15,7 +15,7 @@ export const CommunityClips = () => {
       ) : (
         <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:grid-cols-3">
           {data?.map((item) => {
-            return <ClipCardEntry key={item.id} {...item} />;
+            return <ClipCardEntry key={item.id} {...item} onClick={() => {}} />;
           })}
         </ul>
       )}
