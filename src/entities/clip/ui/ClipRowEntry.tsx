@@ -26,12 +26,7 @@ export const ClipRowEntry = ({ forkedCount, link, title, onClick }: IClipEntry) 
       {/* 링크 URL */}
       <div className="flex items-center text-xs text-gray-500 flex-1 min-w-0">
         <span className="w-2 h-3 mr-1 flex-shrink-0">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -67,7 +62,7 @@ export const ClipRowEntry = ({ forkedCount, link, title, onClick }: IClipEntry) 
         {/* 바로가기 버튼 */}
         <div
           className="flex items-center justify-center p-1.5 text-gray-600 hover:text-blue-600 transition-colors rounded-lg hover:bg-blue-50"
-          onClick={(e) => openInNewTab(e, link)}
+          onClick={(e) => openInNewTab(link)}
         >
           <ExternalLink size={16} />
         </div>
