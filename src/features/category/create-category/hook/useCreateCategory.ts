@@ -1,13 +1,17 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { postCategory } from '../service';
 import { useToast } from '@/shared/hooks';
+import { ICategoryForm } from '../model/type';
+import { generateUniqueId } from '@/shared/utils/uuid';
 
 export const useCreateCategory = () => {
   const toast = useToast();
 
   const queryClient = useQueryClient();
   const postCategoryMutation = useMutation({
-    mutationFn: postCategory,
+    mutationFn: (category: ICategoryForm) => {
+      return postCategory({ ...category, id: generateUniqueId() });
+    },
     onSuccess: () => {
       // 카테고리 목록 조회 캐시 최신화
       queryClient.invalidateQueries({ queryKey: ['category'] });
