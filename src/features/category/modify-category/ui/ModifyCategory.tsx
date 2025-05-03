@@ -7,44 +7,17 @@ import { Input } from '@/shared/ui/input';
 import { Label } from '@/shared/ui/label';
 import clsx from 'clsx';
 import { useState } from 'react';
-import { useCreateCategory } from '../hook/useCreateCategory';
-import { ICategoryForm } from '../model/type';
 import { useForm } from 'react-hook-form';
 
 // 카테고리 생성 모달
-export const CreateCategory = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    setError,
-    setValue,
-    clearErrors,
-    reset,
-  } = useForm<ICategoryForm>({ mode: 'onChange' });
+export const ModifyCategory = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
   const [color, setColor] = useState<string>('');
-  const { postCategory, isLoading } = useCreateCategory();
 
   const selectColor = (newColor: string) => {
     // newColor가 설정되어있다면 set 하고 에러 클리어
     if (newColor.length > 0) {
       setColor(newColor);
-      setValue('color', newColor);
-      clearErrors('color');
     }
-  };
-
-  const onSubmit = (data: ICategoryForm) => {
-    if (color.length === 0) {
-      setError('color', { message: '색상을 선택해 주세요.' });
-      return;
-    }
-    postCategory(data, {
-      onSuccess: () => {
-        onClose();
-        reset();
-      },
-    });
   };
 
   // 닫기 핸들러
@@ -57,29 +30,20 @@ export const CreateCategory = ({ isOpen, onClose }: { isOpen: boolean; onClose: 
         <DrawerHeader>
           <DrawerTitle>Create category</DrawerTitle>
         </DrawerHeader>
-        <form className="flex flex-col gap-6 w-full px-4 lg:w-[40vw] py-4" onSubmit={handleSubmit(onSubmit)}>
+        <form className="flex flex-col gap-6 w-full px-4 lg:w-[40vw] py-4">
           {/** 카테고리 이름*/}
           <div className="grid gap-2 ">
             <Label htmlFor="title">카테고리 이름</Label>
-            <Input
-              id="categoryName"
-              type="text"
-              placeholder="카테고리"
-              {...register('name', { required: '카테고리 이름을 입력해주세요.' })}
-            />
-            <span className="text-sm text-red-500 h-3">{errors?.name?.message || ' '}</span>
+            <Input id="categoryName" type="text" placeholder="카테고리" />
           </div>
 
           {/** 색상 선택 링크*/}
           <div className="grid gap-2 ">
             <Label htmlFor="title">카테고리 색상</Label>
             <ColorPicker color={color} setColor={selectColor} />{' '}
-            <span className="text-sm text-red-500 h-3">{errors?.color?.message || ' '}</span>
           </div>
 
-          <Button type="submit" disabled={isLoading}>
-            카테고리 생성
-          </Button>
+          <Button type="submit">카테고리 수정</Button>
         </form>
       </DrawerContent>
     </Drawer>

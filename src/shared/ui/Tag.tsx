@@ -9,6 +9,9 @@ interface ITagProps extends Omit<ICategoryResponse, 'color'> {
 
 function Tag({ color = '999', name, onClick }: ITagProps) {
   const { background, text, border } = generateModernTagColors(+color);
+
+  const handleModify = () => {};
+
   return (
     <p
       className={clsx(

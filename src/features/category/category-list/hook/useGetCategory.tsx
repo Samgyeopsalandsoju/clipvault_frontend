@@ -1,7 +1,7 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
-import { getCategories } from '../../service';
+import { getCategories } from '../service';
 
 export const useGetCategory = () => {
   const getCategoryQuery = useQuery({

@@ -1,5 +1,5 @@
 export interface ICategoryForm {
   id: string;
-  categoryName: string;
+  name: string;
   color: string;
 }

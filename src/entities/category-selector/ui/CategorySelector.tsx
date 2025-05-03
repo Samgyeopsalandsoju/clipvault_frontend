@@ -3,8 +3,8 @@ import { Select, SelectItem, SelectTrigger, SelectValue, SelectContent } from '@
 import { ICategorySelector } from '../model/type';
 import { ICategoryResponse } from '@/shared/types';
 import { useEffect, useState } from 'react';
-import { useGetCategory } from '@/features/category/category-list/ui/hook/useGetCategory';
 import { Loader2 } from 'lucide-react';
+import { useGetCategory } from '@/features/category/category-list/hook/useGetCategory';
 
 export const CategorySelector = ({ initialCategory, onChange, disabled = false }: ICategorySelector) => {
   const [selectedCategory, setSelectedCategory] = useState<ICategoryResponse | null>(initialCategory || null);
