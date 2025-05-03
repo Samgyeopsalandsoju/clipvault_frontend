@@ -11,6 +11,7 @@ import { useModifyModalStore } from '../model/store';
 import { useForm } from 'react-hook-form';
 import { ICategory } from '@/shared/types';
 import { useModifyCategory } from '../hook/useModifyCategory';
+import { DeleteButton } from '../../delete-category/ui/DeleteButton';
 
 // 카테고리 생성 모달
 export const ModifyCategory = () => {
@@ -79,8 +80,9 @@ export const ModifyCategory = () => {
   return (
     <Drawer open={isOpen} onOpenChange={handleClose}>
       <DrawerContent className={clsx('flex justify-center items-center m-auto w-full', 'md:w-[600px]', 'lg:w-[800px]')}>
-        <DrawerHeader>
+        <DrawerHeader className="flex justify-center items-center relative w-full">
           <DrawerTitle>Modify category</DrawerTitle>
+          <DeleteButton categoryId={category?.id || ''} />
         </DrawerHeader>
         <form className="flex flex-col gap-6 w-full px-4 lg:w-[40vw] py-4" onSubmit={handleSubmit(onSubmit)}>
           {/** 카테고리 이름*/}
