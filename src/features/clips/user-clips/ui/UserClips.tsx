@@ -2,11 +2,12 @@
 
 import { Card } from '@/shared/ui/card';
 import { ClipRowEntry } from '@/entities/clip/ui/ClipRowEntry';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 import { Loader } from 'lucide-react';
 import { useClipListStore } from '@/shared/model/clips.store';
 import { useUserClips } from '../hook/useUserClips';
 import { useModifyModalStore } from '../../modify-clip/model/store';
+import { IUserClip } from '@/shared/types';
 
 // 유저 클립 리스트
 export const UserClips = () => {
@@ -23,10 +24,22 @@ export const UserClips = () => {
     }
   }, [data, setClips]);
 
-  const handleClick = (id: string) => {
-    setIsOpen(true);
-    setClipId(id);
-  };
+  // 클립 클릭 이벤트 핸들러
+  const handleClick = useCallback(
+    (id: string) => {
+      setIsOpen(true);
+      setClipId(id);
+    },
+    [setIsOpen, setClipId]
+  );
+
+  // 클립 렌더링 함수
+  const renderItem = useCallback(
+    (clip: IUserClip) => {
+      return <ClipRowEntry key={clip.id} {...clip} onClick={() => handleClick(clip.id)} />;
+    },
+    [handleClick]
+  );
 
   return (
     <Card className="p-2 pb-8">
@@ -44,11 +57,7 @@ export const UserClips = () => {
         <div className="flex justify-center items-center h-[150px] text-gray-500">클립이 없습니다.</div>
       ) : (
         // 클립 있음
-        <ul className="flex flex-col gap-3">
-          {clips.map((clip) => (
-            <ClipRowEntry key={clip.id} {...clip} onClick={() => handleClick(clip.id)} />
-          ))}
-        </ul>
+        <ul className="flex flex-col gap-3">{clips.map((clip) => renderItem(clip))}</ul>
       )}
     </Card>
   );

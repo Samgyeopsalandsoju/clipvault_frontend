@@ -1,10 +1,25 @@
+import dynamic from 'next/dynamic';
 import { CategoryList } from '@/features/category';
-import { ModifyCategory } from '@/features/category/modify-category/ui/ModifyCategory';
 import { VisibleCategory } from '@/features/category/visible-selector/ui/VisibleCategory';
-import { ModifyClip } from '@/features/clips/modify-clip/ui/ModifyClip';
 import { UserClips } from '@/features/clips/user-clips';
 import { ClipPanel } from '@/widgets/clip/clip-panel/ui/ClipPanel';
 import { MobileCreateButton } from '@/widgets/clip/create-button/ui/MobileCreateButton';
+
+// 모달 컴포넌트 레이지 로딩
+const ModifyClip = dynamic(
+  () => import('@/features/clips/modify-clip/ui/ModifyClip').then((mod) => ({ default: mod.ModifyClip })),
+  {
+    loading: () => null, // 모달이므로 로딩 UI가 필요 없음
+  }
+);
+
+const ModifyCategory = dynamic(
+  () =>
+    import('@/features/category/modify-category/ui/ModifyCategory').then((mod) => ({ default: mod.ModifyCategory })),
+  {
+    loading: () => null, // 모달이므로 로딩 UI가 필요 없음
+  }
+);
 
 function ClipsPage() {
   return (
@@ -24,6 +39,7 @@ function ClipsPage() {
       </section>
       <MobileCreateButton />
       {/** 클립 & 카테고리 수정 모달 */}
+      {/** 레이지 로징 적용*/}
       <ModifyClip />
       <ModifyCategory />
     </main>

@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
 
 import '@/shared/styles/globals.css';
+import dynamic from 'next/dynamic';
 import { Header } from '@/widgets/header';
 import { Footer } from '@/widgets/footer';
 import { Providers } from './_providers';
-import { LoginForm } from '@/features/auth/login/ui/LoginForm';
 
 export const metadata: Metadata = {
   title: 'clipVault',
@@ -42,6 +42,14 @@ export const viewport = {
   maximumScale: 1,
   // 기타 필요한 viewport 설정
 };
+
+// 모달 컴포넌트 레이지 로딩
+const LoginForm = dynamic(
+  () => import('@/features/auth/login/ui/LoginForm').then((mod) => ({ default: mod.LoginForm })),
+  {
+    loading: () => null, // 모달이므로 로딩 UI가 필요 없음
+  }
+);
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
