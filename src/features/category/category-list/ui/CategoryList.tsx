@@ -6,8 +6,10 @@ import { useClipListStore } from '@/shared/model/clips.store';
 import { MAX_CATEGORY_COUNT } from '../model/constant';
 import { useGetCategory } from '../hook/useGetCategory';
 import Tag from '@/entities/category-tag/ui/Tag';
+import { memo } from 'react';
 
-export const CategoryList = () => {
+// 메모이제이션으로 최적화
+export const CategoryList = memo(() => {
   const { categories, isLoading } = useGetCategory();
   const { setCategory } = useClipListStore();
 
@@ -41,4 +43,4 @@ export const CategoryList = () => {
       )}
     </Card>
   );
-};
+});
