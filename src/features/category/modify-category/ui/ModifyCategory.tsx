@@ -11,7 +11,6 @@ import { useModifyModalStore } from '../model/store';
 import { useForm } from 'react-hook-form';
 import { ICategory } from '@/shared/types';
 import { useModifyCategory } from '../hook/useModifyCategory';
-import { ConfirmModal } from '@/shared/modal/ui/ConfirmModal';
 import { Trash } from 'lucide-react';
 import { useDeleteCategory } from '../hook/useDeleteCategory';
 // 카테고리 생성 모달
@@ -19,9 +18,6 @@ export const ModifyCategory = () => {
   // 카테고리 모달 오픈
   const isOpen = useModifyModalStore((state) => state.isOpen);
   const setIsOpen = useModifyModalStore((state) => state.setIsOpen);
-
-  // 삭제 모달 오픈
-  const [isConfirmOpen, setIsConfirmOpen] = useState(false);
 
   // 카테고리
   const category = useModifyModalStore((state) => state.category);
@@ -79,7 +75,12 @@ export const ModifyCategory = () => {
   };
 
   const handleDelete = () => {
-    setIsConfirmOpen(true);
+    const result = window.confirm('해당 카테고리에 포함된 클립들도 전부 삭제됩니다.');
+    if (result) {
+      removeCategory(category?.id || '');
+      reset();
+      setIsOpen(false);
+    }
   };
 
   // 모달 닫기 및 값 초기화
@@ -89,7 +90,7 @@ export const ModifyCategory = () => {
   };
 
   return (
-    <Drawer open={isOpen} onOpenChange={isConfirmOpen ? () => {} : handleClose}>
+    <Drawer open={isOpen} onOpenChange={handleClose}>
       <DrawerContent className={clsx('flex justify-center items-center m-auto w-full', 'md:w-[600px]', 'lg:w-[800px]')}>
         <DrawerHeader className="flex justify-center items-center relative w-full">
           <DrawerTitle>Modify category</DrawerTitle>
@@ -122,20 +123,6 @@ export const ModifyCategory = () => {
           </Button>
         </form>
       </DrawerContent>
-      {isConfirmOpen && (
-        <ConfirmModal
-          isOpen={isConfirmOpen}
-          onClose={() => setIsConfirmOpen(false)}
-          title="카테고리 삭제"
-          content="해당 카테고리에 포함된 클립들도 전부 삭제됩니다."
-          onConfirm={() => {
-            removeCategory(category?.id || '');
-            reset();
-            setIsConfirmOpen(false);
-            setIsOpen(false);
-          }}
-        />
-      )}
     </Drawer>
   );
 };

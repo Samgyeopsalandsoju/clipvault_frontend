@@ -13,3 +13,10 @@ export const getClip = async (id: string) => {
   });
   return response.data.body;
 };
+
+export const deleteClip = async (id: string) => {
+  const response = await apiClient.delete<APIResponse<string>>(`/clip/clip-delete/${id}`, {
+    params: { id },
+  });
+  return response.data.body;
+};

@@ -17,32 +17,29 @@ export const ConfirmModal = ({
   return createPortal(
     <>
       <div
-        className={clsx('fixed inset-0 bg-black bg-opacity-50', 'flex items-center justify-center z-50')}
+        className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center"
         onClick={(e) => {
-          e.preventDefault();
-          if (e.target === e.currentTarget) onClose();
-        }}
+          e.stopPropagation();
+          onClose();
+        }} // 배경 클릭 시 닫기
       >
-        <div
-          className={clsx(
-            'fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 gap-5 z-50',
-            'rounded-xl flex flex-col justify-center items-center px-10 py-5',
-            'bg-white'
-          )}
+        {/* <div
+          className="bg-white rounded-xl p-5 flex flex-col gap-4 relative"
+          onClick={(e) => e.stopPropagation()} // 중요: 이벤트 전파 중지
         >
           <div className="flex flex-col gap-2">
             <p className="text-base font-semibold text-center">{title}</p>
             <p className="text-sm text-center">{content}</p>
           </div>
           <div className="flex gap-3">
-            <Button variant="outline" onClick={onClose}>
+            <Button variant="outline" className="cursor-pointer" onClick={onClose}>
               Cancel
             </Button>
-            <Button variant="default" onClick={onConfirm}>
+            <Button variant="default" className="cursor-pointer" onClick={onConfirm}>
               Confirm
             </Button>
           </div>
-        </div>
+        </div> */}
       </div>
     </>,
     document.body

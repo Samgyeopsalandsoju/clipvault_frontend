@@ -11,8 +11,11 @@ import { useModifyClip } from '../hook/useModifyClip';
 import { VisibilitySelector } from '@/entities/clip';
 import { CategorySelector } from '@/entities/category-selector/ui/CategorySelector';
 import { useModifyForm } from '../hook/useModifyForm';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { ModifyFormProps } from '../model/type';
+import { Trash } from 'lucide-react';
+import { ConfirmModal } from '@/shared/modal/ui/ConfirmModal';
+import { useDeleteClip } from '../hook/useDeleteClip';
 // 클립 수정 모달
 export const ModifyClip = () => {
   // 모달 오픈
@@ -22,6 +25,9 @@ export const ModifyClip = () => {
   // 클립 정보 및 폼 데이터 호출
   const { register, setValue, handleSubmit, reset } = useModifyForm();
   const { clip, modify } = useModifyClip();
+
+  // 삭제 모달 오픈
+  const { deleteClip } = useDeleteClip();
 
   // 카테고리 변경 데이터 감지
   const handleChange = (id: string) => {
@@ -48,11 +54,30 @@ export const ModifyClip = () => {
     });
   };
 
+  // 클립 삭제
+  const handleDelete = () => {
+    const result = window.confirm('해당 클립을 삭제하시겠습니까?');
+    if (result) {
+      deleteClip(clip?.id || '');
+      setIsOpen(false);
+      reset();
+    }
+  };
+
+  // 모달 닫기 및 값 초기화
+  const handleClose = () => {
+    setIsOpen(false);
+    reset();
+  };
+
   return (
-    <Drawer open={isOpen} onOpenChange={() => setIsOpen(false)}>
+    <Drawer open={isOpen} onOpenChange={handleClose}>
       <DrawerContent className={clsx('flex justify-center items-center m-auto w-full', 'md:w-[600px]', 'lg:w-[800px]')}>
         <DrawerHeader>
           <DrawerTitle>Modify Clip</DrawerTitle>
+          <button className="text-red-500 absolute right-8" onClick={handleDelete}>
+            <Trash size={20} />
+          </button>
         </DrawerHeader>
         <form className="flex flex-col gap-4 w-full px-4 lg:w-[40vw] py-4" onSubmit={handleSubmit(onSubmit)}>
           {/** 공개 범위 설정 */}
