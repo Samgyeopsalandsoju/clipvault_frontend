@@ -11,21 +11,28 @@ import { useModifyModalStore } from '../model/store';
 import { useForm } from 'react-hook-form';
 import { ICategory } from '@/shared/types';
 import { useModifyCategory } from '../hook/useModifyCategory';
-import { DeleteButton } from '../../delete-category/ui/DeleteButton';
-
+import { ConfirmModal } from '@/shared/modal/ui/ConfirmModal';
+import { Trash } from 'lucide-react';
+import { useDeleteCategory } from '../hook/useDeleteCategory';
 // 카테고리 생성 모달
 export const ModifyCategory = () => {
-  // 모달 오픈
+  // 카테고리 모달 오픈
   const isOpen = useModifyModalStore((state) => state.isOpen);
   const setIsOpen = useModifyModalStore((state) => state.setIsOpen);
 
+  // 삭제 모달 오픈
+  const [isConfirmOpen, setIsConfirmOpen] = useState(false);
+
   // 카테고리
   const category = useModifyModalStore((state) => state.category);
+
   // 변경 색상
   const [color, setColor] = useState<string>('');
 
   // 수정 카테고리 훅
   const { modify, isLoading } = useModifyCategory();
+  // 삭제 카테고리 훅
+  const { removeCategory, isLoading: isDeleteLoading } = useDeleteCategory();
   // 폼 데이터
   const {
     register,
@@ -71,6 +78,10 @@ export const ModifyCategory = () => {
     });
   };
 
+  const handleDelete = () => {
+    setIsConfirmOpen(true);
+  };
+
   // 모달 닫기 및 값 초기화
   const handleClose = () => {
     setIsOpen(false);
@@ -78,11 +89,13 @@ export const ModifyCategory = () => {
   };
 
   return (
-    <Drawer open={isOpen} onOpenChange={handleClose}>
+    <Drawer open={isOpen} onOpenChange={isConfirmOpen ? () => {} : handleClose}>
       <DrawerContent className={clsx('flex justify-center items-center m-auto w-full', 'md:w-[600px]', 'lg:w-[800px]')}>
         <DrawerHeader className="flex justify-center items-center relative w-full">
           <DrawerTitle>Modify category</DrawerTitle>
-          <DeleteButton categoryId={category?.id || ''} />
+          <button className="text-red-500 absolute right-8" onClick={handleDelete}>
+            <Trash size={20} />
+          </button>
         </DrawerHeader>
         <form className="flex flex-col gap-6 w-full px-4 lg:w-[40vw] py-4" onSubmit={handleSubmit(onSubmit)}>
           {/** 카테고리 이름*/}
@@ -109,6 +122,20 @@ export const ModifyCategory = () => {
           </Button>
         </form>
       </DrawerContent>
+      {isConfirmOpen && (
+        <ConfirmModal
+          isOpen={isConfirmOpen}
+          onClose={() => setIsConfirmOpen(false)}
+          title="카테고리 삭제"
+          content="해당 카테고리에 포함된 클립들도 전부 삭제됩니다."
+          onConfirm={() => {
+            removeCategory(category?.id || '');
+            reset();
+            setIsConfirmOpen(false);
+            setIsOpen(false);
+          }}
+        />
+      )}
     </Drawer>
   );
 };

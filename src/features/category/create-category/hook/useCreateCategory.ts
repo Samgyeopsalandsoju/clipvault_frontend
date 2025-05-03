@@ -14,7 +14,7 @@ export const useCreateCategory = () => {
     },
     onSuccess: () => {
       // 카테고리 목록 조회 캐시 최신화
-      queryClient.invalidateQueries({ queryKey: ['category'] });
+      queryClient.invalidateQueries({ queryKey: ['categories'] });
       toast.success('카테고리 생성 완료');
     },
     onError: () => {

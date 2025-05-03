@@ -24,14 +24,14 @@ function Tag({ color = '999', name, onClick, id }: ITagProps) {
       className={clsx(
         'py-1 px-1.5 text-sm rounded-lg curser-point w-full font-semibold shadow-md border',
         'md:text-sm',
-        'flex justify-center relative items-center group'
+        'flex justify-center relative items-center group cursor-pointer'
       )}
       style={{ backgroundColor: color }}
       onClick={onClick}
     >
       {name}
       <div
-        className="absolute right-2 cursor-pointer opacity-100 lg:opacity-0 group-hover:opacity-100 transition-opacity duration-200 text-gray-300"
+        className="absolute right-2 opacity-100 lg:opacity-0 group-hover:opacity-100 transition-opacity duration-200 text-gray-300"
         onClick={(e) => handleModify(e)}
       >
         <PenLine size={20} className="" />

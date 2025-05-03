@@ -1,24 +1,21 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { deleteCategory } from '../service';
 import { useToast } from '@/shared/hooks';
-import { useRouter } from 'next/navigation';
 
 export const useDeleteCategory = () => {
   const toast = useToast();
   const queryClient = useQueryClient();
-  const router = useRouter();
 
   const deleteCategoryMutation = useMutation({
     mutationFn: deleteCategory,
     onSuccess: () => {
-      toast.success('카테고리 삭제 완료');
       queryClient.invalidateQueries({ queryKey: ['categories'] });
-      router.push('/clips');
+      toast.success('카테고리가 성공적으로 삭제되었습니다.');
     },
     onError: () => {
-      toast.error('카테고리 삭제 실패');
+      toast.error('카테고리 삭제에 실패했습니다.');
     },
   });
 
-  return { deleteCategory: deleteCategoryMutation.mutate, isLoading: deleteCategoryMutation.isPending };
+  return { removeCategory: deleteCategoryMutation.mutate, isLoading: deleteCategoryMutation.isPending };
 };
