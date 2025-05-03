@@ -30,12 +30,14 @@ function Tag({ color = '999', name, onClick, id }: ITagProps) {
       onClick={onClick}
     >
       {name}
-      <div
-        className="absolute right-2 opacity-100 lg:opacity-0 group-hover:opacity-100 transition-opacity duration-200 text-gray-300"
-        onClick={(e) => handleModify(e)}
-      >
-        <PenLine size={20} className="" />
-      </div>
+      {id !== 'all' && (
+        <div
+          className="absolute right-2 opacity-100 lg:opacity-0 group-hover:opacity-100 transition-opacity duration-200 text-gray-300"
+          onClick={(e) => handleModify(e)}
+        >
+          <PenLine size={20} className="" />
+        </div>
+      )}
     </div>
   );
 }
