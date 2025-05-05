@@ -104,13 +104,11 @@ export const generateModernTagColors = (hex: string) => {
   // 헥스를 HSL로 변환하여 Hue 추출
   const [hue, _, __] = hexToHsl(hex);
 
-  // 배경색: 더 선명한 색상, 30% 투명도
-  // 채도를 90%로 높이고, 밝기를 40%로 조정
-  const background = hslToHex(hue, 90, 40, 0.3);
+  // 배경색: 투명도를 낮추고 밝기 조절
+  const background = hslToHex(hue, 90, 50, 1);
 
-  // 텍스트 색상: 더 밝고 선명하게
-  // 채도를 90%로, 밝기를 80%로 높임
-  const text = hslToHex(hue, 90, 80);
+  // 텍스트 색상: 더 밝게 (거의 흰색에 가깝게)
+  const text = hslToHex(hue, 20, 95);
 
   // 테두리 색상: 더 선명하게, 약간의 투명도
   // 채도를 85%로, 밝기를 45%로 조정
