@@ -13,7 +13,6 @@ export const ClipPanel = () => {
     <Card className="p-4">
       <div className="flex flex-row gap-3 pl-4 items-center lg:justify-between">
         <div className="flex">
-          <p className="pr-3">filter:</p>
           <HashTag name={visibility} />,
           <HashTag name={category} />
         </div>
