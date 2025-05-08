@@ -1,18 +1,14 @@
 'use client';
 
 import { VisibilitySelector } from '@/entities/clip';
-import { Button } from '@/shared/ui/button';
-import { Drawer, DrawerContent, DrawerHeader, DrawerTitle } from '@/shared/ui/drawer';
-import { Input } from '@/shared/ui/input';
-import { Label } from '@/shared/ui/label';
-import { Textarea } from '@/shared/ui/textarea';
+import { Button, Drawer, DrawerContent, DrawerHeader, DrawerTitle, Input, Label, Textarea } from '@/shared/ui/shadcn';
 import clsx from 'clsx';
 import { useCreateForm } from '../hook/useCreateForm';
 import { createClipValidation } from '../model/validation';
 import { useState } from 'react';
 import { VisibilityType } from '@/shared/data/model/clips.type';
 import { useCreateClip } from '../hook/useCreateClip';
-import { ICreateForm } from '../model/type';
+import { IClipForm } from '../model/type';
 import { CategorySelector } from '@/entities/category-selector/ui/CategorySelector';
 
 // 클립 생성 모달
@@ -35,7 +31,7 @@ export const CreateClip = ({ isOpen, onClose }: { isOpen: boolean; onClose: () =
   };
 
   // 클립 생성 후 성공 시 리셋 , 모달 닫기
-  const onSubmit = (data: ICreateForm) => {
+  const onSubmit = (data: IClipForm) => {
     createClip(data, {
       onSuccess: () => {
         onClose();

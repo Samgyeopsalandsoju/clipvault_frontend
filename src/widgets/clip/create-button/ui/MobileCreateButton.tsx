@@ -8,7 +8,7 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
   DropdownMenuSeparator,
-} from '@/shared/ui/dropdown-menu';
+} from '@/shared/ui/shadcn';
 import { useState } from 'react';
 import { Plus } from 'lucide-react';
 
@@ -28,9 +28,7 @@ export const MobileCreateButton = () => {
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-40" align="end" sideOffset={5}>
           <DropdownMenuGroup>
-            <DropdownMenuItem onSelect={() => setIsOpenCategory(true)}>
-              create category
-            </DropdownMenuItem>
+            <DropdownMenuItem onSelect={() => setIsOpenCategory(true)}>create category</DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem onSelect={() => setIsOpenClip(true)}>create clip</DropdownMenuItem>
           </DropdownMenuGroup>

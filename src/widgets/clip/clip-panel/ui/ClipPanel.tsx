@@ -1,10 +1,9 @@
 'use client';
 
 import { useClipListStore } from '@/shared/data/model/clips.store';
-import { Card } from '@/shared/ui/card';
 import { HashTag } from '@/shared/ui/HashTag';
 import { CreateButton } from '../../create-button/ui/CreateButton';
-import { MobileCreateButton } from '../../create-button/ui/MobileCreateButton';
+import { Card } from '@/shared/ui/shadcn';
 
 export const ClipPanel = () => {
   const { visibility, category } = useClipListStore();

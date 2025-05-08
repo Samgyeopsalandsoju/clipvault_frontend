@@ -1,12 +1,12 @@
 'use client';
 
-import { Card } from '@/shared/ui/card';
 import { Loader } from 'lucide-react';
 import { useClipListStore } from '@/shared/data/model/clips.store';
 import { MAX_CATEGORY_COUNT } from '../model/constant';
 import { useGetCategory } from '../hook/useGetCategory';
 import Tag from '@/entities/category-tag/ui/Tag';
 import { memo } from 'react';
+import { Card } from '@/shared/ui/shadcn';
 
 // 메모이제이션으로 최적화
 export const CategoryList = memo(() => {

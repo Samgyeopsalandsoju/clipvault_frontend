@@ -1,10 +1,7 @@
 'use client';
 
 import { ColorPicker } from '@/shared/color-palette/ui/ColorPicker';
-import { Button } from '@/shared/ui/button';
-import { Drawer, DrawerContent, DrawerHeader, DrawerTitle } from '@/shared/ui/drawer';
-import { Input } from '@/shared/ui/input';
-import { Label } from '@/shared/ui/label';
+import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, Button, Input, Label } from '@/shared/ui/shadcn';
 import clsx from 'clsx';
 import { useState } from 'react';
 import { useCreateCategory } from '../hook/useCreateCategory';

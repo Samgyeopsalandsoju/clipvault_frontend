@@ -1,14 +1,14 @@
 import { CreateCategory } from '@/features/category/create-category/ui/CreateCategory';
 import { CreateClip } from '@/features/clips/create-clip/ui/CreateClip';
-import { Button } from '@/shared';
 import {
+  Button,
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuTrigger,
   DropdownMenuSeparator,
-} from '@/shared/ui/dropdown-menu';
+} from '@/shared/ui/shadcn';
 import { useState } from 'react';
 
 export const CreateButton = () => {
@@ -25,9 +25,7 @@ export const CreateButton = () => {
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-40" align="end" sideOffset={5}>
           <DropdownMenuGroup>
-            <DropdownMenuItem onSelect={() => setIsOpenCategory(true)}>
-              create category
-            </DropdownMenuItem>
+            <DropdownMenuItem onSelect={() => setIsOpenCategory(true)}>create category</DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem onSelect={() => setIsOpenClip(true)}>create clip</DropdownMenuItem>
           </DropdownMenuGroup>

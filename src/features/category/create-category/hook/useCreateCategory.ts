@@ -2,12 +2,12 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { postCategory } from '../service';
 import { useToast } from '@/shared/core/hooks';
 import { ICategoryForm } from '../model/type';
-import { generateUniqueId } from '@/shared/utils/uuid';
+import { generateUniqueId } from '@/shared/core/utils/uuid';
 
 export const useCreateCategory = () => {
   const toast = useToast();
-
   const queryClient = useQueryClient();
+
   const postCategoryMutation = useMutation({
     mutationFn: (category: ICategoryForm) => {
       return postCategory({ ...category, id: generateUniqueId() });

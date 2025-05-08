@@ -1,13 +1,12 @@
-import { Label } from '@/shared/ui/label';
-import { Select, SelectItem, SelectTrigger, SelectValue, SelectContent } from '@/shared/ui/select';
+import { Label, Select, SelectItem, SelectTrigger, SelectValue, SelectContent } from '@/shared/ui/shadcn';
 import { ICategorySelector } from '../model/type';
-import { ICategoryResponse } from '@/shared/data/types';
+import { ICategory } from '@/shared/data/types';
 import { useEffect, useState } from 'react';
 import { Loader2 } from 'lucide-react';
 import { useGetCategory } from '@/features/category/category-list/hook/useGetCategory';
 
 export const CategorySelector = ({ initialCategory, onChange, disabled = false }: ICategorySelector) => {
-  const [selectedCategory, setSelectedCategory] = useState<ICategoryResponse | null>(initialCategory || null);
+  const [selectedCategory, setSelectedCategory] = useState<ICategory | null>(initialCategory || null);
   const { categories, isLoading } = useGetCategory();
 
   // 선택된 카테고리 업데이트 ( 값 변경 시)

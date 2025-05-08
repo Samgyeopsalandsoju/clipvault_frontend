@@ -1,13 +1,13 @@
 'use client';
 
-import { Card } from '@/shared/ui/card';
 import { ClipRowEntry } from '@/entities/clip/ui/ClipRowEntry';
 import { useEffect, useCallback } from 'react';
 import { Loader } from 'lucide-react';
 import { useClipListStore } from '@/shared/data/model/clips.store';
 import { useUserClips } from '../hook/useUserClips';
 import { useModifyModalStore } from '../../modify-clip/model/store';
-import { IUserClip } from '@/shared/data/types';
+import { IClip } from '@/shared/data/types';
+import { Card } from '@/shared/ui/shadcn';
 
 // 유저 클립 리스트
 export const UserClips = () => {
@@ -35,7 +35,7 @@ export const UserClips = () => {
 
   // 클립 렌더링 함수
   const renderItem = useCallback(
-    (clip: IUserClip) => {
+    (clip: IClip) => {
       return <ClipRowEntry key={clip.id} {...clip} onClick={() => handleClick(clip.id)} />;
     },
     [handleClick]

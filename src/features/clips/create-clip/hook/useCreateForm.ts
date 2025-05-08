@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form';
-import { ICreateForm } from '../model/type';
+import { IClipForm } from '../model/type';
 
 export const useCreateForm = () => {
   const {
@@ -8,7 +8,7 @@ export const useCreateForm = () => {
     formState: { errors },
     setValue,
     reset,
-  } = useForm<ICreateForm>();
+  } = useForm<IClipForm>();
 
   return {
     register,

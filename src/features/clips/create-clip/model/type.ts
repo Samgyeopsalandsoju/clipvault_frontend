@@ -1,8 +1,3 @@
-import { ICategory } from '@/shared/data/types';
+import { IClip } from '@/shared/data/types';
 
-export interface ICreateForm {
-  title: string;
-  link: string;
-  visible: string;
-  category: ICategory;
-}
+export type IClipForm = Omit<IClip, 'id' | 'forkedCount'>;

@@ -1,9 +1,10 @@
 import clsx from 'clsx';
 import { useModifyModalStore } from '@/features/category/modify-category/model/store';
 import { PenLine } from 'lucide-react';
-import { ICategoryResponse } from '@/shared/data/types';
-import { generateModernTagColors } from '@/shared/utils/color';
-interface ITagProps extends Omit<ICategoryResponse, 'color'> {
+import { generateModernTagColors } from '@/shared/core/utils/color';
+import { ICategory } from '@/shared/data/types';
+
+interface ITagProps extends Omit<ICategory, 'color'> {
   onClick: () => void;
   color?: string;
 }
