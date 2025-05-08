@@ -3,9 +3,9 @@ import clsx from 'clsx';
 import { Loader } from 'lucide-react';
 import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
-
+// 레이지 렌더링
 const CommunityClips = dynamic(() =>
-  import('@/features/clips/community-clips').then((mod) => ({
+  import('@/features/clips/public-clips').then((mod) => ({
     default: mod.CommunityClips,
   }))
 );

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { ChevronRight, ChevronLeft } from 'lucide-react';
-import { ISliderProps } from '../types/slider';
+import { ISliderProps } from '../data/types/slider';
 import { motion } from 'framer-motion';
 
 function Slider<T>({ current, GAP, SHOWN_COUNT, PADDING, renderItem, data }: ISliderProps<T>) {

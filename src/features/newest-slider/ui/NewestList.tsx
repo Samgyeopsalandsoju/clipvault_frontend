@@ -2,7 +2,7 @@
 
 import { useRef } from 'react';
 import Slider from '@/shared/ui/Slider';
-import { useBreakpoint } from '@/shared/hooks/useBreakPoint';
+import { useBreakpoint } from '@/shared/core/hooks/useBreakPoint';
 import { useNewestList } from '../hook/useNewestList';
 import { Slide } from '@/entities/slide';
 
@@ -33,9 +33,7 @@ export const NewestList = () => {
   const SHOWN_COUNT = getShownCount();
   return (
     <div className="w-full">
-      <h1 className="text-lg md:text-xl lg:text-2xl font-semibold px-[16px] lg:px-[60px]">
-        최근 등록된 링크
-      </h1>
+      <h1 className="text-lg md:text-xl lg:text-2xl font-semibold px-[16px] lg:px-[60px]">최근 등록된 링크</h1>
       <div className="flex w-full overflow-hidden relative h-[270px]" ref={containerRef}>
         {isLoading ? (
           <>Loading..</>

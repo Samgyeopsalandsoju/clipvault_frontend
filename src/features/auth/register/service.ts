@@ -1,4 +1,4 @@
-import { apiClient } from '@/shared/lib/axios';
+import { apiClient } from '@/shared/core/lib/axios';
 import { RegisterFormData } from './model/type';
 
 // 회원가입 서비스 레이어

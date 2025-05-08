@@ -1,5 +1,5 @@
-import { privateApiClient } from '@/shared/lib/axios';
-import { ICategory } from '@/shared/types';
+import { privateApiClient } from '@/shared/core/lib/axios';
+import { ICategory } from '@/shared/data/types';
 import { AxiosError } from 'axios';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';

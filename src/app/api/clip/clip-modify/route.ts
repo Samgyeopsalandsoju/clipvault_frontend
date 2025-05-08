@@ -1,5 +1,5 @@
 import { ModifyFormProps } from '@/features/clips/modify-clip/model/type';
-import { privateApiClient } from '@/shared/lib/axios';
+import { privateApiClient } from '@/shared/core/lib/axios';
 import { AxiosError } from 'axios';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';

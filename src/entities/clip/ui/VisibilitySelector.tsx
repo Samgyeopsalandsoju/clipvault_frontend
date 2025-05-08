@@ -1,5 +1,4 @@
-import { Label } from '@/shared/ui/label';
-import { Select, SelectItem, SelectTrigger, SelectValue, SelectContent } from '@/shared/ui/select';
+import { Label, Select, SelectItem, SelectTrigger, SelectValue, SelectContent } from '@/shared/ui/shadcn';
 import { IVisibilitySelector } from '../model/type';
 
 export const VisibilitySelector = ({ value, onChange, disabled = false }: IVisibilitySelector) => {

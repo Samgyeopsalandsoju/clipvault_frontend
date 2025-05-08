@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { postCategory } from '../service';
-import { useToast } from '@/shared/hooks';
+import { useToast } from '@/shared/core/hooks';
 import { ICategoryForm } from '../model/type';
 import { generateUniqueId } from '@/shared/utils/uuid';
 

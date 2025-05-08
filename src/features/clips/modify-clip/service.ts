@@ -1,5 +1,5 @@
-import { apiClient } from '@/shared/lib/axios';
-import { APIResponse, IUserClip } from '@/shared/types';
+import { apiClient } from '@/shared/core/lib/axios';
+import { APIResponse, IUserClip } from '@/shared/data/types';
 import { ModifyFormProps } from './model/type';
 
 export const modifyClip = async (data: ModifyFormProps) => {

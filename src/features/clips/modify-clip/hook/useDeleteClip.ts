@@ -1,4 +1,4 @@
-import { useToast } from '@/shared/hooks';
+import { useToast } from '@/shared/core/hooks';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { deleteClip } from '../service';
 

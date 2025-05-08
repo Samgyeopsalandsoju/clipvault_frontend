@@ -1,5 +1,5 @@
-import { ICategory } from '@/shared/types';
-import { ModalProps } from '@/shared/types/modal';
+import { ICategory } from '@/shared/data/types';
+import { ModalProps } from '@/shared/data/types/modal';
 
 // modify modal props
 export interface ModifyClipProps extends ModalProps {

@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 import { register } from '../service';
-import { useToast } from '@/shared/hooks/useToast';
+import { useToast } from '@/shared/core/hooks/useToast';
 import { useRouter } from 'next/navigation';
 
 // 회원가입 훅

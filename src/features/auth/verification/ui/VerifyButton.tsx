@@ -4,16 +4,10 @@ import { Button } from '@/shared/ui/button';
 import { VerifyButtonProps } from '../model/type';
 import { useSendVerifyCode } from '../hooks/useSendVerifyCode';
 import { verifyCodeValidation } from '../model/validation';
-import { useToast } from '@/shared/hooks/useToast';
+import { useToast } from '@/shared/core/hooks/useToast';
 import { VerifyModal } from './VerifyModal';
 
-export const VerifyButton = ({
-  mail,
-  isOpen,
-  onClose,
-  onOpenModal,
-  disabled,
-}: VerifyButtonProps) => {
+export const VerifyButton = ({ mail, isOpen, onClose, onOpenModal, disabled }: VerifyButtonProps) => {
   const toast = useToast();
   const { sendCode, isLoading: isSendCodeLoading } = useSendVerifyCode();
 
@@ -32,13 +26,7 @@ export const VerifyButton = ({
 
   return (
     <>
-      <Button
-        type="button"
-        className="w-full mt-4"
-        variant="outline"
-        onClick={handleSendCode}
-        disabled={disabled}
-      >
+      <Button type="button" className="w-full mt-4" variant="outline" onClick={handleSendCode} disabled={disabled}>
         이메일 인증 코드 발송
       </Button>
       {/** 인증 모달 */}

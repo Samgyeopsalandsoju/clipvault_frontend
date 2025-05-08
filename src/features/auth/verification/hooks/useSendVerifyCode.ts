@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 import { sendVerifyCode } from '../service';
-import { useToast } from '@/shared/hooks/useToast';
+import { useToast } from '@/shared/core/hooks/useToast';
 import { useVerificationStore } from '../model/store';
 
 export const useSendVerifyCode = () => {

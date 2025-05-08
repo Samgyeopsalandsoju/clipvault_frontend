@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { useToast } from '@/shared/hooks/useToast';
+import { useToast } from '@/shared/core/hooks/useToast';
 import { ErrorAuth } from '../model/type';
 import { loginWithNextAuth } from '../service';
 import { setErrorType } from '../helper/auth';

@@ -1,8 +1,8 @@
 import { Bookmark, ExternalLink } from 'lucide-react';
-import { generateModernTagColors, openInNewTab } from '@/shared/utils';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { IClipEntry } from '../model/type';
+import { openInNewTab, generateModernTagColors } from '@/shared/core/utils';
 
 // 퍼블릭 링크 엔트리
 export const ClipCardEntry = ({ category, title, link, forkedCount }: IClipEntry) => {

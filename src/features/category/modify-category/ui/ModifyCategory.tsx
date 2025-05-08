@@ -9,7 +9,7 @@ import clsx from 'clsx';
 import { useEffect, useState } from 'react';
 import { useModifyModalStore } from '../model/store';
 import { useForm } from 'react-hook-form';
-import { ICategory } from '@/shared/types';
+import { ICategory } from '@/shared/data/types';
 import { useModifyCategory } from '../hook/useModifyCategory';
 import { Trash } from 'lucide-react';
 import { useDeleteCategory } from '../hook/useDeleteCategory';

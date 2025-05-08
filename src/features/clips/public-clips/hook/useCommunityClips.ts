@@ -4,8 +4,9 @@ import { getCommunityClips } from '../service';
 // 홈 클립 리스트 훅
 export const useCommunityClips = () => {
   const getCommunityClipsQuery = useQuery({
-    queryKey: ['public-links'],
+    queryKey: ['public-clips'],
     queryFn: getCommunityClips,
+    // 브라우저로 다시 돌아올떄마다 리 패치 x
     refetchOnWindowFocus: false,
   });
 

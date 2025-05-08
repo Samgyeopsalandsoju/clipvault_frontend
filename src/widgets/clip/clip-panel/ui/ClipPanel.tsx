@@ -1,6 +1,6 @@
 'use client';
 
-import { useClipListStore } from '@/shared/model/clips.store';
+import { useClipListStore } from '@/shared/data/model/clips.store';
 import { Card } from '@/shared/ui/card';
 import { HashTag } from '@/shared/ui/HashTag';
 import { CreateButton } from '../../create-button/ui/CreateButton';

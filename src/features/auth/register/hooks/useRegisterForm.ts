@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { useRegister } from './useRegister';
-import { useToast } from '@/shared/hooks/useToast';
+import { useToast } from '@/shared/core/hooks/useToast';
 import { RegisterFormData } from '../model/type';
 import { useVerifyStore } from '../../verification/model/store';
 import { useEffect } from 'react';

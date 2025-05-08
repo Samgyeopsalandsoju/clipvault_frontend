@@ -1,4 +1,4 @@
-import { IUserClip } from '@/shared/types/clip';
+import { IUserClip } from '@/shared/data/types/clip';
 import { create } from 'zustand';
 import { ClipListStoreProps, VisibilityType } from './clips.type';
 

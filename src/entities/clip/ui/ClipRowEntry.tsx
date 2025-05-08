@@ -1,7 +1,7 @@
 import { Bookmark, ExternalLink, Copy } from 'lucide-react';
 import { IClipEntry } from '../model/type';
-import { copyLink, openInNewTab } from '@/shared/utils/link';
-import { useToast } from '@/shared/hooks';
+import { useToast } from '@/shared/core/hooks';
+import { copyLink, openInNewTab } from '@/shared/core/utils';
 
 export const ClipRowEntry = ({ forkedCount, link, title, onClick }: IClipEntry) => {
   const toast = useToast();

@@ -1,5 +1,5 @@
 import { ICreateForm } from '@/features/clips/create-clip/model/type';
-import { privateApiClient } from '@/shared/lib/axios';
+import { privateApiClient } from '@/shared/core/lib/axios';
 import { AxiosError } from 'axios';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
@@ -16,10 +16,7 @@ export async function POST(request: NextRequest) {
     // 필수 값 체크
     const { title, category, link, visible } = body;
     if (!title || !category || !link || !visible) {
-      return NextResponse.json(
-        { status: 400, message: 'Missing required fields' },
-        { status: 400 }
-      );
+      return NextResponse.json({ status: 400, message: 'Missing required fields' }, { status: 400 });
     }
 
     console.info('@ /api/clip/post 요청 데이터:', body);

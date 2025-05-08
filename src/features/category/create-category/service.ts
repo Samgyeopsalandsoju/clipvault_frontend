@@ -1,5 +1,5 @@
-import { apiClient } from '@/shared/lib/axios';
-import { APIResponse } from '@/shared/types';
+import { apiClient } from '@/shared/core/lib/axios';
+import { APIResponse } from '@/shared/data/types';
 import { ICategoryForm } from './model/type';
 
 // 카테고리 생성

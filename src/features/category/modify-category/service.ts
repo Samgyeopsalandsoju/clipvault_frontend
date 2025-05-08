@@ -1,5 +1,5 @@
-import { apiClient } from '@/shared/lib/axios';
-import { APIResponse, ICategory } from '@/shared/types';
+import { apiClient } from '@/shared/core/lib/axios';
+import { APIResponse, ICategory } from '@/shared/data/types';
 
 export const modifyCategory = async (data: ICategory) => {
   const res = await apiClient.patch<APIResponse<string>>(`/category/modify`, data);

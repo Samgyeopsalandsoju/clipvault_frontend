@@ -1,4 +1,4 @@
-import { ICategory } from '@/shared/types';
+import { ICategory } from '@/shared/data/types';
 
 export interface ICreateForm {
   title: string;

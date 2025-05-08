@@ -4,10 +4,10 @@ import { Card } from '@/shared/ui/card';
 import { ClipRowEntry } from '@/entities/clip/ui/ClipRowEntry';
 import { useEffect, useCallback } from 'react';
 import { Loader } from 'lucide-react';
-import { useClipListStore } from '@/shared/model/clips.store';
+import { useClipListStore } from '@/shared/data/model/clips.store';
 import { useUserClips } from '../hook/useUserClips';
 import { useModifyModalStore } from '../../modify-clip/model/store';
-import { IUserClip } from '@/shared/types';
+import { IUserClip } from '@/shared/data/types';
 
 // 유저 클립 리스트
 export const UserClips = () => {

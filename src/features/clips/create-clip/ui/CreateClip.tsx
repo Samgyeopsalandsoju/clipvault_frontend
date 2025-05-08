@@ -10,7 +10,7 @@ import clsx from 'clsx';
 import { useCreateForm } from '../hook/useCreateForm';
 import { createClipValidation } from '../model/validation';
 import { useState } from 'react';
-import { VisibilityType } from '@/shared/model/clips.type';
+import { VisibilityType } from '@/shared/data/model/clips.type';
 import { useCreateClip } from '../hook/useCreateClip';
 import { ICreateForm } from '../model/type';
 import { CategorySelector } from '@/entities/category-selector/ui/CategorySelector';

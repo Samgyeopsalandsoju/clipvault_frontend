@@ -14,7 +14,7 @@ import { useModifyForm } from '../hook/useModifyForm';
 import { useEffect, useState } from 'react';
 import { ModifyFormProps } from '../model/type';
 import { Trash } from 'lucide-react';
-import { ConfirmModal } from '@/shared/modal/ui/ConfirmModal';
+import { ConfirmModal } from '@/shared/ui/modal/ui/ConfirmModal';
 import { useDeleteClip } from '../hook/useDeleteClip';
 // 클립 수정 모달
 export const ModifyClip = () => {

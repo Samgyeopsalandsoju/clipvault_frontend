@@ -2,8 +2,8 @@
 
 import { Card } from '@/shared/ui/card';
 import clsx from 'clsx';
-import { useClipListStore } from '@/shared/model/clips.store';
-import { VisibilityType } from '@/shared/model/clips.type';
+import { useClipListStore } from '@/shared/data/model/clips.store';
+import { VisibilityType } from '@/shared/data/model/clips.type';
 import { VISIBILITY_LIST } from '../model/constant';
 
 export const VisibleCategory = () => {

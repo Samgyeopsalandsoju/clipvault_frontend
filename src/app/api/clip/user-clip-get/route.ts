@@ -1,6 +1,6 @@
-import { privateApiClient } from '@/shared/lib/axios';
-import { APIResponse } from '@/shared/types';
-import { IUserClip } from '@/shared/types/clip';
+import { privateApiClient } from '@/shared/core/lib/axios';
+import { APIResponse } from '@/shared/data/types';
+import { IUserClip } from '@/shared/data/types/clip';
 import { AxiosError } from 'axios';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';

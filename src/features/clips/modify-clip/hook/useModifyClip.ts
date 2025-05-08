@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { getClip, modifyClip } from '../service';
 import { useModifyModalStore } from '../model/store';
-import { useToast } from '@/shared/hooks';
+import { useToast } from '@/shared/core/hooks';
 
 export const useModifyClip = () => {
   const queryClient = useQueryClient();

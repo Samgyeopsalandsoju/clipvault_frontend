@@ -1,6 +1,6 @@
-import { apiClient } from '@/shared/lib/axios';
+import { apiClient } from '@/shared/core/lib/axios';
 import { ICreateForm } from './model/type';
-import { APIResponse } from '@/shared/types';
+import { APIResponse } from '@/shared/data/types';
 
 export const createClip = async (data: ICreateForm) => {
   const response = await apiClient.post<APIResponse<string>>('/clip/clip-post', data);

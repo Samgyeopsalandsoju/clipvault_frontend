@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { modifyCategory } from '../service';
-import { useToast } from '@/shared/hooks';
+import { useToast } from '@/shared/core/hooks';
 
 export const useModifyCategory = () => {
   const toast = useToast();

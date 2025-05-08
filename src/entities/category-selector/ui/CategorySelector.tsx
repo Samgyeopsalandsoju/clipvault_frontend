@@ -1,7 +1,7 @@
 import { Label } from '@/shared/ui/label';
 import { Select, SelectItem, SelectTrigger, SelectValue, SelectContent } from '@/shared/ui/select';
 import { ICategorySelector } from '../model/type';
-import { ICategoryResponse } from '@/shared/types';
+import { ICategoryResponse } from '@/shared/data/types';
 import { useEffect, useState } from 'react';
 import { Loader2 } from 'lucide-react';
 import { useGetCategory } from '@/features/category/category-list/hook/useGetCategory';

@@ -1,4 +1,4 @@
-import { publicApiClient } from '@/shared/lib/axios';
+import { publicApiClient } from '@/shared/core/lib/axios';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 

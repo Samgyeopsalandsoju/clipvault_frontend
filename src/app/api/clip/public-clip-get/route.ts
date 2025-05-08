@@ -1,6 +1,6 @@
-import { publicApiClient } from '@/shared/lib/axios';
-import { IHomeClip } from '@/shared/types';
-import { APIResponse } from '@/shared/types/api';
+import { publicApiClient } from '@/shared/core/lib/axios';
+import { IHomeClip } from '@/shared/data/types';
+import { APIResponse } from '@/shared/data/types/api';
 import { AxiosError } from 'axios';
 import { NextResponse } from 'next/server';
 
@@ -8,16 +8,11 @@ export async function GET() {
   try {
     console.log('public clip list GET called..');
     // api 요청
-    const { status, data } = await publicApiClient.get<APIResponse<IHomeClip[]>>(
-      '/v1/clip/public/30'
-    );
+    const { status, data } = await publicApiClient.get<APIResponse<IHomeClip[]>>('/v1/clip/public/30');
 
     // 통신 체크
     if (status !== 200 || !data) {
-      return NextResponse.json(
-        { status: 500, message: 'Failed to get public clip' },
-        { status: 500 }
-      );
+      return NextResponse.json({ status: 500, message: 'Failed to get public clip' }, { status: 500 });
     }
 
     // 결과 값 리턴

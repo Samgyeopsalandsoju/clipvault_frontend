@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { LogoutButton } from '@/features/auth/logout/ui/LogoutButton';
-import { useBreakpoint } from '@/shared/hooks';
+import { useBreakpoint } from '@/shared/core/hooks';
 import { useEffect, useState } from 'react';
 
 export const AuthNav = () => {

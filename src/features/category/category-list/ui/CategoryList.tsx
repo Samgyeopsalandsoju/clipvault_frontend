@@ -2,7 +2,7 @@
 
 import { Card } from '@/shared/ui/card';
 import { Loader } from 'lucide-react';
-import { useClipListStore } from '@/shared/model/clips.store';
+import { useClipListStore } from '@/shared/data/model/clips.store';
 import { MAX_CATEGORY_COUNT } from '../model/constant';
 import { useGetCategory } from '../hook/useGetCategory';
 import Tag from '@/entities/category-tag/ui/Tag';
