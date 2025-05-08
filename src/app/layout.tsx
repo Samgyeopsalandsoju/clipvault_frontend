@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 
-import '@/shared/styles/globals.css';
+import '@/shared/ui/styles/globals.css';
 import dynamic from 'next/dynamic';
 import { Header } from '@/widgets/header';
 import { Footer } from '@/widgets/footer';

@@ -1,4 +1,4 @@
-import { SheetContent, SheetHeader, SheetTitle } from '@/shared/ui/sheet';
+import { SheetContent, SheetHeader, SheetTitle } from '@/shared/ui/shadcn';
 
 export const NavSheet = () => {
   return (

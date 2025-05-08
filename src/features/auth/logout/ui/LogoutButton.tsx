@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from '@/shared/ui/button';
+import { Button } from '@/shared/ui/shadcn';
 import { signOut } from 'next-auth/react';
 
 export const LogoutButton = () => {

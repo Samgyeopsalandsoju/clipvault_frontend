@@ -1,8 +1,7 @@
 import { Paperclip } from 'lucide-react';
 import Link from 'next/link';
-import { Sheet, SheetTrigger } from '@/shared/ui/sheet';
+import { Sheet, SheetTrigger, Button } from '@/shared/ui/shadcn';
 import { Menu } from 'lucide-react';
-import { Button } from '@/shared/ui/button';
 import { NavSheet } from './Nav';
 import clsx from 'clsx';
 import { AuthNav } from './AuthNav';
@@ -12,9 +11,7 @@ import { Suspense } from 'react';
 // 헤더
 export const Header = () => {
   return (
-    <header
-      className={clsx('sticky top-0 w-full bg-white z-20', 'lg:px-[200px] border-b border-dotted')}
-    >
+    <header className={clsx('sticky top-0 w-full bg-white z-20', 'lg:px-[200px] border-b border-dotted')}>
       <section className="flex items-center gap-10 border-l border-r border-dotted px-5 py-4">
         <Link className="flex items-center gap-1 cursor-pointer" href="/">
           <Paperclip strokeWidth={2.4} className="w-5 h-5 text-primary" />

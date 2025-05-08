@@ -1,14 +1,11 @@
 'use client';
 
-import { Button } from '@/shared/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/card';
-import { Input } from '@/shared/ui/input';
-import { Label } from '@/shared/ui/label';
+import { Card, CardContent, CardHeader, CardTitle, Button, Input, Label } from '@/shared/ui/shadcn';
 import Link from 'next/link';
 import { useLoginForm } from '../hooks/useLoginForm';
-import { Modal } from '@/shared/ui/Modal';
 import { loginValidation } from '../model/validation';
 import { useAuthModalStore } from '../model/store';
+import { Modal } from '@/shared/ui/modal';
 
 // 로그인 폼
 export const LoginForm = () => {
@@ -65,11 +62,7 @@ export const LoginForm = () => {
             </div>
             <div className="mt-4 text-center text-sm ">
               Don&apos;t have an account?
-              <Link
-                href="/register"
-                className="underline underline-offset-4 ml-3"
-                onClick={onLoginModalClose}
-              >
+              <Link href="/register" className="underline underline-offset-4 ml-3" onClick={onLoginModalClose}>
                 Sign up
               </Link>
             </div>
