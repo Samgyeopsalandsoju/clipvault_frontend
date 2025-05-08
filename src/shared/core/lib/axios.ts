@@ -1,5 +1,5 @@
-import { getSessionToken } from '@/shared/utils/session';
 import axios, { InternalAxiosRequestConfig } from 'axios';
+import { getSessionToken } from '../utils';
 
 export const apiClient = axios.create({
   baseURL: '/api',

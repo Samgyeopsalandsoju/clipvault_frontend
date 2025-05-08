@@ -1,4 +1,4 @@
-import { Card } from '@/shared/ui/card';
+import { Card } from '@/shared/ui/shadcn';
 import { COLOR_LIST } from '../model/constant';
 import { motion } from 'framer-motion';
 

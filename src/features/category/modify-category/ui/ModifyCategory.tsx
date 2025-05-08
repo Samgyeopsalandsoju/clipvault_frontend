@@ -1,10 +1,7 @@
 'use client';
 
 import { ColorPicker } from '@/shared/color-palette/ui/ColorPicker';
-import { Button } from '@/shared/ui/button';
-import { Drawer, DrawerContent, DrawerHeader, DrawerTitle } from '@/shared/ui/drawer';
-import { Input } from '@/shared/ui/input';
-import { Label } from '@/shared/ui/label';
+import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, Input, Label, Button } from '@/shared/ui/shadcn';
 import clsx from 'clsx';
 import { useEffect, useState } from 'react';
 import { useModifyModalStore } from '../model/store';
@@ -28,7 +25,7 @@ export const ModifyCategory = () => {
   // 수정 카테고리 훅
   const { modify, isLoading } = useModifyCategory();
   // 삭제 카테고리 훅
-  const { removeCategory, isLoading: isDeleteLoading } = useDeleteCategory();
+  const { removeCategory } = useDeleteCategory();
   // 폼 데이터
   const {
     register,

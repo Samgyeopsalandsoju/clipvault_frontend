@@ -1,20 +1,15 @@
 'use client';
 
-import { Button } from '@/shared/ui/button';
-import { Drawer, DrawerContent, DrawerHeader, DrawerTitle } from '@/shared/ui/drawer';
-import { Input } from '@/shared/ui/input';
-import { Label } from '@/shared/ui/label';
-import { Textarea } from '@/shared/ui/textarea';
+import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, Input, Label, Textarea, Button } from '@/shared/ui/shadcn';
 import clsx from 'clsx';
 import { useModifyModalStore } from '../model/store';
 import { useModifyClip } from '../hook/useModifyClip';
 import { VisibilitySelector } from '@/entities/clip';
 import { CategorySelector } from '@/entities/category-selector/ui/CategorySelector';
 import { useModifyForm } from '../hook/useModifyForm';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { ModifyFormProps } from '../model/type';
 import { Trash } from 'lucide-react';
-import { ConfirmModal } from '@/shared/ui/modal/ui/ConfirmModal';
 import { useDeleteClip } from '../hook/useDeleteClip';
 // 클립 수정 모달
 export const ModifyClip = () => {
