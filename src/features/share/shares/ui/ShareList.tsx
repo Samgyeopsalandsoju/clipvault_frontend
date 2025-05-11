@@ -18,7 +18,7 @@ export const ShareList = () => {
         </div>
       ) : // 클립이 없는 경우
       list.length === 0 ? (
-        <div className="flex justify-center items-center h-[150px] text-gray-500">포크한 클립이 없습니다.</div>
+        <div className="flex justify-center items-center h-[150px] text-gray-500">쉐어한 리스트가 없습니다.</div>
       ) : (
         // 클립 있음
         <></>
