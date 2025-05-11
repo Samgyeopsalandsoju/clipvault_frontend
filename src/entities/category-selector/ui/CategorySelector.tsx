@@ -3,7 +3,7 @@ import { ICategorySelector } from '../model/type';
 import { ICategory } from '@/shared/data/types';
 import { useEffect, useState } from 'react';
 import { Loader2 } from 'lucide-react';
-import { useGetCategory } from '@/features/category/category-list/hook/useGetCategory';
+import { useGetCategory } from '@/features/category/get-catagory-list/hook/useGetCategory';
 
 export const CategorySelector = ({ initialCategory, onChange, disabled = false }: ICategorySelector) => {
   const [selectedCategory, setSelectedCategory] = useState<ICategory | null>(initialCategory || null);

@@ -1,6 +1,6 @@
 'use client';
-import { CreateCategory } from '@/features/category/create-category/ui/CreateCategory';
-import { CreateClip } from '@/features/clips/create-clip/ui/CreateClip';
+import { CreateCategory } from '@/features/category/post-category/ui/CreateCategory';
+import { CreateClip } from '@/features/clip/create-clip/ui/CreateClip';
 import {
   DropdownMenuGroup,
   DropdownMenuItem,

@@ -1,13 +1,13 @@
-import { ICreateForm } from '@/features/clips/create-clip/model/type';
+import { ModifyFormProps } from '@/features/clip/modify-clip/model/type';
 import { privateApiClient } from '@/shared/core/lib/axios';
 import { AxiosError } from 'axios';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-export async function POST(request: NextRequest) {
+export async function PATCH(request: NextRequest) {
+  const body: ModifyFormProps = await request.json();
+  console.log('body', body);
   try {
-    const body: ICreateForm = await request.json();
-
     // body 값 검증
     if (!body || typeof body !== 'object') {
       return NextResponse.json({ status: 400, message: 'Invalid JSON data' }, { status: 400 });
@@ -19,16 +19,16 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ status: 400, message: 'Missing required fields' }, { status: 400 });
     }
 
-    console.info('@ /api/clip/post 요청 데이터:', body);
+    console.info('@ /api/clip/modify 요청 데이터:', body);
 
     // api 요청
-    const { status, data } = await privateApiClient.post('/v1/clip/create', body);
+    const { status, data } = await privateApiClient.patch('/v1/clip/modify', body);
 
-    console.log('/v1/clip/create api response check ', status, data);
+    console.log('/v1/clip/modify api response check ', status, data);
 
     // 통신 체크
     if (status !== 200 || !data) {
-      return NextResponse.json({ status: 500, message: 'Failed to create clip' }, { status: 500 });
+      return NextResponse.json({ status: 500, message: 'Failed to modify clip' }, { status: 500 });
     }
 
     // 결과 값 리턴

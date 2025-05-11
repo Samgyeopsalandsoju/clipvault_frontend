@@ -5,13 +5,12 @@ import { NextResponse, NextRequest } from 'next/server';
 
 export async function DELETE(request: NextRequest, context: any) {
   const params = await context.params;
-  const { category_Id } = params;
-  if (!category_Id) return NextResponse.json({ status: 500, message: 'category_Id does not exist' }, { status: 500 });
-  console.log('category_Id', category_Id);
+  const { id } = params;
+  if (!id) return NextResponse.json({ status: 500, message: 'category_Id does not exist' }, { status: 500 });
 
   try {
     // api 요청
-    const { status, data } = await privateApiClient.delete<APIResponse<string>>(`/v1/category/delete/${category_Id}`);
+    const { status, data } = await privateApiClient.delete<APIResponse<string>>(`/v1/category/delete/${id}`);
 
     console.log('/v1/category/delete/[category_Id] api response check ', status, data.body);
 

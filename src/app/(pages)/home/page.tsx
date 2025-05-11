@@ -5,14 +5,14 @@ import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
 // 레이지 렌더링
 const CommunityClips = dynamic(() =>
-  import('@/features/clips/public-clips').then((mod) => ({
+  import('@/features/clip/public-clips').then((mod) => ({
     default: mod.CommunityClips,
   }))
 );
 
 const HomePage = () => {
   return (
-    <main className={clsx('flex-grow border-l border-r border-dotted ', 'lg:mx-[200px]')}>
+    <main>
       {/** 헤로 컴포넌트 */}
       <Hero />
       {/** 랜덤 링크 목록 */}

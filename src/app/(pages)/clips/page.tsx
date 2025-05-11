@@ -1,13 +1,12 @@
 import dynamic from 'next/dynamic';
-import { CategoryList } from '@/features/category';
-import { VisibleCategory } from '@/features/category/visible-selector/ui/VisibleCategory';
-import { UserClips } from '@/features/clips/user-clips';
 import { ClipPanel } from '@/widgets/clip/clip-panel/ui/ClipPanel';
 import { MobileCreateButton } from '@/widgets/clip/create-button/ui/MobileCreateButton';
+import { CategoryList, VisibleCategory } from '@/features/category';
+import { UserClips } from '@/features/clip/user-clips';
 
 // 모달 컴포넌트 레이지 로딩
 const ModifyClip = dynamic(
-  () => import('@/features/clips/modify-clip/ui/ModifyClip').then((mod) => ({ default: mod.ModifyClip })),
+  () => import('@/features/clip/modify-clip/ui/ModifyClip').then((mod) => ({ default: mod.ModifyClip })),
   {
     loading: () => null, // 모달이므로 로딩 UI가 필요 없음
   }
@@ -23,7 +22,7 @@ const ModifyCategory = dynamic(
 
 function ClipsPage() {
   return (
-    <main className="border-l border-r border-dotted lg:mx-[200px] p-1 pt-4 md:p-10 relative flex-grow">
+    <main className="p-1 pt-4 md:p-10 relative">
       <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pb-10">
         {/** 공개 비공개 카테고리 선택 */}
         <div className="md:sticky md:top-20  self-start flex flex-col gap-4">

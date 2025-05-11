@@ -1,3 +1,3 @@
 export * from './visible-selector/ui/VisibleCategory';
-export * from './category-list/ui/CategoryList';
-export * from './create-category/ui/CreateCategory';
+export * from './get-catagory-list/ui/CategoryList';
+export * from './post-category/ui/CreateCategory';

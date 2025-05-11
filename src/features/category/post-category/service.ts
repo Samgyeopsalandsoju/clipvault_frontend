@@ -4,6 +4,6 @@ import { ICategoryForm } from './model/type';
 
 // 카테고리 생성
 export const postCategory = async (category: ICategoryForm) => {
-  const res = await apiClient.post<APIResponse<string>>('/category/create', category);
+  const res = await apiClient.post<APIResponse<string>>('/categories/post', category);
   return res.data.body;
 };

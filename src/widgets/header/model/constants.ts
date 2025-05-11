@@ -9,9 +9,13 @@ export const NAV_ITEMS = [
     href: '/clips',
   },
   {
+    label: 'My page',
+    href: '/mypage',
+  },
+  {
     label: 'About',
     href: '/about',
   },
 ];
 
-export const PROTECTED_NAV_PATH = ['/clips'];
+export const PROTECTED_NAV_PATH = ['/clips', 'mypage'];
