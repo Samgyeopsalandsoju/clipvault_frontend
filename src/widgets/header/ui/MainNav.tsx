@@ -14,9 +14,8 @@ export const MainNav = () => {
 
   // 로그인 상태에 따른 메뉴 필터링
   const menuItems = NAV_ITEMS.filter((item) => {
-    if (PROTECTED_NAV_PATH.includes(item.href)) {
-      return session?.user;
-    }
+    const isProtected = PROTECTED_NAV_PATH.some((path) => item.href.startsWith(path));
+    if (isProtected) return session?.user;
     return true;
   });
 
@@ -39,18 +38,11 @@ export const MainNav = () => {
   return (
     <nav className="items-center gap-6 hidden md:flex md:flex-1">
       {menuItems.map((item, index) => (
-        <Link
-          className="cursor-pointer font-extralight px-2 py-1 relative"
-          href={item.href}
-          key={index}
-        >
+        <Link className="cursor-pointer font-extralight px-2 py-1 relative" href={item.href} key={index}>
           {item.label}
           {/** 현재 페이지에 맞는 라인 표시 */}
           {isActive(item.href) && (
-            <motion.div
-              layoutId="border"
-              className="border-b border-black absolute bottom-0 left-0 w-full"
-            />
+            <motion.div layoutId="border" className="border-b border-black absolute bottom-0 left-0 w-full" />
           )}
         </Link>
       ))}

@@ -10,7 +10,7 @@ export const NAV_ITEMS = [
   },
   {
     label: 'My page',
-    href: '/mypage',
+    href: '/mypage/forks',
   },
   {
     label: 'About',
@@ -18,4 +18,4 @@ export const NAV_ITEMS = [
   },
 ];
 
-export const PROTECTED_NAV_PATH = ['/clips', 'mypage'];
+export const PROTECTED_NAV_PATH = ['/clips', '/mypage'];
