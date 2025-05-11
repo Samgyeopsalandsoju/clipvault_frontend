@@ -10,7 +10,7 @@ import { useEffect, useState } from 'react';
 export const MainNav = () => {
   const { data: session, status } = useSession();
   const pathname = usePathname();
-  const isActive = (path: string) => pathname === path;
+  const isActive = (path: string) => pathname === path || pathname.startsWith(path);
 
   // 로그인 상태에 따른 메뉴 필터링
   const menuItems = NAV_ITEMS.filter((item) => {
@@ -41,7 +41,7 @@ export const MainNav = () => {
         <Link className="cursor-pointer font-extralight px-2 py-1 relative" href={item.href} key={index}>
           {item.label}
           {/** 현재 페이지에 맞는 라인 표시 */}
-          {isActive(item.href) && (
+          {isActive(item.isShowing) && (
             <motion.div layoutId="border" className="border-b border-black absolute bottom-0 left-0 w-full" />
           )}
         </Link>
