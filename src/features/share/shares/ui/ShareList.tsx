@@ -4,14 +4,22 @@ import { Card } from '@/shared/ui/shadcn';
 import { useShareLinks } from '../hook/useShareLinks';
 import { Loader } from 'lucide-react';
 import { ShareRowEntry } from '@/entities/share/ui/ShareRowEntry';
-import { IShareLinkBase } from '@/shared/data/types/share';
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
+import { IShareLink } from '../model/type';
 
 export const ShareList = () => {
-  const { isLoading, list } = useShareLinks();
+  const { isLoading, list, remove } = useShareLinks();
 
-  const renderItems = useCallback((link: IShareLinkBase) => {
-    return <ShareRowEntry {...link} key={link.link} />;
+  const onDelete = async ({ id, link }: { id: string; link: string }) => {
+    const result = window.confirm('쉐어 링크를 삭제 하시겠습니까?');
+
+    if (result) {
+      await remove({ id, link });
+    }
+  };
+
+  const renderItems = useCallback((link: IShareLink) => {
+    return <ShareRowEntry {...link} key={link.link} onDelete={() => onDelete(link)} />;
   }, []);
 
   return (

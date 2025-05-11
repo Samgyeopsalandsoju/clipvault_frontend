@@ -4,14 +4,17 @@ import { useToast } from '@/shared/core/hooks';
 import { copyLink, openInNewTab } from '@/shared/core/utils';
 import { CountDownTimer } from '@/shared/ui/CountDownTimer';
 
-export const ShareRowEntry = ({ title, link, due }: IShareRowEntry) => {
+export const ShareRowEntry = ({ title, link, due, onDelete, id }: IShareRowEntry) => {
   const toast = useToast();
 
   return (
     <div className="flex items-center bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-200 py-2 px-3 border cursor-pointer">
       {/* 북마크 아이콘과 숫자 */}
       <div className="flex items-center space-x-1 w-14">
-        <button className="flex items-center space-x-2 text-red-500">
+        <button
+          className="flex items-center space-x-2 text-red-700 hover:text-red-500 active:scale-[0.97]"
+          onClick={() => onDelete({ id, link })}
+        >
           <Ban />
         </button>
       </div>

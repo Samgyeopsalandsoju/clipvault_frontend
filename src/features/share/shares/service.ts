@@ -7,4 +7,9 @@ export const shareService = {
     const res = await apiClient.get<APIResponse<IShareLink[]>>('/shares');
     return res.data.body;
   },
+
+  deleteShareLink: async (id: string) => {
+    const response = await apiClient.delete<APIResponse<string>>(`/shares/${id}`);
+    return response;
+  },
 };
