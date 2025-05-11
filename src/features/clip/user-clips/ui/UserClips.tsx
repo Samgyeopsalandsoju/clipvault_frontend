@@ -8,6 +8,7 @@ import { useUserClips } from '../hook/useUserClips';
 import { useModifyModalStore } from '../../modify-clip/model/store';
 import { IClip } from '@/shared/data/types';
 import { Card } from '@/shared/ui/shadcn';
+import { ShareButton } from '@/features/share/export/ui/ShareButton';
 
 // 유저 클립 리스트
 export const UserClips = () => {
@@ -59,6 +60,7 @@ export const UserClips = () => {
         // 클립 있음
         <ul className="flex flex-col gap-3">{clips.map((clip) => renderItem(clip))}</ul>
       )}
+      <ShareButton list={clips} />
     </Card>
   );
 };
