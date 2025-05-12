@@ -1,5 +1,5 @@
-import { useMutation } from '@tanstack/react-query';
-import { generateDeletePresignedUrl, generatePutPresignedUrl } from '../../services';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import { generateDeletePresignedUrl, generateGetPresignedUrl, generatePutPresignedUrl } from '../../services';
 
 export const usePresignedUrl = () => {
   // preSignedURL put 링크 생성
@@ -8,11 +8,11 @@ export const usePresignedUrl = () => {
     onSuccess: () => {},
   });
 
-  // // preSignedURL get 링크 생성
-  // const generateGetUrlMutation = useMutation({
-  //   mutationFn: generateGetPresignedUrl,
-  //   onSuccess: () => {},
-  // });
+  // preSignedURL get 랑크 생성
+  const generateGetUrlMutation = useMutation({
+    mutationFn: generateGetPresignedUrl,
+    onSuccess: () => {},
+  });
 
   // //  preSignedURL delete 링크 생성
   const generateDeleteUrlMutation = useMutation({
@@ -22,7 +22,7 @@ export const usePresignedUrl = () => {
 
   return {
     generatePutUrl: generatePutUrlMutation.mutateAsync,
-    // generateGetUrl: generateGetUrlMutation.mutateAsync,
+    generateGetUrl: generateGetUrlMutation.mutateAsync,
     generateDeleteUrl: generateDeleteUrlMutation.mutateAsync,
   };
 };

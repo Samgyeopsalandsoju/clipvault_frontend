@@ -14,41 +14,39 @@ import { copyLink } from '@/shared/core/utils';
 import { ExpiryDateSelector } from './ExpiryDateSelector';
 
 export const ShareModal = ({ isOpen, onClose, list }: { isOpen: boolean; onClose: () => void; list: IClip[] }) => {
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    getValues,
-    trigger,
-    reset,
-    formState: { errors },
-  } = useForm<IShareLinkBase>();
+  const { register, handleSubmit, setValue, trigger, reset } = useForm<IShareLinkBase>();
   const router = useRouter();
-  const { generatePutUrl } = usePresignedUrl();
+
+  // state
   const [shareLink, setShareLink] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [showingDue, setShowingDue] = useState<string>('7');
+  // hook
+  const { generatePutUrl } = usePresignedUrl();
   const { postShareLink } = usePostShareLink();
   const { upload } = useS3();
+
   const toast = useToast();
 
   const handleSelect = ({ days, showingDue }: { days: string; showingDue: string }): void => {
     setShowingDue(showingDue);
     setValue('due', days);
   };
-
+  // onSubmit
   const onSubmit = async (data: IShareLinkBase) => {
     if (isLoading) return;
 
     setIsLoading(true);
 
     try {
-      const { blob, fileName, url } = prepareFileData({ list, title: getValues('title'), due: getValues('due') });
-      const { body, status } = await postShareLink({ ...data, link: url });
+      // 먼저 데이터를 파일로 업로드 하기 위한 준비 단계
+      const { blob, fileName, url } = prepareFileData({ list, title: data.title, due: data.due });
+      const { body } = await postShareLink({ ...data, link: url });
 
+      // 4001은 업로드 성공
       if (body === '4001') {
         const postToS3Url = await generatePutUrl({ fileName, fileType: blob.type });
-        const result = await upload({ file: blob, fileType: blob.type, url: postToS3Url });
+        await upload({ file: blob, fileType: blob.type, url: postToS3Url });
         setShareLink(url);
       }
       setIsLoading(false);

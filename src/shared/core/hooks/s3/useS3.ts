@@ -1,12 +1,10 @@
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import { v4 as uuidv4 } from 'uuid';
-import { useToast } from '../useToast';
 import { IClip } from '@/shared/data/types';
 import { uploadFile } from '../../services';
 
-export const useS3 = (url?: string) => {
-  const toast = useToast();
-  // 파일 생성에 필요한 데이터 생성
+export const useS3 = () => {
+  // 파일 생성에 필요한 데이터 생성 helper 함수
   const createUploadFileInfo = (clips: IClip[], title: string, due: string) => {
     const id = uuidv4();
     return {
@@ -35,16 +33,8 @@ export const useS3 = (url?: string) => {
     onSuccess: () => {},
   });
 
-  // const getFileQuery = useQuery({
-  //   queryKey: ['getShareFile', url],
-  //   queryFn: () => fetchShareFileData({ url: url! }),
-  //   enabled: !!url,
-  // });
-
   return {
     prepareFileData: prepareFileData,
-    // fileData: getFileQuery.data,
-    // isFetching: getFileQuery.isPending,
     upload: uploadFileMutation.mutateAsync,
   };
 };

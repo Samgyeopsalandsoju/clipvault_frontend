@@ -8,11 +8,13 @@ export const useShareLinks = () => {
   const { generateDeleteUrl } = usePresignedUrl();
   const toast = useToast();
 
+  // get share links
   const getShareLinks = useQuery({
     queryKey: ['share-links'],
     queryFn: shareService.getShareLinks,
   });
 
+  // delete share links
   const deleteShareLinksMutation = useMutation({
     mutationFn: async ({ id, link }: { id: string; link: string }) => {
       const filename = link.split('/').pop();
@@ -34,10 +36,10 @@ export const useShareLinks = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['share-links'] });
-      toast.success('Successfully delete share link!');
+      toast.success('쉐어링크가 삭제되었습니다.');
     },
     onError: () => {
-      toast.error('Failed to delete is. try later..');
+      toast.error('삭제에 실패하였습니다.');
     },
   });
 

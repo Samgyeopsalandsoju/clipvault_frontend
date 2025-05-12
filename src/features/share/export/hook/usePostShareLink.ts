@@ -10,7 +10,7 @@ export const usePostShareLink = () => {
     mutationFn: uploadShareLink,
     onSuccess: ({ body, status }) => {
       if (status) {
-        toast.success('Successfully create share link!');
+        toast.success('쉐어 링크를 생성하였습니다!');
       } else {
         const { message } = addItemWithLimit(body);
         toast.error(message);

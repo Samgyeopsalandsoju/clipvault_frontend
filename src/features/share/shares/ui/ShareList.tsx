@@ -10,6 +10,7 @@ import { IShareLink } from '../model/type';
 export const ShareList = () => {
   const { isLoading, list, remove } = useShareLinks();
 
+  // 쉐어 링크 삭제
   const onDelete = async ({ id, link }: { id: string; link: string }) => {
     const result = window.confirm('쉐어 링크를 삭제 하시겠습니까?');
 

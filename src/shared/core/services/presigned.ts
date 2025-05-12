@@ -17,20 +17,20 @@ export const generatePutPresignedUrl = async ({ fileName, fileType }: { fileName
   return response.data.body;
 };
 
-// export const generateGetPresignedUrl = async (fileName: string) => {
-//   const key = `links/${fileName}.json`;
-//   const response = await apiClient.post<APIResponse<string>>(
-//     `/presigned/get`,
-//     { key },
-//     {
-//       headers: {
-//         'Content-Type': 'application/json',
-//       },
-//     }
-//   );
+export const generateGetPresignedUrl = async (fileName: string) => {
+  const key = `links/${fileName}.json`;
+  const response = await apiClient.post<APIResponse<string>>(
+    `/presigned/get`,
+    { key },
+    {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+  );
 
-//   return response.data.body;
-// };
+  return response.data.body;
+};
 
 export const generateDeletePresignedUrl = async (fileName: string) => {
   const key = `links/${fileName}.json`;
