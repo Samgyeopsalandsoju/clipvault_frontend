@@ -2,6 +2,7 @@ import { ExternalLink, Copy, Star } from 'lucide-react';
 import { IClipEntry } from '../model/type';
 import { useToast } from '@/shared/core/hooks';
 import { copyLink, openInNewTab } from '@/shared/core/utils';
+import { ForkBadge } from '@/shared/ui/ForkBadge';
 
 export const ClipRowEntry = ({ forkedCount, link, title, onClick }: IClipEntry) => {
   const toast = useToast();
@@ -23,10 +24,7 @@ export const ClipRowEntry = ({ forkedCount, link, title, onClick }: IClipEntry) 
         {/* 버튼 섹션 */}
         <div className="flex space-x-1 ml-2">
           {/* 포크 카운터 - 다른 사용자들이 몇 번 포크했는지 표시 */}
-          <div className="flex items-center px-2 py-1 bg-gray-100 rounded-md">
-            <Star size={14} className="text-gray-500 mr-1.5" fill="currentColor" />
-            <span className="text-xs font-medium text-gray-700">{forkedCount}</span>
-          </div>
+          <ForkBadge forkedCount={forkedCount} isForked={true} />
           {/* 복사 버튼 */}
           <div
             className="p-1.5 rounded-full text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition-colors cursor-pointer"
