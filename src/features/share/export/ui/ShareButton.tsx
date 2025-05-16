@@ -20,13 +20,14 @@ export const ShareButton = ({ list }: { list: IClip[] }) => {
           <TooltipTrigger asChild>
             <div
               className={clsx(
-                'fixed bottom-20 right-20 rounded-full border w-8 h-8',
-                'flex items-center justify-center text-gray-400',
-                'hover:text-gray-700 cursor-pointer shadow-md active:scale-[0.97]'
+                // 'fixed bottom-20 right-20 rounded-full border w-8 h-8',
+                // 'flex items-center justify-center text-gray-400',
+                'bg-transparent text-gray-400 flex items-center justify-center',
+                'hover:text-gray-700 cursor-pointer active:scale-[0.97]'
               )}
               onClick={() => setIsOpen(true)}
             >
-              <Share size={18} />
+              <Share size={15} />
             </div>
           </TooltipTrigger>
           <TooltipContent>

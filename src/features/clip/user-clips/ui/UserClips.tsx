@@ -45,7 +45,10 @@ export const UserClips = () => {
   return (
     <Card className="p-2 pb-8">
       <div className="flex justify-between p-2">
-        <h3 className="text-base md:text-lg font-semibold">클립 리스트</h3>
+        <div className="flex gap-2">
+          <h3 className="text-base md:text-lg font-semibold">클립 리스트</h3>
+          <ShareButton list={clips} />
+        </div>
         <span className="text-sm text-gray-400">{data?.length}/100</span>
       </div>
       {/** 로딩 중 인 경우 */}
@@ -60,7 +63,6 @@ export const UserClips = () => {
         // 클립 있음
         <ul className="flex flex-col gap-3">{clips.map((clip) => renderItem(clip))}</ul>
       )}
-      <ShareButton list={clips} />
     </Card>
   );
 };
