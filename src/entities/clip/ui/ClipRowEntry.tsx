@@ -1,5 +1,4 @@
 import { IClipEntry } from '../model/type';
-import { useToast } from '@/shared/core/hooks';
 import { ForkBadge } from '@/shared/ui/ForkBadge';
 import { ExternalLinkButton } from '@/shared/ui/button/ExternalLinkButton';
 import { CopyButton } from '@/shared/ui/button/CopyButton';

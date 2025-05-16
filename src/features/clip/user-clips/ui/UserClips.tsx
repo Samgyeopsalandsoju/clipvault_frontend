@@ -27,7 +27,7 @@ export const UserClips = () => {
 
   // 클립 클릭 이벤트 핸들러
   const handleClick = useCallback(
-    (id: string) => {
+    (id: number) => {
       setIsOpen(true);
       setClipId(id);
     },
