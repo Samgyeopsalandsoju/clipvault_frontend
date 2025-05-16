@@ -34,10 +34,10 @@ export const CategoryList = memo(() => {
         <div className="flex justify-center items-center h-[150px] text-gray-500">카테고리가 없습니다.</div>
       ) : (
         <div className="flex flex-col gap-3">
-          <CategoryChip name="all" color="999" id="all" />
+          <CategoryChip name="all" color="999" id="all" showEditButton={false} />
           {categories &&
             categories.map((category) => {
-              return <CategoryChip key={category.id} {...category} />;
+              return <CategoryChip key={category.id} {...category} showEditButton={true} />;
             })}
         </div>
       )}

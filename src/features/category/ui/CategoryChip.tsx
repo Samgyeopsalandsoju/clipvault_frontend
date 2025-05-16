@@ -1,9 +1,9 @@
-import { ICategory } from '@/shared/data/types';
 import { BasicChip } from '@/shared/ui/category/BasicChip';
 import { useModifyModalStore } from '../modify-category/model/store';
 import { useClipListStore } from '@/shared/data/model/clips.store';
+import { ICategoryChip } from '../model/type';
 
-export const CategoryChip = ({ color, id, name }: ICategory) => {
+export const CategoryChip = ({ color, id, name, showEditButton }: ICategoryChip) => {
   const setIsOpen = useModifyModalStore((state) => state.setIsOpen);
   const setModifyCategory = useModifyModalStore((state) => state.setCategory);
   const { setCategory: setCategoryFilter } = useClipListStore();
@@ -23,7 +23,7 @@ export const CategoryChip = ({ color, id, name }: ICategory) => {
     <BasicChip
       name={name}
       color={color}
-      showEditButton={true}
+      showEditButton={showEditButton}
       onEditClick={handleEdit}
       onClick={handleCategoryFilter}
     />
