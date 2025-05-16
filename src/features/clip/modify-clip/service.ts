@@ -7,12 +7,12 @@ export const modifyClip = async (data: ModifyFormProps) => {
   return response.data.body;
 };
 
-export const getClip = async (id: string) => {
+export const getClip = async (id: number) => {
   const response = await apiClient.get<APIResponse<IClip>>(`/clips/${id}`);
   return response.data.body;
 };
 
-export const deleteClip = async (id: string) => {
+export const deleteClip = async (id: number) => {
   const response = await apiClient.delete<APIResponse<string>>(`/clips/${id}`);
   return response.data.body;
 };

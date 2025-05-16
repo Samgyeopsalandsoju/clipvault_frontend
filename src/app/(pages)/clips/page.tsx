@@ -1,8 +1,9 @@
 import dynamic from 'next/dynamic';
 import { ClipPanel } from '@/widgets/clip/clip-panel/ui/ClipPanel';
 import { MobileCreateButton } from '@/widgets/clip/create-button/ui/MobileCreateButton';
-import { CategoryList, VisibleCategory } from '@/features/category';
+import { VisibleCategory } from '@/features/category';
 import { UserClips } from '@/features/clip/user-clips';
+import { CategoryList } from '@/features/category/get-categories';
 
 // 모달 컴포넌트 레이지 로딩
 const ModifyClip = dynamic(

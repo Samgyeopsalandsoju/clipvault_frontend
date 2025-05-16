@@ -5,12 +5,12 @@ import clsx from 'clsx';
 import { useModifyModalStore } from '../model/store';
 import { useModifyClip } from '../hook/useModifyClip';
 import { VisibilitySelector } from '@/entities/clip';
-import { CategorySelector } from '@/entities/category-selector/ui/CategorySelector';
 import { useModifyForm } from '../hook/useModifyForm';
 import { useEffect } from 'react';
 import { ModifyFormProps } from '../model/type';
 import { Trash } from 'lucide-react';
 import { useDeleteClip } from '../hook/useDeleteClip';
+import { CategorySelector } from '@/features/category/category-selector/ui/CategorySelector';
 // 클립 수정 모달
 export const ModifyClip = () => {
   // 모달 오픈
@@ -51,9 +51,9 @@ export const ModifyClip = () => {
 
   // 클립 삭제
   const handleDelete = () => {
-    const result = window.confirm('해당 클립을 삭제하시겠습니까?');
-    if (result) {
-      deleteClip(clip?.id || '');
+    if (!clip) return;
+    if (window.confirm('해당 클립을 삭제하시겠습니까?')) {
+      deleteClip(clip.id);
       setIsOpen(false);
       reset();
     }

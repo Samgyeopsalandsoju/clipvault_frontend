@@ -9,7 +9,7 @@ import { useState } from 'react';
 import { VisibilityType } from '@/shared/data/model/clips.type';
 import { useCreateClip } from '../hook/useCreateClip';
 import { IClipForm } from '../model/type';
-import { CategorySelector } from '@/entities/category-selector/ui/CategorySelector';
+import { CategorySelector } from '@/features/category/category-selector/ui/CategorySelector';
 
 // 클립 생성 모달
 export const CreateClip = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {

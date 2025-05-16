@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
 // 레이지 렌더링
 const CommunityClips = dynamic(() =>
-  import('@/widgets/list/community').then((mod) => ({
+  import('@/features/clip/public-clips').then((mod) => ({
     default: mod.CommunityClips,
   }))
 );
