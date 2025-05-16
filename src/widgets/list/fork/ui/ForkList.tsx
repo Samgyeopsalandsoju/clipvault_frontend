@@ -13,11 +13,11 @@ export const ForkList = () => {
   // 메모이 제이션
   const renderItem = useCallback(
     (clip: IFork) => {
-      return <ForkRowEntry {...clip} key={clip.id} />;
+      return <ForkRowEntry {...clip} key={clip.clipId} />;
     },
     [forks]
   );
-
+  console.log(forks);
   return (
     <Card className="p-2 pb-8">
       <div className="flex justify-between p-2">

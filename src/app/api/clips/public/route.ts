@@ -6,7 +6,6 @@ import { NextResponse } from 'next/server';
 
 export async function GET() {
   try {
-    console.log('public clip list GET called..');
     // api 요청
     const { status, data } = await publicApiClient.get<APIResponse<IClip[]>>('/v1/clip/public/30');
 

@@ -1,4 +1,4 @@
-import { Bookmark, ExternalLink, Copy, Star } from 'lucide-react';
+import { ExternalLink, Copy, Star } from 'lucide-react';
 import { IClipEntry } from '../model/type';
 import { useToast } from '@/shared/core/hooks';
 import { copyLink, openInNewTab } from '@/shared/core/utils';

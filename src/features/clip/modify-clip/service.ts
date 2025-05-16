@@ -8,15 +8,11 @@ export const modifyClip = async (data: ModifyFormProps) => {
 };
 
 export const getClip = async (id: string) => {
-  const response = await apiClient.get<APIResponse<IClip>>(`/clips/${id}`, {
-    params: { id },
-  });
+  const response = await apiClient.get<APIResponse<IClip>>(`/clips/${id}`);
   return response.data.body;
 };
 
 export const deleteClip = async (id: string) => {
-  const response = await apiClient.delete<APIResponse<string>>(`/clips/${id}`, {
-    params: { id },
-  });
+  const response = await apiClient.delete<APIResponse<string>>(`/clips/${id}`);
   return response.data.body;
 };
