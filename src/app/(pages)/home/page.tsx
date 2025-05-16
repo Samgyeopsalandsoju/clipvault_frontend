@@ -1,11 +1,10 @@
-import { Hero } from '@/widgets/hero';
-import clsx from 'clsx';
+import { Hero } from '@/widgets/hero/home';
 import { Loader } from 'lucide-react';
 import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
 // 레이지 렌더링
 const CommunityClips = dynamic(() =>
-  import('@/widgets/clips-list/community').then((mod) => ({
+  import('@/widgets/list/community').then((mod) => ({
     default: mod.CommunityClips,
   }))
 );

@@ -28,6 +28,7 @@ export const LoginForm = () => {
                   id="email"
                   type="email"
                   required
+                  tabIndex={1}
                   {...register('mail', {
                     required: loginValidation.mail.required,
                     pattern: loginValidation.mail.pattern,
@@ -40,6 +41,7 @@ export const LoginForm = () => {
                   <Link
                     href="/forgot-password"
                     className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
+                    tabIndex={5}
                   >
                     Forgot your password?
                   </Link>
@@ -47,22 +49,28 @@ export const LoginForm = () => {
                 <Input
                   id="password"
                   type="password"
+                  tabIndex={2}
                   required
                   {...register('password', {
                     required: loginValidation.password.required,
                   })}
                 />
               </div>
-              <Button type="submit" className="w-full">
+              <Button type="submit" tabIndex={3} className="w-full">
                 Login
               </Button>
-              <Button variant="outline" className="w-full">
+              <Button variant="outline" tabIndex={4} className="w-full">
                 Login with Google
               </Button>
             </div>
-            <div className="mt-4 text-center text-sm ">
+            <div className="mt-4 text-center text-sm">
               Don&apos;t have an account?
-              <Link href="/register" className="underline underline-offset-4 ml-3" onClick={onLoginModalClose}>
+              <Link
+                tabIndex={6}
+                href="/register"
+                className="underline underline-offset-4 ml-3"
+                onClick={onLoginModalClose}
+              >
                 Sign up
               </Link>
             </div>
