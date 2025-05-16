@@ -70,10 +70,9 @@ export const ModifyCategory = () => {
       },
     });
   };
-
+  // 카레고리 삭제
   const handleDelete = () => {
-    const result = window.confirm('해당 카테고리에 포함된 클립들도 전부 삭제됩니다.');
-    if (result) {
+    if (window.confirm('해당 카테고리에 포함된 클립들도 전부 삭제됩니다.')) {
       removeCategory(category?.id || '');
       reset();
       setIsOpen(false);

@@ -10,8 +10,6 @@ import { ImportCategories } from './ImportCategories';
 import { useClip } from '../hook/useClip';
 import { Card } from '@/shared/ui/shadcn';
 import { CountDownTimer } from '@/shared/ui/CountDownTimer';
-import Link from 'next/link';
-import clsx from 'clsx';
 import { useClipStore } from '../model/store';
 
 interface IShareLink {

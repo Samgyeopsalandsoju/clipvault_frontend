@@ -6,7 +6,7 @@ import { MAX_CATEGORY_COUNT } from '../model/constant';
 import { useGetCategory } from '../hook/useGetCategory';
 import { memo } from 'react';
 import { Card } from '@/shared/ui/shadcn';
-import { CategoryChip } from '@/shared/ui/category/CategoryChip';
+import { CategoryChip } from '../../ui/CategoryChip';
 
 // 메모이제이션으로 최적화
 export const CategoryList = memo(() => {
@@ -34,12 +34,10 @@ export const CategoryList = memo(() => {
         <div className="flex justify-center items-center h-[150px] text-gray-500">카테고리가 없습니다.</div>
       ) : (
         <div className="flex flex-col gap-3">
-          <CategoryChip name="All" onClick={() => handleClickCategory('all')} id="all" />
+          <CategoryChip name="all" color="999" id="all" />
           {categories &&
             categories.map((category) => {
-              return (
-                <CategoryChip key={category.id} {...category} onClick={() => handleClickCategory(category.name)} />
-              );
+              return <CategoryChip key={category.id} {...category} />;
             })}
         </div>
       )}

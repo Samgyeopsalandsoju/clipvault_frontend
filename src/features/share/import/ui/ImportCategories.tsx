@@ -4,7 +4,7 @@ import { memo } from 'react';
 import { Card } from '@/shared/ui/shadcn';
 import { ICategory } from '@/shared/data/types';
 import { MAX_CATEGORY_COUNT } from '@/shared/data/constants';
-import { ShareTag } from '@/entities/share/ui/ShareTag';
+import { ShareCategoryChip } from './ShareCategoryChip';
 
 // 메모이제이션으로 최적화
 export const ImportCategories = memo(
@@ -26,10 +26,23 @@ export const ImportCategories = memo(
           <div className="flex justify-center items-center h-[150px] text-gray-500">카테고리가 없습니다.</div>
         ) : (
           <div className="flex flex-col gap-3">
-            <ShareTag name="All" onClick={() => handleClickCategory('')} id="all" />
+            <ShareCategoryChip
+              name="all"
+              color="999"
+              onClick={() => handleClickCategory('')}
+              id="all"
+              showEditButton={false}
+            />
             {categories &&
               categories.map((category) => {
-                return <ShareTag key={category.id} {...category} onClick={() => handleClickCategory(category.id)} />;
+                return (
+                  <ShareCategoryChip
+                    key={category.id}
+                    {...category}
+                    onClick={() => handleClickCategory(category.id)}
+                    showEditButton={true}
+                  />
+                );
               })}
           </div>
         )}

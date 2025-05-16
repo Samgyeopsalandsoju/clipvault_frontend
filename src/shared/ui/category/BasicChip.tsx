@@ -1,16 +1,16 @@
+import { useClipListStore } from '@/shared/data/model/clips.store';
 import clsx from 'clsx';
 import { PenLine } from 'lucide-react';
 
 export interface BasicTagProps {
-  id: string;
   name: string;
   color?: string;
-  onClick?: () => void;
   showEditButton?: boolean;
   onEditClick?: (e: React.MouseEvent) => void;
+  onClick?: () => void;
 }
 
-export const CategoryChip = ({ name, color, onClick, onEditClick, showEditButton }: BasicTagProps) => {
+export const BasicChip = ({ name, color, onEditClick, showEditButton, onClick }: BasicTagProps) => {
   const handleEditClick = (e: React.MouseEvent) => {
     if (onEditClick) {
       e.preventDefault();
