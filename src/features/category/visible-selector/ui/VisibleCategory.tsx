@@ -18,8 +18,8 @@ export const VisibleCategory = () => {
         <div
           key={idx}
           className={clsx(
-            'py-1 px-4 md:text-sm rounded-[4px] shadow-md cursor-pointer',
-            visibility === item && 'bg-[#000] text-white'
+            'py-1 px-4 rounded-[4px] shadow-md cursor-pointer',
+            visibility === item ? 'bg-[#000] text-white' : 'bg-white text-black'
           )}
           onClick={() => handleClick(item)}
         >
