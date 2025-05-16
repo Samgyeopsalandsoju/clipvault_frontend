@@ -47,7 +47,7 @@ export const UserClips = () => {
       <div className="flex justify-between p-2">
         <div className="flex gap-2">
           <h3 className="text-base md:text-lg font-semibold">클립 리스트</h3>
-          <ShareButton list={clips} />
+          {clips.length > 0 && <ShareButton list={clips} />}
         </div>
         <span className="text-sm text-gray-400">{data?.length}/100</span>
       </div>
