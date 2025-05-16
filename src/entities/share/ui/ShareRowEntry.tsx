@@ -1,12 +1,10 @@
-import { Ban, Copy, ExternalLink } from 'lucide-react';
+import { Ban } from 'lucide-react';
 import { IShareRowEntry } from '../model/type';
-import { useToast } from '@/shared/core/hooks';
-import { copyLink, openInNewTab } from '@/shared/core/utils';
 import { CountDownTimer } from '@/shared/ui/CountDownTimer';
+import { ExternalLinkButton } from '@/shared/ui/button/ExternalLinkButton';
+import { CopyButton } from '@/shared/ui/button/CopyButton';
 
 export const ShareRowEntry = ({ title, link, due, onDelete, id }: IShareRowEntry) => {
-  const toast = useToast();
-
   return (
     <div className="flex items-center bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-200 py-2 px-3 border cursor-pointer">
       {/* 북마크 아이콘과 숫자 */}
@@ -31,26 +29,9 @@ export const ShareRowEntry = ({ title, link, due, onDelete, id }: IShareRowEntry
       {/* 버튼 섹션 */}
       <div className="flex items-center gap-2">
         {/* 복사 버튼 */}
-        <div
-          className="flex items-center justify-center p-1.5 text-gray-600 hover:text-blue-600 transition-colors rounded-lg hover:bg-blue-50"
-          onClick={(e) =>
-            copyLink(
-              e,
-              link,
-              () => toast.success('링크가 복사되었습니다.'),
-              () => toast.error('링크 복사에 실패하였습니다. 잠시후 시도해주세요.')
-            )
-          }
-        >
-          <Copy size={16} />
-        </div>
+        <CopyButton link={link} />
         {/* 바로가기 버튼 */}
-        <div
-          className="flex items-center justify-center p-1.5 text-gray-600 hover:text-blue-600 transition-colors rounded-lg hover:bg-blue-50"
-          onClick={(e) => openInNewTab(link)}
-        >
-          <ExternalLink size={16} />
-        </div>
+        <ExternalLinkButton link={link} />
       </div>
     </div>
   );

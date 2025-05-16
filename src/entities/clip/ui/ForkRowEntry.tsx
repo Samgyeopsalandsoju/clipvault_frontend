@@ -1,4 +1,3 @@
-import { useToast } from '@/shared/core/hooks';
 import { IFork } from '@/shared/data/types/fork';
 import { DeleteForkButton } from '@/features/clip-fork';
 import { CopyButton } from '@/shared/ui/button/CopyButton';
