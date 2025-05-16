@@ -1,13 +1,12 @@
 import { privateApiClient } from '@/shared/core/lib/axios';
-import { APIResponse } from '@/shared/data/types';
-import { ICategoryResponse } from '@/shared/data/types/category';
+import { APIResponse, ICategory } from '@/shared/data/types';
 import { AxiosError } from 'axios';
 import { NextResponse } from 'next/server';
 
 export async function GET() {
   try {
     // api 요청
-    const { status, data } = await privateApiClient.get<APIResponse<ICategoryResponse[]>>('/v1/category/list');
+    const { status, data } = await privateApiClient.get<APIResponse<ICategory[]>>('/v1/category/list');
 
     // 통신 체크
     if (status !== 200 || !data) {

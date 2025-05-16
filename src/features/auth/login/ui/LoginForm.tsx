@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useLoginForm } from '../hooks/useLoginForm';
 import { loginValidation } from '../model/validation';
 import { useAuthModalStore } from '../model/store';
-import { Modal } from '@/shared/ui/modal';
+import { Modal } from '@/shared/ui/modal/Modal';
 
 // 로그인 폼
 export const LoginForm = () => {

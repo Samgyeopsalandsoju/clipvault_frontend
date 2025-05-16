@@ -1,4 +1,3 @@
-import { Modal } from '@/shared/ui/modal';
 import { Button, Card, CardContent, CardHeader, CardTitle, Input } from '@/shared/ui/shadcn';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -12,6 +11,7 @@ import { useS3 } from '@/shared/core/hooks/s3/useS3';
 import { Copy } from 'lucide-react';
 import { copyLink } from '@/shared/core/utils';
 import { ExpiryDateSelector } from './ExpiryDateSelector';
+import { Modal } from '@/shared/ui/modal/Modal';
 
 export const ShareModal = ({ isOpen, onClose, list }: { isOpen: boolean; onClose: () => void; list: IClip[] }) => {
   const { register, handleSubmit, setValue, trigger, reset } = useForm<IShareLinkBase>();

@@ -1,4 +1,4 @@
-import { ICreateForm } from '@/features/clip/create-clip/model/type';
+import { IClipForm } from '@/features/clip/create-clip/model/type';
 import { privateApiClient } from '@/shared/core/lib/axios';
 import { AxiosError } from 'axios';
 import { NextResponse } from 'next/server';
@@ -6,7 +6,7 @@ import type { NextRequest } from 'next/server';
 
 export async function POST(request: NextRequest) {
   try {
-    const body: ICreateForm = await request.json();
+    const body: IClipForm = await request.json();
 
     // body 값 검증
     if (!body || typeof body !== 'object') {

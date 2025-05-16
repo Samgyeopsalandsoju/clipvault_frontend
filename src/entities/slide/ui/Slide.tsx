@@ -1,6 +1,6 @@
-import { generateModernTagColors } from '@/shared/utils';
 import { motion } from 'framer-motion';
 import { ISlideProps } from '../model/type';
+import { generateModernTagColors } from '@/shared/core/utils';
 
 export const Slide = ({ category, forkedCount, id, title, cardWidth, cardHeight }: ISlideProps) => {
   const { background, text, border } = generateModernTagColors(+category.color);

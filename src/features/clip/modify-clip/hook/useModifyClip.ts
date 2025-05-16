@@ -10,7 +10,7 @@ export const useModifyClip = () => {
 
   const getClipInfoQuery = useQuery({
     queryKey: ['clip', clipId],
-    queryFn: () => getClip(clipId ?? ''),
+    queryFn: () => getClip(clipId ?? 0),
     enabled: !!clipId,
   });
 

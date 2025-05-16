@@ -1,6 +1,6 @@
-import { IHomeClip } from '@/shared/data/types/clip';
+import { IClip } from '@/shared/data/types/clip';
 
-export interface ISlideProps extends IHomeClip {
+export interface ISlideProps extends IClip {
   cardWidth: number;
   cardHeight: number;
 }

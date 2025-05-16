@@ -1,7 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { createClip } from '../service';
 import { useToast } from '@/shared/core/hooks';
-import { ICreateForm } from '../model/type';
 
 export const useCreateClip = () => {
   const queryClient = useQueryClient();

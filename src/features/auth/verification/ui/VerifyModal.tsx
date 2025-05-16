@@ -1,22 +1,12 @@
-import {
-  InputOTP,
-  InputOTPGroup,
-  InputOTPSeparator,
-  InputOTPSlot,
-  REGEXP_ONLY_DIGITS,
-} from '@/shared/ui/input-otp';
-import { Modal } from '@/shared/ui/Modal';
+import { InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot, REGEXP_ONLY_DIGITS } from '@/shared/ui/shadcn';
 import { Loader2 } from 'lucide-react';
 import { VerifyModalProps } from '../model/type';
 import { useEffect, useState } from 'react';
 import { useVerificationStore, useVerifyStore } from '../model/store';
 import { useCheckVerifyCode } from '../hooks/useCheckVerifyCode';
+import { Modal } from '@/shared/ui/modal/Modal';
 
-export const VerifyModal = ({
-  isOpen,
-  onClose,
-  isLoading: isSendCodeLoading,
-}: VerifyModalProps) => {
+export const VerifyModal = ({ isOpen, onClose, isLoading: isSendCodeLoading }: VerifyModalProps) => {
   const [authCode, setAuthCode] = useState<string>('');
   // 인증 코드 저장 스토어
   const { mail, authKey, reset } = useVerificationStore.getState();

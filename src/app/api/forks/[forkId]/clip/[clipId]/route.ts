@@ -3,9 +3,9 @@ import { AxiosError } from 'axios';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-export async function DELETE(_: NextRequest, { params }: { params: { forkId: string; clipId: string } }) {
+export async function DELETE(request: NextRequest, context: any) {
   try {
-    const { forkId, clipId } = params;
+    const { forkId, clipId } = context.params;
     if (!forkId && clipId)
       return NextResponse.json({ status: 500, message: 'clip_id does not exist' }, { status: 500 });
 

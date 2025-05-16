@@ -1,4 +1,4 @@
-import { IUserClip } from '@/shared/data/types/clip';
+import { IClip } from '@/shared/data/types/clip';
 import { create } from 'zustand';
 import { ClipListStoreProps, VisibilityType } from './clips.type';
 
@@ -9,7 +9,7 @@ export const useClipListStore = create<ClipListStoreProps>((set, get) => ({
   category: 'all', // 카테고리
 
   // 클립 리스트 설정
-  setClips: (clips: IUserClip[]) => set({ originalClips: clips, filteredClips: clips }),
+  setClips: (clips: IClip[]) => set({ originalClips: clips, filteredClips: clips }),
 
   // 클립 리스트 필터링
   setVisibility: (visibility: VisibilityType) => {

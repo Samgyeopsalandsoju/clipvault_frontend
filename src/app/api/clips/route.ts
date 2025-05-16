@@ -1,6 +1,5 @@
 import { privateApiClient } from '@/shared/core/lib/axios';
-import { APIResponse } from '@/shared/data/types';
-import { IUserClip } from '@/shared/data/types/clip';
+import { APIResponse, IClip } from '@/shared/data/types';
 import { AxiosError } from 'axios';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
@@ -8,7 +7,7 @@ import type { NextRequest } from 'next/server';
 export async function GET(request: NextRequest) {
   try {
     // api 요청
-    const { status, data } = await privateApiClient.get<APIResponse<IUserClip[]>>('/v1/clip/list');
+    const { status, data } = await privateApiClient.get<APIResponse<IClip[]>>('/v1/clip/list');
 
     // 통신 체크
     if (status !== 200 || !data) {

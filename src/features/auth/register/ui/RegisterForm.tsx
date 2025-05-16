@@ -1,13 +1,10 @@
 'use client';
 
-import { Button } from '@/shared/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/card';
-import { Input } from '@/shared/ui/input';
-import { Label } from '@/shared/ui/label';
 import { registerValidation } from '../model/validation';
 import { useRegisterForm } from '../hooks/useRegisterForm';
 import { useState } from 'react';
 import { VerifyButton } from '../../verification';
+import { Button, Card, CardContent, CardHeader, CardTitle, Input, Label } from '@/shared/ui/shadcn';
 
 // 회원가입 폼
 export const RegisterForm = () => {
@@ -73,13 +70,10 @@ export const RegisterForm = () => {
                   required
                   {...register('confirmPassword', {
                     // 비밀번호 확인
-                    validate: (confirmPwd) =>
-                      confirmPwd === watch('password') || '비밀번호를 확인해주세요.',
+                    validate: (confirmPwd) => confirmPwd === watch('password') || '비밀번호를 확인해주세요.',
                   })}
                 />
-                <span className="text-sm text-red-500 h-3">
-                  {errors?.confirmPassword?.message || ' '}
-                </span>
+                <span className="text-sm text-red-500 h-3">{errors?.confirmPassword?.message || ' '}</span>
               </div>
             </div>
             <Button type="submit" className="w-full" disabled={isLoading}>

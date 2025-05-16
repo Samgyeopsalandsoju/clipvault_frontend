@@ -1,11 +1,11 @@
 'use client';
 
-import { Button } from '@/shared/ui/button';
 import { VerifyButtonProps } from '../model/type';
 import { useSendVerifyCode } from '../hooks/useSendVerifyCode';
 import { verifyCodeValidation } from '../model/validation';
 import { useToast } from '@/shared/core/hooks/useToast';
 import { VerifyModal } from './VerifyModal';
+import { Button } from '@/shared/ui/shadcn';
 
 export const VerifyButton = ({ mail, isOpen, onClose, onOpenModal, disabled }: VerifyButtonProps) => {
   const toast = useToast();
