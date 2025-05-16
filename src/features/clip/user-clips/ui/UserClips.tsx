@@ -43,7 +43,7 @@ export const UserClips = () => {
   );
 
   return (
-    <Card className="p-2 pb-8">
+    <Card className="p-4 pb-8">
       <div className="flex justify-between p-2">
         <div className="flex gap-2">
           <h3 className="text-base md:text-lg font-semibold">클립 리스트</h3>
