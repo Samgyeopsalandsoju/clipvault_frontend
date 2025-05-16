@@ -7,3 +7,8 @@ export const getCommunityClips = async () => {
   const res = await apiClient.get<APIResponse<IClip[]>>('/clips/public');
   return res.data.body;
 };
+
+export const getForkedClips = async () => {
+  const res = await apiClient.get<APIResponse<number[]>>('/forks/ids');
+  return res.data.body;
+};

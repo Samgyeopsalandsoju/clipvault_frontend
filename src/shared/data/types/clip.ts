@@ -1,10 +1,10 @@
 import { ICategory } from './category';
 
 export interface IClip {
-  id: string;
+  id: number;
   title: string;
   link: string;
   visible: string;
-  forkedCount: string;
+  forkedCount: number;
   category: ICategory;
 }

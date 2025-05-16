@@ -1,8 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
-import { getCommunityClips } from '../service';
+import { getCommunityClips, getForkedClips } from '../service';
+import { useSession } from 'next-auth/react';
 
 // 홈 클립 리스트 훅
 export const useCommunityClips = () => {
+  const { data: session, status } = useSession();
+
   const getCommunityClipsQuery = useQuery({
     queryKey: ['public-clips'],
     queryFn: getCommunityClips,
@@ -10,8 +13,15 @@ export const useCommunityClips = () => {
     refetchOnWindowFocus: false,
   });
 
+  const getForkedClipsQuery = useQuery({
+    queryKey: ['forked-ids'],
+    queryFn: getForkedClips,
+    enabled: !!session?.accessToken && status === 'authenticated',
+  });
+
   return {
-    data: getCommunityClipsQuery.data, // 데이터
+    clips: getCommunityClipsQuery.data ?? [], // 데이터
+    ids: getForkedClipsQuery.data ?? [],
     isLoading: getCommunityClipsQuery.isPending, // 로딩
     error: getCommunityClipsQuery.error, // 에러
   };

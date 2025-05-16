@@ -1,80 +1,48 @@
-import { Bookmark, ExternalLink } from 'lucide-react';
-import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { ForkButton } from '@/features/clip-fork';
 import { IClipEntry } from '../model/type';
-import { openInNewTab, generateModernTagColors } from '@/shared/core/utils';
+import { CopyButton } from '@/shared/ui/button/CopyButton';
+import { ExternalLinkButton } from '@/shared/ui/button/ExternalLinkButton';
 
 // 퍼블릭 링크 엔트리
-export const ClipCardEntry = ({ category, title, link, forkedCount }: IClipEntry) => {
-  const [isSwipedOut, setIsSwipedOut] = useState(false);
-  const { background, text } = generateModernTagColors(+category.color);
+export const ClipCardEntry = ({ category, title, link, forkedCount, id, isForked }: IClipEntry) => {
   return (
-    <div
-      className="shadow-md bg-gray-200 rounded-lg relative"
-      onMouseEnter={() => setIsSwipedOut(true)}
-      onMouseLeave={() => setIsSwipedOut(false)}
-    >
-      {/* 외부 링크 버튼 */}
-      <motion.button
-        className="absolute right-0 top-1/2 -translate-y-1/2 pr-2"
-        animate={{ opacity: isSwipedOut ? 1 : 0 }}
-        transition={{ duration: 0.3, type: 'tween' }}
-        onClick={() => openInNewTab(link)}
-      >
-        <ExternalLink size={24} className="text-gray-500 hover:text-gray-600 cursor-pointer" />
-      </motion.button>
-
-      {/* 클립 카드 */}
-      <motion.div
-        className="bg-white w-full shadow-md hover:shadow-lg rounded-lg"
-        animate={{ x: isSwipedOut ? -40 : 0 }}
-        transition={{ duration: 0.3, type: 'tween' }}
-      >
-        <div className="p-4  flex flex-col gap-5">
-          {/* 상단 영역: 북마크 아이콘과 횟수 + 카테고리 태그 */}
-          <div className="flex justify-between items-center mb-3">
-            <div className="flex items-center space-x-2">
-              <Bookmark size={20} strokeWidth={1} className="cursor-pointer" />
-              <span className="text-sm text-gray-500">{forkedCount}</span>
-            </div>
-            <div className="flex items-center">
-              <span
-                className="text-xs font-medium px-2.5 py-0.5 rounded-full"
-                style={{ backgroundColor: background, color: text }}
-              >
-                {category.name}
-              </span>
-            </div>
+    <div className="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl border border-gray-100 hover:border-blue-200 flex flex-col h-full">
+      <div className="p-4 flex-grow">
+        {/** 카드 헤더 */}
+        <div className="flex items-center justify-between mb-3">
+          {/* 카테고리 배지 */}
+          <div
+            className="px-3 py-1 rounded-full text-xs font-medium"
+            style={{
+              backgroundColor: `${category.color}20`,
+              color: category.color,
+            }}
+          >
+            {category.name}
           </div>
-          {/* 제목 */}
-          <h3 className="font-medium text-gray-900 mb-1 line-clamp-1">{title}</h3>
 
-          {/* 링크 URL */}
-          <div className="flex items-center text-sm text-gray-500 mb-3">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-4 w-4 flex-shrink-0 mr-3"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101"
-              />
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M14.828 14.828a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
-              />
-            </svg>
-            <p className="truncate">{link}</p>
+          {/* 액션 버튼 그룹 */}
+          <div className="flex items-center space-x-2">
+            {/* 복사 버튼 */}
+            <CopyButton link={link} />
+
+            {/* 새 창에서 열기 버튼 */}
+            <ExternalLinkButton link={link} />
           </div>
         </div>
-      </motion.div>
+        {/** 제목 */}
+        <h3 className="font-medium text-lg text-gray-900 mb-2 line-clamp-2">{title}</h3>
+        {/** 링크 미리보기 */}
+        <p className="text-sm text-gray-500 truncate mb-2 select-none">{link}</p>
+      </div>
+      {/* 카드 푸터 영역 */}
+      <div className="px-4 py-3 bg-gray-50 border-t border-gray-100 flex items-center justify-between">
+        {/* 즐겨찾기 버튼 */}
+        <ForkButton forkedCount={forkedCount} clipId={id} isForked={isForked} />
+
+        {/* 도메인 표시 */}
+        <div className="text-xs text-gray-400">{new URL(link).hostname.replace('www.', '')}</div>
+      </div>
     </div>
   );
 };

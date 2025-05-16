@@ -2,12 +2,14 @@
 
 import { ClipCardEntry } from '@/entities/clip';
 import { useCommunityClips } from '../hook/useCommunityClips';
+import { markIntersectingElementsAsForked } from '../model/util';
 
 // 홈 클립 리스트
 export const CommunityClips = () => {
-  const { data, isLoading } = useCommunityClips();
+  const { clips, isLoading, ids } = useCommunityClips();
 
-  const handleForkClip = () => {};
+  // 포크 유아이 업데이트
+  const markedClips = markIntersectingElementsAsForked(clips, ids);
 
   return (
     <section className="px-[16px] md:px-[16px] lg:px-[60px] py-[50px]">
@@ -16,8 +18,8 @@ export const CommunityClips = () => {
         <div>Loading...</div>
       ) : (
         <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:grid-cols-3">
-          {data?.map((item) => {
-            return <ClipCardEntry key={item.id} {...item} />;
+          {markedClips?.map((clip) => {
+            return <ClipCardEntry key={clip.id} {...clip} />;
           })}
         </ul>
       )}
