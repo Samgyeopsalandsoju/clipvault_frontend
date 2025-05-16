@@ -5,10 +5,10 @@ import { useDeleteFork } from '../hook/useDeleteFork';
 import { IDeleteForkButton } from '../model/type';
 
 export const DeleteForkButton = ({ clipId, forkId }: IDeleteForkButton) => {
-  const { deleteFork, isLoading } = useDeleteFork();
+  const { deleteFork } = useDeleteFork();
 
   const handleDelete = () => {
-    deleteFork({ clipId, forkId });
+    if (window.confirm('포크 클립을 삭제 하시겠습니까?')) deleteFork({ clipId, forkId });
   };
 
   return (
