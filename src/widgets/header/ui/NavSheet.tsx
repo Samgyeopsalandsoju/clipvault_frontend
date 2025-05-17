@@ -19,39 +19,69 @@ export const NavSheet = () => {
       <div className="grid gap-4 py-4 pt-20">
         {data ? (
           <ul className="flex flex-col gap-10">
-            <SheetClose className="border-b text-start">
-              <Button type="submit" variant={'link'} onClick={() => router.push('/home')}>
+            <SheetClose asChild>
+              <Button
+                className="w-full justify-start"
+                type="submit"
+                variant={'link'}
+                onClick={() => router.push('/home')}
+              >
                 home
               </Button>
             </SheetClose>
-            <SheetClose className="border-b text-start">
-              <Button type="submit" variant={'link'} onClick={() => router.push('/clips')}>
+            <SheetClose asChild>
+              <Button
+                className="w-full justify-start"
+                type="submit"
+                variant={'link'}
+                onClick={() => router.push('/clips')}
+              >
                 clips
               </Button>
             </SheetClose>
-            <SheetClose className="border-b text-start">
-              <Button type="submit" variant={'link'} onClick={() => router.push('/mypage/forks')}>
+            <SheetClose asChild>
+              <Button
+                className="w-full justify-start"
+                type="submit"
+                variant={'link'}
+                onClick={() => router.push('/mypage/forks')}
+              >
                 my page
               </Button>
             </SheetClose>
-            <SheetClose className="border-b text-start">
-              <Button type="submit" variant={'link'} onClick={() => router.push('/about')}>
+            <SheetClose asChild>
+              <Button
+                className="w-full justify-start text-start"
+                type="submit"
+                variant={'link'}
+                onClick={() => router.push('/about')}
+              >
                 about
               </Button>
             </SheetClose>
-            <SheetClose className="text-start">
+            <SheetClose asChild>
               <LogoutButton color="red" />
             </SheetClose>
           </ul>
         ) : (
           <ul className="flex flex-col gap-10">
-            <SheetClose className="border-b text-start">
-              <Button type="submit" variant={'link'} onClick={() => handleLoginModalOpen()}>
+            <SheetClose asChild>
+              <Button
+                className="w-full justify-start"
+                type="submit"
+                variant={'link'}
+                onClick={() => handleLoginModalOpen()}
+              >
                 login
               </Button>
             </SheetClose>
-            <SheetClose className="border-b text-start">
-              <Button type="submit" variant={'link'} onClick={() => router.push('/register')}>
+            <SheetClose asChild>
+              <Button
+                className="w-full justify-start"
+                type="submit"
+                variant={'link'}
+                onClick={() => router.push('/register')}
+              >
                 register
               </Button>
             </SheetClose>

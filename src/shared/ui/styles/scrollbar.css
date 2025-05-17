@@ -1,12 +1,12 @@
 /* Firefox 스크롤바 스타일 */
 html {
   scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
-  scrollbar-gutter: stable;
+  /* scrollbar-gutter: stable; */
 }
 
 /* WebKit 브라우저 스크롤바 스타일 (Chrome, Safari, Edge 등) */
 html::-webkit-scrollbar {
-  width: 4px; /* 더 얇게 설정 */
+  width: 4px;
   height: 4px;
 }
 
