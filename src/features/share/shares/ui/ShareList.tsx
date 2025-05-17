@@ -4,7 +4,7 @@ import { Card } from '@/shared/ui/shadcn';
 import { useShareLinks } from '../hook/useShareLinks';
 import { Loader } from 'lucide-react';
 import { ShareRowEntry } from '@/entities/share/ui/ShareRowEntry';
-import { useCallback, useState } from 'react';
+import { useCallback } from 'react';
 import { IShareLink } from '../model/type';
 
 export const ShareList = () => {

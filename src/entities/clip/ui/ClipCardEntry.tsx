@@ -1,4 +1,4 @@
-import { ForkButton } from '@/features/clip-fork';
+import { ForkButton } from '@/features/fork';
 import { IClipEntry } from '../model/type';
 import { CopyButton } from '@/shared/ui/button/CopyButton';
 import { ExternalLinkButton } from '@/shared/ui/button/ExternalLinkButton';

@@ -8,8 +8,8 @@ export const getCommunityClips = async () => {
   const res = await apiClient.get<APIResponse<IClip[]>>('/clips/public');
   return res.data.body;
 };
-
-export const getForkedClips = async () => {
+// 커뮤니티 페이지에 내가 포크한 클립 id 리스트 가져오기
+export const getForkedClipIds = async () => {
   const res = await apiClient.get<APIResponse<number[]>>('/forks/ids');
   return res.data.body;
 };
