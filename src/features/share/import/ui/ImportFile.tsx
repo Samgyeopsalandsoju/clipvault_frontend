@@ -55,9 +55,11 @@ export const ImportFile = () => {
           <h1 className="text-lg md:text-xl font-semibold">{shareData?.title}</h1>
           <h3> {CountDownTimer({ targetDate: shareData?.expiresAt || '' })}</h3>
         </Card>
-        <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {clipList && clipList.map((clip) => renderItems(clip))}
-        </ul>
+        <Card className="p-4 pb-8">
+          <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {clipList && clipList.map((clip) => renderItems(clip))}
+          </ul>
+        </Card>
       </div>
     </section>
   );
