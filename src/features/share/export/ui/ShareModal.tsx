@@ -72,7 +72,7 @@ export const ShareModal = ({ isOpen, onClose, list }: { isOpen: boolean; onClose
           <CardTitle className="text-2xl text-center">Create share link</CardTitle>
         </CardHeader>
         <CardContent>
-          <form className="flex flex-col py-[26px] px-2 gap-5" onSubmit={handleSubmit(onSubmit)}>
+          <form className="flex flex-col pb-[26px] px-2 gap-5" onSubmit={handleSubmit(onSubmit)}>
             <p className="text-xs md:text-base">
               {`The shared link will expire in ${showingDue} day${showingDue === '1' ? '' : 's'}. `}
               <br />

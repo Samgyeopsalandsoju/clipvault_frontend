@@ -23,7 +23,7 @@ export const RegisterForm = () => {
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit}>
-          <div className="flex flex-col gap-10">
+          <div className="flex flex-col gap-2">
             <div className="grid gap-2">
               <Label htmlFor="email">Email</Label>
               <Input
@@ -44,7 +44,7 @@ export const RegisterForm = () => {
                 onOpenModal={handleVerify}
               />
             </div>
-            <div className="grid gap-2">
+            <div className="grid gap-1">
               <div className="grid gap-2">
                 <div className="flex items-center">
                   <Label htmlFor="password">Password</Label>
