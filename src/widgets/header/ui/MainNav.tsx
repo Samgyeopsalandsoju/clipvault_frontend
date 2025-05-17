@@ -36,7 +36,7 @@ export const MainNav = () => {
   }
 
   return (
-    <nav className="items-center gap-6 hidden md:flex md:flex-1">
+    <nav className="items-center gap-1 hidden md:flex md:flex-1">
       {menuItems.map((item, index) => (
         <Link className="cursor-pointer font-extralight px-2 py-1 relative" href={item.href} key={index}>
           {item.label}

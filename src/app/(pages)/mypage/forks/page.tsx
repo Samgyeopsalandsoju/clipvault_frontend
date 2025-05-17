@@ -1,4 +1,4 @@
-import { ForkList } from '@/widgets/list/fork';
+import { ForkList } from '@/features/fork';
 
 const MyPage = () => {
   return <ForkList />;
