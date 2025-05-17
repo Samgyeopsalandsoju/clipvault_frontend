@@ -1,5 +1,5 @@
 import { CreateCategory } from '@/features/category';
-import { CreateClip } from '@/features/clip/create-clip/ui/CreateClip';
+import { CreateClip } from '@/features/clip/ui/CreateClip';
 import {
   Button,
   DropdownMenuGroup,

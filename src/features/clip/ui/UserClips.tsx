@@ -4,16 +4,16 @@ import { ClipRowEntry } from '@/entities/clip/ui/ClipRowEntry';
 import { useEffect, useCallback } from 'react';
 import { Loader } from 'lucide-react';
 import { useClipListStore } from '@/shared/data/model/clips.store';
-import { useUserClips } from '../hook/useUserClips';
-import { useModifyModalStore } from '../../modify-clip/model/store';
 import { IClip } from '@/shared/data/types';
 import { Card } from '@/shared/ui/shadcn';
 import { ShareButton } from '@/features/share/export/ui/ShareButton';
+import { useModifyClipModalStore } from '../model/stores';
+import { useUserClips } from '../hooks/useUserClips';
 
 // 유저 클립 리스트
 export const UserClips = () => {
-  const setIsOpen = useModifyModalStore((state) => state.setIsOpen);
-  const setClipId = useModifyModalStore((state) => state.setClipId);
+  const setIsOpen = useModifyClipModalStore((state) => state.setIsOpen);
+  const setClipId = useModifyClipModalStore((state) => state.setClipId);
   const { data, isLoading } = useUserClips();
   // 클립 스토어 state set 호출
   const clips = useClipListStore((state) => state.filteredClips);

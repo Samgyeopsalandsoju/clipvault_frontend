@@ -1,4 +1,4 @@
-import { IClipForm } from '@/features/clip/create-clip/model/type';
+import { IClipForm } from '@/features/clip/model/types';
 import { privateApiClient } from '@/shared/core/lib/axios';
 import { AxiosError } from 'axios';
 import { NextResponse } from 'next/server';
@@ -19,12 +19,8 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ status: 400, message: 'Missing required fields' }, { status: 400 });
     }
 
-    console.info('@ /api/clip/post 요청 데이터:', body);
-
     // api 요청
     const { status, data } = await privateApiClient.post('/v1/clip/create', body);
-
-    console.log('/v1/clip/create api response check ', status, data);
 
     // 통신 체크
     if (status !== 200 || !data) {

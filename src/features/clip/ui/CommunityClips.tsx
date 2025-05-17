@@ -1,8 +1,8 @@
 'use client';
 
 import { ClipCardEntry } from '@/entities/clip';
-import { useCommunityClips } from '../hook/useCommunityClips';
-import { markIntersectingElementsAsForked } from '../model/util';
+import { useCommunityClips } from '../hooks/useCommunityClips';
+import { markIntersectingElementsAsForked } from '../model/utils';
 
 // 홈 클립 리스트
 export const CommunityClips = () => {

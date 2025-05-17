@@ -1,7 +1,7 @@
 import { create } from 'zustand';
-import { ModifyClipProps } from './type';
+import { IModifyClipStore } from './types';
 
-export const useModifyModalStore = create<ModifyClipProps>((set) => ({
+export const useModifyClipModalStore = create<IModifyClipStore>((set) => ({
   isOpen: false,
   setIsOpen: (isOpen: boolean) => set({ isOpen }),
   clipId: null,

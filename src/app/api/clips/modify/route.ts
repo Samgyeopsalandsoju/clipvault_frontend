@@ -1,12 +1,11 @@
-import { ModifyFormProps } from '@/features/clip/modify-clip/model/type';
+import { IModifyForm } from '@/features/clip/model/types';
 import { privateApiClient } from '@/shared/core/lib/axios';
 import { AxiosError } from 'axios';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 export async function PATCH(request: NextRequest) {
-  const body: ModifyFormProps = await request.json();
-  console.log('body', body);
+  const body: IModifyForm = await request.json();
   try {
     // body 값 검증
     if (!body || typeof body !== 'object') {
@@ -19,12 +18,8 @@ export async function PATCH(request: NextRequest) {
       return NextResponse.json({ status: 400, message: 'Missing required fields' }, { status: 400 });
     }
 
-    console.info('@ /api/clip/modify 요청 데이터:', body);
-
     // api 요청
     const { status, data } = await privateApiClient.patch('/v1/clip/modify', body);
-
-    console.log('/v1/clip/modify api response check ', status, data);
 
     // 통신 체크
     if (status !== 200 || !data) {

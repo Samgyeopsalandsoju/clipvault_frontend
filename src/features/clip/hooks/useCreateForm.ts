@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form';
-import { IClipForm } from '../model/type';
+import { IClipForm } from '../model/types';
 
 export const useCreateForm = () => {
   const {

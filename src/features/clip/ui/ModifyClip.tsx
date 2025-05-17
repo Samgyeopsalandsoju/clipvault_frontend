@@ -2,20 +2,20 @@
 
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, Input, Label, Textarea, Button } from '@/shared/ui/shadcn';
 import clsx from 'clsx';
-import { useModifyModalStore } from '../model/store';
-import { useModifyClip } from '../hook/useModifyClip';
 import { VisibilitySelector } from '@/entities/clip';
-import { useModifyForm } from '../hook/useModifyForm';
 import { useEffect } from 'react';
-import { ModifyFormProps } from '../model/type';
 import { Trash } from 'lucide-react';
-import { useDeleteClip } from '../hook/useDeleteClip';
 import { CategorySelector } from '@/features/category';
+import { useModifyClipModalStore } from '../model/stores';
+import { useModifyForm } from '../hooks/useModifyForm';
+import { useModifyClip } from '../hooks/useModifyClip';
+import { useDeleteClip } from '../hooks/useDeleteClip';
+import { IModifyForm } from '../model/types';
 // 클립 수정 모달
 export const ModifyClip = () => {
   // 모달 오픈
-  const isOpen = useModifyModalStore((state) => state.isOpen);
-  const setIsOpen = useModifyModalStore((state) => state.setIsOpen);
+  const isOpen = useModifyClipModalStore((state) => state.isOpen);
+  const setIsOpen = useModifyClipModalStore((state) => state.setIsOpen);
 
   // 클립 정보 및 폼 데이터 호출
   const { register, setValue, handleSubmit, reset } = useModifyForm();
@@ -39,7 +39,7 @@ export const ModifyClip = () => {
     }
   }, [clip]);
 
-  const onSubmit = (data: ModifyFormProps) => {
+  const onSubmit = (data: IModifyForm) => {
     modify(data, {
       // 성공 후 로직
       onSuccess: () => {

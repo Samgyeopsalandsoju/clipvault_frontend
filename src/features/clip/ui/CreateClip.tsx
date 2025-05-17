@@ -3,13 +3,13 @@
 import { VisibilitySelector } from '@/entities/clip';
 import { Button, Drawer, DrawerContent, DrawerHeader, DrawerTitle, Input, Label, Textarea } from '@/shared/ui/shadcn';
 import clsx from 'clsx';
-import { useCreateForm } from '../hook/useCreateForm';
-import { createClipValidation } from '../model/validation';
 import { useState } from 'react';
 import { VisibilityType } from '@/shared/data/model/clips.type';
-import { useCreateClip } from '../hook/useCreateClip';
-import { IClipForm } from '../model/type';
 import { CategorySelector } from '@/features/category';
+import { useCreateForm } from '../hooks/useCreateForm';
+import { useCreateClip } from '../hooks/useCreateClip';
+import { IClipForm } from '../model/types';
+import { createClipValidation } from '../model/validations';
 
 // 클립 생성 모달
 export const CreateClip = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
