@@ -1,5 +1,5 @@
 import { ForkBadge } from '@/shared/ui/ForkBadge';
-import { useForkClip } from '../hook/useForkClip';
+import { useForkClip } from '../hooks/useForkClip';
 import { useSession } from 'next-auth/react';
 import { useToast } from '@/shared/core/hooks';
 

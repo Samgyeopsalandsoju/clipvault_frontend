@@ -1,7 +1,7 @@
 'use client';
 import clsx from 'clsx';
 import { Trash2 } from 'lucide-react';
-import { useDeleteFork } from '../hook/useDeleteFork';
+import { useDeleteFork } from '../hooks/useDeleteFork';
 import { IDeleteForkButton } from '../model/type';
 
 export const DeleteForkButton = ({ clipId, forkId }: IDeleteForkButton) => {

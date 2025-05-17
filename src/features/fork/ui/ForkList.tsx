@@ -1,7 +1,7 @@
 'use client';
 
 import { Card } from '@/shared/ui/shadcn';
-import { useGetForks } from '../hook/useGetForks';
+import { useGetForks } from '../hooks/useGetForks';
 import { Loader } from 'lucide-react';
 import { useCallback } from 'react';
 import { ForkRowEntry } from '@/entities/clip/ui/ForkRowEntry';
