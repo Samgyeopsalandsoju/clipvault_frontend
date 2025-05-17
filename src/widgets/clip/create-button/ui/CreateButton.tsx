@@ -1,4 +1,4 @@
-import { CreateCategory } from '@/features/category/post-category/ui/CreateCategory';
+import { CreateCategory } from '@/features/category';
 import { CreateClip } from '@/features/clip/create-clip/ui/CreateClip';
 import {
   Button,

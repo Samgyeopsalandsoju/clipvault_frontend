@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { postCategory } from '../service';
 import { useToast } from '@/shared/core/hooks';
-import { ICategoryForm } from '../model/type';
 import { generateUniqueId } from '@/shared/core/utils/uuid';
+import { postCategory } from '../service';
+import { ICategoryForm } from '../model/types';
 
 export const useCreateCategory = () => {
   const toast = useToast();

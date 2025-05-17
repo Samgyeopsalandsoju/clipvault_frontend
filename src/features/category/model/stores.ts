@@ -1,7 +1,7 @@
 import { create } from 'zustand';
-import { ModifyCategoryProps } from './type';
+import { ModifyCategoryProps } from './types';
 
-export const useModifyModalStore = create<ModifyCategoryProps>((set) => ({
+export const useModifyCategoryModalStore = create<ModifyCategoryProps>((set) => ({
   isOpen: false,
   setIsOpen: (isOpen: boolean) => set({ isOpen }),
   category: null,

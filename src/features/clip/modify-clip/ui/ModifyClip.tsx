@@ -10,7 +10,7 @@ import { useEffect } from 'react';
 import { ModifyFormProps } from '../model/type';
 import { Trash } from 'lucide-react';
 import { useDeleteClip } from '../hook/useDeleteClip';
-import { CategorySelector } from '@/features/category/category-selector/ui/CategorySelector';
+import { CategorySelector } from '@/features/category';
 // 클립 수정 모달
 export const ModifyClip = () => {
   // 모달 오픈

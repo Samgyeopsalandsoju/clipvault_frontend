@@ -2,21 +2,16 @@
 
 import { Loader } from 'lucide-react';
 import { useClipListStore } from '@/shared/data/model/clips.store';
-import { MAX_CATEGORY_COUNT } from '../model/constant';
-import { useGetCategory } from '../hook/useGetCategory';
 import { memo } from 'react';
 import { Card } from '@/shared/ui/shadcn';
-import { CategoryChip } from '../../ui/CategoryChip';
+import { useGetCategory } from '../hooks/useGetCategory';
+import { MAX_CATEGORY_COUNT } from '@/shared/data/constants';
+import { CategoryChip } from './CategoryChip';
 
 // 메모이제이션으로 최적화
 export const CategoryList = memo(() => {
   const { categories, isLoading } = useGetCategory();
   const { setCategory } = useClipListStore();
-
-  // 카테고리 선택
-  const handleClickCategory = (category: string) => {
-    setCategory(category);
-  };
 
   return (
     <Card className="p-2 pb-8">

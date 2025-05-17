@@ -1,11 +1,13 @@
+'use client';
+
 import { Label, Select, SelectItem, SelectTrigger, SelectValue, SelectContent } from '@/shared/ui/shadcn';
-import { ICategorySelector } from '../model/type';
 import { ICategory } from '@/shared/data/types';
 import { useEffect, useState } from 'react';
 import { Loader2 } from 'lucide-react';
-import { useGetCategory } from '../../get-categories/hook/useGetCategory';
+import { ICategorySelectorProps } from '../model/types';
+import { useGetCategory } from '../hooks/useGetCategory';
 
-export const CategorySelector = ({ initialCategory, onChange, disabled = false }: ICategorySelector) => {
+export const CategorySelector = ({ initialCategory, onChange, disabled = false }: ICategorySelectorProps) => {
   const [selectedCategory, setSelectedCategory] = useState<ICategory | null>(initialCategory || null);
   const { categories, isLoading } = useGetCategory();
 

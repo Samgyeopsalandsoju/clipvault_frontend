@@ -4,9 +4,9 @@ import { ColorPicker } from '@/shared/color-palette/ui/ColorPicker';
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, Button, Input, Label } from '@/shared/ui/shadcn';
 import clsx from 'clsx';
 import { useState } from 'react';
-import { useCreateCategory } from '../hook/useCreateCategory';
-import { ICategoryForm } from '../model/type';
 import { useForm } from 'react-hook-form';
+import { ICategoryForm } from '../model/types';
+import { useCreateCategory } from '../hooks/useCreateCategory';
 
 // 카테고리 생성 모달
 export const CreateCategory = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {

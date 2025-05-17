@@ -4,20 +4,20 @@ import { ColorPicker } from '@/shared/color-palette/ui/ColorPicker';
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, Input, Label, Button } from '@/shared/ui/shadcn';
 import clsx from 'clsx';
 import { useEffect, useState } from 'react';
-import { useModifyModalStore } from '../model/store';
 import { useForm } from 'react-hook-form';
 import { ICategory } from '@/shared/data/types';
-import { useModifyCategory } from '../hook/useModifyCategory';
 import { Trash } from 'lucide-react';
-import { useDeleteCategory } from '../hook/useDeleteCategory';
+import { useModifyCategoryModalStore } from '../model/stores';
+import { useModifyCategory } from '../hooks/useModifyCategory';
+import { useDeleteCategory } from '../hooks/useDeleteCategory';
 // 카테고리 생성 모달
 export const ModifyCategory = () => {
   // 카테고리 모달 오픈
-  const isOpen = useModifyModalStore((state) => state.isOpen);
-  const setIsOpen = useModifyModalStore((state) => state.setIsOpen);
+  const isOpen = useModifyCategoryModalStore((state) => state.isOpen);
+  const setIsOpen = useModifyCategoryModalStore((state) => state.setIsOpen);
 
   // 카테고리
-  const category = useModifyModalStore((state) => state.category);
+  const category = useModifyCategoryModalStore((state) => state.category);
 
   // 변경 색상
   const [color, setColor] = useState<string>('');

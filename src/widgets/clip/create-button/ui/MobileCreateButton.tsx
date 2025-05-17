@@ -1,5 +1,4 @@
 'use client';
-import { CreateCategory } from '@/features/category/post-category/ui/CreateCategory';
 import { CreateClip } from '@/features/clip/create-clip/ui/CreateClip';
 import {
   DropdownMenuGroup,
@@ -11,6 +10,7 @@ import {
 } from '@/shared/ui/shadcn';
 import { useState } from 'react';
 import { Plus } from 'lucide-react';
+import { CreateCategory } from '@/features/category';
 
 export const MobileCreateButton = () => {
   // clip 생성 모달 오픈

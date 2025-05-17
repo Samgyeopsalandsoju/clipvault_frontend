@@ -1,9 +1,8 @@
 import dynamic from 'next/dynamic';
 import { ClipPanel } from '@/widgets/clip/clip-panel/ui/ClipPanel';
 import { MobileCreateButton } from '@/widgets/clip/create-button/ui/MobileCreateButton';
-import { VisibleCategory } from '@/features/category';
+import { CategoryList, VisibleCategory } from '@/features/category';
 import { UserClips } from '@/features/clip/user-clips';
-import { CategoryList } from '@/features/category/get-categories';
 
 // 모달 컴포넌트 레이지 로딩
 const ModifyClip = dynamic(
@@ -14,8 +13,7 @@ const ModifyClip = dynamic(
 );
 
 const ModifyCategory = dynamic(
-  () =>
-    import('@/features/category/modify-category/ui/ModifyCategory').then((mod) => ({ default: mod.ModifyCategory })),
+  () => import('@/features/category/ui/ModifyCategory').then((mod) => ({ default: mod.ModifyCategory })),
   {
     loading: () => null, // 모달이므로 로딩 UI가 필요 없음
   }
