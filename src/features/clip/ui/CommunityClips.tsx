@@ -3,6 +3,7 @@
 import { ClipCardEntry } from '@/entities/clip';
 import { useCommunityClips } from '../hooks/useCommunityClips';
 import { markIntersectingElementsAsForked } from '../model/utils';
+import { useSession } from 'next-auth/react';
 
 // 홈 클립 리스트
 export const CommunityClips = () => {

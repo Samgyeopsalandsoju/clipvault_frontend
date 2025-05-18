@@ -1,5 +1,5 @@
 'use client';
-import React, { createContext, useContext, ReactNode } from 'react';
+import React, { createContext, ReactNode } from 'react';
 import toast, { Toaster, ToastOptions } from 'react-hot-toast';
 
 interface ToastContextType {

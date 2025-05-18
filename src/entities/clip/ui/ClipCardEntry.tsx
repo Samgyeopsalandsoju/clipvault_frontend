@@ -14,8 +14,8 @@ export const ClipCardEntry = ({ category, title, link, forkedCount, id, isForked
           <div
             className="px-3 py-1 rounded-full text-xs font-medium"
             style={{
-              backgroundColor: `${category.color}20`,
-              color: category.color,
+              color: '#fff',
+              backgroundColor: category.color,
             }}
           >
             {category.name}
