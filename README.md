@@ -1,10 +1,10 @@
-# Clip Vault - 영상 클립 저장 및 관리 애플리케이션
+# Clip Vault - 클립(링크) 저장 및 관리 애플리케이션
 
 ## 1. 프로젝트 개요
 
 Clip Vault는 사용자가 웹 상의 다양한 클립(맛집 지도 링크, 유용한 정보 사이트)의 링크를 저장하고, 카테고리별로 분류하며, 필요시 쉽게 찾아볼수 있는 웹 애플리케이션입니다. 사용자 편의성을 높이기 위해 직관적인 UI와 반응형 디자인을 적용했으며, Next.js의 최신 기능을 활용하였습니다!
 
-또한 악성 링크 저장및 공유를 _google safe browsing_ api와 여러 URL 필터 로직을 구현하여 방지하고 있습니다! [clipvault](https://www.clipvault.com)을 들어가시고 로그인을 하면 해당 기능들을 사용해볼수 있습니다.
+또한 악성 링크 저장및 공유를 _google safe browsing_ api와 여러 URL 필터 로직을 구현하여 방지하고 있습니다! [clipvault](https://www.clipvault.info)을 들어가시고 로그인을 하면 해당 기능들을 사용해볼수 있습니다.
 
 **주요 기능:**
 
@@ -33,7 +33,7 @@ Clip Vault는 사용자가 웹 상의 다양한 클립(맛집 지도 링크, 유
 - **CSS Framework:** [Tailwind CSS](https://tailwindcss.com/) (with PostCSS)
 - **Styled-components**[Styled-Components](https://styled-components.com/) 처음에는 styled components로 구현하였으나
   SSR의 장점을 최대한 살리고 싶어 TailwindCss로 마이그레이션 하였습니다.
-- **UI Components:** 일부 [Material UI (MUI)](https://mui.com/) 컴포넌트 사용 (@emotion/react, @mui/material)
+- **shadcn Components:** 일부 [Material UI (MUI)](https://ui.shadcn.com/) 컴포넌트 사용 (@emotion/react, @mui/material)
 
 ### 🚀 CI/CD & Deployment
 
@@ -237,41 +237,32 @@ Clip Vault는 사용자가 웹 상의 다양한 클립(맛집 지도 링크, 유
 
 ## 4. 프로젝트 구조
 
-```
-.
-├── .github/workflows/      # GitHub Actions 워크플로우 (CI/CD)
-├── .next/                  # Next.js 빌드 결과물
-├── node_modules/           # 의존성 모듈
-├── public/                 # 정적 파일 (이미지, 폰트 등)
-├── scripts/                # 배포 관련 쉘 스크립트
-├── src/                    # 소스 코드 루트
-│   ├── app/                # Next.js App Router (페이지, 레이아웃, API 라우트)
-│   │   ├── (client)/       # 클라이언트 전용 라우트 그룹
-│   │   ├── api/            # API 라우트 핸들러
-│   │   └── ...             # 기타 라우트
-│   ├── components/         # UI 컴포넌트 (공용, 기능별)
-│   ├── constants/          # 상수 값
-│   ├── hoc/                # 고차 컴포넌트
-│   ├── hooks/              # 커스텀 React Hooks
-│   ├── libs/               # 공통 라이브러리/유틸리티 (API 클라이언트, 토스트 등)
-│   ├── providers/          # 전역 Context Provider 등
-│   ├── services/           # API 호출 서비스 로직
-│   ├── stores/             # 상태 관리 (Jotai, Zustand)
-│   ├── styles/             # 전역 스타일, Tailwind CSS base/utilities
-│   ├── types/              # TypeScript 타입 정의
-│   └── utils/              # 범용 유틸리티 함수
-├── .env                    # 로컬 환경 변수 (버전 관리 제외)
-├── .gitignore              # Git 추적 제외 목록
-├── appspec.yml             # AWS CodeDeploy 설정
-├── ecosystem.config.js     # PM2 설정
-├── eslint.config.mjs       # ESLint 설정
-├── next.config.ts          # Next.js 설정
-├── package.json            # 프로젝트 정보 및 의존성
-├── pnpm-lock.yaml          # pnpm 잠금 파일
-├── postcss.config.js       # PostCSS 설정
-├── README.md               # 프로젝트 설명 (현재 파일)
-├── tailwind.config.js      # Tailwind CSS 설정
-└── tsconfig.json           # TypeScript 설정
-```
+src/
+├── app/ # 애플리케이션 진입점 및 Next.js 라우터
+│ ├── \_providers/ # 앱 전체에 사용되는 Provider 컴포넌트
+│ ├── (pages)/ # 라우트 그룹화 (Next.js 그룹 라우트)
+│ ├── api/ # API 라우트 핸들러
+│ └── layout.tsx # 루트 레이아웃 컴포넌트
+├── entities/ # 엔티티 모듈
+│ ├── clip/ # 클립 관련 외부 코드 또는 예제
+│ ├── share/ # 공유 기능 관련 외부 코드
+│ └── slide/ # 슬라이드 관련 외부 코드
+├── features/ # 기능별 모듈 (FSD 아키텍처의 핵심)
+│ ├── auth/ # 인증/인가 관련 기능
+│ ├── category/ # 카테고리 관련 기능
+│ ├── clip/ # 클립 관리 관련 기능
+│ ├── fork/ # 포크 기능 (코드/콘텐츠 분기)
+│ └── share/ # 공유 기능
+├── shared/ # 공유 모듈 (여러 기능에서 재사용)
+│ ├── color-palette/ # 색상 테마 및 팔레트
+│ ├── core/ # 핵심 유틸리티 및 타입
+│ ├── data/ # 데이터 모델, API 클라이언트
+│ └── ui/ # 기본 UI 컴포넌트
+└── widgets/ # 독립적인 UI 블록 (FSD의 위젯 레이어)
+├── clip/ # 클립 관련 위젯
+├── footer/ # 푸터 컴포넌트
+├── header/ # 헤더 컴포넌트
+├── hero/ # 히어로 섹션 위젯
+└── newest-slider/ # 최신 항목 슬라이더 위젯
 
 [clipvault](www.clipvault.info)에 접속하여 회원가입을 진행하면 해당 기능들을 전부 사용할수 있습니다.
