@@ -9,9 +9,10 @@ export const ShareRowEntry = ({ title, link, due, onDelete, id }: IShareRowEntry
   return (
     <div className="bg-white rounded-lg border border-gray-100 shadow-sm transition-all hover:shadow-md cursor-pointer">
       <div className="flex items-center p-4">
-        {/* 제목 */}
         <div className="mx-5 flex-grow flex justify-between">
+          {/* 제목 */}
           <p className="text-xs md:text-sm font-semibold text-gray-700 truncate w-[120px] lg:w-fit">{title}</p>
+          {/* 남은 시간 */}
           <div className="flex items-center text-xs text-gray-500 min-w-0">
             <CountDownTimer targetDate={due} />
           </div>
