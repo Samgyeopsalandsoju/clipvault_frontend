@@ -1,37 +1,39 @@
-import { Ban } from 'lucide-react';
+import { Ban, Trash2 } from 'lucide-react';
 import { IShareRowEntry } from '../model/type';
 import { CountDownTimer } from '@/shared/ui/CountDownTimer';
 import { ExternalLinkButton } from '@/shared/ui/button/ExternalLinkButton';
 import { CopyButton } from '@/shared/ui/button/CopyButton';
+import clsx from 'clsx';
 
 export const ShareRowEntry = ({ title, link, due, onDelete, id }: IShareRowEntry) => {
   return (
-    <div className="flex items-center bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-200 py-2 px-3 border cursor-pointer">
-      {/* 북마크 아이콘과 숫자 */}
-      <div className="flex items-center space-x-1 w-14">
-        <button
-          className="flex items-center space-x-2 text-red-700 hover:text-red-500 active:scale-[0.97]"
-          onClick={() => onDelete({ id, link })}
-        >
-          <Ban />
-        </button>
-      </div>
+    <div className="bg-white rounded-lg border border-gray-100 shadow-sm transition-all hover:shadow-md cursor-pointer">
+      <div className="flex items-center p-4">
+        {/* 제목 */}
+        <div className="mx-5 flex-grow flex justify-between">
+          <p className="text-xs md:text-sm font-semibold text-gray-700 truncate w-[120px] lg:w-fit">{title}</p>
+          <div className="flex items-center text-xs text-gray-500 min-w-0">
+            <CountDownTimer targetDate={due} />
+          </div>
+        </div>
 
-      {/* 제목 */}
-      <div className="flex-1 min-w-0 flex items-center justify-start">
-        <h3 className="font-medium text-gray-900 text-sm line-clamp-1">{title}</h3>
-      </div>
-
-      {/* 링크 URL */}
-      <div className="flex items-center text-xs text-gray-500 flex-1 min-w-0">
-        <CountDownTimer targetDate={due} />
-      </div>
-      {/* 버튼 섹션 */}
-      <div className="flex items-center gap-2">
-        {/* 복사 버튼 */}
-        <CopyButton link={link} />
-        {/* 바로가기 버튼 */}
-        <ExternalLinkButton link={link} />
+        {/* 버튼 섹션 */}
+        <div className="flex space-x-1 ml-2">
+          {/* 복사 버튼 */}
+          <CopyButton link={link} />
+          {/* 바로가기 버튼 */}
+          <ExternalLinkButton link={link} />
+          {/* 포크 삭제 */}
+          <div
+            className={clsx(
+              'p-1.5 rounded-full text-gray-400 hover:text-gray-700 hover:bg-gray-100 cursor-pointer',
+              'duration-500 ease-in-out hover:rotate-[20deg] transition-all text-gray-500 hover:text-red-500'
+            )}
+            onClick={() => onDelete({ id, link })}
+          >
+            <Trash2 size={16} />
+          </div>
+        </div>
       </div>
     </div>
   );
