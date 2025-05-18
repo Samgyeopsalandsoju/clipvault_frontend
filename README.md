@@ -33,7 +33,7 @@ Clip Vault는 사용자가 웹 상의 다양한 클립(맛집 지도 링크, 유
 - **CSS Framework:** [Tailwind CSS](https://tailwindcss.com/) (with PostCSS)
 - **Styled-components**[Styled-Components](https://styled-components.com/) 처음에는 styled components로 구현하였으나
   SSR의 장점을 최대한 살리고 싶어 TailwindCss로 마이그레이션 하였습니다.
-- **shadcn Components:** 일부 [Material UI (MUI)](https://ui.shadcn.com/) 컴포넌트 사용 (@emotion/react, @mui/material)
+- **shadcn ui:** 일부 [Material UI (MUI)](https://ui.shadcn.com/) 컴포넌트 사용 (@emotion/react, @mui/material)
 
 ### 🚀 CI/CD & Deployment
 
