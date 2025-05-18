@@ -42,7 +42,12 @@ export const MainNav = () => {
           {item.label}
           {/** 현재 페이지에 맞는 라인 표시 */}
           {isActive(item.isShowing) && (
-            <motion.div layoutId="border" className="border-b border-black absolute bottom-0 left-0 w-full" />
+            <motion.div
+              initial={{ width: 0 }}
+              animate={{ width: '100%' }}
+              transition={{ duration: 0.3 }}
+              className="border-b border-black absolute bottom-0 left-0 w-full"
+            />
           )}
         </Link>
       ))}
