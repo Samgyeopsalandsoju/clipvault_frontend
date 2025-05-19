@@ -1,14 +1,14 @@
 import { useMutation } from '@tanstack/react-query';
 import { sendVerifyCode } from '../service';
 import { useToast } from '@/shared/core/hooks/useToast';
-import { useVerificationStore } from '../model/store';
+import { useVerifyCodeStore } from '../model/store';
 
 export const useSendVerifyCode = () => {
   const toast = useToast();
 
   // 인증 아이디 저장 스토어
-  const setMail = useVerificationStore((state) => state.setMail);
-  const setAuthKey = useVerificationStore((state) => state.setAuthKey);
+  const setMail = useVerifyCodeStore((state) => state.setMail);
+  const setAuthKey = useVerifyCodeStore((state) => state.setAuthKey);
 
   const sendVerifyCodeMutation = useMutation({
     mutationFn: sendVerifyCode,

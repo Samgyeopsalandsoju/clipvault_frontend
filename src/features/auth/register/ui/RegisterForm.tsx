@@ -3,8 +3,8 @@
 import { registerValidation } from '../model/validation';
 import { useRegisterForm } from '../hooks/useRegisterForm';
 import { useState } from 'react';
-import { VerifyButton } from '../../verification';
 import { Button, Card, CardContent, CardHeader, CardTitle, Input, Label } from '@/shared/ui/shadcn';
+import { VerifyButton } from './VerifyButton';
 
 // 회원가입 폼
 export const RegisterForm = () => {

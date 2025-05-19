@@ -2,34 +2,37 @@ import { InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot, REGEXP_ONLY_D
 import { Loader2 } from 'lucide-react';
 import { VerifyModalProps } from '../model/type';
 import { useEffect, useState } from 'react';
-import { useVerificationStore, useVerifyStore } from '../model/store';
+import { useVerifyCodeStore } from '../model/store';
 import { useCheckVerifyCode } from '../hooks/useCheckVerifyCode';
 import { Modal } from '@/shared/ui/modal/Modal';
 
 export const VerifyModal = ({ isOpen, onClose, isLoading: isSendCodeLoading }: VerifyModalProps) => {
   const [authCode, setAuthCode] = useState<string>('');
   // 인증 코드 저장 스토어
-  const { mail, authKey, reset } = useVerificationStore.getState();
+  const { mail, authKey, reset } = useVerifyCodeStore.getState();
   const { verifyCode, isLoading } = useCheckVerifyCode();
   // 인증 여부 설정 스토어
-  const setIsVerified = useVerifyStore((state) => state.setIsVerified);
+  const setIsVerified = useVerifyCodeStore((state) => state.setIsVerified);
 
   // 인증하기
   const checkVerifyCode = async () => {
     // 스토어 값 확인
     if (!authCode || !mail || !authKey) return;
     // 인증 코드 확인
-    const status = await verifyCode({ authCode, mail, authKey });
-    if (status) {
-      // 모달창 닫기
-      onClose();
-      // 인증코드 초기화
-      setAuthCode('');
-      // 스토어 리셋
-      reset();
-      // 인증 여부 확인
-      setIsVerified(true);
-    }
+    verifyCode(
+      { authCode, mail, authKey },
+      {
+        onSuccess: () => {
+          onClose();
+          // 인증코드 초기화
+          setAuthCode('');
+          // 스토어 리셋
+          reset();
+          // 인증 여부 확인
+          setIsVerified(true);
+        },
+      }
+    );
   };
 
   // authCode 값이 전부 작성되면 checkVerifyCode 함수 호출
