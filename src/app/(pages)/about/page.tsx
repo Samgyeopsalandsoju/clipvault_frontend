@@ -1,7 +1,7 @@
 function AboutPage() {
   return (
     <main className="p-1 pt-4 md:p-10 relative">
-      <section className="flex flex-col gap-5">
+      <section className="flex flex-col gap-5 px-2">
         <h1 className="tracking-tighter text-2xl font-bold">Clipvault</h1>
         <div className="border-b border-1 border-black " />
         <h4>ClipVault는 웹에서 발견한 유용한 링크들을 저장하고 관리하는 플랫폼입니다.</h4>
