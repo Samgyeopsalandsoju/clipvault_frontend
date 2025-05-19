@@ -46,9 +46,6 @@ export const ExpiryDateSelector = ({ onSelect, defaultValue = '7' }: ExpiryDateS
 
   return (
     <div className={clsx('flex gap-2 rounded-[8px] p-2', 'border-solid border-[1px] h-[40px]')}>
-      <div className="flex items-center justify-center hidden md:block">
-        <Clock size={16} />
-      </div>
       <select
         className="w-[15%] h-full text-xs md:text-base bg-inherit"
         value={selectedDays}
