@@ -1,6 +1,6 @@
 import { IClipEntry } from '../model/type';
 import { ForkBadge } from '@/shared/ui/ForkBadge';
-import { ExternalLinkButton } from '@/shared/ui/button/ExternalLinkButton';
+import { ExternalLinkButton } from '@/shared/ui/button';
 import { CopyButton } from '@/shared/ui/button/CopyButton';
 
 export const ClipRowEntry = ({ forkedCount, link, title, onClick }: IClipEntry) => {

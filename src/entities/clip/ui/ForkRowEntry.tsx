@@ -1,7 +1,7 @@
 import { IFork } from '@/shared/data/types/fork';
 import { DeleteForkButton } from '@/features/fork';
 import { CopyButton } from '@/shared/ui/button/CopyButton';
-import { ExternalLinkButton } from '@/shared/ui/button/ExternalLinkButton';
+import { ExternalLinkButton } from '@/shared/ui/button';
 
 export const ForkRowEntry = ({ categoryColor, categoryName, clipLink, clipTitle, id, clipId }: IFork) => {
   return (
