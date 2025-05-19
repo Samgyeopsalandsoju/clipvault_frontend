@@ -58,9 +58,9 @@ export const RegisterForm = () => {
                     minLength: registerValidation.password.minLength,
                   })}
                 />
-                <span className="text-sm text-red-500 h-3">{errors?.password?.message || ' '}</span>
+                <span className="text-xs px-2 text-red-500 h-3">{errors?.password?.message || ' '}</span>
               </div>
-              <div className="grid gap-2 mt-4">
+              <div className="grid gap-2 mt-1">
                 <div className="flex items-center">
                   <Label htmlFor="password">Confirm Password</Label>
                 </div>
@@ -73,7 +73,7 @@ export const RegisterForm = () => {
                     validate: (confirmPwd) => confirmPwd === watch('password') || '비밀번호를 확인해주세요.',
                   })}
                 />
-                <span className="text-sm text-red-500 h-3">{errors?.confirmPassword?.message || ' '}</span>
+                <span className="text-xs px-2 text-red-500 h-3">{errors?.confirmPassword?.message || ' '}</span>
               </div>
             </div>
             <Button type="submit" className="w-full" disabled={isLoading}>

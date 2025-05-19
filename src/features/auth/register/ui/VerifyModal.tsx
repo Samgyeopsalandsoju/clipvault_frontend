@@ -3,8 +3,8 @@ import { Loader2 } from 'lucide-react';
 import { VerifyModalProps } from '../model/type';
 import { useEffect, useState } from 'react';
 import { useVerifyCodeStore } from '../model/store';
-import { useCheckVerifyCode } from '../hooks/useCheckVerifyCode';
 import { Modal } from '@/shared/ui/modal/Modal';
+import { useCheckVerifyCode } from '../hooks/useCheckVerifyCode';
 
 export const VerifyModal = ({ isOpen, onClose, isLoading: isSendCodeLoading }: VerifyModalProps) => {
   const [authCode, setAuthCode] = useState<string>('');
@@ -67,9 +67,9 @@ export const VerifyModal = ({ isOpen, onClose, isLoading: isSendCodeLoading }: V
                   <InputOTPSlot index={0} />
                   <InputOTPSlot index={1} />
                   <InputOTPSlot index={2} />
-                </InputOTPGroup>
+                  {/* </InputOTPGroup>
                 <InputOTPSeparator />
-                <InputOTPGroup>
+                <InputOTPGroup> */}
                   <InputOTPSlot index={3} />
                   <InputOTPSlot index={4} />
                   <InputOTPSlot index={5} />
