@@ -82,7 +82,7 @@ export const ShareModal = ({ isOpen, onClose, list }: { isOpen: boolean; onClose
               <>
                 <div className="flex w-full gap-[10px]">
                   <input
-                    className="flex w-full h-[40px] rounded-[8px] p-[10px] border-solid border-[1px]"
+                    className="flex w-full h-[40px] rounded-[8px] p-[10px] border-solid border-[1px] text-xs md:text-sm"
                     value={shareLink}
                     readOnly
                   />
@@ -110,6 +110,7 @@ export const ShareModal = ({ isOpen, onClose, list }: { isOpen: boolean; onClose
             {!shareLink && (
               <div className="flex flex-col gap-[0.7rem]">
                 <Input
+                  className="text-xs md:text-sm"
                   {...register('title', {
                     required: 'title is required',
                     maxLength: { value: 10, message: 'up to 10 letters' },
@@ -127,12 +128,12 @@ export const ShareModal = ({ isOpen, onClose, list }: { isOpen: boolean; onClose
               </div>
             )}
             <div className="flex gap-[15px]">
-              <Button type="submit" className="px-8">
+              <Button type="submit" className="px-8 text-xs md:text-sm">
                 Create
               </Button>
               <Button
                 type="button"
-                className="flex flex-1"
+                className="flex flex-1 text-xs md:text-sm"
                 onClick={() => router.push('/mypage/share')}
                 variant="outline"
               >
