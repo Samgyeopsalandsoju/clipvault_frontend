@@ -46,11 +46,11 @@ export const ExpiryDateSelector = ({ onSelect, defaultValue = '7' }: ExpiryDateS
 
   return (
     <div className={clsx('flex gap-2 rounded-[8px] p-2', 'border-solid border-[1px] h-[40px]')}>
-      <div className="flex items-center justify-center">
+      <div className="flex items-center justify-center hidden md:block">
         <Clock size={16} />
       </div>
       <select
-        className="w-[15%] h-full"
+        className="w-[15%] h-full text-xs md:text-base bg-inherit"
         value={selectedDays}
         onChange={(e) => {
           const {
@@ -60,13 +60,15 @@ export const ExpiryDateSelector = ({ onSelect, defaultValue = '7' }: ExpiryDateS
         }}
       >
         {EXPIRY_OPTIONS.map((option) => (
-          <option key={option.value} value={option.value}>
+          <option key={option.value} value={option.value} className="">
             {option.label}
           </option>
         ))}
       </select>
       <div className="h-full border-l-[1px] border-solid" />
-      <div className="flex flex-1 select-none pl-[0.4rem]">Due: {expiryDate}</div>
+      <div className="flex flex-1 select-none pl-[0.4rem] items-center text-xs md:text-base bg-inherit">
+        Due: {expiryDate}
+      </div>
     </div>
   );
 };
