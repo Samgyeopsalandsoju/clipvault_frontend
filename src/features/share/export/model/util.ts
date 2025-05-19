@@ -19,7 +19,7 @@ export const addItemWithLimit = (code: any) => {
 const createUploadFileInfo = (clips: IClip[], title: string, due: string) => {
   const id = uuidv4();
   return {
-    url: `localhost:3000/share-page/${id}`,
+    url: `clipvault.info/share-page/${id}`,
     clips: clips,
     title: title,
     expiresAt: due,
